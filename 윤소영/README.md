@@ -43,4 +43,13 @@
 
 ​	❗ 가상 머신 생성 및 구동 - syntax error 발생
 
-​		![image-20210830173858317](C:\Users\multicampus\AppData\Roaming\Typora\typora-user-images\image-20210830173858317.png)
+
+
+### 0831(화)
+
+:white_check_mark: 오후 아이디어 회의 - 그래픽 카드 추적, 자취 아이템 대여 서비스, 투명한 기부 추적 시스템
+
+:white_check_mark: 개발 환경 세팅 - error 해결
+
+:white_large_square: 프라이빗 이더리움 네트워크 구축 - 노드 구성 해결 중
+
