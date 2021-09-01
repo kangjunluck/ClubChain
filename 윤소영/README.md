@@ -51,5 +51,23 @@
 
 :white_check_mark: 개발 환경 세팅 - error 해결
 
-:white_large_square: 프라이빗 이더리움 네트워크 구축 - 노드 구성 해결 중
+:white_large_square: Req.1. 프라이빗 이더리움 네트워크 구축 - 노드 구성 해결 중
+
+
+
+### 0832 (수)
+
+:white_check_mark: 2차 팀미팅
+
+:white_check_mark: 아이디어 회의
+
+:white_check_mark: Req.1. 프라이빗 이더리움 네트워크 구축 
+
+:white_check_mark: Req.2. 이더리움 계정 생성
+
+:white_large_square:Req.3. 이더리움 트랜잭션 생성
+
+​		✔ 3-1. 트랜잭션 생성
+
+​		❗ 3-2. 트랜잭션 결과 확인 - 이슈 발생! 이더가 줄어들긴 하지만, 받는 쪽의 이더는 증가하지 않는다.
 
