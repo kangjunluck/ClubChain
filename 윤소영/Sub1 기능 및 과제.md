@@ -63,8 +63,6 @@
 - [x]  eth0 노드의 경우 RPC API를 호출할 수 있도록 활성화
 - 참고 [https://dongsik93.github.io/pro/2019/08/22/pro-blockchain-private-ethereum/](https://dongsik93.github.io/pro/2019/08/22/pro-blockchain-private-ethereum/)
 
-[제목 없음](https://www.notion.so/ced3586810aa40de9f457eba298e0058)
-
 ![Untitled](Sub1%20%E1%84%80%E1%85%B5%E1%84%82%E1%85%B3%E1%86%BC%20%E1%84%80%E1%85%AA%E1%84%8C%E1%85%A6%20502b349c78414bc68fb679dfff10adfe/Untitled.png)
 
 ### 3) 이더리움 eth1 노드 구성
@@ -253,25 +251,25 @@ $ geth --datadir ~/dev/eth_localdata init CustomGenesis.json
     ```bash
     # eth0: "0x981713beb94841102ea7489e37999c970e46d18f"
     # eth1: "0x19378bc30d1322f61656c4c95b9324c64071353d"
-
+    
     # 트랜잭션 작성
     from: "0x981713beb94841102ea7489e37999c970e46d18f"
     to: "0x19378bc30d1322f61656c4c95b9324c64071353d"
     tx= {from:from, to:to, value:web3.toWei(2,"ether")}
     eth.sendTransaction(tx)
-
+    
     # GoError: Error: account unlock with HTTP access is forbidden at web3.js:6357:37(47)
     # 위 에러 발생시 --allow-insecure-unlock 옵션 추가하기 
-
+    
     personal.unlockAccount(eth.accounts[0], "비밀번호")
     > true
-
+    
     # 트랜잭션 해시 값 확인을 위해 변수에 저장
     tx_hash = eth.sendTransaction(tx) 
-
+    
     # 해시 값 확인
     eht.getTransaction(tx_hash)
-
+    
     # 잔액 확인
     web3.fromWei(eth.getBalance(from), "ether")
     ```
@@ -406,45 +404,55 @@ $ geth --datadir ~/dev/eth_localdata init CustomGenesis.json
         rs 2 --mine --allow-insecure-unlock --nodiscover console
         ```
 
-- [x]  기본 제공 예제 중 1개를 선택하여 코드 내용 확인
+- [x] 기본 제공 예제 중 1개를 선택하여 코드 내용 확인
 
     ```jsx
-    pragma solidity >=0.4.22 <0.7.0;
-
-    contract SimpleStorage {
-        uint public storedData;
-
-        constructor() public {
-            storedData = 100;
+    // SPDX-License-Identifier: GPL-3.0
+    
+    pragma solidity >=0.7.0 <0.9.0;
+    
+    /**
+     * @title Storage
+     * @dev Store & retrieve value in a variable
+     */
+    contract Storage {
+    
+        uint256 number;
+    
+        /**
+         * @dev Store value in variable
+         * @param num value to store
+         */
+        function store(uint256 num) public {
+            number = num;
         }
-
-        function set(uint x) public {
-            storedData = x;
-        }
-
-        function get() public view returns (uint retVal) {
-            return storedData;
+    
+        /**
+         * @dev Return value 
+         * @return value of 'number'
+         */
+        function retrieve() public view returns (uint256){
+            return number;
         }
     }
     ```
 
 - [x]  Compile 및 Deploy 수행 후 결과 확인
-    - 예제 리스트 [링크](https://remix-ide.readthedocs.io/en/latest/unittesting_examples.html) [링크2](https://solidity-kr.readthedocs.io/ko/latest/introduction-to-smart-contracts.html)
-    - [참고](https://maniara.github.io/sc_lecture.pdf)
+    - 참고 [링크](https://remix-ide.readthedocs.io/en/latest/unittesting_examples.html) [링크2](https://solidity-kr.readthedocs.io/ko/latest/introduction-to-smart-contracts.html) [링크3](https://maniara.github.io/sc_lecture.pdf)
     - Compile 및 Deploy
         1. compiler 버전 맞춰서 compile 진행
-
+    
             ![Untitled](Sub1%20%E1%84%80%E1%85%B5%E1%84%82%E1%85%B3%E1%86%BC%20%E1%84%80%E1%85%AA%E1%84%8C%E1%85%A6%20502b349c78414bc68fb679dfff10adfe/Untitled%2031.png)
-
+    
         2. `miner.start()`
         3. 이후 deploy 하면 error 발생
-
+    
             ![Untitled](Sub1%20%E1%84%80%E1%85%B5%E1%84%82%E1%85%B3%E1%86%BC%20%E1%84%80%E1%85%AA%E1%84%8C%E1%85%A6%20502b349c78414bc68fb679dfff10adfe/Untitled%2032.png)
-
+    
             ![Untitled](Sub1%20%E1%84%80%E1%85%B5%E1%84%82%E1%85%B3%E1%86%BC%20%E1%84%80%E1%85%AA%E1%84%8C%E1%85%A6%20502b349c78414bc68fb679dfff10adfe/Untitled%2033.png)
-
+    
         4. 해결 방법 - genesis.json 파일수정
-
+    
             ```jsx
             config: {
             	 ...
@@ -452,14 +460,14 @@ $ geth --datadir ~/dev/eth_localdata init CustomGenesis.json
             	"constantinopleBlock": 0
             ...
             ```
-
+    
             이후 초기화 재 진행
-
+    
         5. geth 구동, personal.unlockAccount() 진행, miner.start()
         6. 정상 작동 확인
-
+    
             ![Untitled](Sub1%20%E1%84%80%E1%85%B5%E1%84%82%E1%85%B3%E1%86%BC%20%E1%84%80%E1%85%AA%E1%84%8C%E1%85%A6%20502b349c78414bc68fb679dfff10adfe/Untitled%2034.png)
-
+    
             ![Untitled](Sub1%20%E1%84%80%E1%85%B5%E1%84%82%E1%85%B3%E1%86%BC%20%E1%84%80%E1%85%AA%E1%84%8C%E1%85%A6%20502b349c78414bc68fb679dfff10adfe/Untitled%2035.png)
 
 ### 4) 블록 정보 조회
