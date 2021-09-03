@@ -241,9 +241,27 @@
 
 - eth0의 keystore을 json 파일로 저장
 
+  1. 로컬에 공유 폴더 만들기
 
+  2. 가상 머신에서 공유 폴더 설정하기
 
+     ![image-20210903104245401](README.assets/image-20210903104245401.png)
 
+  3. 우분투에서 공유 할 폴더 생성
+
+     ![image-20210903104253693](README.assets/image-20210903104253693.png)
+
+  4. 마운트 진행
+
+     ![image-20210903104302000](README.assets/image-20210903104302000.png)
+
+  5. 키스토어 파일 이동
+
+     ![image-20210903104312045](README.assets/image-20210903104312045.png)
+
+     ![image-20210903104320198](README.assets/image-20210903104320198.png)
+
+     
 
 
 
