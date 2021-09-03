@@ -79,6 +79,12 @@
 
 - 최신 버전이 아니라서 나는 오류라는 이야기도 있는데 더 찾아봐야 할 것 같다.
 
+  :arrow_forward: 최신 버전 설치, 6.0의 다른 버전들 설치 후 시도했으나 실패
+
+  :arrow_forward: VirtualBox 확장팩 설치 후 시도했으나 실패
+
+  :arrow_forward: 다른 디렉토리로 옮겨서 시도했으나 실패
+
   
 
 - 가상 머신 접속 : `vagrant ssh eth0`
@@ -90,7 +96,9 @@
   ![image-20210831231111999](README.assets/image-20210831231111999.png)
 
 - 종료 : `exit`
+
 - 가상 머신 중지 : `vagrant halt`
+
 - 가상 머신 삭제 : `vagrant destroy`
 
 
@@ -150,3 +158,96 @@
   **eth1**
 
   ​	![image-20210831231420712](README.assets/image-20210831231420712.png)
+  
+- 마이닝 시작 : `miner.start(스레드값)`  중지 : `miner.stop()`
+
+  - null 값이 나와도 정상 작동 -> 원래는 true, false로 나왔으나 버전 업그레이드(?) 로 인해 null return
+
+  ![image-20210903100810690](README.assets/image-20210903100810690.png)
+
+  - null값과 중지하고 계정 잔액을 확인해보면 0 값이 나온다 → ❗**Genesis Block을 안만들었기 때문**
+  - `vim genesis.json`
+
+  ```json
+  {
+      "config": {
+          "chainId": 921,
+          "homesteadBlock": 0,
+          "eip155Block": 0,
+          "eip158Block": 0,
+          "eip150Block": 0
+       },
+       "nonce": "0xdeadbeefdeadbeef",
+       "timestamp": "0x00",
+       "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+       "extraData": "0x00",
+       "gasLimit": "9999999",
+       "difficulty": "0x10",
+       "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+       "coinbase": "0x3333333333333333333333333333333333333333",
+       "alloc": {}
+  }
+  ```
+
+  - genesis.json 파일 적용 : `geth --datadir /home/vagrant/dev/eth_localdata/ init /home/vagrant/dev/eth_localdata/genesis.json`
+
+    - genesis.json 파일 에러
+
+      ![image-20210903101053186](README.assets/image-20210903101053186.png)
+
+    - geth 설정 삭제
+
+      ![image-20210903101129573](README.assets/image-20210903101129573.png)
+
+    - 다시 파일 적용하면 성공적으로 초기화가 끝났다는 메세지가 나온다!
+
+  - 노드 설정에 맞게 geth 명령어 실행
+
+    - ❗ `--mine` 을 사용할 때 에는 서버를 실행하기 전에 계정이 생성이 안 돼있으면 오류가 난다 : `geth --datadir 계정생성경로 account new` 로 계정만들어주기(r경로는 `pwd` 로 확인 가능)
+
+    - **eth0** : `geth --datadir ~/dev/eth_localdata --networkid 921 --http --http.addr "0.0.0.0" --http.port "8545" --http.api "admin, eth, debug, miner, net, txpool, personal, web3" --port "30303" --maxpeers 2 --mine console`
+
+    - 블록 생성된다!
+
+      ![image-20210903101312027](README.assets/image-20210903101312027.png)
+
+![image-20210903101320242](README.assets/image-20210903101320242.png)
+
+​				:exclamation: eth0노드에서 채굴을 완료하고 eth1노드에서 똑같이 실행했는데 채굴이 안되는 이슈 발생
+
+​					:arrow_forward: 그냥 내 컴퓨터가 느려서 채굴할 때 바로 안되고 한 1~2분 기다리면 해결되는거였다...(내 시간.....)
+
+- 트랜잭션 생성하기
+
+  ```
+  tx = { from : 주소, to : 주소, value ; web3.toWei(0.2, "ether")}
+  ```
+
+  - 트랜잭션을 보내면 보내는 쪽의 eth값은 줄어든걸 확인할 수 있는데 받는 쪽에서 안받아짐
+
+    ![image-20210903101934811](README.assets/image-20210903101934811.png)
+
+    ![image-20210903101945438](README.assets/image-20210903101945438.png)
+
+  :arrow_forward: addPeer와 static 파일 추가 등 enode 연결을 하기 위해 시도 했으나 실패
+
+
+
+## 3-4. 스마트 컨트랙트 배포
+
+- eth0 노드 확인
+
+  ![image-20210903102058669](README.assets/image-20210903102058669.png)
+
+- eth0의 keystore을 json 파일로 저장
+
+
+
+
+
+
+
+
+
+
+
