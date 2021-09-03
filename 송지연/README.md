@@ -261,11 +261,56 @@
 
      ![image-20210903104320198](README.assets/image-20210903104320198.png)
 
-     
+- Metamask 설정
 
+  - metamask의 custom RPC 옵션 설정
 
+  - metamask 계정 Import(eth0의 keystore json 파일 활용)
 
+    ![image-20210903162500239](README.assets/image-20210903162500239.png)
 
+  - metamask에서 계정 및 잔액 정보 확인
+
+    ![image-20210903162517998](README.assets/image-20210903162517998.png)
+
+  
+
+- 스마트 컨트랙트 배포(Remix)
+
+  - [Remix 접속](https://remix.ethereum.org)해서 이더리움 네트워크와 연동 : geth 서버 킬 때 `--http.corsdomin="<https://remix.ethereum.org>"` 추가
+
+    ![image-20210903162603173](README.assets/image-20210903162603173.png)
+
+  - 예제 코드 중 `storage.sol` 선택해서 compile 및 deploy 진행
+
+    - 중간에 password or unlock이라는 에러가 뜨는데 `personal.unlockAccount()` 로 해결
+
+    ![image-20210903162617680](README.assets/image-20210903162617680.png)
+
+    ![image-20210903162627034](README.assets/image-20210903162627034.png)
+
+    ❗ store 할 때 밑에와 같은 에러 발생
+
+    ![image-20210903162638445](README.assets/image-20210903162638445.png)
+
+    - 해결 : genesis.json 파일 수정
+
+      ```ruby
+      // config에서 밑에 추가
+      
+      "byzantiumBlock": 0,
+      "constantinopleBlock": 0
+      ```
+
+  - 블록 정보 조회
+
+    - frontEnd 코드 `npm run serve` 해서 실행하기
+
+      ![image-20210903162653009](README.assets/image-20210903162653009.png)
+
+      ![image-20210903162706958](README.assets/image-20210903162706958.png)
+
+      ![image-20210903162723101](README.assets/image-20210903162723101.png)
 
 
 
