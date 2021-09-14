@@ -7,8 +7,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@ApiModel("UserRegisterPostRequest")
-public class UserRegisterPostReq {
+@ApiModel("UserPutRequest")
+public class UserPutReq {
     @ApiModelProperty(name="유저 Email", example="ssafy@ssafy.com")
     String userEmail;
     @ApiModelProperty(name="유저 Password", example="1234")
