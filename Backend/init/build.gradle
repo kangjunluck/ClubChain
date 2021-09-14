@@ -1,0 +1,86 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'org.springframework.experimental.aot' version '0.10.3'
+	id 'org.graalvm.buildtools.native' version '0.9.3'
+	id 'org.hibernate.orm'
+}
+
+group = 'com.blockback'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	maven { url 'https://repo.spring.io/release' }
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+	runtimeOnly 'mysql:mysql-connector-java'
+	annotationProcessor("org.springframework.boot:spring-boot-starter-data-jpa")
+
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+
+	implementation("com.querydsl:querydsl-jpa:4.4.0")
+	implementation("com.querydsl:querydsl-apt:4.4.0")
+	annotationProcessor("com.querydsl:querydsl-apt:4.4.0:jpa")
+
+	implementation("com.auth0:java-jwt:3.10.3")
+
+	compileOnly('org.springframework.boot:spring-boot-starter-data-redis')
+	compileOnly('org.springframework.session:spring-session-data-redis:2.4.2')
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ["$projectDir/src/main/java", "$projectDir/build/generated"]
+		}
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
+
+bootBuildImage {
+	builder = 'paketobuildpacks/builder:tiny'
+	environment = ['BP_NATIVE_IMAGE': 'true']
+}
+
+nativeBuild {
+	classpath processAotResources.outputs, compileAotJava.outputs
+}
+
+nativeTest {
+	classpath processAotTestResources.outputs, compileAotTestJava.outputs
+}
+
+hibernate {
+	enhance {
+		enableLazyInitialization = true
+		enableDirtyTracking = true
+		enableAssociationManagement = true
+		enableExtendedEnhancement = false
+	}
+}
