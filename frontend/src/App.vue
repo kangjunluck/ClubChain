@@ -2,12 +2,15 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link :to="{ name: 'Main' }">Main</router-link>
     </div>
     <div>ㅎㅇ</div>
     <router-view />
   </div>
 </template>
+
+
 
 <style>
 #app {
@@ -30,5 +33,4 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-
 </style>
