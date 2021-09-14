@@ -13,7 +13,7 @@ export default new Vuex.Store({
   // state를 변경하는 로직
   // 비동깆거으로 동작하면 state가 변화하는 시점이 달라질 수 있기 때문에 동기적 코드만 작성
   // 첫 인자로 state가 들어옴
-  // UPPER_CASE 로 주로 작성
+  // UPPER_CASE 로 주로 작성햐
   mutations: {},
 
 

@@ -5,7 +5,6 @@
       <router-link to="/about">About</router-link> |
       <router-link :to="{ name: 'Main' }">Main</router-link>
     </div>
-    <div>ㅎㅇ</div>
     <router-view />
   </div>
 </template>
