@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+//import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/api/users")
 @Api(value = "유저 API", tags = {"User"})
 @CrossOrigin(origins = "*")
-@EnableRedisHttpSession
+//@EnableRedisHttpSession
 public class UserController {
 
     @Autowired
