@@ -1,5 +1,6 @@
 package com.blockback.init.service;
 
+import com.blockback.init.common.request.UserPutReq;
 import com.blockback.init.common.request.UserRegisterPostReq;
 import com.blockback.init.entity.User;
 import com.blockback.init.repository.UserRepository;
@@ -8,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service("userService")
-public class UserServiceImpl implements com.blockback.init.service.UserService {
+public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
@@ -24,9 +27,22 @@ public class UserServiceImpl implements com.blockback.init.service.UserService {
 
     @Override
     public User getUserByUserEmail(String userEmail) {
-        User user = userRepository.findUserByUserEmail(userEmail).get();
-        System.out.println(user);
-        return user;
+        Optional<User> user = userRepository.findUserByUserEmail(userEmail);
+        User user1 = null;
+        if (user.isPresent()) {
+            user1 = user.get();
+        }
+        return user1;
+    }
+
+    @Override
+    public User getUserById(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        User user1 = null;
+        if (user.isPresent()) {
+            user1 = user.get();
+        }
+        return user1;
     }
 
     @Override
@@ -40,23 +56,22 @@ public class UserServiceImpl implements com.blockback.init.service.UserService {
 
         return userRepository.save(user);
     }
-//
-//    @Override
-//    public User modifyUser(UserModifyReq modifyinfo, String userId) {
-//        User userupdate = userRepository.findUserByUserid(userId).get();
-//        userupdate.setUserid(userId);
-//        userupdate.setUsername(modifyinfo.getUsername());
-//        userupdate.setPassword(passwordEncoder.encode(modifyinfo.getPassword()));
-//
-//        return userRepository.save(userupdate);
-//    }
-//
-//    @Override
-//    public void deleteUser(String userId) {
-//        User user = getUserByUserId(userId);
-//
-//        userRepository.delete(user);
-//    }
+
+    @Override
+    public User putUser(UserPutReq putinfo, Long userId) {
+        User user = userRepository.findById(userId).get();
+        user.setUserEmail(putinfo.getUserEmail());
+        user.setPassword(putinfo.getPassword());
+        user.setUsernickname(putinfo.getUsernickname());
+        user.setUserthumbnail(putinfo.getUserthumbnail());
+        return userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUser(Long userId) {
+        User user = userRepository.findById(userId).get();
+        userRepository.delete(user);
+    }
 //
 //    @Override
 //    public User_Room getUserByUserNickname(String usernickname) {
