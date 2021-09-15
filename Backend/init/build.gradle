@@ -47,8 +47,8 @@ dependencies {
 
 	implementation("com.auth0:java-jwt:3.10.3")
 
-//	compileOnly('org.springframework.boot:spring-boot-starter-data-redis')
-//	compileOnly('org.springframework.session:spring-session-data-redis:2.4.2')
+	implementation ('org.springframework.boot:spring-boot-starter-data-redis')
+	implementation ('org.springframework.session:spring-session-data-redis:2.4.2')
 }
 
 //sourceSets {
