@@ -1,7 +1,7 @@
 package com.blockback.init.controller;
 
-import com.blockback.init.entity.Article;
-import com.blockback.init.service.ArticleService;
+import com.blockback.init.entity.Board;
+import com.blockback.init.service.BoardService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(value = "게시판 API", tags = {"User"})
+@Api(value = "게시판 API", tags = {"Article"})
 @RestController
 @RequestMapping("/api/{clubid}/board")
-public class ArticleController {
+public class BoardController {
 
     @Autowired
-    ArticleService articleService;
+    BoardService boardService;
 
     @GetMapping("/")
     @ApiOperation(value = "게시글 전체 조회")
@@ -24,9 +24,9 @@ public class ArticleController {
             @ApiResponse(code = 404, message = "사용자 없음"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
-    public List<Article> index(@PathVariable("clubid") Long clubid)
+    public List<Board> index(@PathVariable("clubid") Long clubid)
     {
-        List<Article> articleList = articleService.getArticlesByClubId(clubid);
-        return articleList;
+        List<Board> boardList = boardService.getBoardsByClubId(clubid);
+        return boardList;
     }
 }
