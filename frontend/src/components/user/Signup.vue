@@ -15,19 +15,19 @@
             </div>
             <input 
                 type="text"
-                id="nickname"
-                name="nickname"
-                v-model="nickname"
-                ref="nickname"
+                id="usernickname"
+                name="usernickname"
+                v-model="usernickname"
+                ref="usernickname"
                 placeholder="닉네임"
                 class="form-control mt-5 mb-2"
             />
             <input
                 type="text"
-                id="email"
-                name="email"
-                v-model="email"
-                ref="email"
+                id="userEmail"
+                name="userEmail"
+                v-model="userEmail"
+                ref="userEmail"
                 placeholder="이메일"
                 class="form-control mb-2"
             />
@@ -63,7 +63,7 @@
             />
         </div>
 
-        <div class="btn btn-primary">
+        <div class="btn btn-primary" @keyup.enter="insertUser" @click="insertUser">
             회원가입
         </div>
     </div>
@@ -76,8 +76,8 @@ export default {
   data() {
     return {
       image: "",
-      nickname: "",
-      email: "",
+      usernickname: "",
+      userEmail: "",
       password: "",
     };
   },
@@ -85,9 +85,10 @@ export default {
     insertUser() {
       http
         .post("/regist", {
-          nickname: this.nickname,
-          email: this.email,
           password: this.password,
+          userEmail: this.userEmail,
+          usernickname: this.usernickname,
+          userthumbnail: "",
         })
         .then(({ data }) => {
           console.log(data);
@@ -136,7 +137,7 @@ export default {
   border-radius: 100%;
 }
 
-#email {
+#userEmail {
     width: 70%;
     display: inline-block;
 }
