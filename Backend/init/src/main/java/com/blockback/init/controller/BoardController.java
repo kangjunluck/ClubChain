@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(value = "게시판 API", tags = {"Article"})
+@Api(value = "게시판 API", tags = {"Board"})
 @RestController
 @RequestMapping("/api/{clubid}/board")
 public class BoardController {

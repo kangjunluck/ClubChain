@@ -9,6 +9,7 @@ import com.blockback.init.entity.User;
 import com.blockback.init.service.UserService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpSession;
 
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping(value = "/api/users")
 @Api(value = "유저 API", tags = {"User"})
 @EnableRedisHttpSession
 public class UserController {
@@ -63,7 +64,7 @@ public class UserController {
     }
 
 
-    @PostMapping("/regist")
+    @PostMapping(value = "/regist")
     @ApiOperation(value = "회원 가입", notes = "<strong>아이디와 패스워드</strong>를 통해 회원가입 한다.")
     @ApiResponses({
             @ApiResponse(code = 201, message = "성공"),
@@ -71,7 +72,7 @@ public class UserController {
             @ApiResponse(code = 404, message = "사용자 없음"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
-    public ResponseEntity<? extends UserResponse> register(
+    public ResponseEntity<UserResponse> register(
             @ApiParam(value="회원가입 정보", required = true) UserRegisterPostReq registerInfo,
             @RequestPart(value = "image", required = false) MultipartFile thumbnail) {
         User user = userService.getUserByUserEmail(registerInfo.getUserEmail());
@@ -82,16 +83,19 @@ public class UserController {
         return ResponseEntity.status(201).body(UserResponse.of(201, "Success"));
     }
 
-    @PutMapping("/{userId}")
+    @PutMapping(value="/{userId}", consumes = "multipart/form-data", produces="multipart/form-data")
     @ApiOperation(value = "회원정보 수정", notes = "회원정보를 수정합니다. ")
     @ApiResponses({
             @ApiResponse(code = 201, message = "성공"),
     })
     public ResponseEntity<UserResponse> modifyUser(
             @PathVariable("userId") Long userId,
-            @RequestBody UserPutReq putinfo,
+            @RequestBody
+            @ApiParam(value="회원가입 정보", required = true) UserPutReq putinfo,
             @RequestPart(value = "image", required = false) MultipartFile thumbnail) {
+        System.out.println(putinfo+"@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         User user = userService.putUser(putinfo, userId, thumbnail);
+
 
         return ResponseEntity.status(201).body(UserResponse.of(201, "Success"));
     }
