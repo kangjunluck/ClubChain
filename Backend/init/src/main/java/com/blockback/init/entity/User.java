@@ -21,7 +21,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-
     // response 시, 나타나지 않도록 하기 위해
     // 쓸때만 접근이 가능하다
     String userEmail;

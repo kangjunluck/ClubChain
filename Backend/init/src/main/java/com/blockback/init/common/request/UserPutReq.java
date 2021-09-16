@@ -15,8 +15,6 @@ public class UserPutReq {
     String password;
     @ApiModelProperty(name="유저 nickName", example="codingprince")
     String usernickname;
-    @ApiModelProperty(name="유저 profile_thumbnail", example="/url")
-    String userthumbnail;
     @ApiModelProperty(name="유저 account", example="110-257-456789")
     String useraccount;
 }

@@ -71,8 +71,7 @@ public class UserController {
             @ApiResponse(code = 404, message = "사용자 없음"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
-    public ResponseEntity<UserResponse> register(
-            @RequestBody
+    public ResponseEntity<? extends UserResponse> register(
             @ApiParam(value="회원가입 정보", required = true) UserRegisterPostReq registerInfo,
             @RequestPart(value = "image", required = false) MultipartFile thumbnail) {
         User user = userService.getUserByUserEmail(registerInfo.getUserEmail());
