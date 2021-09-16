@@ -1,6 +1,7 @@
 package com.blockback.init.common.response;
 
 
+import com.blockback.init.entity.User;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -30,35 +31,15 @@ public class UserResponse {
         return res;
     }
 
-    public static UserResponse of(Integer statusCode, String message, String userEmail,String usernickname) {
+    public static UserResponse of(Integer statusCode, String message, User user) {
         UserResponse res = new UserResponse();
         res.setStatusCode(statusCode);
         res.setMessage(message);
-        res.setUserEmail(userEmail);
-        res.setUsernickname(usernickname);
-
+        res.setUserEmail(user.getUserEmail());
+        res.setUsernickname(user.getUsernickname());
+        res.setUserPk(user.getId());
+        res.setUserthumbnail(user.getUserthumbnail());
         return res;
     }
 
-//    public static UserResponse of(Integer statusCode, String message) {
-//        UserResponse body = new UserResponse();
-//        body.message = message;
-//        body.statusCode = statusCode;
-//        return body;
-//    }
-
-//    public static UserResponse of(String username, String usernickname) {
-//        UserResponse body = new UserResponse();
-//        body.username = username;
-//        body.usernickname = usernickname;
-//        return body;
-//    }
-//
-//    public static UserResponse of(User user) {
-//        UserResponse res = new UserResponse();
-//        res.setUserId(user.getUseremail());
-//        res.setUserPk(user.getId());
-//        res.setUsername(user.getUsername());
-//        return res;
-//    }
 }

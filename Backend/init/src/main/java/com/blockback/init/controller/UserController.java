@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,7 +22,6 @@ import javax.servlet.http.HttpSession;
 @RestController
 @RequestMapping("/api/users")
 @Api(value = "유저 API", tags = {"User"})
-@CrossOrigin(origins = "*")
 @EnableRedisHttpSession
 public class UserController {
 
@@ -39,11 +39,13 @@ public class UserController {
             @ApiResponse(code = 404, message = "사용자 없음", response = UserResponse.class),
             @ApiResponse(code = 500, message = "서버 오류", response = UserResponse.class)
     })
-    public ResponseEntity<UserResponse> login(@RequestBody @ApiParam(value="로그인 정보", required = true) UserLoginReq loginInfo, HttpSession session) {
+    public ResponseEntity<UserResponse> login(
+            @RequestBody
+            @ApiParam(value="로그인 정보", required = true) UserLoginReq loginInfo,
+            HttpSession session) {
         String userEmail = loginInfo.getUserEmail();
         String password = loginInfo.getPassword();
         User user = userService.getUserByUserEmail(userEmail);
-        System.out.println(user);
         // 로그인 요청한 유저로부터 입력된 패스워드 와 디비에 저장된 유저의 암호화된 패스워드가 같은지 확인.(유효한 패스워드인지 여부 확인)
         if (user == null)
         {
@@ -70,12 +72,13 @@ public class UserController {
             @ApiResponse(code = 500, message = "서버 오류")
     })
     public ResponseEntity<? extends UserResponse> register(
-            @RequestBody @ApiParam(value="회원가입 정보", required = true) UserRegisterPostReq registerInfo) {
+            @ApiParam(value="회원가입 정보", required = true) UserRegisterPostReq registerInfo,
+            @RequestPart(value = "image", required = false) MultipartFile thumbnail) {
         User user = userService.getUserByUserEmail(registerInfo.getUserEmail());
         if (user != null)
             return ResponseEntity.status(401).body(UserResponse.of(401, "이미 있는 유저입니다"));
         //임의로 리턴된 User 인스턴스. 현재 코드는 회원 가입 성공 여부만 판단하기 때문에 굳이 Insert 된 유저 정보를 응답하지 않음.
-        userService.createUser(registerInfo);
+        userService.createUser(registerInfo, thumbnail);
         return ResponseEntity.status(201).body(UserResponse.of(201, "Success"));
     }
 
@@ -84,8 +87,11 @@ public class UserController {
     @ApiResponses({
             @ApiResponse(code = 201, message = "성공"),
     })
-    public ResponseEntity<? extends UserResponse> modifyUser(@PathVariable("userId") Long userId, @RequestBody UserPutReq putinfo) {
-        User user = userService.putUser(putinfo, userId);
+    public ResponseEntity<UserResponse> modifyUser(
+            @PathVariable("userId") Long userId,
+            @RequestBody UserPutReq putinfo,
+            @RequestPart(value = "image", required = false) MultipartFile thumbnail) {
+        User user = userService.putUser(putinfo, userId, thumbnail);
 
         return ResponseEntity.status(201).body(UserResponse.of(201, "Success"));
     }
@@ -95,74 +101,24 @@ public class UserController {
     @ApiResponses({
             @ApiResponse(code = 204, message = "성공"),
     })
-    public ResponseEntity<? extends UserResponse> deleteUser(@PathVariable("userId") Long userId) {
+    public ResponseEntity<UserResponse> deleteUser(@PathVariable("userId") Long userId) {
         userService.deleteUser(userId);
         return ResponseEntity.status(204).body(UserResponse.of(204, "Success"));
     }
 
+    @GetMapping("/{userId}")
+    @ApiOperation(value = "회원정보 조회", notes = "회원정보를 조회합니다.")
+    public ResponseEntity<UserResponse> UserInfo(
+            @PathVariable("userId") Long userId) {
+        User user = userService.getUserByUserId(userId);
 
-//
-//    @GetMapping("/id/{userId}")
-//    @ApiOperation(value = "아이디 중복검사", notes = "중복된 아이디를 검사합니다.")
-//    public ResponseEntity<? extends UserResponse> duplication(@PathVariable("userId") String userId) {
-//        User user = userService.getUserByUserId(userId);
-//
-//        if (user.getId() == null)
-//        {
-//            return ResponseEntity.status(200).body(UserResponse.of(200, "가입이 가능합니다."));
-//        }
-//        else
-//            return ResponseEntity.status(401).body(UserResponse.of(401, "중복된 아이디입니다."));
-//    }
-//
-//    @GetMapping("/nickname/{usernickname}")
-//    @ApiOperation(value = "닉네임 중복검사", notes = "중복된 닉네임을 검사합니다.")
-//    public ResponseEntity<? extends UserResponse> nicknameduplication(@PathVariable("usernickname") String usernickname) {
-//        User_Room user = userService.getUserByUserNickname(usernickname);
-//
-//        if (user.getId() == null)
-//        {
-//            return ResponseEntity.status(200).body(UserResponse.of(200, "Success"));
-//        }
-//        else
-//            return ResponseEntity.status(200).body(UserResponse.of(200, "Fail"));
-//    }
-//
-//    @GetMapping("/{userId}")
-//    @ApiOperation(value = "회원정보 조회", notes = "회원정보를 조회합니다.")
-//    public ResponseEntity<UserResponse> UserInfo(@PathVariable("userId") String userId) {
-//        User user = userService.getUserByUserId(userId);
-//
-//        if (user.getId() == null)
-//        {
-//            return ResponseEntity.status(404).body(UserResponse.of(404, "존재하지 않는 아이디입니다."));
-//        }
-//        else {
-//            UserResponse res = new UserResponse();
-//            res.setUsername(user.getUsername());
-//            res.setMessage("성공");
-//            return ResponseEntity.status(200).body(res);
-//        }
-//    }
-//
-//    @GetMapping("/me")
-//    @ApiOperation(value = "회원 본인 정보 조회", notes = "로그인한 회원 본인의 정보를 응답한다.")
-//    @ApiResponses({
-//            @ApiResponse(code = 200, message = "성공"),
-//            @ApiResponse(code = 401, message = "인증 실패"),
-//            @ApiResponse(code = 404, message = "사용자 없음"),
-//            @ApiResponse(code = 500, message = "서버 오류")
-//    })
-//    public ResponseEntity<UserResponse> getUserInfo(@ApiIgnore Authentication authentication) {
-//        /**
-//         * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
-//         * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
-//         */
-//        System.out.println("★★★");
-//        SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-//        String userId = userDetails.getUsername();
-//        User user = userService.getUserByUserId(userId);
-//
-//        return ResponseEntity.status(200).body(UserResponse.of(user));
-//    }
+        if (user == null)
+        {
+            return ResponseEntity.status(404).body(UserResponse.of(404, "존재하지 않는 아이디입니다."));
+        }
+        else {
+            return ResponseEntity.status(200).body(UserResponse.of(200, "Success", user));
+        }
+
+    }
 }
