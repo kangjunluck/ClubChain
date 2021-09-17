@@ -25,6 +25,7 @@ public class ClubServiceImpl implements ClubService {
             ClubListRes tmp = new ClubListRes();
 
             tmp.setClubid(club.getId());
+            tmp.setName(club.getName());
             tmp.setIntroduce(club.getIntroduce());
             tmp.setProfile_thumbnail(club.getProfile_thumbnail());
             tmp.setPassword(club.getPassword());
