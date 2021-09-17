@@ -1,6 +1,7 @@
 package com.blockback.init.service;
 
 
+import com.blockback.init.common.request.BoardRegisterReq;
 import com.blockback.init.entity.Board;
 import com.blockback.init.repository.BoardRepository;
 import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
@@ -16,7 +17,17 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public List<Board> getBoardsByClubId(Long clubid) {
-        boardRepository.findBoardsByClubId(clubid);
+        List<Board> boardList = boardRepository.findBoardsByClubId(clubid);
+        return boardList;
+    }
+
+    @Override
+    public Board getBoardByBoardId(Long clubid, Long boardid) {
+        return boardRepository.findBoardByBoardId(clubid, boardid);
+    }
+
+    @Override
+    public Board createBoard(BoardRegisterReq boardinfo, Long clubid) {
         return null;
     }
 }

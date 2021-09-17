@@ -12,4 +12,5 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     List<Board> findBoardsByClubId(Long clubid);
 
+    Board findBoardByBoardId(Long clubid, Long boardid);
 }

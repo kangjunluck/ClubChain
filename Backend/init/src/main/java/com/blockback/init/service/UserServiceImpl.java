@@ -103,6 +103,7 @@ public class UserServiceImpl implements UserService {
             if(thumbnail == null) { // 프로필 사진 입력 안함
                 //프로필 이미지 저장 (기본 이미지)
                 if (!pic_place.substring(pic_place.length()-11, pic_place.length()).equals("default.png")){
+                    // 없을 수도 있잖아 오류가 안난다.
                     File before = new File(user.getUserthumbnail());
                     before.delete();
                 }
@@ -122,7 +123,6 @@ public class UserServiceImpl implements UserService {
                     user.setUserthumbnail(filePath);
                 }
             }
-            System.out.println(putinfo.getUseraccount() + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             user.setUserEmail(putinfo.getUserEmail());
             user.setPassword(passwordEncoder.encode(putinfo.getPassword()));
             user.setUsernickname(putinfo.getUsernickname());

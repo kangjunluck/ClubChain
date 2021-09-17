@@ -83,17 +83,15 @@ public class UserController {
         return ResponseEntity.status(201).body(UserResponse.of(201, "Success"));
     }
 
-    @PutMapping(value="/{userId}", consumes = "multipart/form-data", produces="multipart/form-data")
-    @ApiOperation(value = "회원정보 수정", notes = "회원정보를 수정합니다. ")
+    @PutMapping(value="/{userId}")
+    @ApiOperation(value = "회원정보 수정", notes = "회원정보를 수정합니다.", consumes = "multipart/form-data", produces = "multipart/form-data")
     @ApiResponses({
             @ApiResponse(code = 201, message = "성공"),
     })
     public ResponseEntity<UserResponse> modifyUser(
             @PathVariable("userId") Long userId,
-            @RequestBody
             @ApiParam(value="회원가입 정보", required = true) UserPutReq putinfo,
             @RequestPart(value = "image", required = false) MultipartFile thumbnail) {
-        System.out.println(putinfo+"@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         User user = userService.putUser(putinfo, userId, thumbnail);
 
 
