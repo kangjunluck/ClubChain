@@ -55,4 +55,11 @@ public class ClubController {
 
         return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
     }
+
+    @GetMapping("/search/{word}")
+    @ApiOperation(value = "동호회 검색하기", notes = "동호회명을 검색한다.")
+    public ResponseEntity<List<ClubListRes>> searchClub(@RequestParam String word) {
+        List<ClubListRes> res = clubService.getClubListBySearch(word);
+        return ResponseEntity.status(200).body(res);
+    }
 }

@@ -68,6 +68,28 @@ public class ClubServiceImpl implements ClubService {
         clubRepository.save(clubTmp);
     }
 
+    @Override
+    public List<ClubListRes> getClubListBySearch(String name) {
+        List<Club> clubList = clubRepository.findByNameContainingIgnoreCase(name);
+        List<ClubListRes> res = new ArrayList<>();
+
+        for(Club club : clubList) {
+            ClubListRes tmp = new ClubListRes();
+
+            tmp.setClubid(club.getId());
+            tmp.setName(club.getName());
+            tmp.setIntroduce(club.getIntroduce());
+            tmp.setProfile_thumbnail(club.getProfile_thumbnail());
+            tmp.setPassword(club.getPassword());
+            tmp.setOwner_id(club.getUser().getId());
+            tmp.setOwner_name(club.getUser().getUsernickname());
+
+            res.add(tmp);
+        }
+
+        return res;
+    }
+
     private String getShortFilePath(String path) {
         int idx = path.indexOf("image");
         return path.substring(idx, path.length());
