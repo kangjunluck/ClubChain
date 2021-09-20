@@ -47,9 +47,6 @@ public class ClubController {
     public ResponseEntity<MessageResponse> createClub(HttpSession session, ClubCreatedReq req,
                   @RequestPart(value = "study_thumbnail", required = false) MultipartFile clubThumbnail) throws IOException {
         String owner_email = (String) session.getAttribute("LoginUser");
-        System.out.println(owner_email);
-
-
 
         // 방장 정보
         User user = userService.getUserByUserEmail(owner_email);
