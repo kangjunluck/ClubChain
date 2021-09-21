@@ -9,20 +9,16 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class Board {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+public class Board extends BaseEntity {
 
     // 즉시로딩, 지연 로딩, 게시글과 user 즉시 로딩이 좋을듯
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userid")
     User user;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "clubid")
-//    Club club;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "clubid")
+    Club club;
 
     String title;
     String content;

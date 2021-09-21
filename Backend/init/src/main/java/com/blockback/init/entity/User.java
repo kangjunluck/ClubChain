@@ -13,13 +13,7 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @Setter
-public class User {
-
-    // PK
-    // 마지막 값 +1 자동,
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+public class User extends BaseEntity {
 
     // response 시, 나타나지 않도록 하기 위해
     // 쓸때만 접근이 가능하다
