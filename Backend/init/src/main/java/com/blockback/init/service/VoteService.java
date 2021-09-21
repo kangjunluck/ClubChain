@@ -11,4 +11,6 @@ public interface VoteService {
     boolean createVote(Long clubid, VoteCreateReq req, User user);
     boolean vote(Long voteid, User user, Long itemId);
     boolean revote(Long voteid, User user, Long itemId);
+    boolean isOwner(User user, Long voteid);
+    void voteDelete(Long voteid);
 }
