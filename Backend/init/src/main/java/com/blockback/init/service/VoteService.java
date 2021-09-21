@@ -9,4 +9,6 @@ import java.util.List;
 public interface VoteService {
     List<VoteListRes> getVoteList(Long clubid);
     boolean createVote(Long clubid, VoteCreateReq req, User user);
+    boolean vote(Long voteid, User user, Long itemId);
+    boolean revote(Long voteid, User user, Long itemId);
 }
