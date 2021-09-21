@@ -1,2 +1,4 @@
-package com.blockback.init.service;public interface VoteService {
+package com.blockback.init.service;
+
+public interface VoteService {
 }
