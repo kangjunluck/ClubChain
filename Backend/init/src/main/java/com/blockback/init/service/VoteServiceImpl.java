@@ -32,7 +32,7 @@ public class VoteServiceImpl implements VoteService {
     @Override
     public List<VoteListRes> getVoteList(Long clubid) {
 
-        List<Vote> vote = voteRepository.findAllById(clubid);
+        List<Vote> vote = voteRepository.findByClubId(clubid);
         List<VoteListRes> res = new ArrayList<>();
 
         for(Vote v : vote) {
