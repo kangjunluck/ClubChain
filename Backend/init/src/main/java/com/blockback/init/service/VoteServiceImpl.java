@@ -156,4 +156,24 @@ public class VoteServiceImpl implements VoteService {
 
         return true;
     }
+
+    @Override
+    public boolean isOwner(User user, Long voteid) {
+        Optional<Vote> vote = voteRepository.findById(voteid);
+        if(!vote.isPresent()) {
+            return false;
+        }
+
+        if(vote.get().getUser().getId() == user.getId()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void voteDelete(Long voteid) {
+        voteUserRepository.deleteAllByVoteId(voteid);
+        voteListRepository.deleteAllByVoteId(voteid);
+        voteRepository.deleteById(voteid);
+    }
 }
