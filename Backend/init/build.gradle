@@ -49,6 +49,10 @@ dependencies {
 
 	implementation ('org.springframework.boot:spring-boot-starter-data-redis')
 	implementation ('org.springframework.session:spring-session-data-redis:2.4.2')
+
+	// https://mvnrepository.com/artifact/junit/junit
+	testImplementation group: 'junit', name: 'junit', version: '4.12'
+
 }
 
 //sourceSets {

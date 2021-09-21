@@ -64,8 +64,8 @@ public class UserController {
     }
 
 
-    @PostMapping(value = "/regist")
-    @ApiOperation(value = "회원 가입", notes = "<strong>아이디와 패스워드</strong>를 통해 회원가입 한다.")
+    @PostMapping("/regist")
+    @ApiOperation(value = "회원 가입", notes = "<strong>아이디와 패스워드</strong>를 통해 회원가입 한다.", consumes = "multipart/form-data", produces = "multipart/form-data")
     @ApiResponses({
             @ApiResponse(code = 201, message = "성공"),
             @ApiResponse(code = 401, message = "인증 실패"),
@@ -80,7 +80,7 @@ public class UserController {
             return ResponseEntity.status(401).body(UserResponse.of(401, "이미 있는 유저입니다"));
         //임의로 리턴된 User 인스턴스. 현재 코드는 회원 가입 성공 여부만 판단하기 때문에 굳이 Insert 된 유저 정보를 응답하지 않음.
         userService.createUser(registerInfo, thumbnail);
-        return ResponseEntity.status(201).body(UserResponse.of(201, "Success"));
+        return ResponseEntity.status(201).body(UserResponse.of(400, "fail"));
     }
 
     @PutMapping(value="/{userId}")
