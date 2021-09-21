@@ -114,4 +114,46 @@ public class VoteServiceImpl implements VoteService {
 
         return true;
     }
+
+    @Override
+    public boolean revote(Long voteid, User user, Long itemId) {
+        Optional<Vote> vote = voteRepository.findById(voteid);
+        if(!vote.isPresent()) {
+            return false;
+        }
+
+        Optional<VoteList> nvl = voteListRepository.findById(itemId);
+        if(!nvl.isPresent()) {
+            return false;
+        }
+
+        // 원래 투표한거
+        Optional<VoteUser> vu = voteUserRepository.findByVoteIdAndUserId(vote.get().getId(), user.getId());
+        if(!vu.isPresent()) {
+            return false;
+        }
+
+        // 원래 항목 투표수 줄이기기
+        Optional<VoteList> vl = voteListRepository.findById(vu.get().getVoteList().getId());
+        if(!vl.isPresent()) {
+            return false;
+        }
+
+        VoteList ovl = vl.get();
+        Long newVotes = ovl.getVotes() - 1;
+        ovl.setVotes(newVotes);
+        voteListRepository.save(ovl);
+
+        // 새로 투표한거 바꾸기
+        VoteUser nvu = vu.get();
+        nvu.setVoteList(nvl.get());
+        voteUserRepository.save(nvu);
+
+        VoteList newvl = nvl.get();
+        newVotes = newvl.getVotes() + 1;
+        newvl.setVotes(newVotes);
+        voteListRepository.save(newvl);
+
+        return true;
+    }
 }
