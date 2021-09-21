@@ -5,16 +5,18 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Getter
 @Setter
 @ApiModel("UserPutRequest")
-public class UserPutReq {
-    @ApiModelProperty(name="유저 Email", example="ssafy@ssafy.com")
+public class UserPutReq  {
+    @ApiModelProperty(name="userEmail", example="ssafy@ssafy.com")
     String userEmail;
-    @ApiModelProperty(name="유저 Password", example="1234")
+    @ApiModelProperty(name="password", example="1234")
     String password;
-    @ApiModelProperty(name="유저 nickName", example="codingprince")
+    @ApiModelProperty(name="usernickname", example="codingprince")
     String usernickname;
-    @ApiModelProperty(name="유저 account", example="110-257-456789")
+    @ApiModelProperty(name="useraccount", example="110-257-456789")
     String useraccount;
 }

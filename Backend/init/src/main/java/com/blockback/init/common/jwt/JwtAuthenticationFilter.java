@@ -2,7 +2,6 @@ package com.blockback.init.common.jwt;
 
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.blockback.init.common.response.ResponseBodyWriteUtil;
 import com.blockback.init.entity.User;
 import com.blockback.init.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;

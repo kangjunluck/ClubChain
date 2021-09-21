@@ -15,13 +15,13 @@ public class UserResponse {
     String message = null;
     @ApiModelProperty(name="응답 코드", example = "200")
     Integer statusCode = null;
-    @ApiModelProperty(name="User PK")
-    Long userPk;
-    @ApiModelProperty(name="유저 Email", example = "ssafy@ssary.com")
+    @ApiModelProperty(name="userid")
+    Long userid;
+    @ApiModelProperty(name="userEmail", example = "ssafy@ssary.com")
     String userEmail;
-    @ApiModelProperty(name="유저 닉네임", example = "피싸")
+    @ApiModelProperty(name="usernickname", example = "피싸")
     String usernickname = null;
-    @ApiModelProperty(name="유저 프로필 사진", example = "/url")
+    @ApiModelProperty(name="userthumbnail", example = "/url")
     String userthumbnail = null;
 
     public static UserResponse of(Integer statusCode, String message) {
@@ -37,7 +37,7 @@ public class UserResponse {
         res.setMessage(message);
         res.setUserEmail(user.getUserEmail());
         res.setUsernickname(user.getUsernickname());
-        res.setUserPk(user.getId());
+        res.setUserid(user.getId());
         res.setUserthumbnail(user.getUserthumbnail());
         return res;
     }
