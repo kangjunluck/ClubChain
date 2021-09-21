@@ -89,7 +89,7 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public boolean vote(Long clubid, Long voteid, User user, Long itemId) {
+    public boolean vote(Long voteid, User user, Long itemId) {
         VoteUser vu = new VoteUser();
 
         Optional<Vote> vote = voteRepository.findById(voteid);

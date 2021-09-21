@@ -68,10 +68,11 @@ public class VoteController {
         }
 
         Long itemId = req.get("itemid");
-        if(voteService.vote(clubid, voteid, user, itemId)) {
+        if(voteService.vote(voteid, user, itemId)) {
             return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
         }
 
         return ResponseEntity.status(500).body(MessageResponse.of(500, FAIL));
     }
+    
 }
