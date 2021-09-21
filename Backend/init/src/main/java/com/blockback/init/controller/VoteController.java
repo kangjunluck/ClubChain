@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -48,6 +49,26 @@ public class VoteController {
         User user = userService.getUserByUserEmail(owner_email);
 
         if(voteService.createVote(clubid, req, user)) {
+            return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
+        }
+
+        return ResponseEntity.status(500).body(MessageResponse.of(500, FAIL));
+    }
+
+    @PostMapping("/{clubid}/vote/{voteid}")
+    @ApiOperation(value = "투표 하기", notes = "투표를 한다.")
+    public ResponseEntity<MessageResponse> vote(@RequestParam Long clubid, @RequestParam Long voteid,
+                                                HttpSession session, @RequestBody Map<String, Long> req) {
+        String owner_email = (String) session.getAttribute("LoginUser");
+        // 투표 생성자 정보
+        User user = userService.getUserByUserEmail(owner_email);
+
+        if(!req.containsKey("itemid")) {
+            return ResponseEntity.status(500).body(MessageResponse.of(500, FAIL));
+        }
+
+        Long itemId = req.get("itemid");
+        if(voteService.vote(clubid, voteid, user, itemId)) {
             return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
         }
 

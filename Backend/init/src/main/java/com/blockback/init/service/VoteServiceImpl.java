@@ -3,13 +3,11 @@ package com.blockback.init.service;
 import com.blockback.init.common.request.VoteCreateReq;
 import com.blockback.init.common.response.VoteItemList;
 import com.blockback.init.common.response.VoteListRes;
-import com.blockback.init.entity.Club;
-import com.blockback.init.entity.User;
-import com.blockback.init.entity.Vote;
-import com.blockback.init.entity.VoteList;
+import com.blockback.init.entity.*;
 import com.blockback.init.repository.ClubRepository;
 import com.blockback.init.repository.VoteListRepository;
 import com.blockback.init.repository.VoteRepository;
+import com.blockback.init.repository.VoteUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +26,9 @@ public class VoteServiceImpl implements VoteService {
 
     @Autowired
     ClubRepository clubRepository;
+
+    @Autowired
+    VoteUserRepository voteUserRepository;
 
     @Override
     public List<VoteListRes> getVoteList(Long clubid) {
@@ -83,6 +84,33 @@ public class VoteServiceImpl implements VoteService {
             vl.setVote(voteSave);
             voteListRepository.save(vl);
         }
+
+        return true;
+    }
+
+    @Override
+    public boolean vote(Long clubid, Long voteid, User user, Long itemId) {
+        VoteUser vu = new VoteUser();
+
+        Optional<Vote> vote = voteRepository.findById(voteid);
+        if(!vote.isPresent()) {
+            return false;
+        }
+
+        Optional<VoteList> vl = voteListRepository.findById(itemId);
+        if(!vl.isPresent()) {
+            return false;
+        }
+
+        vu.setVote(vote.get());
+        vu.setUser(user);
+        vu.setVoteList(vl.get());
+        voteUserRepository.save(vu);
+
+        VoteList nvl = vl.get();
+        Long newVotes = nvl.getVotes() + 1;
+        nvl.setVotes(newVotes);
+        voteListRepository.save(nvl);
 
         return true;
     }
