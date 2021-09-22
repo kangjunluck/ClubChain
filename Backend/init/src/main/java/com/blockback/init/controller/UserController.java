@@ -62,6 +62,15 @@ public class UserController {
         // 유효하지 않는 패스워드인 경우, 로그인 실패로 응답.
         return ResponseEntity.status(401).body(UserResponse.of(401, "잘못된 비밀번호입니다."));
     }
+    @DeleteMapping("/logout")
+    @ApiOperation(value = "로그아웃")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공", response = UserResponse.class),
+    })
+    public ResponseEntity<UserResponse> logout(HttpSession session) {
+        session.invalidate();
+        return ResponseEntity.ok(UserResponse.of(200, "Success"));
+    }
 
 
     @PostMapping("/regist")
