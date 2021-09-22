@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">test</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link :to="{ name: 'Main' }">Main</router-link>
-    </div>
+    </div> -->
     <router-view class="router_view" />
   </div>
 </template>

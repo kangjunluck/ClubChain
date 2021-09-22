@@ -1,39 +1,39 @@
 <template>
-  <div class="layer">
-    <div class="MainLogin">
-      <!-- 로고와 서비스이름 파일 들어갈 예정 -->
-      <img alt="Vue logo" src="@/assets/logo.png" />
-      <!-- 로그인 폼 만들기 -->
-      <div class="login_form">
-        <b-form-input
-          type="text"
-          id="useremail"
-          v-model="credentials.useremail"
-          placeholder="이메일"
-          class="form_useremail"
-        />
-        <b-form-input
-          type="password"
-          v-model="credentials.password"
-          placeholder="비밀번호"
-          class="form_password"
-        />
-      </div>
-      <!-- 클릭할 때 함수 실행 -->
-      <button @click="login(credentials)" class="login_button">로그인</button>
-      <div class="links">
-        <span class="lost_password">비밀번호 찾기</span>
-        <router-link :to="{ name: 'Signup' }" class="signup"
-          >회원가입</router-link
-        >
-        <!-- <span class="signup" @click="signupLink">회원가입</span> -->
-      </div>
+  <div class="MainLogin">
+    <!-- 로고와 서비스이름 파일 들어갈 예정 -->
+    <img alt="Vue logo" src="@/assets/logo.png" class="logo item" />
+    <!-- 로그인 폼 만들기 -->
+    <div class="login_form item">
+      <b-form-input
+        type="text"
+        id="useremail"
+        v-model="credentials.useremail"
+        placeholder="이메일"
+        class="form_useremail"
+      />
+      <b-form-input
+        type="password"
+        v-model="credentials.password"
+        placeholder="비밀번호"
+        class="form_password"
+      />
+    </div>
+    <!-- 클릭할 때 함수 실행 -->
+    <button @click="login(credentials)" class="login_button item">로그인</button>
+    <div class="links item">
+      <span class="lost_password">비밀번호 찾기</span>
+      <router-link :to="{ name: 'Signup' }" class="signup"
+        >회원가입</router-link
+      >
+      <!-- <span class="signup" @click="signupLink">회원가입</span> -->
     </div>
   </div>
+  
 </template>
 
 <script>
 import { mapActions } from "vuex";
+import $ from "jquery";
 export default {
   name: "Login",
   data: function () {
@@ -51,31 +51,30 @@ export default {
       this.$router.push({ path: "signup" });
     },
   },
-  // mounted() {
-  // var windowHeight = $(window).height();
-  // console.log(windowHeight);
-  // var topHeight = $("#top").height();
-  // $("#content").css({ height: windowHeight - topHeight + "px" });
-  // },
+  // jquery로 화면 높이 계산하려고 했음
+  mounted() {
+    var windowHeight = $(window).height();
+    console.log(windowHeight);
+    // var topHeight = $("#top").height();
+    // $("#content").css({ height: windowHeight - topHeight + "px" });
+    },
 };
 </script>
 
 <style scoped>
-.layer {
-  display: flex;
-  background-color: #8ec0ff;
-  height: auto;
+.logo {
+  width: 50%;
+  margin: 0 auto;
 }
 .MainLogin {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  /* background: #f00; */
-  transform: translate(-50%, -50%);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* background-color: aqua; */
+  justify-content: center;
 }
 .login_form {
-  margin: auto;
+  margin: 0 auto;
   width: 70%;
 }
 .form_useremail {
@@ -86,6 +85,7 @@ export default {
 }
 .login_button {
   background-color: #1ec0ff;
+  margin: 0 auto;
   width: 70%;
   height: 2.3rem;
   border-radius: 3rem;
@@ -95,7 +95,7 @@ export default {
   border: 1px solid transparent;
 }
 .links {
-  margin: 1rem 1rem 0 0;
+  margin: 1rem 1rem 3rem 0;
   font-size: 0.8rem;
 }
 .lost_password {
