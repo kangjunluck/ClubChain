@@ -1,31 +1,33 @@
 <template>
-  <div class="MainLogin">
-    <!-- 로고와 서비스이름 파일 들어갈 예정 -->
-    <img alt="Vue logo" src="@/assets/logo.png" />
-    <!-- 로그인 폼 만들기 -->
-    <div class="login_form">
-      <b-form-input
-        type="text"
-        id="useremail"
-        v-model="credentials.useremail"
-        placeholder="이메일"
-        class="form_useremail"
-      />
-      <b-form-input
-        type="password"
-        v-model="credentials.password"
-        placeholder="비밀번호"
-        class="form_password"
-      />
-    </div>
-    <!-- 클릭할 때 함수 실행 -->
-    <button @click="login(credentials)" class="login_button">로그인</button>
-    <div class="links">
-      <span class="lost_password">비밀번호 찾기</span>
-      <router-link :to="{ name: 'Signup' }" class="signup"
-        >회원가입</router-link
-      >
-      <!-- <span class="signup" @click="signupLink">회원가입</span> -->
+  <div class="layer">
+    <div class="MainLogin">
+      <!-- 로고와 서비스이름 파일 들어갈 예정 -->
+      <img alt="Vue logo" src="@/assets/logo.png" />
+      <!-- 로그인 폼 만들기 -->
+      <div class="login_form">
+        <b-form-input
+          type="text"
+          id="useremail"
+          v-model="credentials.useremail"
+          placeholder="이메일"
+          class="form_useremail"
+        />
+        <b-form-input
+          type="password"
+          v-model="credentials.password"
+          placeholder="비밀번호"
+          class="form_password"
+        />
+      </div>
+      <!-- 클릭할 때 함수 실행 -->
+      <button @click="login(credentials)" class="login_button">로그인</button>
+      <div class="links">
+        <span class="lost_password">비밀번호 찾기</span>
+        <router-link :to="{ name: 'Signup' }" class="signup"
+          >회원가입</router-link
+        >
+        <!-- <span class="signup" @click="signupLink">회원가입</span> -->
+      </div>
     </div>
   </div>
 </template>
@@ -47,13 +49,23 @@ export default {
     pageLink() {
       // object
       this.$router.push({ path: "signup" });
-      // 이름을 가지는 라우트
     },
   },
+  // mounted() {
+  // var windowHeight = $(window).height();
+  // console.log(windowHeight);
+  // var topHeight = $("#top").height();
+  // $("#content").css({ height: windowHeight - topHeight + "px" });
+  // },
 };
 </script>
 
 <style scoped>
+.layer {
+  display: flex;
+  background-color: #8ec0ff;
+  height: auto;
+}
 .MainLogin {
   position: absolute;
   top: 50%;
