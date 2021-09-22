@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -22,9 +23,11 @@ public class Board extends BaseEntity {
 
     String title;
     String content;
-    Long view;
-    LocalDateTime created;
-    LocalDateTime updated;
+    int view;
+    @Temporal(TemporalType.TIMESTAMP)
+    Date created;
+    @Temporal(TemporalType.TIMESTAMP)
+    Date updated;
     String section;
 
 }
