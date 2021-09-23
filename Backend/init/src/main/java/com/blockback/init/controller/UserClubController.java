@@ -37,10 +37,17 @@ public class UserClubController {
 
     @GetMapping("/")
     @ApiOperation(value = "동호회 입장 가능 확인", notes = "동호회 가입 유저인지 확인한다.")
-    public ResponseEntity<MessageResponse> checkJoin() {
-        List<ClubListRes> res = clubService.getClubList();
-
-        return ResponseEntity.status(200).body(MessageResponse.of(200, "Success"));
+    public ResponseEntity<MessageResponse> checkJoin(
+            HttpSession session,
+            @PathVariable("clubid") Long clubid) throws IOException {
+        String owner_email = (String) session.getAttribute("LoginUser");
+        // 유저 정보
+        User user = userService.getUserByUserEmail(owner_email);
+        User_Club_Join userclub = userClubService.getUserClubByUserIdandClubId(user.getId(), clubid);
+        if (userclub == null){
+            return ResponseEntity.status(401).body(MessageResponse.of(401, "동호회를 가입해주세요"));
+        }
+        return ResponseEntity.status(200).body(MessageResponse.of(200, "동호회 유저입니다"));
     }
 
     @PostMapping("/")
@@ -53,16 +60,23 @@ public class UserClubController {
         User user = userService.getUserByUserEmail(owner_email);
         // 유저가 해당 동호회 가입여부 확인
         User_Club_Join userclub = userClubService.getUserClubByUserIdandClubId(user.getId(), clubid);
+        if (userclub != null){
+            return ResponseEntity.status(401).body(MessageResponse.of(401, "잘못된 요청입니다."));
+        }
         // 동호회 가입
         userClubService.signClub(user, clubid);
-
         return ResponseEntity.status(200).body(MessageResponse.of(200, "Success"));
     }
 
-//    @DeleteMapping("/")
-//    @ApiOperation(value = "동호회 탈퇴하기", notes = "동호회를 탈퇴한다.")
-//    public ResponseEntity<MessageResponse> reSignClub(@RequestParam String word) {
-//        List<ClubListRes> res = clubService.getClubListBySearch(word);
-//        return ResponseEntity.status(200).body(res);
-//    }
+    @DeleteMapping("/")
+    @ApiOperation(value = "동호회 탈퇴하기", notes = "동호회를 탈퇴한다.")
+    public ResponseEntity<MessageResponse> reSignClub(
+            HttpSession session,
+            @PathVariable("clubid") Long clubid) throws IOException {
+        String owner_email = (String) session.getAttribute("LoginUser");
+        // 유저 정보
+        User user = userService.getUserByUserEmail(owner_email);
+        userClubService.resignClub(user, clubid);
+        return ResponseEntity.status(200).body(MessageResponse.of(200, "Success"));
+    }
 }
