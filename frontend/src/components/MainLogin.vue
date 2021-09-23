@@ -31,7 +31,9 @@
       </b-form-invalid-feedback>
     </div>
     <!-- 클릭할 때 함수 실행 -->
-    <button @click="login" @keyup.enter="login" class="loginButton">로그인</button>
+    <button @click="login" @keyup.enter="login" class="loginButton">
+      로그인
+    </button>
     <div class="links">
       <span class="lostPassword">비밀번호 찾기</span>
       <router-link :to="{ name: 'Signup' }" class="signUp"
@@ -57,8 +59,8 @@ export default {
   },
   computed: {
     validationPassword() {
-      return this.password.length > 4
-    }
+      return this.password.length > 4;
+    },
   },
   methods: {
     // ...mapActions(["login"]),
@@ -73,20 +75,20 @@ export default {
           password: this.password,
         })
         .then((res) => {
-          console.log(res)
+          console.log(res);
         })
-        .catch((error)=>{
-          console.log(error)
-          alert("로그인 실패")
-        })
+        .catch((error) => {
+          console.log(error);
+          alert("로그인 실패");
+        });
     },
-  }
+  },
   // jquery로 화면 높이 계산하려고 했음
   // mounted() {
-    // var windowHeight = $(window).height();
-    // console.log(windowHeight);
-    // var topHeight = $("#top").height();
-    // $("#content").css({ height: windowHeight - topHeight + "px" });
+  // var windowHeight = $(window).height();
+  // console.log(windowHeight);
+  // var topHeight = $("#top").height();
+  // $("#content").css({ height: windowHeight - topHeight + "px" });
   // }
 };
 </script>
@@ -94,7 +96,7 @@ export default {
 <style scoped>
 .logo {
   width: 100px;
-  margin: 0 auto 3rem ;
+  margin: 0 auto 3rem;
 }
 .mainLogin {
   height: 100%;
@@ -124,10 +126,10 @@ export default {
   box-shadow: none;
   border-color: none;
   color: none;
-    /* outline: none !important; */
-    /* border:1px solid red; */
-    /* box-shadow: 0 0 10px #719E; */
-  }
+  /* outline: none !important; */
+  /* border:1px solid red; */
+  /* box-shadow: 0 0 10px #719E; */
+}
 .loginButton {
   background-color: #1ec0ff;
   margin: 0 auto 0;
@@ -139,7 +141,6 @@ export default {
   color: #fff;
   border: 1px solid transparent;
   height: 2.5rem;
-  align-self: stretch;
 }
 .links {
   margin: 1rem 1rem 3rem 0;
@@ -155,7 +156,7 @@ export default {
   text-decoration-line: none;
 }
 .validationPassword {
-  text-align:left;
+  text-align: left;
   font-size: 0.8rem;
   margin: 2px 0 0 4px;
   height: 22px;
