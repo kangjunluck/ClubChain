@@ -63,9 +63,15 @@ public class ClubServiceImpl implements ClubService {
         Club clubTmp = clubRepository.save(club);
         Long clubId = clubTmp.getId();
 
-        String path = BASE_PATH + clubId + "-" + clubThumbnail.getOriginalFilename();
-        File dest = new File(path);
-        clubThumbnail.transferTo(dest);
+        String path = BASE_PATH;
+        if(clubThumbnail == null) {
+            path += "default.png";
+
+        } else {
+            path += clubId + "-" + clubThumbnail.getOriginalFilename();
+            File dest = new File(path);
+            clubThumbnail.transferTo(dest);
+        }
         clubTmp.setProfile_thumbnail(getShortFilePath(path));
 
         clubRepository.save(clubTmp);
