@@ -65,7 +65,7 @@ public class UserController {
 
 
     @PostMapping("/regist")
-    @ApiOperation(value = "회원 가입", notes = "<strong>아이디와 패스워드</strong>를 통해 회원가입 한다.", consumes = "multipart/form-data", produces = "multipart/form-data")
+    @ApiOperation(value = "회원 가입", notes = "<strong>아이디와 패스워드</strong>를 통해 회원가입 한다.")
     @ApiResponses({
             @ApiResponse(code = 201, message = "성공"),
             @ApiResponse(code = 401, message = "인증 실패"),
@@ -75,6 +75,7 @@ public class UserController {
     public ResponseEntity<UserResponse> register(
             @ApiParam(value="회원가입 정보", required = true) UserRegisterPostReq registerInfo,
             @RequestPart(value = "image", required = false) MultipartFile thumbnail) {
+        System.out.println(thumbnail.getOriginalFilename());
         User user = userService.getUserByUserEmail(registerInfo.getUserEmail());
         if (user != null)
             return ResponseEntity.status(401).body(UserResponse.of(401, "이미 있는 유저입니다"));
