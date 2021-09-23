@@ -5,6 +5,7 @@ import com.blockback.init.common.request.UserLoginReq;
 import com.blockback.init.common.request.UserPutReq;
 import com.blockback.init.common.request.UserRegisterPostReq;
 import com.blockback.init.common.response.MessageResponse;
+import com.blockback.init.common.response.UserResponse;
 import com.blockback.init.entity.User;
 import com.blockback.init.service.UserService;
 import io.swagger.annotations.*;
@@ -34,7 +35,7 @@ public class UserController {
 
     @PostMapping("/login")
     @ApiOperation(value = "로그인", notes = "<strong>아이디와 패스워드</strong>를 통해 로그인 한다.")
-    public ResponseEntity<MessageResponse> login(
+    public ResponseEntity<UserResponse> login(
             @RequestBody
             @ApiParam(value="로그인 정보", required = true) UserLoginReq loginInfo,
             HttpSession session) {
@@ -44,25 +45,25 @@ public class UserController {
         // 로그인 요청한 유저로부터 입력된 패스워드 와 디비에 저장된 유저의 암호화된 패스워드가 같은지 확인.(유효한 패스워드인지 여부 확인)
         if (user == null)
         {
-            return ResponseEntity.status(404).body(MessageResponse.of(404, "존재하지 않는 계정입니다."));
+            return ResponseEntity.status(404).body(UserResponse.of(404, "존재하지 않는 계정입니다."));
         }
         if(passwordEncoder.matches(password, user.getPassword())) {
 //            JwtTokenUtil.getToken(userEmail);
             // 세션에 저장해준다.
             session.setAttribute("LoginUser", userEmail);
-            return ResponseEntity.ok(MessageResponse.of(200, "Success"));
+            return ResponseEntity.ok(UserResponse.of(200, "Success"));
         }
         // 유효하지 않는 패스워드인 경우, 로그인 실패로 응답.
-        return ResponseEntity.status(401).body(MessageResponse.of(401, "잘못된 비밀번호입니다."));
+        return ResponseEntity.status(401).body(UserResponse.of(401, "잘못된 비밀번호입니다."));
     }
     @DeleteMapping("/logout")
     @ApiOperation(value = "로그아웃")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    public ResponseEntity<MessageResponse> logout(HttpSession session) {
+    public ResponseEntity<UserResponse> logout(HttpSession session) {
         session.invalidate();
-        return ResponseEntity.ok(MessageResponse.of(200, "Success"));
+        return ResponseEntity.ok(UserResponse.of(200, "Success"));
     }
 
 
@@ -74,26 +75,26 @@ public class UserController {
             @ApiResponse(code = 404, message = "사용자 없음"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
-    public ResponseEntity<MessageResponse> register(
+    public ResponseEntity<UserResponse> register(
             @ApiParam(value="회원가입 정보", required = true) UserRegisterPostReq registerInfo,
             @RequestPart(value = "image", required = false) MultipartFile thumbnail) {
         User user = userService.getUserByUserEmail(registerInfo.getUserEmail());
         if (user != null) {
-            return ResponseEntity.status(401).body(MessageResponse.of(401, "이미 있는 유저입니다"));
+            return ResponseEntity.status(401).body(UserResponse.of(401, "이미 있는 유저입니다"));
         }
         userService.createUser(registerInfo, thumbnail);
-        return ResponseEntity.ok(MessageResponse.of(200, "Success"));
+        return ResponseEntity.ok(UserResponse.of(200, "Success"));
     }
 
     @PutMapping(value="/{userId}")
     @ApiOperation(value = "회원정보 수정", notes = "회원정보를 수정합니다.")
-    public ResponseEntity<MessageResponse> modifyUser(
+    public ResponseEntity<UserResponse> modifyUser(
             @PathVariable("userId") Long userId,
             @ApiParam(value="회원가입 정보", required = true) UserPutReq putinfo,
             @RequestPart(value = "image", required = false) MultipartFile thumbnail) {
         User user = userService.putUser(putinfo, userId, thumbnail);
 
-        return ResponseEntity.status(201).body(MessageResponse.of(201, "Success"));
+        return ResponseEntity.status(201).body(UserResponse.of(201, "Success"));
     }
 
     @DeleteMapping("/{userId}")
@@ -101,23 +102,23 @@ public class UserController {
     @ApiResponses({
             @ApiResponse(code = 204, message = "성공"),
     })
-    public ResponseEntity<MessageResponse> deleteUser(@PathVariable("userId") Long userId) {
+    public ResponseEntity<UserResponse> deleteUser(@PathVariable("userId") Long userId) {
         userService.deleteUser(userId);
-        return ResponseEntity.status(204).body(MessageResponse.of(204, "Success"));
+        return ResponseEntity.status(204).body(UserResponse.of(204, "Success"));
     }
 
     @GetMapping("/{userId}")
     @ApiOperation(value = "회원정보 조회", notes = "회원정보를 조회합니다.")
-    public ResponseEntity<MessageResponse> UserInfo(
+    public ResponseEntity<UserResponse> UserInfo(
             @PathVariable("userId") Long userId) {
         User user = userService.getUserByUserId(userId);
 
         if (user == null)
         {
-            return ResponseEntity.status(404).body(MessageResponse.of(404, "존재하지 않는 아이디입니다."));
+            return ResponseEntity.status(404).body(UserResponse.of(404, "존재하지 않는 아이디입니다."));
         }
         else {
-            return ResponseEntity.status(200).body(MessageResponse.of(200, "Success"));
+            return ResponseEntity.status(200).body(UserResponse.of(200, "Success", user));
         }
 
     }
