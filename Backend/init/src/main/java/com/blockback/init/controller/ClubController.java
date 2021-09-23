@@ -61,4 +61,21 @@ public class ClubController {
         List<ClubListRes> res = clubService.getClubListBySearch(word);
         return ResponseEntity.status(200).body(res);
     }
+
+    @PutMapping("/{clubid}")
+    @ApiOperation(value = "동호회 수정하기", notes = "동호회명을 수정한다.")
+    public ResponseEntity<MessageResponse> modifyClub(HttpSession session, ClubCreatedReq req, @RequestParam Long clubid,
+                                                      @RequestPart(value = "club_thumbnail", required = false) MultipartFile clubThumbnail) throws IOException {
+        String owner_email = (String) session.getAttribute("LoginUser");
+        // 방장 정보
+        User user = userService.getUserByUserEmail(owner_email);
+
+        // 동호회 수정
+        if(clubService.isOwner(user, clubid) && clubService.modifyClub(req, clubThumbnail, clubid)) {
+            return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
+        }
+
+        return ResponseEntity.status(400).body(MessageResponse.of(400, FAIL));
+    }
+
 }
