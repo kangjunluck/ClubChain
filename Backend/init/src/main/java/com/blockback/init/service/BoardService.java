@@ -2,6 +2,7 @@ package com.blockback.init.service;
 
 import com.blockback.init.common.request.BoardRegisterReq;
 import com.blockback.init.entity.Board;
+import com.blockback.init.entity.User;
 
 import java.util.List;
 
@@ -10,5 +11,5 @@ public interface BoardService {
 
     Board getBoardByBoardId(Long clubid, Long boardid);
 
-    Board createBoard(BoardRegisterReq boardinfo, Long clubid);
+    void createBoard(User user, BoardRegisterReq boardinfo, Long clubid);
 }
