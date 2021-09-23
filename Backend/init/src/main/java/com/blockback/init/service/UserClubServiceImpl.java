@@ -44,4 +44,11 @@ public class UserClubServiceImpl implements UserClubService {
         }
         return null;
     }
+
+    @Override
+    public void resignClub(User user, Long clubid) {
+        Optional<Club> club = clubRepository.findById(clubid);
+        Optional<User_Club_Join> userclub = userClubRepository.findByUserAndClub(user, club.get());
+        userClubRepository.delete(userclub.get());
+    }
 }

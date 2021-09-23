@@ -43,9 +43,9 @@ public class ClubController {
     }
 
     @PostMapping("/")
-    @ApiOperation(value = "동호회 생성하기", notes = "동호회를 만든다.", consumes = "multipart/form-data", produces = "multipart/form-data")
+    @ApiOperation(value = "동호회 생성하기", notes = "동호회를 만든다.")
     public ResponseEntity<MessageResponse> createClub(HttpSession session, ClubCreatedReq req,
-                  @RequestPart(value = "study_thumbnail", required = false) MultipartFile clubThumbnail) throws IOException {
+                  @RequestPart(value = "club_thumbnail", required = false) MultipartFile clubThumbnail) throws IOException {
         String owner_email = (String) session.getAttribute("LoginUser");
         // 방장 정보
         User user = userService.getUserByUserEmail(owner_email);

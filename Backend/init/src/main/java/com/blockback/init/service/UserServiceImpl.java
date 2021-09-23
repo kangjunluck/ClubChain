@@ -4,12 +4,9 @@ import com.blockback.init.common.request.UserPutReq;
 import com.blockback.init.common.request.UserRegisterPostReq;
 import com.blockback.init.entity.User;
 import com.blockback.init.repository.UserRepository;
-import com.blockback.init.repository.UserRepositorySup;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -21,18 +18,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    UserRepositorySup userRepositorySup;
 
     @Autowired
     PasswordEncoder passwordEncoder;
 
-//    @Autowired
-//    UserRoomRepositry userRoomRepositry;
-
     @Override
     public User getUserByUserEmail(String userEmail) {
-        Optional<User> user = userRepository.findUserByUserEmail(userEmail);
+        Optional<User> user = userRepository.findByUserEmail(userEmail);
         User user1 = null;
         if (user.isPresent()) {
             user1 = user.get();
@@ -141,11 +133,5 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userId).get();
         userRepository.delete(user);
     }
-//
-//    @Override
-//    public User_Room getUserByUserNickname(String usernickname) {
-//        User_Room user = userRepositorySup.findUserRoomByNickName(usernickname).get();
-//        System.out.println(user);
-//        return user;
-//    }
+
 }
