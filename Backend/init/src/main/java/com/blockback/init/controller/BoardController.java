@@ -70,8 +70,6 @@ public class BoardController {
             @PathVariable("clubid") Long clubid,
             @ApiParam(value="게시글 정보", required = true) BoardRegisterReq boardinfo)
     {
-        //사용자이면서 동호회 가입 이용자만 글을 작성할 수 있어야 한다. 여기에 조건을 넣어주자. 수정중
-        // User_Club_Join 을 만들고 확인해야 한다. 아직 동호회 가입에 대한 것이 안만듬
         String owner_email = (String) session.getAttribute("LoginUser");
         User user = userService.getUserByUserEmail(owner_email);
         User_Club_Join userclub = userClubService.getUserClubByUserIdandClubId(user.getId(), clubid);
@@ -82,5 +80,51 @@ public class BoardController {
         return ResponseEntity.status(200).body(MessageResponse.of(200, "success"));
     }
 
+    @PutMapping(value = "/{boardid}")
+    @ApiOperation(value = "게시글 수정")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "성공"),
+            @ApiResponse(code = 404, message = "작성 오류"),
+            @ApiResponse(code = 500, message = "서버 오류")
+    })
+    public ResponseEntity<MessageResponse> putBoard(
+            HttpSession session,
+            @PathVariable("clubid") Long clubid,
+            @PathVariable("boardid") Long boardid,
+            @ApiParam(value="게시글 정보", required = true) BoardRegisterReq boardinfo)
+    {
+        // board의 userid가 같아야 한다.
+        String owner_email = (String) session.getAttribute("LoginUser");
+        User user = userService.getUserByUserEmail(owner_email);
+        Board board = boardService.getBoardByBoardId(clubid, boardid);
+        if (!board.getUser().getId().equals(user.getId())){
+            return ResponseEntity.status(401).body(MessageResponse.of(401, "잘못된 요청입니다"));
+        }
+        boardService.putBoard(boardinfo, boardid);
+        return ResponseEntity.status(200).body(MessageResponse.of(200, "success"));
+    }
+
+    @DeleteMapping(value = "/{boardid}")
+    @ApiOperation(value = "게시글 삭제")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "성공"),
+            @ApiResponse(code = 404, message = "작성 오류"),
+            @ApiResponse(code = 500, message = "서버 오류")
+    })
+    public ResponseEntity<MessageResponse> deleteBoard(
+            HttpSession session,
+            @PathVariable("clubid") Long clubid,
+            @PathVariable("boardid") Long boardid)
+    {
+        // board의 userid가 같아야 한다.
+        String owner_email = (String) session.getAttribute("LoginUser");
+        User user = userService.getUserByUserEmail(owner_email);
+        Board board = boardService.getBoardByBoardId(clubid, boardid);
+        if (!board.getUser().getId().equals(user.getId())){
+            return ResponseEntity.status(401).body(MessageResponse.of(401, "잘못된 요청입니다"));
+        }
+        boardService.deleteBoard(boardid);
+        return ResponseEntity.status(200).body(MessageResponse.of(200, "success"));
+    }
 
 }
