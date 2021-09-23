@@ -20,6 +20,7 @@ import java.util.List;
 @Api(value = "게시판 API", tags = {"Board"})
 @RestController
 @RequestMapping("/api/{clubid}/board")
+@CrossOrigin(origins = "*")
 public class BoardController {
     @Autowired
     BoardService boardService;

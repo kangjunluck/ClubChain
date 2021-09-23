@@ -86,7 +86,7 @@ public class UserController {
     }
 
     @PutMapping(value="/{userId}")
-    @ApiOperation(value = "회원정보 수정", notes = "회원정보를 수정합니다.", consumes = "multipart/form-data", produces = "multipart/form-data")
+    @ApiOperation(value = "회원정보 수정", notes = "회원정보를 수정합니다.")
     public ResponseEntity<MessageResponse> modifyUser(
             @PathVariable("userId") Long userId,
             @ApiParam(value="회원가입 정보", required = true) UserPutReq putinfo,
