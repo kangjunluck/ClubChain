@@ -9,8 +9,7 @@
                     <img alt="프로필" :src="image" id="image" />
                 </div>
                 <div class="float2">
-                    <div class="filename">파일명....png</div>
-                    <div class="btn btn-secondary">이미지 선택</div>
+                    <input v-on:change="fileSelect()" ref="image" type="file" name="photo" id="photo" />
                 </div>
             </div>
             <input 
@@ -41,6 +40,15 @@
                 v-model="code"
                 ref="code"
                 placeholder="인증코드"
+                class="form-control mb-2"
+            />
+            <input
+                type="text"
+                id="useraccount"
+                name="useraccount"
+                v-model="useraccount"
+                ref="useraccount"
+                placeholder="계정명"
                 class="form-control mb-2"
             />
             <input
@@ -76,28 +84,32 @@ export default {
   data() {
     return {
       image: "",
-      usernickname: "",
-      userEmail: "",
       password: "",
+      userEmail: "",
+      useraccount: "",
+      usernickname: "",
     };
   },
   methods: {
     insertUser() {
+      const formData = new FormData;
+      formData.append('image', this.image);
+      formData.append('password', this.password);
+      formData.append('userEmail', this.userEmail);
+      formData.append('useraccount', this.useraccount);
+      formData.append('usernickname', this.usernickname);
       http
-        .post("/regist", {
-          password: this.password,
-          userEmail: this.userEmail,
-          usernickname: this.usernickname,
-          userthumbnail: "",
-        })
-        .then(({ data }) => {
-          console.log(data);
-          let msg = "회원가입 실패!!";
-          if (data === "success") {
-            msg = "회원가입 완료";
-            this.$router.push("/");
+        .post("/api/users/regist", formData, {
+          headers: {
+            'Content-Type' : 'multipart/form-data'
           }
+        }         
+        )
+        .then( res => {
+          console.log(res.data);
+          let msg = "회원가입 완료";
           alert(msg);
+          this.$router.push("/");
         })
         .catch((error) => {
           alert("회원가입 실패");
@@ -106,6 +118,10 @@ export default {
     },
     home() {
       this.$router.push("/");
+    },
+    fileSelect() {
+      console.log(this.$refs);
+      this.image = this.$refs.image.files[0];
     },
   },
 };
