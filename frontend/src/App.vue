@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">test</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link :to="{ name: 'Main' }">Main</router-link>
-    </div>
-    <router-view />
+    </div> -->
+    <router-view class="router_view" />
   </div>
 </template>
 
@@ -18,6 +18,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 100%;
 }
 
 #nav {
@@ -31,5 +32,8 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+.router_view {
+  height: 100%;
 }
 </style>
