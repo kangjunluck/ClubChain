@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="main">
         <div class="club">
             <div class="clubimage">
                 <img alt="Vue logo" src="@/assets/logo.png"/>
@@ -58,6 +58,7 @@ export default {
 </script>
 
 <style scoped>
+
 .club {
     border: 1px solid black;
     width: 80%;
