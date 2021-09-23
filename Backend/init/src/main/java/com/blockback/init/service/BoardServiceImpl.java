@@ -50,4 +50,21 @@ public class BoardServiceImpl implements BoardService {
 
         boardRepository.save(board);
     }
+
+    @Override
+    public void putBoard(BoardRegisterReq boardinfo, Long boardid) {
+        Board board = boardRepository.findById(boardid).get();
+        board.setTitle(boardinfo.getTitle());
+        board.setContent(boardinfo.getContent());
+        board.setUpdated(new Date());
+        board.setSection(boardinfo.getSection());
+
+        boardRepository.save(board);
+    }
+
+    @Override
+    public void deleteBoard(Long boardid) {
+        Board board = boardRepository.findById(boardid).get();
+        boardRepository.delete(board);
+    }
 }
