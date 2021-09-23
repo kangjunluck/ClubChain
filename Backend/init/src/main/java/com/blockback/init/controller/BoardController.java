@@ -82,4 +82,5 @@ public class BoardController {
         return ResponseEntity.status(200).body(MessageResponse.of(200, "success"));
     }
 
+
 }

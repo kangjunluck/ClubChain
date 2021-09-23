@@ -1,5 +1,6 @@
 package com.blockback.init.common.response;
 
+import com.blockback.init.entity.User;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -21,5 +22,10 @@ public class MessageResponse {
         body.statusCode = statusCode;
         return body;
     }
-
+    public static MessageResponse of(Integer statusCode, String message, User user) {
+        MessageResponse body = new MessageResponse();
+        body.message = message;
+        body.statusCode = statusCode;
+        return body;
+    }
 }
