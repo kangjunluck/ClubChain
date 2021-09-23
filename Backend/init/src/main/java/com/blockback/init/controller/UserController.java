@@ -51,7 +51,7 @@ public class UserController {
 //            JwtTokenUtil.getToken(userEmail);
             // 세션에 저장해준다.
             session.setAttribute("LoginUser", userEmail);
-            return ResponseEntity.ok(UserResponse.of(200, "Success"));
+            return ResponseEntity.ok(UserResponse.of(200, "Success", user));
         }
         // 유효하지 않는 패스워드인 경우, 로그인 실패로 응답.
         return ResponseEntity.status(401).body(UserResponse.of(401, "잘못된 비밀번호입니다."));

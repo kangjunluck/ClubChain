@@ -12,4 +12,8 @@ public interface BoardService {
     Board getBoardByBoardId(Long clubid, Long boardid);
 
     void createBoard(User user, BoardRegisterReq boardinfo, Long clubid);
+    
+    void putBoard(BoardRegisterReq boardinfo, Long boardid);
+
+    void deleteBoard(Long boardid);
 }
