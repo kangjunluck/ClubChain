@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -52,5 +53,61 @@ public class VoteController {
         }
 
         return ResponseEntity.status(500).body(MessageResponse.of(500, FAIL));
+    }
+
+    @PostMapping("/{clubid}/vote/{voteid}")
+    @ApiOperation(value = "투표 하기", notes = "투표를 한다.")
+    public ResponseEntity<MessageResponse> vote(@RequestParam Long clubid, @RequestParam Long voteid,
+                                                HttpSession session, @RequestBody Map<String, Long> req) {
+        String owner_email = (String) session.getAttribute("LoginUser");
+        // 투표 생성자 정보
+        User user = userService.getUserByUserEmail(owner_email);
+
+        if(!req.containsKey("itemid")) {
+            return ResponseEntity.status(500).body(MessageResponse.of(500, FAIL));
+        }
+
+        Long itemId = req.get("itemid");
+        if(voteService.vote(voteid, user, itemId)) {
+            return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
+        }
+
+        return ResponseEntity.status(500).body(MessageResponse.of(500, FAIL));
+    }
+
+    @PutMapping("/{clubid}/vote/{voteid}")
+    @ApiOperation(value = "재투표 하기", notes = "재투표를 한다.")
+    public ResponseEntity<MessageResponse> revote(@RequestParam Long clubid, @RequestParam Long voteid,
+                                                  HttpSession session, @RequestBody Map<String, Long> req) {
+        String owner_email = (String) session.getAttribute("LoginUser");
+        // 투표 생성자 정보
+        User user = userService.getUserByUserEmail(owner_email);
+
+        if(!req.containsKey("itemid")) {
+            return ResponseEntity.status(500).body(MessageResponse.of(500, FAIL));
+        }
+
+        Long itemId = req.get("itemid");
+        if(voteService.revote(voteid, user, itemId)) {
+            return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
+        }
+
+        return ResponseEntity.status(500).body(MessageResponse.of(500, FAIL));
+    }
+
+    @DeleteMapping("/{clubid}/vote/{voteid}")
+    @ApiOperation(value = "투표 삭제", notes = "투표를 삭제한다.")
+    public ResponseEntity<MessageResponse> voteDelete(@RequestParam Long clubid, @RequestParam Long voteid, HttpSession session) {
+        String owner_email = (String) session.getAttribute("LoginUser");
+        // 투표 생성자 정보
+        User user = userService.getUserByUserEmail(owner_email);
+
+        // 직접 만들었는지 확인
+        if(!voteService.isOwner(user, voteid)) {
+            return ResponseEntity.status(500).body(MessageResponse.of(500, FAIL));
+        }
+
+        voteService.voteDelete(voteid);
+        return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
     }
 }
