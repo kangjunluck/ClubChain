@@ -1,5 +1,6 @@
 <template>
   <div class="mainLogin">
+    <!-- 나중에 trim도 추가하기 -->
     <!-- 로고와 서비스이름 파일 들어갈 예정 -->
     <img alt="Vue logo" src="@/assets/logo.png" class="logo" />
     <!-- 로그인 폼 만들기 -->
@@ -7,7 +8,7 @@
       <b-form-input
         type="text"
         id="userEmail"
-        v-model="userEmail"
+        v-model="credentials.userEmail"
         placeholder="이메일"
         class="formuseremail"
       />
@@ -31,7 +32,7 @@
       </b-form-invalid-feedback>
     </div>
     <!-- 클릭할 때 함수 실행 -->
-    <button @click="login" @keyup.enter="login" class="loginButton">
+    <button @click="loginSubmit" @keyup.enter="loginSubmit" class="loginButton">
       로그인
     </button>
     <div class="links">
@@ -53,13 +54,23 @@ export default {
   name: "Login",
   data: function () {
     return {
-      userEmail: "",
-      password: "",
+      password: null,
+      credentials: {
+        userEmail: null,
+        useraccount: null,
+        usernickname: null,
+        userthumbnail: null,
+      }
     };
   },
   computed: {
     validationPassword() {
-      return this.password.length > 4;
+      if (this.password === null) {
+        // 나중에 수정... 비어있을 때 옳음 표시 뜸
+        return true
+      } else {
+        return this.password.length > 4;
+      }
     },
   },
   methods: {
@@ -68,14 +79,22 @@ export default {
       // object
       this.$router.push({ path: "signup" });
     },
-    login() {
+    loginSubmit() {
       http
         .post("api/users/login", {
-          userEmail: this.userEmail,
+          userEmail: this.credentials.userEmail,
           password: this.password,
         })
         .then((res) => {
-          console.log(res);
+          if (res.data.statusCode === 200){
+            this.credentials.userEmail = res.data.userEmail;
+            this.credentials.useraccount = res.data.useraccount;
+            this.credentials.usernickname = res.data.usernickname;
+            this.credentials.userthumbnail = res.data.userthumbnail; 
+            this.$store.dispatch("logininfo", this.credentials);
+            this.$store.dispatch("isLogin");
+            this.$router.push("Vote");
+          }
         })
         .catch((error) => {
           console.log(error);
