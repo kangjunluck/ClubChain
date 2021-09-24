@@ -15,6 +15,13 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(BootstrapVue)
 
+import VueSession from 'vue-session'
+
+var sessionOptions = {
+  persist: true
+}
+Vue.use(VueSession, sessionOptions)
+
 new Vue({
   router,
   store,
