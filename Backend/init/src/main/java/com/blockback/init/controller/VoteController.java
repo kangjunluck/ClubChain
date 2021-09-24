@@ -21,7 +21,6 @@ import java.util.Map;
 @RequestMapping("/api")
 @Api(value = "투표 API", tags = {"Vote"})
 @CrossOrigin(origins = "*")
-@EnableRedisHttpSession
 public class VoteController {
 
     @Autowired
