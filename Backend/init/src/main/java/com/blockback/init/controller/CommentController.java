@@ -61,7 +61,7 @@ public class CommentController {
     }
 
     @PutMapping("/{commentid}")
-    @ApiOperation(value = "해당 게시글의 댓글 작성")
+    @ApiOperation(value = "댓글 수정")
     public ResponseEntity<MessageResponse> createComment(
             HttpSession session,
             CommentCreateReq commentinfo,
