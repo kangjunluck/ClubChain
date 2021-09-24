@@ -13,11 +13,11 @@ import javax.persistence.ManyToOne;
 @Setter
 public class User_Club_Join extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="userid")
     User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="clubid")
     Club club;
 

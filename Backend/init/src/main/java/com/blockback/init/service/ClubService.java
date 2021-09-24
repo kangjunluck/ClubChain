@@ -13,4 +13,5 @@ public interface ClubService {
     List<ClubListRes> getClubList();
     void createClub(User user, ClubCreatedReq req, MultipartFile clubThumbnail) throws IOException;
     List<ClubListRes> getClubListBySearch(String name);
+    List<ClubListRes> getSignClubList(User user);
 }

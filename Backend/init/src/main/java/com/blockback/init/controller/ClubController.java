@@ -61,4 +61,14 @@ public class ClubController {
         List<ClubListRes> res = clubService.getClubListBySearch(word);
         return ResponseEntity.status(200).body(res);
     }
+
+    @GetMapping("/myclub")
+    @ApiOperation(value = "가입한 동호회 조회", notes = "가입한 동호회 목록을 조회한다.")
+    public ResponseEntity<List<ClubListRes>> getSignClubList(HttpSession session) {
+        String owner_email = (String) session.getAttribute("LoginUser");
+        User user = userService.getUserByUserEmail(owner_email);
+
+        List<ClubListRes> res = clubService.getSignClubList(user);
+        return ResponseEntity.status(200).body(res);
+    }
 }
