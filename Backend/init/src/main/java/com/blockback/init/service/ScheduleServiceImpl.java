@@ -1,22 +1,31 @@
 package com.blockback.init.service;
 
+import com.blockback.init.common.request.ScheduleCreateReq;
 import com.blockback.init.common.response.ScheduleListRes;
+import com.blockback.init.entity.Club;
 import com.blockback.init.entity.Schedule;
+import com.blockback.init.entity.User;
+import com.blockback.init.repository.ClubRepository;
 import com.blockback.init.repository.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service("scheduleService")
 public class ScheduleServiceImpl implements ScheduleService {
 
     @Autowired
     ScheduleRepository scheduleRepository;
+
+    @Autowired
+    ClubRepository clubRepository;
 
     @Override
     public List<ScheduleListRes> getScheduleList(Long clubid) {
@@ -41,8 +50,38 @@ public class ScheduleServiceImpl implements ScheduleService {
         return res;
     }
 
+    @Override
+    public boolean createSchedule(Long clubid, User user, ScheduleCreateReq req) {
+        Optional<Club> club = clubRepository.findById(clubid);
+        if(!club.isPresent()) {
+            return false;
+        }
+
+        Schedule schedule = new Schedule();
+        schedule.setContent(req.getContent());
+        schedule.setEnd(stringFormatToDate(req.getEnd()));
+        schedule.setStart(stringFormatToDate(req.getStart()));
+        schedule.setTitle(req.getTitle());
+        schedule.setUser(user);
+        schedule.setClub(club.get());
+
+        scheduleRepository.save(schedule);
+        return true;
+    }
+
     public String dateFormat(Date date) { // 날짜 형식 변환
         DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
         return sdFormat.format(date);
+    }
+
+    public Date stringFormatToDate(String date) { // 날짜 형식 변환
+        Date res = new Date();
+        try {
+            res = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return res;
     }
 }
