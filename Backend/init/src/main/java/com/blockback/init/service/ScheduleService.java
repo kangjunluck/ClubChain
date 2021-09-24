@@ -1,2 +1,4 @@
-package com.blockback.init.service;public interface ScheduleService {
+package com.blockback.init.service;
+
+public interface ScheduleService {
 }
