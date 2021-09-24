@@ -6,6 +6,7 @@ import Enterclub from "../components/club/Enterclub.vue";
 import Vote from "../components/vote/Vote.vue"
 import Test from "../components/Test.vue"
 import Clublist from "../components/club/Clublist.vue"
+import Finance from "../views/finance.vue"
 
 Vue.use(VueRouter);
 
@@ -39,7 +40,13 @@ const routes = [
     path: "/club/list",
     name: "Clublist",
     component: Clublist,
-  }
+  },
+  {
+    path: "/club/finance",
+    name: "Finance",
+    component: Finance,
+  },
+  
 ];
 
 const router = new VueRouter({
