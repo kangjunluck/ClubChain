@@ -10,8 +10,6 @@ import lombok.Setter;
 @Setter
 @ApiModel("BoardRegisterRequest")
 public class BoardRegisterReq {
-    @ApiModelProperty(name="id", example="1")
-    Long id;
     @ApiModelProperty(name="title", example="안녕하세요")
     String title;
     @ApiModelProperty(name="content", example="반갑습니다")

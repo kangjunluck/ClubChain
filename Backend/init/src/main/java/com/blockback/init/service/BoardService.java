@@ -9,7 +9,7 @@ import java.util.List;
 public interface BoardService {
     List<Board> getBoardsByClubId(Long clubid);
 
-    Board getBoardByBoardId(Long clubid, Long boardid);
+    Board getBoardByBoardId(Long boardid);
 
     void createBoard(User user, BoardRegisterReq boardinfo, Long clubid);
     
