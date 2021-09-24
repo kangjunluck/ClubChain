@@ -48,7 +48,7 @@ public class VoteController {
         // 투표 생성자 정보
         User user = userService.getUserByUserEmail(owner_email);
 
-        if(voteService.createVote(clubid, req, user)) {
+        if(user != null && voteService.createVote(clubid, req, user)) {
             return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
         }
 

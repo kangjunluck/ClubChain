@@ -17,7 +17,7 @@ public class VoteCreateReq {
     String content;
 
     @ApiModelProperty(name="end", example = "2021-09-08")
-    Date end;
+    String end;
 
     @ApiModelProperty(name="vote_list", example = "")
     ArrayList<String> vote_list;
