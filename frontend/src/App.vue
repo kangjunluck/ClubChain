@@ -5,6 +5,7 @@
       <router-link to="/about">About</router-link> |
       <router-link :to="{ name: 'Main' }">Main</router-link>
     </div> -->
+
     <router-view class="router_view" />
   </div>
 </template>
