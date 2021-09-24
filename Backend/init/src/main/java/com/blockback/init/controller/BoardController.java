@@ -54,7 +54,7 @@ public class BoardController {
             @PathVariable("clubid") Long clubid,
             @PathVariable("boardid") Long boardid)
     {
-        Board board = boardService.getBoardByBoardId(clubid, boardid);
+        Board board = boardService.getBoardByBoardId(boardid);
         return board;
     }
 
@@ -96,7 +96,7 @@ public class BoardController {
         // board의 userid가 같아야 한다.
         String owner_email = (String) session.getAttribute("LoginUser");
         User user = userService.getUserByUserEmail(owner_email);
-        Board board = boardService.getBoardByBoardId(clubid, boardid);
+        Board board = boardService.getBoardByBoardId(boardid);
         if (!board.getUser().getId().equals(user.getId())){
             return ResponseEntity.status(401).body(MessageResponse.of(401, "잘못된 요청입니다"));
         }
@@ -119,7 +119,7 @@ public class BoardController {
         // board의 userid가 같아야 한다.
         String owner_email = (String) session.getAttribute("LoginUser");
         User user = userService.getUserByUserEmail(owner_email);
-        Board board = boardService.getBoardByBoardId(clubid, boardid);
+        Board board = boardService.getBoardByBoardId(boardid);
         if (!board.getUser().getId().equals(user.getId())){
             return ResponseEntity.status(401).body(MessageResponse.of(401, "잘못된 요청입니다"));
         }
