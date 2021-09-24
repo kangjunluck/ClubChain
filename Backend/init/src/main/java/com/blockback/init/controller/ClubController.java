@@ -36,10 +36,10 @@ public class ClubController {
 
     @GetMapping("/")
     @ApiOperation(value = "동호회 전체 조회", notes = "동호회 전체 목록을 조회한다.")
-    public ResponseEntity<List<ClubListRes>> getClubList() {
-        List<ClubListRes> res = clubService.getClubList();
+        public ResponseEntity<List<ClubListRes>> getClubList() {
+            List<ClubListRes> res = clubService.getClubList();
 
-        return ResponseEntity.status(200).body(res);
+            return ResponseEntity.status(200).body(res);
     }
 
     @PostMapping("/")
