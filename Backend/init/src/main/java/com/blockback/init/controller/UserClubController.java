@@ -3,6 +3,7 @@ package com.blockback.init.controller;
 import com.blockback.init.common.request.ClubCreatedReq;
 import com.blockback.init.common.response.ClubListRes;
 import com.blockback.init.common.response.MessageResponse;
+import com.blockback.init.entity.Board;
 import com.blockback.init.entity.User;
 import com.blockback.init.entity.User_Club_Join;
 import com.blockback.init.service.ClubService;
@@ -10,6 +11,8 @@ import com.blockback.init.service.UserClubService;
 import com.blockback.init.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
@@ -79,4 +82,5 @@ public class UserClubController {
         userClubService.resignClub(user, clubid);
         return ResponseEntity.status(200).body(MessageResponse.of(200, "Success"));
     }
+
 }

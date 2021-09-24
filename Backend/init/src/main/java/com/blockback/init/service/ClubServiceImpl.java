@@ -4,7 +4,10 @@ import com.blockback.init.common.request.ClubCreatedReq;
 import com.blockback.init.common.response.ClubListRes;
 import com.blockback.init.entity.Club;
 import com.blockback.init.entity.User;
+import com.blockback.init.entity.User_Club_Join;
 import com.blockback.init.repository.ClubRepository;
+import com.blockback.init.repository.UserClubRepository;
+import com.blockback.init.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +28,10 @@ public class ClubServiceImpl implements ClubService {
 
     @Autowired
     ClubRepository clubRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    UserClubRepository userClubRepository;
 
     String BASE_PATH = System.getProperty("user.dir") + "/init/src/main/resources/image/club/";
 
@@ -149,6 +156,26 @@ public class ClubServiceImpl implements ClubService {
 
         return res;
     }
+
+    @Override
+    public List<ClubListRes> getSignClubList(User user) {
+        List<User_Club_Join> signList = userClubRepository.findByUser(user);
+        List<ClubListRes> res = new ArrayList<>();
+        for(User_Club_Join sign : signList) {
+            ClubListRes tmp = new ClubListRes();
+            Club club = sign.getClub();
+            tmp.setClubid(club.getId());
+            tmp.setName(club.getName());
+            tmp.setIntroduce(club.getIntroduce());
+            tmp.setProfile_thumbnail(club.getProfile_thumbnail());
+            tmp.setPassword(club.getPassword());
+            tmp.setOwner_id(club.getUser().getId());
+            tmp.setOwner_name(club.getUser().getUsernickname());
+            res.add(tmp);
+        }
+        return res;
+    }
+
 
     private String getShortFilePath(String path) {
         int idx = path.indexOf("image");

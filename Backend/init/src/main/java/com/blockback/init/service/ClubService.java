@@ -15,4 +15,5 @@ public interface ClubService {
     List<ClubListRes> getClubListBySearch(String name);
     boolean modifyClub(ClubCreatedReq req, MultipartFile clubThumbnail, Long clubid);
     boolean isOwner(User user, Long clubid);
+    List<ClubListRes> getSignClubList(User user);
 }
