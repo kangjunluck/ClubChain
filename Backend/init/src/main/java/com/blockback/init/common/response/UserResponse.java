@@ -20,6 +20,8 @@ public class UserResponse {
     String userEmail;
     @ApiModelProperty(name="useraccount")
     String useraccount;
+    @ApiModelProperty(name="userprivatekey")
+    String userprivatekey;
     @ApiModelProperty(name="userthumbnail")
     String userthumbnail;
     @ApiModelProperty(name="usernickname")
@@ -39,6 +41,7 @@ public class UserResponse {
         res.setMessage(message);
         res.setUserEmail(user.getUserEmail());
         res.setUseraccount(user.getUseraccount());
+        res.setUserprivatekey(user.getUserprivatekey());
         res.setUserthumbnail(user.getUserthumbnail());
         res.setUsernickname(user.getUsernickname());
         return res;

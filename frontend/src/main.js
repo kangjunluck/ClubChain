@@ -3,7 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 // aixos import -> 전역 사용x
-import axios from 'axios'
+import axios from 'axios';
 
 Vue.prototype.$Axios = axios;
 Vue.config.productionTip = false;
@@ -14,6 +14,13 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 // import 'expose-loader?$!expose-loader?jQuery!jquery'
 
 Vue.use(BootstrapVue)
+
+import VueSession from 'vue-session'
+
+var sessionOptions = {
+  persist: true
+}
+Vue.use(VueSession, sessionOptions)
 
 new Vue({
   router,

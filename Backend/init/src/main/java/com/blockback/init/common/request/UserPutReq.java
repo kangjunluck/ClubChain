@@ -19,4 +19,6 @@ public class UserPutReq  {
     String usernickname;
     @ApiModelProperty(name="useraccount", example="110-257-456789")
     String useraccount;
+    @ApiModelProperty(name="userprivatekey", example="YLKEL2112342")
+    String userprivatekey;
 }

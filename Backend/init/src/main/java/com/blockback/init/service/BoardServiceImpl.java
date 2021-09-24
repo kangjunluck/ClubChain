@@ -4,6 +4,7 @@ package com.blockback.init.service;
 import com.blockback.init.common.request.BoardRegisterReq;
 import com.blockback.init.entity.Board;
 import com.blockback.init.entity.Club;
+import com.blockback.init.entity.Comment;
 import com.blockback.init.entity.User;
 import com.blockback.init.repository.BoardRepository;
 import com.blockback.init.repository.ClubRepository;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class BoardServiceImpl implements BoardService {
 
@@ -30,9 +33,12 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Board getBoardByBoardId(Long clubid, Long boardid) {
-        Club club = clubRepository.findById(clubid).get();
-        return boardRepository.findByIdAndClub(boardid, club);
+    public Board getBoardByBoardId(Long boardid) {
+        Optional<Board> board = boardRepository.findById(boardid);
+        if (board.isPresent()) {
+            return board.get();
+        }
+        return null;
     }
 
     @Override
