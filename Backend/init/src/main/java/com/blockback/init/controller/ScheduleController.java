@@ -1,5 +1,7 @@
 package com.blockback.init.controller;
 
+import com.blockback.init.common.request.ScheduleCreateReq;
+import com.blockback.init.common.response.MessageResponse;
 import com.blockback.init.common.response.ScheduleListRes;
 import com.blockback.init.entity.Club;
 import com.blockback.init.entity.User;
@@ -29,6 +31,9 @@ public class ScheduleController {
     @Autowired
     ScheduleService scheduleService;
 
+    String SUCCESS = "Success";
+    String FAIL = "Fail";
+
     @GetMapping("/")
     @ApiOperation(value = "동호회 일정 전체 조회", notes = "동호회 일정 전체 목록을 조회한다.")
     public ResponseEntity<List<ScheduleListRes>> scheduleList(@PathVariable("clubid") Long clubid, HttpSession session) {
@@ -39,4 +44,18 @@ public class ScheduleController {
         List<ScheduleListRes> res = scheduleService.getScheduleList(clubid);
         return ResponseEntity.status(200).body(res);
     }
+
+    @PostMapping("/")
+    @ApiOperation(value = "동호회 일정 생성", notes = "동호회 일정 생성하기기")
+    public ResponseEntity<MessageResponse> createSchedule(@PathVariable("clubid") Long clubid, HttpSession session, ScheduleCreateReq req) {
+        String email = (String) session.getAttribute("LoginUser");
+        User user = userService.getUserByUserEmail(email);
+
+        if(user != null && scheduleService.createSchedule(clubid, user, req)) {
+            return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
+        }
+
+        return ResponseEntity.status(200).body(MessageResponse.of(400, FAIL));
+    }
 }
+
