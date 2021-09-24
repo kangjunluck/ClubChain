@@ -82,6 +82,12 @@ public class ClubServiceImpl implements ClubService {
         clubTmp.setProfile_thumbnail(getShortFilePath(path));
 
         clubRepository.save(clubTmp);
+
+        User_Club_Join ucj = new User_Club_Join();
+        ucj.setPosition("관리자");
+        ucj.setUser(user);
+        ucj.setClub(clubTmp);
+        userClubRepository.save(ucj);
     }
 
     @Override
