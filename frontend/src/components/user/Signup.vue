@@ -79,7 +79,7 @@
 
 <script>
 import http from "@/util/http-common";
-
+//import Web3 from "web3";
 export default {
   data() {
     return {
@@ -88,10 +88,16 @@ export default {
       userEmail: "",
       useraccount: "",
       usernickname: "",
+      addr:"",
+
     };
+  },
+  created:{ 
   },
   methods: {
     insertUser() {
+      //var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
+
       const formData = new FormData;
       formData.append('image', this.image);
       formData.append('password', this.password);
@@ -107,8 +113,31 @@ export default {
         )
         .then( res => {
           console.log(res.data);
+
+          //계정생성, 지갑생성
+          // let {address,privateKey} = web3.eth.accounts.create();
+
+          // let wallet = web3.eth.accounts.wallet.add(
+          //   {
+          //     privateKey: privateKey,
+          //     address: address
+          //   }
+          // )
+          // console.log(wallet);
+          // const formData = new FormData;
+          // formData.append('address', address);
+          // formData.append('privateKey', privateKey);
+
+          // http
+          // .post("/api/dues/wallet",formData)
+          // .then( res => {
+          //   console.log(res.data);
+          // })
+
+
           let msg = "회원가입 완료";
           alert(msg);
+
           this.$router.push("/");
         })
         .catch((error) => {
