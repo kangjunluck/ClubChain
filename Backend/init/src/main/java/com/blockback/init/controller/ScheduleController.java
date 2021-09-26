@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -35,7 +36,7 @@ public class ScheduleController {
 
     @GetMapping("/")
     @ApiOperation(value = "동호회 일정 전체 조회", notes = "동호회 일정 전체 목록을 조회한다.")
-    public ResponseEntity<List<ScheduleListRes>> scheduleList(@PathVariable("clubid") Long clubid, HttpSession session) {
+    public ResponseEntity<List<ScheduleListRes>> scheduleList(@PathVariable("clubid") Long clubid, @ApiIgnore HttpSession session) {
         // 동호회 회원인지 확인
 //        String owner_email = (String) session.getAttribute("LoginUser");
 //        User user = userService.getUserByUserEmail(owner_email);
@@ -46,11 +47,26 @@ public class ScheduleController {
 
     @PostMapping("/")
     @ApiOperation(value = "동호회 일정 생성", notes = "동호회 일정 생성하기기")
-    public ResponseEntity<MessageResponse> createSchedule(@PathVariable("clubid") Long clubid, HttpSession session, ScheduleCreateReq req) {
+    public ResponseEntity<MessageResponse> createSchedule(@PathVariable("clubid") Long clubid, @ApiIgnore HttpSession session, ScheduleCreateReq req) {
         String email = (String) session.getAttribute("LoginUser");
         User user = userService.getUserByUserEmail(email);
 
         if(user != null && scheduleService.createSchedule(clubid, user, req)) {
+            return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
+        }
+
+        return ResponseEntity.status(200).body(MessageResponse.of(400, FAIL));
+    }
+
+    @PutMapping("/{scheduleid}")
+    @ApiOperation(value = "동호회 일정 생성", notes = "동호회 일정 생성하기기")
+    public ResponseEntity<MessageResponse> modifySchedule(@PathVariable("clubid") Long clubid, @ApiIgnore HttpSession session,
+                                                          @RequestParam Long scheduleid, ScheduleCreateReq req) {
+
+        String email = (String) session.getAttribute("LoginUser");
+        User user = userService.getUserByUserEmail(email);
+
+        if(user != null && scheduleService.modifySchedule(user, scheduleid, req)) {
             return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
         }
 
