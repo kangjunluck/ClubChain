@@ -10,4 +10,5 @@ public interface ScheduleService {
     List<ScheduleListRes> getScheduleList(Long clubid);
     boolean createSchedule(Long clubid, User user, ScheduleCreateReq req);
     boolean modifySchedule(User user, Long scheduleid, ScheduleCreateReq req);
+    boolean deleteSchedule(User user, Long scheduleid);
 }
