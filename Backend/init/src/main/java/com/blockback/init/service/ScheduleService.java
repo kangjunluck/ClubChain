@@ -9,4 +9,5 @@ import java.util.List;
 public interface ScheduleService {
     List<ScheduleListRes> getScheduleList(Long clubid);
     boolean createSchedule(Long clubid, User user, ScheduleCreateReq req);
+    boolean modifySchedule(User user, Long scheduleid, ScheduleCreateReq req);
 }
