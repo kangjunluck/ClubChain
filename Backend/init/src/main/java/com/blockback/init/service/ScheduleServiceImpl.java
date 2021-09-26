@@ -87,6 +87,20 @@ public class ScheduleServiceImpl implements ScheduleService {
         return true;
     }
 
+    @Override
+    public boolean deleteSchedule(User user, Long scheduleid) {
+        // 작성자인지 확인
+        Optional<Schedule> schedule = scheduleRepository.findById(scheduleid);
+        if(!schedule.isPresent() || !schedule.get().getUser().getUserEmail().equals(user.getUserEmail())) {
+            return false;
+        }
+
+        // 삭제하기
+        scheduleRepository.deleteById(scheduleid);
+
+       return true;
+    }
+
     public String dateFormat(Date date) { // 날짜 형식 변환
         DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
         return sdFormat.format(date);

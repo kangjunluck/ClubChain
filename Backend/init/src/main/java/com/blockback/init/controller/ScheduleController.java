@@ -46,7 +46,7 @@ public class ScheduleController {
     }
 
     @PostMapping("/")
-    @ApiOperation(value = "동호회 일정 생성", notes = "동호회 일정 생성하기기")
+    @ApiOperation(value = "동호회 일정 생성", notes = "동호회 일정 생성하기")
     public ResponseEntity<MessageResponse> createSchedule(@PathVariable("clubid") Long clubid, @ApiIgnore HttpSession session, ScheduleCreateReq req) {
         String email = (String) session.getAttribute("LoginUser");
         User user = userService.getUserByUserEmail(email);
@@ -59,7 +59,7 @@ public class ScheduleController {
     }
 
     @PutMapping("/{scheduleid}")
-    @ApiOperation(value = "동호회 일정 생성", notes = "동호회 일정 생성하기기")
+    @ApiOperation(value = "동호회 일정 수정", notes = "동호회 일정 수정하기")
     public ResponseEntity<MessageResponse> modifySchedule(@PathVariable("clubid") Long clubid, @ApiIgnore HttpSession session,
                                                           @RequestParam Long scheduleid, ScheduleCreateReq req) {
 
@@ -67,6 +67,19 @@ public class ScheduleController {
         User user = userService.getUserByUserEmail(email);
 
         if(user != null && scheduleService.modifySchedule(user, scheduleid, req)) {
+            return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
+        }
+
+        return ResponseEntity.status(200).body(MessageResponse.of(400, FAIL));
+    }
+
+    @DeleteMapping("/{scheduleid}")
+    @ApiOperation(value = "동호회 일정 삭제", notes = "동호회 일정 삭제하기")
+    public ResponseEntity<MessageResponse> modifySchedule(@PathVariable("clubid") Long clubid, @ApiIgnore HttpSession session, @RequestParam Long scheduleid) {
+        String email = (String) session.getAttribute("LoginUser");
+        User user = userService.getUserByUserEmail(email);
+
+        if(user != null && scheduleService.deleteSchedule(user, scheduleid)) {
             return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
         }
 
