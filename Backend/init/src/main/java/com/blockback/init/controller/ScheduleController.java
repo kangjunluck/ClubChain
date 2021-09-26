@@ -36,7 +36,7 @@ public class ScheduleController {
 
     @GetMapping("/")
     @ApiOperation(value = "동호회 일정 전체 조회", notes = "동호회 일정 전체 목록을 조회한다.")
-    public ResponseEntity<List<ScheduleListRes>> scheduleList(@PathVariable("clubid") Long clubid, HttpSession session) {
+    public ResponseEntity<List<ScheduleListRes>> scheduleList(@PathVariable("clubid") Long clubid, @ApiIgnore HttpSession session) {
         // 동호회 회원인지 확인
 //        String owner_email = (String) session.getAttribute("LoginUser");
 //        User user = userService.getUserByUserEmail(owner_email);
@@ -47,7 +47,7 @@ public class ScheduleController {
 
     @PostMapping("/")
     @ApiOperation(value = "동호회 일정 생성", notes = "동호회 일정 생성하기기")
-    public ResponseEntity<MessageResponse> createSchedule(@PathVariable("clubid") Long clubid, HttpSession session, ScheduleCreateReq req) {
+    public ResponseEntity<MessageResponse> createSchedule(@PathVariable("clubid") Long clubid, @ApiIgnore HttpSession session, ScheduleCreateReq req) {
         String email = (String) session.getAttribute("LoginUser");
         User user = userService.getUserByUserEmail(email);
 
