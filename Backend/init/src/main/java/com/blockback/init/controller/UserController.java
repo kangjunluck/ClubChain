@@ -24,7 +24,6 @@ import java.io.IOException;
 @RequestMapping(value = "/api/users")
 @Api(value = "유저 API", tags = {"User"})
 @CrossOrigin(origins = "*")
-@EnableRedisHttpSession
 public class UserController {
 
     @Autowired

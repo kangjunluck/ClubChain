@@ -22,7 +22,6 @@ import java.util.List;
 @CrossOrigin("*")
 @RequestMapping("/api/{clubid}/schedule")
 @Api(value = "일정 API", tags = {"Schedule"})
-@EnableRedisHttpSession
 public class ScheduleController {
 
     @Autowired
