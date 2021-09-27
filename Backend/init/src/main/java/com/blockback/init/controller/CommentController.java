@@ -15,6 +15,7 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.List;
 @Api(value = "댓글 API", tags = {"Commnent"})
 @RestController
 @RequestMapping("/api/{clubid}/{boardid}/comment")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class CommentController {
     @Autowired
     CommentService commentService;
@@ -48,7 +49,7 @@ public class CommentController {
     @PostMapping("/")
     @ApiOperation(value = "해당 게시글의 댓글 작성")
     public ResponseEntity<MessageResponse> createComment(
-            HttpSession session,
+            @ApiIgnore HttpSession session,
             CommentCreateReq commentinfo,
             @PathVariable("clubid") Long clubid,
             @PathVariable("boardid") Long boardid)
@@ -63,7 +64,7 @@ public class CommentController {
     @PutMapping("/{commentid}")
     @ApiOperation(value = "댓글 수정")
     public ResponseEntity<MessageResponse> createComment(
-            HttpSession session,
+            @ApiIgnore HttpSession session,
             CommentCreateReq commentinfo,
             @PathVariable("clubid") Long clubid,
             @PathVariable("boardid") Long boardid,
