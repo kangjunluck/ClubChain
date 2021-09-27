@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -23,7 +24,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping(value = "/api/users")
 @Api(value = "유저 API", tags = {"User"})
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
@@ -35,9 +36,8 @@ public class UserController {
     @PostMapping("/login")
     @ApiOperation(value = "로그인", notes = "<strong>아이디와 패스워드</strong>를 통해 로그인 한다.")
     public ResponseEntity<UserResponse> login(
-            @RequestBody
             @ApiParam(value="로그인 정보", required = true) UserLoginReq loginInfo,
-            HttpSession session) {
+            @ApiIgnore HttpSession session) {
         String userEmail = loginInfo.getUserEmail();
         String password = loginInfo.getPassword();
         User user = userService.getUserByUserEmail(userEmail);
@@ -60,7 +60,7 @@ public class UserController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    public ResponseEntity<UserResponse> logout(HttpSession session) {
+    public ResponseEntity<UserResponse> logout(@ApiIgnore HttpSession session) {
         session.invalidate();
         return ResponseEntity.ok(UserResponse.of(200, "Success"));
     }

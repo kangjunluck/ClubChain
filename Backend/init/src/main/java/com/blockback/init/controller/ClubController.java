@@ -22,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/club")
 @Api(value = "유저 API", tags = {"Club"})
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class ClubController {
 
     @Autowired

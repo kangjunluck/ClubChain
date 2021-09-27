@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RequestMapping("/api/{clubid}/schedule")
 @Api(value = "일정 API", tags = {"Schedule"})
 public class ScheduleController {

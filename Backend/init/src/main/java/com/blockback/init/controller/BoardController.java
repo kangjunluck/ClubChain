@@ -13,6 +13,7 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.List;
 @Api(value = "게시판 API", tags = {"Board"})
 @RestController
 @RequestMapping("/api/{clubid}/board")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class BoardController {
     @Autowired
     BoardService boardService;
@@ -66,7 +67,7 @@ public class BoardController {
             @ApiResponse(code = 500, message = "서버 오류")
     })
     public ResponseEntity<MessageResponse> createBoard(
-            HttpSession session,
+            @ApiIgnore HttpSession session,
             @PathVariable("clubid") Long clubid,
             @ApiParam(value="게시글 정보", required = true) BoardRegisterReq boardinfo)
     {
@@ -88,7 +89,7 @@ public class BoardController {
             @ApiResponse(code = 500, message = "서버 오류")
     })
     public ResponseEntity<MessageResponse> putBoard(
-            HttpSession session,
+            @ApiIgnore HttpSession session,
             @PathVariable("clubid") Long clubid,
             @PathVariable("boardid") Long boardid,
             @ApiParam(value="게시글 정보", required = true) BoardRegisterReq boardinfo)
@@ -112,7 +113,7 @@ public class BoardController {
             @ApiResponse(code = 500, message = "서버 오류")
     })
     public ResponseEntity<MessageResponse> deleteBoard(
-            HttpSession session,
+            @ApiIgnore HttpSession session,
             @PathVariable("clubid") Long clubid,
             @PathVariable("boardid") Long boardid)
     {

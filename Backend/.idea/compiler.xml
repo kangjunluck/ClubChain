@@ -65,6 +65,7 @@
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-core/1.2.5/3e149d9c476be313030faf12d76a82c8a0e97f04/logback-core-1.2.5.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.14.1/cd8858fbbde69f46bce8db1152c18a43328aae78/log4j-api-2.14.1.jar" />
         </processorPath>
+        <module name="init.main" />
       </profile>
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
@@ -130,10 +131,6 @@
         </processorPath>
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8">
-      <module name="init" target="1.8" />
-      <module name="init.main" target="1.8" />
-      <module name="init.test" target="1.8" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.8" />
   </component>
 </project>
