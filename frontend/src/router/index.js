@@ -47,12 +47,12 @@ const routes = [
     path: "/sendToken",
     name: "sendToken",
     component: sendToken,
-  }
+  },
+  {
     path: "/club/finance",
     name: "Finance",
     component: Finance,
   },
-  
 ];
 
 const router = new VueRouter({

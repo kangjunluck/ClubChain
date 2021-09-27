@@ -10,6 +10,24 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: "App",
+  data: function () {
+    return {
+      isLogin: false,
+    }
+  },
+  methods: {},
+  created: function () {
+    // const token = localStorage.getItem('jwt')
+    // if (token) {
+    //   this.isLogin = true
+    // }
+  },
+}
+</script>
+
 
 
 <style>
