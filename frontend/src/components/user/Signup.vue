@@ -92,8 +92,6 @@ export default {
 
     };
   },
-  created:{ 
-  },
   methods: {
     insertUser() {
       //var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));

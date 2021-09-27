@@ -3,10 +3,12 @@ import VueRouter from "vue-router";
 import Main from "../views/Main.vue";
 import Signup from "../components/user/Signup.vue";
 import Enterclub from "../components/club/Enterclub.vue";
-import Vote from "../components/vote/Vote.vue"
-import Test from "../components/Test.vue"
-import Clublist from "../components/club/Clublist.vue"
+import Vote from "../components/vote/Vote.vue";
+import Test from "../components/Test.vue";
+import Clublist from "../components/club/Clublist.vue";
+import sendToken from "../components/Token/sendToken.vue";
 import Finance from "../views/finance.vue"
+
 
 Vue.use(VueRouter);
 
@@ -42,11 +44,15 @@ const routes = [
     component: Clublist,
   },
   {
+    path: "/sendToken",
+    name: "sendToken",
+    component: sendToken,
+  },
+  {
     path: "/club/finance",
     name: "Finance",
     component: Finance,
   },
-  
 ];
 
 const router = new VueRouter({
