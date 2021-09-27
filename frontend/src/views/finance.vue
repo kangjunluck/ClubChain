@@ -3,10 +3,9 @@
     <!-- 상단바도 컴포넌트로 두고 전환해야 하나? -->
     <p>{{ componenetStateEmit }}</p>
     <FinanceInfo @componenetState="componenetState" />
-    <!-- <v-if></v-if> -->
-    <!-- if로 컴포넌트 전환?  -->
-    <TransactionHistory v-if="componenetStateEmit === transactionHistory " />
-    <Transaction />
+    <div v-if="componenetStateEmit===''">여기에 최근 거래 몇개 보여줘야 함</div>
+    <TransactionHistory v-if= "componenetStateEmit==='transactionHistory'" />
+    <Transaction v-if= "componenetStateEmit==='transfer'" />
     <Footer />
     <!-- footer 어따 달지? -->
   </div>
@@ -17,9 +16,10 @@ import FinanceInfo from "@/components/finance/financeinfo.vue";
 import TransactionHistory from "@/components/finance/transactionHistory.vue";
 import Transaction from "@/components/finance/transaction.vue";
 import Footer from "@/components/footer/footer.vue";
+// import http from "@/util/http-common";
 export default {
   name: "Finance",
-  data: function() {
+  data: function () {
     return {
       componenetStateEmit: "",
     }
@@ -27,9 +27,10 @@ export default {
   methods: {
     // eslint-disable-next-line vue/no-dupe-keys
     componenetState(componenetState) {
-      this.componenetStateEmit = componenetState
+      this.componenetStateEmit = componenetState;
     }
   },
+
   components: {
     FinanceInfo,
     TransactionHistory,
