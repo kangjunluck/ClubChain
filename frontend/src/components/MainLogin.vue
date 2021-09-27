@@ -84,9 +84,8 @@ export default {
       const formData = new FormData;
       formData.append('userEmail', this.credentials.userEmail);
       formData.append('password', this.password);
-      
       http
-        .post("api/users/login", formData)
+        .post("api/users/login", formData, { withCredentials: true })
         .then((res) => {
           if (res.data.statusCode === 200){
             console.log(res)
