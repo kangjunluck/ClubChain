@@ -44,11 +44,11 @@ export default {
         url += "4" + "/";     //가입할 동호회id로 변경
         console.log(this.$store.state.credentials.userEmail);
         console.log(this.$store.state.credentials.usernickname);
-        this.$session.set('LoginUser', this.$store.state.credentials.userEmail);
+        //this.$session.set('LoginUser', this.$store.state.credentials.userEmail);
         console.log(this.$session.get('LoginUser'));
         console.log(this.$session.get('userEmail') + "aaaa");
       http
-        .post(url)
+        .post(url, {}, { withCredentials : true})
         .then( () => {
             
         });
