@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -22,7 +23,6 @@ import java.util.List;
 @RequestMapping("/api/club")
 @Api(value = "유저 API", tags = {"Club"})
 @CrossOrigin(origins = "*")
-@EnableRedisHttpSession
 public class ClubController {
 
     @Autowired
@@ -36,16 +36,16 @@ public class ClubController {
 
     @GetMapping("/")
     @ApiOperation(value = "동호회 전체 조회", notes = "동호회 전체 목록을 조회한다.")
-    public ResponseEntity<List<ClubListRes>> getClubList() {
-        List<ClubListRes> res = clubService.getClubList();
+        public ResponseEntity<List<ClubListRes>> getClubList() {
+            List<ClubListRes> res = clubService.getClubList();
 
-        return ResponseEntity.status(200).body(res);
+            return ResponseEntity.status(200).body(res);
     }
 
     @PostMapping("/")
     @ApiOperation(value = "동호회 생성하기", notes = "동호회를 만든다.")
-    public ResponseEntity<MessageResponse> createClub(HttpSession session, ClubCreatedReq req,
-                  @RequestPart(value = "club_thumbnail", required = false) MultipartFile clubThumbnail) throws IOException {
+    public ResponseEntity<MessageResponse> createClub(@ApiIgnore HttpSession session, ClubCreatedReq req,
+                                                      @RequestPart(value = "club_thumbnail", required = false) MultipartFile clubThumbnail) throws IOException {
         String owner_email = (String) session.getAttribute("LoginUser");
         // 방장 정보
         User user = userService.getUserByUserEmail(owner_email);
@@ -64,7 +64,7 @@ public class ClubController {
 
     @PutMapping("/{clubid}")
     @ApiOperation(value = "동호회 수정하기", notes = "동호회명을 수정한다.")
-    public ResponseEntity<MessageResponse> modifyClub(HttpSession session, ClubCreatedReq req, @RequestParam Long clubid,
+    public ResponseEntity<MessageResponse> modifyClub(@ApiIgnore HttpSession session, ClubCreatedReq req, @RequestParam Long clubid,
                                                       @RequestPart(value = "club_thumbnail", required = false) MultipartFile clubThumbnail) throws IOException {
         String owner_email = (String) session.getAttribute("LoginUser");
         // 방장 정보
@@ -80,7 +80,7 @@ public class ClubController {
 
     @GetMapping("/myclub")
     @ApiOperation(value = "가입한 동호회 조회", notes = "가입한 동호회 목록을 조회한다.")
-    public ResponseEntity<List<ClubListRes>> getSignClubList(HttpSession session) {
+    public ResponseEntity<List<ClubListRes>> getSignClubList(@ApiIgnore HttpSession session) {
         String owner_email = (String) session.getAttribute("LoginUser");
         User user = userService.getUserByUserEmail(owner_email);
 

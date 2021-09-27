@@ -69,6 +69,38 @@ public class ScheduleServiceImpl implements ScheduleService {
         return true;
     }
 
+    @Override
+    public boolean modifySchedule(User user, Long scheduleid, ScheduleCreateReq req) {
+        // 작성자인지 확인
+        Optional<Schedule> schedule = scheduleRepository.findById(scheduleid);
+        if(!schedule.isPresent() || !schedule.get().getUser().getUserEmail().equals(user.getUserEmail())) {
+            return false;
+        }
+
+        // 수정하기
+        schedule.get().setTitle(req.getTitle());
+        schedule.get().setStart(stringFormatToDate(req.getStart()));
+        schedule.get().setContent(req.getContent());
+        schedule.get().setEnd(stringFormatToDate(req.getEnd()));
+        scheduleRepository.save(schedule.get());
+
+        return true;
+    }
+
+    @Override
+    public boolean deleteSchedule(User user, Long scheduleid) {
+        // 작성자인지 확인
+        Optional<Schedule> schedule = scheduleRepository.findById(scheduleid);
+        if(!schedule.isPresent() || !schedule.get().getUser().getUserEmail().equals(user.getUserEmail())) {
+            return false;
+        }
+
+        // 삭제하기
+        scheduleRepository.deleteById(scheduleid);
+
+       return true;
+    }
+
     public String dateFormat(Date date) { // 날짜 형식 변환
         DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
         return sdFormat.format(date);

@@ -12,16 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/{clubid}/vote")
 @Api(value = "투표 API", tags = {"Vote"})
 @CrossOrigin(origins = "*")
-@EnableRedisHttpSession
 public class VoteController {
 
     @Autowired
@@ -33,32 +33,32 @@ public class VoteController {
     String SUCCESS = "Success";
     String FAIL = "Fail";
 
-    @GetMapping("/{clubid}/vote")
+    @GetMapping("/")
     @ApiOperation(value = "투표 전체 조회", notes = "투표 전체 목록을 조회한다.")
-    public ResponseEntity<List<VoteListRes>> getVoteList(@RequestParam Long clubid) {
+    public ResponseEntity<List<VoteListRes>> getVoteList(@PathVariable("clubid") Long clubid) {
         List<VoteListRes> res = voteService.getVoteList(clubid);
         return ResponseEntity.status(200).body(res);
     }
 
-    @PostMapping("/{clubid}/vote")
+    @PostMapping("/")
     @ApiOperation(value = "투표 만들기", notes = "투표를 만든다.")
-    public ResponseEntity<MessageResponse> createVote(@RequestParam Long clubid, HttpSession session,
+    public ResponseEntity<MessageResponse> createVote(@PathVariable("clubid") Long clubid, @ApiIgnore HttpSession session,
                                                         @RequestBody VoteCreateReq req) {
         String owner_email = (String) session.getAttribute("LoginUser");
         // 투표 생성자 정보
         User user = userService.getUserByUserEmail(owner_email);
 
-        if(voteService.createVote(clubid, req, user)) {
+        if(user != null && voteService.createVote(clubid, req, user)) {
             return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
         }
 
         return ResponseEntity.status(500).body(MessageResponse.of(500, FAIL));
     }
 
-    @PostMapping("/{clubid}/vote/{voteid}")
+    @PostMapping("/{voteid}")
     @ApiOperation(value = "투표 하기", notes = "투표를 한다.")
-    public ResponseEntity<MessageResponse> vote(@RequestParam Long clubid, @RequestParam Long voteid,
-                                                HttpSession session, @RequestBody Map<String, Long> req) {
+    public ResponseEntity<MessageResponse> vote(@PathVariable("clubid") Long clubid, @RequestParam Long voteid,
+                                                @ApiIgnore HttpSession session, @RequestBody Map<String, Long> req) {
         String owner_email = (String) session.getAttribute("LoginUser");
         // 투표 생성자 정보
         User user = userService.getUserByUserEmail(owner_email);
@@ -75,10 +75,10 @@ public class VoteController {
         return ResponseEntity.status(500).body(MessageResponse.of(500, FAIL));
     }
 
-    @PutMapping("/{clubid}/vote/{voteid}")
+    @PutMapping("/{voteid}")
     @ApiOperation(value = "재투표 하기", notes = "재투표를 한다.")
-    public ResponseEntity<MessageResponse> revote(@RequestParam Long clubid, @RequestParam Long voteid,
-                                                  HttpSession session, @RequestBody Map<String, Long> req) {
+    public ResponseEntity<MessageResponse> revote(@PathVariable("clubid") Long clubid, @RequestParam Long voteid,
+                                                  @ApiIgnore HttpSession session, @RequestBody Map<String, Long> req) {
         String owner_email = (String) session.getAttribute("LoginUser");
         // 투표 생성자 정보
         User user = userService.getUserByUserEmail(owner_email);
@@ -95,9 +95,9 @@ public class VoteController {
         return ResponseEntity.status(500).body(MessageResponse.of(500, FAIL));
     }
 
-    @DeleteMapping("/{clubid}/vote/{voteid}")
+    @DeleteMapping("/{voteid}")
     @ApiOperation(value = "투표 삭제", notes = "투표를 삭제한다.")
-    public ResponseEntity<MessageResponse> voteDelete(@RequestParam Long clubid, @RequestParam Long voteid, HttpSession session) {
+    public ResponseEntity<MessageResponse> voteDelete(@PathVariable("clubid") Long clubid, @RequestParam Long voteid, @ApiIgnore HttpSession session) {
         String owner_email = (String) session.getAttribute("LoginUser");
         // 투표 생성자 정보
         User user = userService.getUserByUserEmail(owner_email);

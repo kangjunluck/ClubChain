@@ -27,7 +27,6 @@ import java.util.List;
 @RequestMapping("/api/{clubid}")
 @Api(value = "User Club API", tags = {"User Club"})
 @CrossOrigin(origins = "*")
-@EnableRedisHttpSession
 public class UserClubController {
     @Autowired
     ClubService clubService;

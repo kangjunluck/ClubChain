@@ -7,6 +7,8 @@ import Vote from "../components/vote/Vote.vue";
 import Test from "../components/Test.vue";
 import Clublist from "../components/club/Clublist.vue";
 import sendToken from "../components/Token/sendToken.vue";
+import Finance from "../views/finance.vue"
+
 
 Vue.use(VueRouter);
 
@@ -46,6 +48,11 @@ const routes = [
     name: "sendToken",
     component: sendToken,
   }
+    path: "/club/finance",
+    name: "Finance",
+    component: Finance,
+  },
+  
 ];
 
 const router = new VueRouter({

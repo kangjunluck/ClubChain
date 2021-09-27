@@ -11,7 +11,10 @@ import com.blockback.init.repository.VoteUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,7 +77,7 @@ public class VoteServiceImpl implements VoteService {
         vote.setContent(req.getContent());
         vote.setClub(club.get());
         vote.setUser(user);
-        vote.setEnd(req.getEnd());
+        vote.setEnd(stringFormatToDate(req.getEnd()));
 
         Vote voteSave = voteRepository.save(vote);
         for(String item : req.getVote_list()) {
@@ -86,6 +89,17 @@ public class VoteServiceImpl implements VoteService {
         }
 
         return true;
+    }
+
+    private Date stringFormatToDate(String date) {
+        Date res = new Date();
+        try {
+            res = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return res;
     }
 
     @Override
