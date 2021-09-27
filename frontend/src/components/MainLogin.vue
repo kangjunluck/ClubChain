@@ -85,7 +85,8 @@ export default {
       formData.append('password', this.password);
       
       http
-        .post("api/users/login", formData)
+        .post("api/users/login", formData,
+        { withCredentials : true})
         .then((res) => {
           if (res.data.statusCode === 200){
             this.credentials.userEmail = res.data.userEmail;
