@@ -1,6 +1,7 @@
 <template>
   <div class="mainLogin">
     <!-- 나중에 trim도 추가하기 -->
+    <!-- isLogin -->
     <!-- 로고와 서비스이름 파일 들어갈 예정 -->
     <img alt="Vue logo" src="@/assets/logo.png" class="logo" />
     <!-- 로그인 폼 만들기 -->
@@ -87,6 +88,8 @@ export default {
         })
         .then((res) => {
           if (res.data.statusCode === 200){
+            console.log(res)
+            // res.data.sessionid 추가될 예정
             this.credentials.userEmail = res.data.userEmail;
             this.credentials.useraccount = res.data.useraccount;
             this.credentials.usernickname = res.data.usernickname;

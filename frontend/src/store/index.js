@@ -46,6 +46,11 @@ export default new Vuex.Store({
       context.commit('IS_LOGIN')
     }
   },
+  getters: {
+    isLogin(state) {
+      return state.username !== "  ";
+    }
+  },
   modules: {},
   // Getters
   // state를 변경하지 않고 활용하여 계산을 수행 (computed와 유사). state를 기준으로 계산
