@@ -80,11 +80,12 @@ export default {
       this.$router.push({ path: "signup" });
     },
     loginSubmit() {
+      const formData = new FormData;
+      formData.append('userEmail', this.credentials.userEmail);
+      formData.append('password', this.password);
+      
       http
-        .post("api/users/login", {
-          userEmail: this.credentials.userEmail,
-          password: this.password,
-        })
+        .post("api/users/login", formData)
         .then((res) => {
           if (res.data.statusCode === 200){
             this.credentials.userEmail = res.data.userEmail;
