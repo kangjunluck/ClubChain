@@ -2,7 +2,7 @@
     <div class="main">
         <div class="profilearea">
           <img alt="Vue logo" src="@/assets/logo.png" class="logo" />
-          <img alt="profile" src="@/assets/logo.png" class="profile"/>
+          <img alt="profile" src="@/assets/profile.png" class="profile"/>
         </div>
         <div class="searcharea">
             <input 
@@ -14,11 +14,11 @@
                 placeholder="검색어를 입력해주세요"
                 class="form-control mt-5 mb-2"
             />
-            <img alt="searchbtn" src="@/assets/logo.png" class="searchbtn"/>
+            <img alt="searchbtn" src="@/assets/search.png" class="searchbtn"/>
         </div>
         <div class="textarea">
           <div class="clubtext">가입한 동호회</div>
-          <img alt="plusbtn" src="@/assets/logo.png" class="plusbtn" />
+          <img alt="plusbtn" src="@/assets/plusbtn.png" class="plusbtn" />
         </div>
         <div class="clubarea">
           <div v-for="club in clublist" v-bind:key="club" class="club">
@@ -28,6 +28,9 @@
             {{club.name}}
             </div>
           </div>
+        </div>
+        <div class="notexist" v-if="!clubexist">
+            가입한 동호회가 없습니다
         </div>
 
     </div>
@@ -40,7 +43,7 @@ export default {
   data() {
     return {
       clublist : null,
-
+      clubexist : false,
     };
   },
   methods: {
@@ -54,6 +57,7 @@ export default {
       .then((res) => {
         console.log(res.data);
         this.clublist = res.data;
+        if(this.clublist.length > 0) this.clubexist = true;
       }).catch((error) => {
         console.log(error);
         alert("가져오기 실패");

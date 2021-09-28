@@ -5,7 +5,7 @@
                 <img alt="Vue logo" src="@/assets/logo.png"/>
             </div>
             <div class="clubname">
-                2게 블록이야
+                {{name}}
             </div>
         </div>
         <input
@@ -35,7 +35,8 @@ import http from "@/util/http-common";
 export default {
   data() {
     return {
-      
+        name : "",
+        image : "",
     };
   },
   methods: {
@@ -66,6 +67,24 @@ export default {
         this.$router.push({ name : "Main"});
     },
   },
+  created() {
+        //clubid를 스토어에서 가져와서 경로에 붙여야함. 현재는 4로 고정
+        console.log(this.$store.state.selectedClub);
+        console.log("aaa");
+        var url = "/api/club/{clubid}?clubid=4"
+        http
+        .get(url,{
+            withCredentials : true
+        })
+        .then((res) => {
+            console.log(res.data);
+            this.name = res.data.name;
+        }).catch((error) => {
+            console.log(error);
+            alert("가져오기 실패");
+        })
+        
+    },
 };
 </script>
 
