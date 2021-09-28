@@ -394,19 +394,19 @@ export default {
     {
       const Tx = require('ethereumjs-tx').Transaction;
       var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
-      var contract = new web3.eth.Contract(this.abi,this.contractAddr,{from: '0x97415060E1Ff0d2c51BF6d92B959be7D6316a983'});
-      let privKey_= "27ddaa90db29f7740736e57703c437595a6f62707aa53d90773cb3fb4c91282d"; // 보내는사람의 개인키
+      var contract = new web3.eth.Contract(this.abi,this.contractAddr,{from: '0x50dEEFBA64329a6377960325e6e9b9DC6ce6Bc81'}); //보내는사람 주소
+      let privKey_= "cf0f0a64538a8a005532d195605d334f02d6a89fde64f068f5a2d239531986e7"; // 보내는사람의 개인키
       let privKey= new Buffer.from(privKey_, "hex");
-
-      web3.eth.getTransactionCount("0x97415060E1Ff0d2c51BF6d92B959be7D6316a983",(err,txCount)=>{ //보내는 주소
+      console.log("privateKey = ",privKey);
+      web3.eth.getTransactionCount("0x50dEEFBA64329a6377960325e6e9b9DC6ce6Bc81",(err,txCount)=>{ //보내는 주소
         const txObject = {
-          'from':'0x97415060E1Ff0d2c51BF6d92B959be7D6316a983', //보내는 주소
+          'from':'0x50dEEFBA64329a6377960325e6e9b9DC6ce6Bc81', //보내는 주소
           'nonce': web3.utils.toHex(txCount),
           'gasLimit': web3.utils.toHex(1000000),
           'gasPrice': web3.utils.toHex(web3.utils.toWei('10','gwei')),
           'to': this.contractAddr, //계약 주소
           'value': '0x0',
-          'data': contract.methods.transfer('0x50dEEFBA64329a6377960325e6e9b9DC6ce6Bc81',1).encodeABI() //받는 주소, 토큰 갯수
+          'data': contract.methods.transfer('0x9317eE31aCEB52365e4c9ED6b17FC436756A8169',10).encodeABI() //받는 주소, 토큰 갯수
         }
         let transaction = new Tx(txObject,{'chain':'ropsten'});
         transaction.sign(privKey);
