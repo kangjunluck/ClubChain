@@ -10,6 +10,7 @@ import sendToken from "../components/Token/sendToken.vue";
 import Finance from "../views/finance.vue"
 import ClubCreate from "../views/TheCreateClub.vue"
 
+import Myclub from "../components/club/Myclub.vue"
 
 Vue.use(VueRouter);
 
@@ -58,7 +59,12 @@ const routes = [
     path: "/create",
     name: "ClubCreate",
     component: ClubCreate,
-  }
+  },
+  {
+    path: "/club/myclub",
+    name: "Myclub",
+    component: Myclub,
+  },
 ];
 
 const router = new VueRouter({

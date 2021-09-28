@@ -2,6 +2,7 @@ package com.blockback.init.service;
 
 import com.blockback.init.common.request.ClubCreatedReq;
 import com.blockback.init.common.response.ClubListRes;
+import com.blockback.init.entity.Board;
 import com.blockback.init.entity.Club;
 import com.blockback.init.entity.User;
 import com.blockback.init.entity.User_Club_Join;
@@ -58,6 +59,15 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
+    public Club getClubByClubId(Long clubid) {
+        Optional<Club> club = clubRepository.findById(clubid);
+        if (club.isPresent()) {
+            return club.get();
+        }
+        return null;
+    }
+
+    @Override
     public void createClub(User user, ClubCreatedReq req, MultipartFile clubThumbnail) throws IOException {
 
         Club club = new Club();
@@ -66,6 +76,7 @@ public class ClubServiceImpl implements ClubService {
         club.setIntroduce(req.getIntroduce());
         club.setName(req.getName());
         club.setCreated(new Date());
+        club.setClubaccount((req.getClubaccount()));
 
         Club clubTmp = clubRepository.save(club);
         Long clubId = clubTmp.getId();

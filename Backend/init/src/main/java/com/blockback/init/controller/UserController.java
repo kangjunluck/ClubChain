@@ -106,11 +106,11 @@ public class UserController {
         return ResponseEntity.status(204).body(UserResponse.of(204, "Success"));
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/{userId:.+}")
     @ApiOperation(value = "회원정보 조회", notes = "회원정보를 조회합니다.")
     public ResponseEntity<UserResponse> UserInfo(
-            @PathVariable("userId") Long userId) {
-        User user = userService.getUserByUserId(userId);
+            @PathVariable("userEmail") String userEmail) {
+        User user = userService.getUserByUserEmail(userEmail);
 
         if (user == null)
         {

@@ -43,15 +43,6 @@
                 class="form-control mb-2"
             />
             <input
-                type="text"
-                id="useraccount"
-                name="useraccount"
-                v-model="useraccount"
-                ref="useraccount"
-                placeholder="계정명"
-                class="form-control mb-2"
-            />
-            <input
                 type="password"
                 id="password"
                 name="password"
@@ -79,7 +70,7 @@
 
 <script>
 import http from "@/util/http-common";
-//import Web3 from "web3";
+import Web3 from "web3";
 export default {
   data() {
     return {
@@ -94,14 +85,25 @@ export default {
   },
   methods: {
     insertUser() {
-      //var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
+      var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
+      // 계정생성, 지갑생성
+        let {address,privateKey} = web3.eth.accounts.create();
 
+        let wallet = web3.eth.accounts.wallet.add(
+          {
+            privateKey: privateKey,
+            address: address
+          }
+        )
+        console.log(wallet);
+        
       const formData = new FormData;
       formData.append('image', this.image);
       formData.append('password', this.password);
       formData.append('userEmail', this.userEmail);
-      formData.append('useraccount', this.useraccount);
       formData.append('usernickname', this.usernickname);
+      formData.append('useraccount', address);
+      formData.append('userprivatekey', privateKey);
       http
         .post("/api/users/regist", formData, {
           headers: {
@@ -111,28 +113,6 @@ export default {
         )
         .then( res => {
           console.log(res.data);
-
-          //계정생성, 지갑생성
-          // let {address,privateKey} = web3.eth.accounts.create();
-
-          // let wallet = web3.eth.accounts.wallet.add(
-          //   {
-          //     privateKey: privateKey,
-          //     address: address
-          //   }
-          // )
-          // console.log(wallet);
-          // const formData = new FormData;
-          // formData.append('address', address);
-          // formData.append('privateKey', privateKey);
-
-          // http
-          // .post("/api/dues/wallet",formData)
-          // .then( res => {
-          //   console.log(res.data);
-          // })
-
-
           let msg = "회원가입 완료";
           alert(msg);
 

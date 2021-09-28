@@ -45,13 +45,16 @@ export default {
     }
   },
   created: function () {
-    const url = "/account/" + this.$store.state.credentials.userEmail 
+    // var email = this.$store.state.credentials.userEmail.split('@');
+    // let emailAddr = email[0]+"%40"+email[1];
+    let email = encodeURI(this.$store.state.credentials.userEmail)
+    const url = "api/uesrs/" + email;
     console.log(url)
     http
       .get(url)
       .then((res) => {
         console.log(res);
-        this.myAccountNumber = res
+        this.myAccountNumber = res.useraccount;
         //잔액 조회
         var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
         let contractAddr = '0x856638064bdecb3cbb3329dc8e3c083f0726218d';
@@ -417,8 +420,9 @@ export default {
         }
       ]
       var contract = new web3.eth.Contract(abi,contractAddr); 
-        contract.methods.balanceOf("0x97415060E1Ff0d2c51BF6d92B959be7D6316a983").call() // this.myAccountNumber
+        contract.methods.balanceOf(this.myAccountNumber).call() // this.myAccountNumber
         .then(data => {
+          console.log(data);
           this.contractAbi = abi;
           this.contractAddr = contractAddr;
           this.balance = data;
@@ -440,7 +444,6 @@ export default {
       console.log(this.componenetStateValue);
       this.$emit("componenetState", this.componenetStateValue);
     },
-    
   }
 }
 </script>
