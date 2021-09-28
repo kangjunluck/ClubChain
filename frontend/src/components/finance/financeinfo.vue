@@ -1,6 +1,5 @@
 <template>
   <div class="finanaceInfo">
-    <div>회비관리</div>
     <div class="clubname">동아리 이름</div>
     <b-container class="infomation">
       <b-row>
