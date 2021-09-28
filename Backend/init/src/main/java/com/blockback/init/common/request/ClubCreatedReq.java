@@ -19,4 +19,7 @@ public class ClubCreatedReq {
 
     @ApiModelProperty(name="password", example="1234")
     String password;
+
+    @ApiModelProperty(name="clubaccount", example="21s2d1f5a")
+    String clubaccount;
 }
