@@ -48,7 +48,7 @@ export default {
   },
   created() {
     http.
-      get("/api/club/myclub", {}, {
+      get("/api/club/myclub", {
         withCredentials : true
       })
       .then((res) => {
