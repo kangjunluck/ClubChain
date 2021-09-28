@@ -66,6 +66,7 @@ public class ClubServiceImpl implements ClubService {
         club.setIntroduce(req.getIntroduce());
         club.setName(req.getName());
         club.setCreated(new Date());
+        club.setClubaccount((req.getClubaccount()));
 
         Club clubTmp = clubRepository.save(club);
         Long clubId = clubTmp.getId();

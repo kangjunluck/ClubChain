@@ -39,18 +39,26 @@ export default {
     };
   },
   methods: {
+      setSession: function () {
+      document.cookie
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
     enterClub() {
-        var url = "/api/";
-        url += "4" + "/";     //가입할 동호회id로 변경
-        console.log(this.$store.state.credentials.userEmail);
-        console.log(this.$store.state.credentials.usernickname);
+        //var url = "/api/";
+        //url += "4" + "/";     //가입할 동호회id로 변경
+        //console.log(this.$store.state.credentials.userEmail);
+        //console.log(this.$store.state.credentials.usernickname);
         //this.$session.set('LoginUser', this.$store.state.credentials.userEmail);
-        console.log(this.$session.get('LoginUser'));
-        console.log(this.$session.get('userEmail') + "aaaa");
+        //console.log(this.$session.get('LoginUser'));
+        //console.log(this.$session.get('userEmail') + "aaaa");
       http
-        .post(url, {}, { withCredentials : true})
-        .then( () => {
-            
+        .post("/api/4/", {},
+        { withCredentials: true }
+        ).then( () => {
         });
 
     },

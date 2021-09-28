@@ -17,6 +17,8 @@ public class Club extends BaseEntity {
 
     String profile_thumbnail;
 
+    String clubaccount;
+
     String password = null;
 
     @Temporal(TemporalType.TIMESTAMP)
