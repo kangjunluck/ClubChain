@@ -7,7 +7,7 @@
         <b-col cols="10" class="ethCard">
           <div>계좌번호 : {{ myAccountNumber}} </div>
           <div></div>
-          <div style="font-size: 3rem">잔고 {{balance}} ETH</div>
+          <div style="font-size: 3rem">잔고: {{balance}} Token</div>
           <div>
             <span class="button1" @click="transactionHistoryButton">거래내역</span>
             <span class="button2" @click="transferButton">이체</span>
@@ -48,13 +48,13 @@ export default {
     // var email = this.$store.state.credentials.userEmail.split('@');
     // let emailAddr = email[0]+"%40"+email[1];
     let email = encodeURI(this.$store.state.credentials.userEmail)
-    const url = "api/uesrs/" + email;
+    const url = "api/users/" + email;
     console.log(url)
     http
       .get(url)
       .then((res) => {
         console.log(res);
-        this.myAccountNumber = res.useraccount;
+        this.myAccountNumber = res.data.useraccount;
         //잔액 조회
         var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
         let contractAddr = '0x856638064bdecb3cbb3329dc8e3c083f0726218d';
