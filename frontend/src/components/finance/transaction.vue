@@ -6,16 +6,16 @@
         <b-col offset="1" cols="10" class="ethCard">
           <b-row>
             <b-col>받는사람</b-col>
-            <b-col><b-form-input></b-form-input></b-col>
+            <b-col><b-form-input v-model="toEmail"></b-form-input></b-col>
           </b-row>
           <b-row>
             <b-col>송금액</b-col>
-            <b-col><b-form-input></b-form-input></b-col>
+            <b-col><b-form-input v-model="value"></b-form-input></b-col>
           </b-row>
           <b-row>
-            <b-col>수수료 얼마</b-col>
+            <b-col>수수료</b-col>
           </b-row>
-          <div class="btn btn-primary" @click="enchargeToken">
+          <div class="btn btn-primary" @click="getAccount">
             송금
            </div>
         </b-col>
@@ -26,11 +26,11 @@
 
 <script>
 import Web3 from "web3";
-
+import http from "@/util/http-common";
 export default {
   name: "Transaction",
   data() {
-    return {
+    return {  
       abi: [
         {
           "constant": true,
@@ -395,27 +395,57 @@ export default {
       contractAddr:"0x856638064bdecb3cbb3329dc8e3c083f0726218d",
       myAddr:"",
       privateKey:"",
+      toEmail:"",
       toAddr:"",
+      value:"",
     };
   },
 
   methods:{
+    getAccount()
+    {
+      let from = encodeURI(this.$store.state.credentials.userEmail);
+      let to = this.toEmail;
+      console.log("송신: ",from);
+      console.log("수신: ",to);
+
+      http
+      .get("api/users/"+from)
+      .then((res) => {
+        this.myAddr = res.data.useraccount;
+
+        http
+        .get("api/users/"+to)
+        .then((res) => {
+          this.toAddr = res.data.useraccount;
+          this.sendToken();
+        })
+      })
+
+    },
+
     async sendToken(){
+      // await this.getAccount(encodeURI(this.$store.state.credentials.userEmail),this.toEmail)
+
+      console.log("송신: ",this.myAddr)
+      console.log("수신: ",this.toAddr)
+
       const Tx = require('ethereumjs-tx').Transaction;
       var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
-      var contract = new web3.eth.Contract(this.abi,this.contractAddr,{from: '0x50dEEFBA64329a6377960325e6e9b9DC6ce6Bc81'}); //보내는사람 주소
-      let privKey_= "cf0f0a64538a8a005532d195605d334f02d6a89fde64f068f5a2d239531986e7"; // 보내는사람의 개인키
+      var contract = new web3.eth.Contract(this.abi,this.contractAddr,{from: this.myAddr}); //보내는사람 주소
+      let privKey_= "3b0935331ba86137cd0b4c304af778aa267d736cf91b3031811514d60b34226c"; // 보내는사람의 개인키
       let privKey= new Buffer.from(privKey_, "hex");
+      
       console.log("privateKey = ",privKey);
-      web3.eth.getTransactionCount("0x50dEEFBA64329a6377960325e6e9b9DC6ce6Bc81",(err,txCount)=>{ //보내는 주소
+      web3.eth.getTransactionCount(this.myAddr,(err,txCount)=>{ //보내는 주소
         const txObject = {
-          'from':'0x50dEEFBA64329a6377960325e6e9b9DC6ce6Bc81', //보내는 주소
+          'from':this.myAddr, //보내는 주소
           'nonce': web3.utils.toHex(txCount),
           'gasLimit': web3.utils.toHex(1000000),
           'gasPrice': web3.utils.toHex(web3.utils.toWei('10','gwei')),
           'to': this.contractAddr, //계약 주소
           'value': '0x0',
-          'data': contract.methods.transfer('0x9317eE31aCEB52365e4c9ED6b17FC436756A8169',10).encodeABI() //받는 주소, 토큰 갯수
+          'data': contract.methods.transfer(this.toAddr,this.value).encodeABI() //받는 주소, 토큰 갯수
         }
         let transaction = new Tx(txObject,{'chain':'ropsten'});
         transaction.sign(privKey);
