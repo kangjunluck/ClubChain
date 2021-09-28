@@ -14,7 +14,7 @@
           <b-row>
             <b-col>수수료</b-col>
           </b-row>
-          <div class="btn btn-primary" @click="getAccount">
+          <div class="btn btn-primary" @click="sendTx">
             송금
            </div>
         </b-col>
@@ -402,25 +402,15 @@ export default {
   },
 
   methods:{
-    getAccount()
+    async sendTx()
     {
-      let from = encodeURI(this.$store.state.credentials.userEmail);
-      let to = this.toEmail;
-      console.log("송신: ",from);
-      console.log("수신: ",to);
+      const res = await http.get("api/users/"+ encodeURI(this.$store.state.credentials.userEmail));
+      const res2 = await http.get("api/users/"+this.toEmail);
 
-      http
-      .get("api/users/"+from)
-      .then((res) => {
-        this.myAddr = res.data.useraccount;
+      this.myAddr = res.data.useraccount;
+      this.toAddr = res2.data.useraccount;
 
-        http
-        .get("api/users/"+to)
-        .then((res) => {
-          this.toAddr = res.data.useraccount;
-          this.sendToken();
-        })
-      })
+      this.sendToken();
 
     },
 

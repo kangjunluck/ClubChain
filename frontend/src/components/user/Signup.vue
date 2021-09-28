@@ -96,7 +96,7 @@ export default {
           }
         )
         console.log(wallet);
-        
+
       const formData = new FormData;
       formData.append('image', this.image);
       formData.append('password', this.password);
@@ -104,6 +104,8 @@ export default {
       formData.append('usernickname', this.usernickname);
       formData.append('useraccount', address);
       formData.append('userprivatekey', privateKey);
+
+      this.useraccount = address;
       http
         .post("/api/users/regist", formData, {
           headers: {
@@ -112,9 +114,10 @@ export default {
         }         
         )
         .then( res => {
+          this.sendEth()
           console.log(res.data);
-          let msg = "회원가입 완료";
           alert(msg);
+          let msg = "회원가입 완료";
 
           this.$router.push("/");
         })
@@ -130,6 +133,31 @@ export default {
       console.log(this.$refs);
       this.image = this.$refs.image.files[0];
     },
+    sendEth()
+    {
+      const Tx = require('ethereumjs-tx').Transaction;
+      var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
+
+      let privKey_= "27ddaa90db29f7740736e57703c437595a6f62707aa53d90773cb3fb4c91282d"; // 보내는사람의 개인키
+      let privKey= new Buffer.from(privKey_, "hex");
+      console.log("privateKey = ",privKey);
+
+      web3.eth.getTransactionCount("0x97415060E1Ff0d2c51BF6d92B959be7D6316a983",(err,txCount)=>{ //보내는 주소
+        const txObject = {
+          'from':'0x97415060E1Ff0d2c51BF6d92B959be7D6316a983', //보내는 주소
+          'nonce': web3.utils.toHex(txCount),
+          'gasLimit': web3.utils.toHex(1000000),
+          'gasPrice': web3.utils.toHex(web3.utils.toWei('10','gwei')),
+          'to': this.useraccount,
+          'value': '0x16345785d8a0000',
+        }
+
+        let transaction = new Tx(txObject,{'chain':'ropsten'});
+        transaction.sign(privKey);
+        web3.eth.sendSignedTransaction('0x'+transaction.serialize().toString('hex'))
+        .on('transactionHash',console.log)
+      });
+    }
   },
 };
 </script>
