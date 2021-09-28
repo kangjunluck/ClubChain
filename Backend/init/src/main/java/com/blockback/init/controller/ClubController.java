@@ -3,6 +3,7 @@ package com.blockback.init.controller;
 import com.blockback.init.common.request.ClubCreatedReq;
 import com.blockback.init.common.response.ClubListRes;
 import com.blockback.init.common.response.MessageResponse;
+import com.blockback.init.entity.Club;
 import com.blockback.init.entity.User;
 import com.blockback.init.service.ClubService;
 import com.blockback.init.service.UserService;
@@ -40,6 +41,13 @@ public class ClubController {
             List<ClubListRes> res = clubService.getClubList();
 
             return ResponseEntity.status(200).body(res);
+    }
+
+    @GetMapping("/{clubid}")
+    @ApiOperation(value = "동호회 단일 조회", notes = "동호회 하나를 조회한다.")
+    public Club getClub(@RequestParam Long clubid) {
+        Club club = clubService.getClubByClubId(clubid);
+        return club;
     }
 
     @PostMapping("/")

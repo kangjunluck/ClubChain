@@ -2,6 +2,7 @@ package com.blockback.init.service;
 
 import com.blockback.init.common.request.ClubCreatedReq;
 import com.blockback.init.common.response.ClubListRes;
+import com.blockback.init.entity.Board;
 import com.blockback.init.entity.Club;
 import com.blockback.init.entity.User;
 import com.blockback.init.entity.User_Club_Join;
@@ -55,6 +56,15 @@ public class ClubServiceImpl implements ClubService {
         }
 
         return res;
+    }
+
+    @Override
+    public Club getClubByClubId(Long clubid) {
+        Optional<Club> club = clubRepository.findById(clubid);
+        if (club.isPresent()) {
+            return club.get();
+        }
+        return null;
     }
 
     @Override
