@@ -8,7 +8,7 @@ import Test from "../components/Test.vue";
 import Clublist from "../components/club/Clublist.vue";
 import sendToken from "../components/Token/sendToken.vue";
 import Finance from "../views/finance.vue"
-
+import Myclub from "../components/club/Myclub.vue"
 
 Vue.use(VueRouter);
 
@@ -52,6 +52,11 @@ const routes = [
     path: "/club/finance",
     name: "Finance",
     component: Finance,
+  },
+  {
+    path: "/club/myclub",
+    name: "Myclub",
+    component: Myclub,
   },
 ];
 
