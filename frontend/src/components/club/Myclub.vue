@@ -17,7 +17,7 @@
             <img alt="searchbtn" src="@/assets/logo.png" class="searchbtn"/>
         </div>
         <div class="textarea">
-          <div class="clubtext">동호회 리스트</div>
+          <div class="clubtext">가입한 동호회</div>
           <img alt="plusbtn" src="@/assets/logo.png" class="plusbtn" />
         </div>
         <div class="clubarea">
@@ -48,7 +48,7 @@ export default {
   },
   created() {
     http.
-      get("/api/club/", {}, {
+      get("/api/club/myclub", {}, {
         withCredentials : true
       })
       .then((res) => {
