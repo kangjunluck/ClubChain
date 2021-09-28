@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div>송금 컴포넌트</div>
     <b-container>
       <b-row>
         <b-col offset="1" cols="10" class="ethCard">
@@ -21,6 +20,7 @@
         </b-col>
       </b-row>
     </b-container>
+    
   </div>
 </template>
 
@@ -460,12 +460,34 @@ export default {
 <style scoped>
 .ethCard {
   background-color: #1EC0FF;
-  height: 10rem;
   border-radius: 0.5rem;
   color: #FFFFFF;
-  display: flex;
+  display: flex;  
   flex-direction: column;
   justify-content: center;
 }
-
+.textAlignStart {
+  align-self: start;
+  margin: 1rem 0 0.3rem 0;
+  font-size: 1rem;
+}
+.textAlignEnd {
+  align-self: end;
+  margin: 0.5rem 0.3rem 0.5rem 0;
+  font-size: 0.8rem;
+}
+.transactonButton {
+  background-color: #1ec0ff;
+  margin: 2rem auto 0;
+  height: 2.3rem;
+  width: 100%;
+  border-radius: 2.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  border: 1px solid transparent;
+}
+.paddingRemove {
+  padding: 0 0 0 0;
+}
 </style>

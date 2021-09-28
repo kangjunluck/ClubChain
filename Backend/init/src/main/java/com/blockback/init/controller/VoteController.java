@@ -57,7 +57,7 @@ public class VoteController {
 
     @PostMapping("/{voteid}")
     @ApiOperation(value = "투표 하기", notes = "투표를 한다.")
-    public ResponseEntity<MessageResponse> vote(@PathVariable("clubid") Long clubid, @RequestParam Long voteid,
+    public ResponseEntity<MessageResponse> vote(@PathVariable("clubid") Long clubid, @PathVariable("voteid") Long voteid,
                                                 @ApiIgnore HttpSession session, @RequestBody Map<String, Long> req) {
         String owner_email = (String) session.getAttribute("LoginUser");
         // 투표 생성자 정보
@@ -77,7 +77,7 @@ public class VoteController {
 
     @PutMapping("/{voteid}")
     @ApiOperation(value = "재투표 하기", notes = "재투표를 한다.")
-    public ResponseEntity<MessageResponse> revote(@PathVariable("clubid") Long clubid, @RequestParam Long voteid,
+    public ResponseEntity<MessageResponse> revote(@PathVariable("clubid") Long clubid, @PathVariable("voteid") Long voteid,
                                                   @ApiIgnore HttpSession session, @RequestBody Map<String, Long> req) {
         String owner_email = (String) session.getAttribute("LoginUser");
         // 투표 생성자 정보
@@ -97,7 +97,7 @@ public class VoteController {
 
     @DeleteMapping("/{voteid}")
     @ApiOperation(value = "투표 삭제", notes = "투표를 삭제한다.")
-    public ResponseEntity<MessageResponse> voteDelete(@PathVariable("clubid") Long clubid, @RequestParam Long voteid, @ApiIgnore HttpSession session) {
+    public ResponseEntity<MessageResponse> voteDelete(@PathVariable("clubid") Long clubid, @PathVariable("voteid") Long voteid, @ApiIgnore HttpSession session) {
         String owner_email = (String) session.getAttribute("LoginUser");
         // 투표 생성자 정보
         User user = userService.getUserByUserEmail(owner_email);
