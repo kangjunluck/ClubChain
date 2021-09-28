@@ -4,7 +4,7 @@
     <div>회비 관리 상단바</div>
     <MyFiananceInfoLight v-if="componenetStateEmit==='transactionHistory' ||componenetStateEmit === 'transfer' "/>
     <FinanceInfo @componenetState="componenetState" v-if="componenetStateEmit===''"/>
-    <div v-if="componenetStateEmit===''">여기에 최근 거래 몇개 보여줘야 함</div>
+    <!-- <div v-if="componenetStateEmit===''">여기에 최근 거래 몇개 보여줘야 함</div> -->
     <TransactionHistory v-if= "componenetStateEmit==='transactionHistory'" />
     <Transaction v-if= "componenetStateEmit==='transfer'" />
     <Footer />

@@ -8,9 +8,12 @@
           <div>계좌번호 : {{ myAccountNumber}} </div>
           <div></div>
           <div style="font-size: 3rem">잔고: {{balance}} Token</div>
+          
           <div>
             <span class="button1" @click="transactionHistoryButton">거래내역</span>
-            <span class="button2" @click="transferButton">이체</span>
+            <span class="button1" @click="transferButton">이체</span>
+
+            <span class="button2" @click="encharge">충전</span>
           </div>
         </b-col> 
         <b-col cols="1" align-self="center">▶</b-col>
@@ -444,6 +447,31 @@ export default {
       console.log(this.componenetStateValue);
       this.$emit("componenetState", this.componenetStateValue);
     },
+    encharge()
+    {
+      const Tx = require('ethereumjs-tx').Transaction;
+      var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
+      var contract = new web3.eth.Contract(this.contractAbi,this.contractAddr,{from: '0x97415060E1Ff0d2c51BF6d92B959be7D6316a983'}); //보내는사람 주소
+      let privKey_= "27ddaa90db29f7740736e57703c437595a6f62707aa53d90773cb3fb4c91282d"; // 보내는사람의 개인키
+      let privKey= new Buffer.from(privKey_, "hex");
+      
+      console.log("privateKey = ",privKey);
+      web3.eth.getTransactionCount('0x97415060E1Ff0d2c51BF6d92B959be7D6316a983',(err,txCount)=>{ //보내는 주소
+        const txObject = {
+          'from':'0x97415060E1Ff0d2c51BF6d92B959be7D6316a983', //보내는 주소
+          'nonce': web3.utils.toHex(txCount),
+          'gasLimit': web3.utils.toHex(1000000),
+          'gasPrice': web3.utils.toHex(web3.utils.toWei('10','gwei')),
+          'to': this.contractAddr, //계약 주소
+          'value': '0x0',
+          'data': contract.methods.transfer(this.myAccountNumber,100).encodeABI() //받는 주소, 토큰 갯수
+        }
+        let transaction = new Tx(txObject,{'chain':'ropsten'});
+        transaction.sign(privKey);
+        web3.eth.sendSignedTransaction('0x'+transaction.serialize().toString('hex'))
+        .on('transactionHash',console.log)
+      })
+    }
   }
 }
 </script>
