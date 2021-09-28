@@ -61,7 +61,7 @@ public class ScheduleController {
     @PutMapping("/{scheduleid}")
     @ApiOperation(value = "동호회 일정 수정", notes = "동호회 일정 수정하기")
     public ResponseEntity<MessageResponse> modifySchedule(@PathVariable("clubid") Long clubid, @ApiIgnore HttpSession session,
-                                                          @RequestParam Long scheduleid, ScheduleCreateReq req) {
+                                                          @PathVariable("scheduleid") Long scheduleid, ScheduleCreateReq req) {
 
         String email = (String) session.getAttribute("LoginUser");
         User user = userService.getUserByUserEmail(email);
@@ -75,7 +75,7 @@ public class ScheduleController {
 
     @DeleteMapping("/{scheduleid}")
     @ApiOperation(value = "동호회 일정 삭제", notes = "동호회 일정 삭제하기")
-    public ResponseEntity<MessageResponse> modifySchedule(@PathVariable("clubid") Long clubid, @ApiIgnore HttpSession session, @RequestParam Long scheduleid) {
+    public ResponseEntity<MessageResponse> modifySchedule(@PathVariable("clubid") Long clubid, @ApiIgnore HttpSession session, @PathVariable("scheduleid") Long scheduleid) {
         String email = (String) session.getAttribute("LoginUser");
         User user = userService.getUserByUserEmail(email);
 

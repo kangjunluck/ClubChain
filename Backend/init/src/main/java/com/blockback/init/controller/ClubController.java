@@ -55,7 +55,7 @@ public class ClubController {
         return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
     }
 
-    @GetMapping("/search/{word}")
+    @GetMapping("/search")
     @ApiOperation(value = "동호회 검색하기", notes = "동호회명을 검색한다.")
     public ResponseEntity<List<ClubListRes>> searchClub(@RequestParam String word) {
         List<ClubListRes> res = clubService.getClubListBySearch(word);
@@ -64,7 +64,7 @@ public class ClubController {
 
     @PutMapping("/{clubid}")
     @ApiOperation(value = "동호회 수정하기", notes = "동호회명을 수정한다.")
-    public ResponseEntity<MessageResponse> modifyClub(@ApiIgnore HttpSession session, ClubCreatedReq req, @RequestParam Long clubid,
+    public ResponseEntity<MessageResponse> modifyClub(@ApiIgnore HttpSession session, ClubCreatedReq req, @PathVariable Long clubid,
                                                       @RequestPart(value = "club_thumbnail", required = false) MultipartFile clubThumbnail) throws IOException {
         String owner_email = (String) session.getAttribute("LoginUser");
         // 방장 정보
