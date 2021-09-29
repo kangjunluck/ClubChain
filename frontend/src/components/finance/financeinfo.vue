@@ -42,7 +42,6 @@ export default {
     }
   },
   props: {
-    // eslint-disable-next-line vue/no-dupe-keys
     componenetState: {
       type: String,
     }
@@ -484,7 +483,6 @@ export default {
   margin: 0 0 0.1rem 0;
   font-size: 1.5rem;
 }
-/* .infomation >>> .ethCard { */
 .ethCard {
   background-color: #1EC0FF;
   height: 10rem;

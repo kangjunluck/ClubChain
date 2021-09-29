@@ -16,7 +16,7 @@
           </b-row>
           <div class="btn btn-primary" @click="sendTx">
             송금
-           </div>
+          </div>
         </b-col>
       </b-row>
     </b-container>
@@ -455,6 +455,7 @@ export default {
   display: flex;  
   flex-direction: column;
   justify-content: center;
+  
 }
 .textAlignStart {
   align-self: start;
