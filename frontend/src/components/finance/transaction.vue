@@ -423,10 +423,12 @@ export default {
       const Tx = require('ethereumjs-tx').Transaction;
       var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
       var contract = new web3.eth.Contract(this.abi,this.contractAddr,{from: this.myAddr}); //보내는사람 주소
-      let privKey_= "3b0935331ba86137cd0b4c304af778aa267d736cf91b3031811514d60b34226c"; // 보내는사람의 개인키
+      let privKey_= "169013cdb58f70e0f71a8d059efa9d032ba0a3e671bc6f914b19e901c590cf38"; // 보내는사람의 개인키
       let privKey= new Buffer.from(privKey_, "hex");
       
       console.log("privateKey = ",privKey);
+      console.log("myAddr ",this.myAddr);
+
       web3.eth.getTransactionCount(this.myAddr,(err,txCount)=>{ //보내는 주소
         const txObject = {
           'from':this.myAddr, //보내는 주소

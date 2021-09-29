@@ -7,6 +7,9 @@
       <div class="btn btn-primary" @click="balanceToken">
             잔액확인
       </div>
+      <div class="btn btn-primary" @click="getTest">
+            명령어 테스트
+      </div>
   </div>
 </template>
  
@@ -413,7 +416,11 @@ export default {
         web3.eth.sendSignedTransaction('0x'+transaction.serialize().toString('hex'))
         .on('transactionHash',console.log)
       });
-
+    },
+    gethTest()
+    {
+      var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
+      console.log(web3.eth.getBlockNumber)
     }
 
   }
