@@ -4,9 +4,8 @@
 		create club
 		</div>
 		<div>
-			<input class="form-control" type="file" id="formFile">
+			<input v-on:change="fileSelect" class="form-control" type="file" name="club_thumbnail" id="club_thumbnail">
 		</div>
-
 		<!-- <b-form-file
 		v-model="file1"
 		:state="Boolean(file1)"
@@ -16,17 +15,17 @@
     <!-- <div class="mt-3">Selected file: {{ file1 ? file1.name : '' }}</div> -->
 		<b-form-input
 		type="text"
-		id="clubaccount"
-		v-model="clubinfos.clubaccount"
+		id="name"
+		v-model="clubinfos.name"
 		placeholder="동호회명"
-		class="clubaccount"
+		class="name"
 	></b-form-input>
 		<b-form-input
 		type="text"
-		id="clubinfo"
-		v-model="clubinfos.clubinfo"
+		id="introduce"
+		v-model="clubinfos.introduce"
 		placeholder="설명"
-		class="formClubinfo"
+		class="introduce"
 	></b-form-input>
 		<select class="form-select" name='test' aria-label="Default select example" @change="updatetpye">
 			<option selected>타입</option>
@@ -36,22 +35,20 @@
 	<input v-if="clubtype === '타입' || clubtype === '공개 동호회' " class="form-control" type="text" placeholder="비밀번호" aria-label="Disabled input example" disabled>
 	<b-form-input v-if=" clubtype === '비공개 동호회'"
 		type="text"
-		id="clubpassword"
-		v-model="clubinfos.clubpassword"
+		id="password"
+		v-model="clubinfos.password"
 		placeholder="비밀번호"
-		class="formClubPassword"
+		class="password"
 	></b-form-input>
 		<button  class="clubCreateButton" @click="createSubmit">
 				동호회 생성
 			</button>
-	
-  </div>
-
+	</div>
 </template>
 
 <script>
 import $ from "jquery";
-// import http from "@/util/http-common";
+import http from "@/util/http-common";
 
 export default {
 	name: 'ClubCreate',
@@ -60,9 +57,11 @@ export default {
 			clubtype: '타입',
 			file1: null,
 			clubinfos: {
+				club_thumbnail: "",
 				clubaccount: "",
-				clubinfo: "",
-				clubpassword: "",
+				introduce: "",
+				name: "",
+				password: "",
 			},
 			// types: [{text:'타입', value: null}, '공개 동호회', '비공개 동호회'],
 		}
@@ -72,12 +71,42 @@ export default {
 			console.log('업데이트')
 			this.clubtype= $("select[name=test] option:checked").text()
 		},
+		fileSelect(file) {
+			console.log(file);
+			this.clubinfos.club_thumbnail = file
+		},
 		createSubmit() {
 			console.log(this.clubinfos.clubaccount)
 			console.log(this.clubinfos.clubinfo)
 			console.log(this.clubinfos.clubpassword)
-			// http
-			// 	.post("api/club")
+	
+			const formData = new FormData;
+			formData.append('club_thumbnail', this.clubinfos.club_thumbnail)
+			formData.append('clubaccount', this.clubinfos.clubaccount)
+			formData.append('introduce', this.clubinfos.introduce)
+			formData.append('name', this.clubinfos.name)
+			formData.append('password', this.clubinfos.password)
+			console.log(formData)
+			// FormData의 값 확인 
+			for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
+
+
+
+			http
+				.post("api/club/", formData, {
+					headers: {
+            'Content-Type' : 'multipart/form-data'
+          }
+				}).then( res=> {
+					console.log('성공')
+					console.log(res)
+				}).catch((error) => {
+					
+					console.log('실패')
+					console.log(error)
+				})
+
+
 		}
 	}
 }
