@@ -97,7 +97,7 @@ export default {
             this.credentials.userthumbnail = res.data.userthumbnail; 
             this.$store.dispatch("logininfo", this.credentials);
             this.$store.dispatch("isLogin");
-            this.$router.push("Vote");
+            this.$router.push("club/finance");
           }
         })
         .catch((error) => {
