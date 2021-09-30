@@ -86,6 +86,7 @@ export default {
       formData.append("password", this.password);
       http
         .post("api/users/login", formData, { withCredentials: true })
+        // withcredentials를 넣어야 쿠키에 담겨있는 세션 id가 전달됨
         .then((res) => {
           if (res.data.statusCode === 200) {
             console.log(res);
@@ -96,6 +97,8 @@ export default {
             this.credentials.userthumbnail = res.data.userthumbnail;
             this.$store.dispatch("logininfo", this.credentials);
             this.$store.dispatch("isLogin");
+            console.log('로그인 데이터')
+            console.log(res.data)
             this.$router.push("club/finance");
           }
         })
