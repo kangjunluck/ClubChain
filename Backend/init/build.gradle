@@ -56,6 +56,16 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/io.lettuce/lettuce-core
 	implementation group: 'io.lettuce', name: 'lettuce-core', version: '6.1.4.RELEASE'
+
+	// https://mvnrepository.com/artifact/javax.mail/mail
+	implementation group: 'javax.mail', name: 'mail', version: '1.4.7'
+
+	// https://mvnrepository.com/artifact/org.springframework/spring-context-support
+	implementation group: 'org.springframework', name: 'spring-context-support', version: '5.3.6'
+
+	// https://mvnrepository.com/artifact/javax.interceptor/javax.interceptor-api
+	implementation group: 'javax.interceptor', name: 'javax.interceptor-api', version: '1.2'
+
 }
 
 //sourceSets {
