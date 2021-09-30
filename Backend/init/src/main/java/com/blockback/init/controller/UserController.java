@@ -1,12 +1,14 @@
 package com.blockback.init.controller;
 
 
+import com.blockback.init.common.request.EmailReq;
 import com.blockback.init.common.request.UserLoginReq;
 import com.blockback.init.common.request.UserPutReq;
 import com.blockback.init.common.request.UserRegisterPostReq;
 import com.blockback.init.common.response.MessageResponse;
 import com.blockback.init.common.response.UserResponse;
 import com.blockback.init.entity.User;
+import com.blockback.init.service.EmailService;
 import com.blockback.init.service.UserService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
 
 
 @RestController
@@ -32,6 +35,14 @@ public class UserController {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    EmailService emailService;
+
+    private HashMap<String, String> emailRepository = new HashMap<>();
+
+    String SUCCESS = "Success";
+    String FAIL = "Fail";
 
     @PostMapping("/login")
     @ApiOperation(value = "로그인", notes = "<strong>아이디와 패스워드</strong>를 통해 로그인 한다.")
@@ -121,5 +132,37 @@ public class UserController {
         else {
             return ResponseEntity.status(200).body(UserResponse.of(200, "Success", user));
         }
+    }
+
+    @GetMapping("/email/{userEmail}")
+    @ApiOperation(value = "이메일 인증 요청", notes = "이메일 인증 요청을 보냅니다.")
+    public ResponseEntity<MessageResponse> sendEmail(@PathVariable String userEmail) throws Exception {
+
+        String code = emailService.sendEmail(userEmail);
+
+        if(code != null) {
+            emailRepository.put(userEmail, code);
+        }
+
+        return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
+    }
+
+    @PostMapping("/verifyCode")
+    @ApiOperation(value = "이메일 인증 코드 검증", notes = "이메일 인증 코드 검증하기.")
+    public ResponseEntity<MessageResponse> verifyEmailCode(@RequestBody EmailReq emailReq) {
+
+        if (emailReq.getCode().length() != 0 && emailReq.getCode().equals(emailRepository.get(emailReq.getEmail()))) {
+            emailRepository.remove(emailReq.getEmail());
+            return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
+        }
+
+        return ResponseEntity.status(400).body(MessageResponse.of(400, FAIL));
+    }
+
+    @GetMapping("/email/clear")
+    @ApiOperation(value = "이메일 hashMap 내용 삭제", notes = "hashMap 내용 전체 삭제. 이메일 인증 테스트하면서 중간에 emailRepository를 지울때 사용.")
+    public ResponseEntity<MessageResponse> clearEmail() {
+        emailRepository.clear();
+        return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
     }
 }
