@@ -28,8 +28,6 @@ public class User extends BaseEntity {
 
     String useraccount;
 
-    String userprivatekey;
-
     @Override
     public String toString() {
         return "User{" +
@@ -39,7 +37,6 @@ public class User extends BaseEntity {
                 ", username='" + usernickname + '\'' +
                 ", profile_thumbnail='" + userthumbnail + '\'' +
                 ", account='" + useraccount + '\'' +
-                ", privatekey='" + userprivatekey + '\'' +
                 '}';
     }
 }

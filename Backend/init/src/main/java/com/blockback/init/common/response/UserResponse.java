@@ -16,6 +16,8 @@ public class UserResponse {
     String message = null;
     @ApiModelProperty(name="응답 코드", example = "200")
     Integer statusCode = null;
+    @ApiModelProperty(name="userId")
+    Long userId;
     @ApiModelProperty(name="userEmail")
     String userEmail;
     @ApiModelProperty(name="useraccount")
@@ -39,9 +41,9 @@ public class UserResponse {
         UserResponse res = new UserResponse();
         res.setStatusCode(statusCode);
         res.setMessage(message);
+        res.setUserId(user.getId());
         res.setUserEmail(user.getUserEmail());
         res.setUseraccount(user.getUseraccount());
-        res.setUserprivatekey(user.getUserprivatekey());
         res.setUserthumbnail(user.getUserthumbnail());
         res.setUsernickname(user.getUsernickname());
         return res;

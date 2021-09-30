@@ -4,14 +4,7 @@
             회원가입
         </div><br>
         <div class="signup_form">
-            <div class="my-4 d-flex">
-                <div class="float1">
-                    <img alt="프로필" :src="image" id="image" />
-                </div>
-                <div class="float2">
-                    <input v-on:change="fileSelect()" ref="image" type="file" name="photo" id="photo" />
-                </div>
-            </div>
+            <input v-on:change="fileSelect()" ref="image" type="file" name="photo" id="photo" />
             <input 
                 type="text"
                 id="usernickname"
@@ -109,13 +102,13 @@ export default {
 
       this.useraccount = address;
       http
-        .post("/api/users/regist", formData, {
+        .post("/api/users/regist", formData, 
+        {
           headers: {
             'Content-Type' : 'multipart/form-data'
           }
         }         
-        )
-        .then( res => {
+        ).then( res => {
           this.sendEth()
           console.log(res.data);
           alert(msg);
