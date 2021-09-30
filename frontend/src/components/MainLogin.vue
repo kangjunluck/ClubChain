@@ -61,14 +61,14 @@ export default {
         useraccount: null,
         usernickname: null,
         userthumbnail: null,
-      }
+      },
     };
   },
   computed: {
     validationPassword() {
       if (this.password === null) {
         // 나중에 수정... 비어있을 때 옳음 표시 뜸
-        return true
+        return true;
       } else {
         return this.password.length > 4;
       }
@@ -81,20 +81,19 @@ export default {
       this.$router.push({ path: "signup" });
     },
     loginSubmit() {
-      const formData = new FormData;
-      formData.append('userEmail', this.credentials.userEmail);
-      formData.append('password', this.password);
+      const formData = new FormData();
+      formData.append("userEmail", this.credentials.userEmail);
+      formData.append("password", this.password);
       http
-        .post("api/users/login", formData,
-        { withCredentials : true})
+        .post("api/users/login", formData, { withCredentials: true })
         .then((res) => {
-          if (res.data.statusCode === 200){
-            console.log(res)
+          if (res.data.statusCode === 200) {
+            console.log(res);
             // res.data.sessionid 추가될 예정
             this.credentials.userEmail = res.data.userEmail;
             this.credentials.useraccount = res.data.useraccount;
             this.credentials.usernickname = res.data.usernickname;
-            this.credentials.userthumbnail = res.data.userthumbnail; 
+            this.credentials.userthumbnail = res.data.userthumbnail;
             this.$store.dispatch("logininfo", this.credentials);
             this.$store.dispatch("isLogin");
             this.$router.push("club/finance");
@@ -144,15 +143,15 @@ export default {
   margin: 1.5rem 0 0 0;
   height: 3rem;
 }
-.formUseremail:focus {
+/* .formUseremail:focus {
   outline: none;
   box-shadow: none;
   border-color: none;
   color: none;
   /* outline: none !important; */
-  /* border:1px solid red; */
-  /* box-shadow: 0 0 10px #719E; */
-}
+/* border:1px solid red; */
+/* box-shadow: 0 0 10px #719E; 
+} */
 .loginButton {
   background-color: #1ec0ff;
   margin: 0 auto 0;
