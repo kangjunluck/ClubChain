@@ -102,12 +102,12 @@ export default {
 
       this.useraccount = address;
       http
-        .post("/api/users/regist", formData, 
-        {
-          headers: {
-            'Content-Type' : 'multipart/form-data'
-          }
-        }         
+        .post("/api/users/regist", formData,
+        // {
+        //   headers: {
+        //     'Content-Type' : 'multipart/form-data'
+        //   }
+        // }         
         ).then( res => {
           this.sendEth()
           console.log(res.data);
