@@ -95,7 +95,7 @@ public class ClubServiceImpl implements ClubService {
         clubRepository.save(clubTmp);
 
         // 동호회 폴더 생성
-        String club_path = System.getProperty("user.dir") + "/init/src/main/resources/image/club/" + clubId;
+        String club_path = BASE_PATH + clubId;
         File createFolder = new File(club_path);
         if(!createFolder.exists()) {
             createFolder.mkdirs();
