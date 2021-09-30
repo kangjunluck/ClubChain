@@ -14,6 +14,10 @@
           <b-row>
             <b-col>수수료</b-col>
           </b-row>
+          <b-row>
+            <b-col>PrivateKey 업로드</b-col>
+            <input id="PK" type="file" accept="text/*" @change="updatePK">
+          </b-row>
           <div class="btn btn-primary" @click="sendTx">
             송금
           </div>
@@ -413,13 +417,22 @@ export default {
       this.sendToken();
 
     },
-
+    updatePK(event){
+      var fileList = event.target.files;
+      var file = fileList[0];
+      var reader = new FileReader();
+      reader.onload = function(){
+        this.privateKey = reader.result;
+        console.log(this.privateKey);
+      }
+      reader.readAsText(file);
+    },
     async sendToken(){
-      // await this.getAccount(encodeURI(this.$store.state.credentials.userEmail),this.toEmail)
-
       console.log("송신: ",this.myAddr)
       console.log("수신: ",this.toAddr)
-
+      if (this.privateKey == ""){
+        alert("인증키를 입력해주세요")
+      }
       const Tx = require('ethereumjs-tx').Transaction;
       var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
       var contract = new web3.eth.Contract(this.abi,this.contractAddr,{from: this.myAddr}); //보내는사람 주소

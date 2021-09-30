@@ -95,6 +95,8 @@ export default {
             address: address
           }
         )
+        // 유저에게 privateKey 전달
+        this.saveFile(privateKey)
         console.log(wallet);
 
       const formData = new FormData;
@@ -157,6 +159,21 @@ export default {
         web3.eth.sendSignedTransaction('0x'+transaction.serialize().toString('hex'))
         .on('transactionHash',console.log)
       });
+    },
+    saveFile(privateKey) {
+      var blob = new Blob([privateKey], {type: 'text/plain'});
+
+      const objURL = window.URL.createObjectURL(blob);
+      console.log(objURL);
+      if (window.__Xr_objURL_forCreatingFile__) {
+        window.URL.revokeObjectURL(window.__Xr_objURL_forCreatingFile__);
+      }
+      window.__Xr_objURL_forCreatingFile__ = objURL;
+      var a = document.createElement('a');
+      a.download = "PrivateKey";
+      a.href = objURL;
+      console.log(a)
+      a.click();
     }
   },
 };
