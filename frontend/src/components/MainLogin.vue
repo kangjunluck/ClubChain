@@ -90,7 +90,6 @@ export default {
         .then((res) => {
           if (res.data.statusCode === 200) {
             console.log(res);
-            // res.data.sessionid 추가될 예정
             this.credentials.userEmail = res.data.userEmail;
             this.credentials.useraccount = res.data.useraccount;
             this.credentials.usernickname = res.data.usernickname;
