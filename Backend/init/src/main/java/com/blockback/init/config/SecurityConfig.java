@@ -41,8 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public CookieSerializer cookieSerializer() {
         DefaultCookieSerializer serializer = new DefaultCookieSerializer();
         serializer.setUseSecureCookie(true);
-        serializer.setDomainNamePattern("^.+?\\.(\\w+\\.[a-z]+)$");
-        serializer.setSameSite("None"); return serializer;
+        serializer.setSameSite("None");
+        return serializer;
     }
     // DAO 기반으로 Authentication Provider를 생성
     // BCrypt Password Encoder와 UserDetailService 구현체를 설정
