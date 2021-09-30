@@ -4,7 +4,7 @@
 		create club
 		</div>
 		<div>
-			<input v-on:change="fileSelect" class="form-control" type="file" name="club_thumbnail" id="club_thumbnail">
+			<input v-on:change="fileSelect" class="form-control" type="file" name="profile_thumbnail" id="profile_thumbnail">
 		</div>
 		<!-- <b-form-file
 		v-model="file1"
@@ -48,7 +48,8 @@
 
 <script>
 import $ from "jquery";
-import http from "@/util/http-common";
+// import http from "@/util/http-common";
+import axios from "axios";
 
 export default {
 	name: 'ClubCreate',
@@ -57,7 +58,6 @@ export default {
 			clubtype: '타입',
 			file1: null,
 			clubinfos: {
-				club_thumbnail: "",
 				clubaccount: "",
 				introduce: "",
 				name: "",
@@ -73,31 +73,31 @@ export default {
 		},
 		fileSelect(file) {
 			console.log(file);
-			this.clubinfos.club_thumbnail = file
+			this.clubinfos.profile_thumbnail = file
 		},
 		createSubmit() {
-			console.log(this.clubinfos.clubaccount)
-			console.log(this.clubinfos.clubinfo)
-			console.log(this.clubinfos.clubpassword)
-	
+			var photoFile = document.getElementById("profile_thumbnail");
 			const formData = new FormData;
-			formData.append('club_thumbnail', this.clubinfos.club_thumbnail)
+			formData.append('profile_thumbnail', photoFile.files[0])
+			console.log('포토파일', photoFile.files[0])
 			formData.append('clubaccount', this.clubinfos.clubaccount)
 			formData.append('introduce', this.clubinfos.introduce)
 			formData.append('name', this.clubinfos.name)
 			formData.append('password', this.clubinfos.password)
-			console.log(formData)
+			console.log(formData)	
+		
 			// FormData의 값 확인 
 			for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
 
 
 
-			http
-				.post("api/club/", formData, {
-					headers: {
-            'Content-Type' : 'multipart/form-data'
-          }
-				}).then( res=> {
+			axios({
+				method: "post",
+				url:"http://j5b1021.p.ssafy.io:8080/api/club/",
+				data: formData,
+				headers: { "Content-Type": "multipart/form-data" },
+			})
+			.then( res=> {
 					console.log('성공')
 					console.log(res)
 				}).catch((error) => {

@@ -10,7 +10,9 @@ import sendToken from "../components/Token/sendToken.vue";
 import Finance from "../views/finance.vue"
 import ClubCreate from "../views/TheCreateClub.vue"
 import Myclub from "../components/club/Myclub.vue"
-import MyPage from "../views/MyPage.vue"
+import MyPage from "../views/TheMyPage.vue"
+import MyinfoUpdate from "../views/TheMyInfoUpdate.vue"
+import Photos from "../views/Photos.vue"
 
 Vue.use(VueRouter);
 
@@ -69,6 +71,16 @@ const routes = [
     path: "/mypage",
     name: "MyPage",
     component: MyPage,
+  },
+  {
+    path: "/myinfoupdate",
+    name: "MyinfoUpdate",
+    component: MyinfoUpdate,
+  },
+  {
+    path: "/photos",
+    name: "Photos",
+    component: Photos,
   }
 ];
 
