@@ -419,7 +419,7 @@ export default {
     },
     updatePK(event){
       var fileList = event.target.files;
-      var file = fileList[0]
+      var file = fileList[0];
       var reader = new FileReader();
       reader.onload = function(){
         this.privateKey = reader.result;
