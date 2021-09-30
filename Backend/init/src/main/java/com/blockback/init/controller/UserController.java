@@ -165,4 +165,16 @@ public class UserController {
         emailRepository.clear();
         return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
     }
+
+    @GetMapping("/password/{userEmail}")
+    @ApiOperation(value = "비밀번호 찾기", notes = "비밀번호 찾기")
+    public ResponseEntity<MessageResponse> findPassword(@PathVariable String userEmail) throws Exception {
+
+        User user = userService.getUserByUserEmail(userEmail);
+        if(user != null && emailService.findPassowrd(user)) {
+            return ResponseEntity.status(200).body(MessageResponse.of(200, SUCCESS));
+        }
+
+        return ResponseEntity.status(400).body(MessageResponse.of(400, FAIL));
+    }
 }
