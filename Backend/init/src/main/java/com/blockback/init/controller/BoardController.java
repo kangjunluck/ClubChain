@@ -13,6 +13,7 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
@@ -69,15 +70,20 @@ public class BoardController {
     public ResponseEntity<MessageResponse> createBoard(
             @ApiIgnore HttpSession session,
             @PathVariable("clubid") Long clubid,
-            @ApiParam(value="게시글 정보", required = true) BoardRegisterReq boardinfo)
-    {
+            @ApiParam(value="게시글 정보", required = true) BoardRegisterReq boardinfo,
+            @RequestPart(value = "board_thumbnail", required = false) MultipartFile boardThumbnail) {
+
         String owner_email = (String) session.getAttribute("LoginUser");
         User user = userService.getUserByUserEmail(owner_email);
-        User_Club_Join userclub = userClubService.getUserClubByUserIdandClubId(user.getId(), clubid);
-        if (user == null | userclub == null){
+        if(user == null) {
             return ResponseEntity.status(401).body(MessageResponse.of(401, "잘못된 요청입니다"));
         }
-        boardService.createBoard(user, boardinfo, clubid);
+
+        User_Club_Join userclub = userClubService.getUserClubByUserIdandClubId(user.getId(), clubid);
+        if (userclub == null){
+            return ResponseEntity.status(401).body(MessageResponse.of(401, "잘못된 요청입니다"));
+        }
+        boardService.createBoard(user, boardinfo, clubid, boardThumbnail);
         return ResponseEntity.status(200).body(MessageResponse.of(200, "success"));
     }
 
@@ -127,5 +133,5 @@ public class BoardController {
         boardService.deleteBoard(boardid);
         return ResponseEntity.status(200).body(MessageResponse.of(200, "success"));
     }
-
+    
 }
