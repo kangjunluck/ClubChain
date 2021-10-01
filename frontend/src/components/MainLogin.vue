@@ -2,7 +2,6 @@
   <div class="mainLogin">
     <!-- 나중에 trim도 추가하기 -->
     <!-- isLogin -->
-    <!-- 로고와 서비스이름 파일 들어갈 예정 -->
     <img alt="Vue logo" src="@/assets/CC.svg" class="logo" />
     <!-- 로그인 폼 만들기 -->
     <div class="loginForm">
@@ -158,13 +157,12 @@ export default {
   background-color: #1ec0ff;
   margin: 0 auto 0;
   width: 70%;
-  height: 2.3rem;
   border-radius: 3rem;
   font-size: 1rem;
   font-weight: 500;
   color: #fff;
   border: 1px solid transparent;
-  height: 2.5rem;
+  min-height: 2.5rem;
   -webkit-appearance: none;
 }
 .links {
