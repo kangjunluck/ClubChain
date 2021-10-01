@@ -4,7 +4,7 @@
 		create club
 		</div>
 		<div>
-			<input v-on:change="fileSelect" class="form-control" ref="profile_thumbnail" type="file" name="profile_thumbnail" id="profile_thumbnail">
+			<input v-on:change="fileSelect()" class="form-control" ref="image" type="file" name="photo" id="photo">
 		</div>
 		<!-- <b-form-file
 		v-model="file1"
@@ -78,7 +78,7 @@ export default {
 		// },
 		fileSelect() {
 			console.log(this.$refs);
-			this.clubinfos.profile_thumbnail = this.$refs.profile_thumbnail.files[0];
+			this.clubinfos.profile_thumbnail = this.$refs.image.files[0];
 		},
 		createSubmit() {
 			// var photoFile = document.getElementById("profile_thumbnail");
