@@ -165,6 +165,7 @@ export default {
   color: #fff;
   border: 1px solid transparent;
   height: 2.5rem;
+  -webkit-appearance: none;
 }
 .links {
   margin: 1rem 1rem 3rem 0;
