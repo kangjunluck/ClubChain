@@ -1,64 +1,73 @@
 <template>
-    <div>
-        <div class="signup_header">
-            회원가입
-        </div><br>
-        <div class="signup_form">
-            <input v-on:change="fileSelect()" ref="image" type="file" name="photo" id="photo" />
-            <input 
-                type="text"
-                id="usernickname"
-                name="usernickname"
-                v-model="usernickname"
-                ref="usernickname"
-                placeholder="닉네임"
-                class="form-control mt-5 mb-2"
-            />
-            <input
-                type="text"
-                id="userEmail"
-                name="userEmail"
-                v-model="userEmail"
-                ref="userEmail"
-                placeholder="이메일"
-                class="form-control mb-2"
-            />
-            <span id="request" class="btn btn-primary">
-                인증 요청
-            </span>
-            <input
-                type="text"
-                id="code"
-                name="code"
-                v-model="code"
-                ref="code"
-                placeholder="인증코드"
-                class="form-control mb-2"
-            />
-            <input
-                type="password"
-                id="password"
-                name="password"
-                v-model="password"
-                ref="password"
-                placeholder="비밀번호"
-                class="form-control mb-2"
-            />
-            <input
-                type="password"
-                id="passwordconfirm"
-                name="passwordconfirm"
-                v-model="passwordconfirm"
-                ref="passwordconfirm"
-                placeholder="비밀번호 확인"
-                class="form-control mb-2"
-            />
+      <div class="container d-flex flex-column justify-content-center align-items-center">
+        <div class="row signup_header">
+          <div class="col-9"><span>회원가입</span></div>
         </div>
-
-        <div class="btn btn-primary" @keyup.enter="insertUser" @click="insertUser">
-            회원가입
+        <div class="row signup_form">
+          <div class="col-12">
+            <div class="mb-2 d-flex justify-content-between align-items-center">
+              <img :src="selecturl" alt="url" class="col-6 px-0" style="width:3rem; height:3rem;">
+              <label class="photo-button" for="photo">업로드</label>
+              <input v-on:change="fileSelect()" ref="image" type="file" name="photo" id="photo" class="col-6" style="display:none;" />
+            </div>
+          </div>
+          <input 
+              type="text"
+              id="usernickname"
+              name="usernickname"
+              v-model="usernickname"
+              ref="usernickname"
+              placeholder="닉네임"
+              class="form-control col-12"
+          />
+          <div class="col-12">
+            <div class="row">
+              <input
+                  type="text"
+                  id="userEmail"
+                  name="userEmail"
+                  v-model="userEmail"
+                  ref="userEmail"
+                  placeholder="이메일"
+                  class="form-control"
+              />
+              <button class="btn photo-button mb-2">
+                  인증 요청
+              </button>
+            </div>
+          </div>
+          <input
+              type="text"
+              id="code"
+              name="code"
+              v-model="code"
+              ref="code"
+              placeholder="인증코드"
+              class="form-control"
+          />
+          <input
+              type="password"
+              id="password"
+              name="password"
+              v-model="password"
+              ref="password"
+              placeholder="비밀번호"
+              class="form-control"
+          />
+          <input
+              type="password"
+              id="passwordconfirm"
+              name="passwordconfirm"
+              v-model="passwordconfirm"
+              ref="passwordconfirm"
+              placeholder="비밀번호 확인"
+              class="form-control"
+          />
+          <div class="btn photo-button" @keyup.enter="insertUser" @click="insertUser">
+              회원가입
+          </div>
         </div>
-    </div>
+      </div>
 </template>
 
 <script>
@@ -72,8 +81,9 @@ export default {
       userEmail: "",
       useraccount: "",
       usernickname: "",
-      addr:"",
+      addr: "",
 
+      selecturl: require("../../assets/profile.png"),
     };
   },
   methods: {
@@ -125,8 +135,11 @@ export default {
       this.$router.push("/");
     },
     fileSelect() {
-      console.log(this.$refs);
       this.image = this.$refs.image.files[0];
+      if (this.image == undefined){
+        this.selecturl = require("../../assets/profile.png");
+      }
+      this.selecturl = URL.createObjectURL(this.image);
     },
     sendEth()
     {
@@ -176,14 +189,23 @@ export default {
 
 <style scoped>
 .signup_header {
-    font-size: 30px;
-    float:left;
-    margin-left: 20%;
+    width: 60%;
+    font-size: 2em;
+    text-align: left;
 }
 
 .signup_form {
     width: 60%;
-    margin-left: 20%;
+}
+.photo-button{
+  padding: 3px 15px;
+  background-color:#1ec0ff;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+}
+.form-control{
+  margin-bottom: 8px;
 }
 .float1{
     width:35%;
@@ -198,11 +220,4 @@ export default {
   border-radius: 100%;
 }
 
-#userEmail {
-    width: 70%;
-    display: inline-block;
-}
-#request {
-    font-size: 10px;
-}
 </style>
