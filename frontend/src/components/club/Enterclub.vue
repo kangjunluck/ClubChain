@@ -38,15 +38,15 @@ export default {
         name : "",
         image : "",
     };
-  },
+},
   methods: {
-      setSession: function () {
-      document.cookie
-      const token = localStorage.getItem('jwt')
-      const config = {
+    setSession: function () {
+    document.cookie
+    const token = localStorage.getItem('jwt')
+    const config = {
         Authorization: `JWT ${token}`
-      }
-      return config
+    }
+    return config
     },
     enterClub() {
         //var url = "/api/";
