@@ -2,6 +2,7 @@ package com.blockback.init.controller;
 
 import com.blockback.init.common.request.BoardRegisterReq;
 import com.blockback.init.common.response.MessageResponse;
+import com.blockback.init.common.response.PhotoRes;
 import com.blockback.init.entity.Board;
 import com.blockback.init.entity.User;
 import com.blockback.init.entity.User_Club_Join;
@@ -133,5 +134,12 @@ public class BoardController {
         boardService.deleteBoard(boardid);
         return ResponseEntity.status(200).body(MessageResponse.of(200, "success"));
     }
-    
+
+    @GetMapping("/photo")
+    @ApiOperation(value = "게시글 전체 사진 조회")
+    public ResponseEntity<PhotoRes> getPhoto(@PathVariable("clubid") Long clubid) {
+        PhotoRes res = boardService.getPhotos(clubid);
+
+        return ResponseEntity.status(200).body(res);
+    }
 }
