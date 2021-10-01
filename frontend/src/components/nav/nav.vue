@@ -1,13 +1,13 @@
 <template>
   <div>
-		<i class="fas fa-wallet fa-lg"></i>
-
+		nav
+		<i class="fas fa-arrow-left"></i>
   </div>
 </template>
 
 <script>
 export default {
-	name: "Footer",
+
 }
 </script>
 

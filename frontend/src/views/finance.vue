@@ -2,7 +2,6 @@
   <div class="finance">
     <!-- 상단바도 컴포넌트로 두고 전환해야 하나? -->
     <!-- <div>{{componenetStateEmit}}</div> -->
-    <div></div>
     <Navigator v-if="componenetStateEmit !==''" v-bind:componenetStateEmit="componenetStateEmit" @test="test"/>
     <MyFiananceInfoLight v-if="componenetStateEmit==='transactionHistory' ||componenetStateEmit === 'transfer' "/>
     <FinanceInfo @componenetState="componenetState" v-if="componenetStateEmit===''"/>
