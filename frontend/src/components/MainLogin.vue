@@ -3,7 +3,7 @@
     <!-- 나중에 trim도 추가하기 -->
     <!-- isLogin -->
     <!-- 로고와 서비스이름 파일 들어갈 예정 -->
-    <img alt="Vue logo" src="@/assets/logo.png" class="logo" />
+    <img alt="Vue logo" src="@/assets/CC.svg" class="logo" />
     <!-- 로그인 폼 만들기 -->
     <div class="loginForm">
       <b-form-input
@@ -119,8 +119,8 @@ export default {
 
 <style scoped>
 .logo {
-  width: 100px;
-  margin: 0 auto 3rem;
+  width: 55%;
+  margin: 0 auto ;
 }
 .mainLogin {
   height: 100%;
