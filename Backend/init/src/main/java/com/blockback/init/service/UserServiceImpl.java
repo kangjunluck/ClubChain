@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User putUser(UserPutReq putinfo, Long userId, MultipartFile thumbnail) {
         User user = userRepository.findById(userId).get();
-        String BASE_PATH = System.getProperty("user.dir") + "/init/src/main/resources/image/user/";
+        String BASE_PATH = System.getProperty("user.dir") + "/Backend/init/src/main/resources/image/user/";
         String pic_place = user.getUserthumbnail();
         try {
             /*
