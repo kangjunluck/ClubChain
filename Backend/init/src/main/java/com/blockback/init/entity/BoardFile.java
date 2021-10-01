@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 @Entity
 @Getter
 @Setter
-public class File extends BaseEntity {
+public class BoardFile extends BaseEntity {
 
     String origin_file;
     String save_file;
