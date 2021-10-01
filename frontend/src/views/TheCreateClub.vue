@@ -48,8 +48,8 @@
 
 <script>
 import $ from "jquery";
-// import http from "@/util/http-common";
-import axios from "axios";
+import http from "@/util/http-common";
+// import axios from "axios";
 
 export default {
 	name: 'ClubCreate',
@@ -91,24 +91,20 @@ export default {
 
 
 
-			axios({
-				method: "post",
-				url:"http://j5b1021.p.ssafy.io:8080/api/club/",
-				data: formData,
-				headers: { "Content-Type": "multipart/form-data" },
-			})
-			.then( res=> {
+			http
+				.post("api/club/", formData, { withCredentials: true })
+				.then( (res) => {
 					console.log('성공')
-					console.log(res)
-				}).catch((error) => {
-					
-					console.log('실패')
-					console.log(error)
-				})
+					console.log(res)})
+				.catch((error) => {		
+						console.log('실패')
+						console.log(error)
+					})
 
 
 		}
 	}
+
 }
 </script>
 
