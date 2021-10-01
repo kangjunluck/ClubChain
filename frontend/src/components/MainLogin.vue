@@ -16,9 +16,10 @@
         type="password"
         v-model="password"
         placeholder="비밀번호"
-        :state="validationPassword"
+        
         class="formPassword"
       />
+      <!-- :state="validationPassword" -->
       <div
         :state="validationPassword"
         v-if="validationPassword"
@@ -28,7 +29,7 @@
         :state="validationPassword"
         class="validationPassword"
       >
-        비밀번호 길이는 4 이상이어야 합니다.
+        <!-- 비밀번호 길이는 4 이상이어야 합니다. -->
       </b-form-invalid-feedback>
     </div>
     <!-- 클릭할 때 함수 실행 -->
