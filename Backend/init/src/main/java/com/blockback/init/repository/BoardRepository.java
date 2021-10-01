@@ -13,4 +13,5 @@ import java.util.List;
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
     List<Board> findByClub(Club club);
+    List<Board> findByClubId(Long clubid);
 }

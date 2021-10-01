@@ -2,6 +2,7 @@ package com.blockback.init.controller;
 
 import com.blockback.init.common.request.BoardRegisterReq;
 import com.blockback.init.common.response.MessageResponse;
+import com.blockback.init.common.response.PhotoRes;
 import com.blockback.init.entity.Board;
 import com.blockback.init.entity.User;
 import com.blockback.init.entity.User_Club_Join;
@@ -13,6 +14,7 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
@@ -69,15 +71,20 @@ public class BoardController {
     public ResponseEntity<MessageResponse> createBoard(
             @ApiIgnore HttpSession session,
             @PathVariable("clubid") Long clubid,
-            @ApiParam(value="게시글 정보", required = true) BoardRegisterReq boardinfo)
-    {
+            @ApiParam(value="게시글 정보", required = true) BoardRegisterReq boardinfo,
+            @RequestPart(value = "board_thumbnail", required = false) MultipartFile boardThumbnail) {
+
         String owner_email = (String) session.getAttribute("LoginUser");
         User user = userService.getUserByUserEmail(owner_email);
-        User_Club_Join userclub = userClubService.getUserClubByUserIdandClubId(user.getId(), clubid);
-        if (user == null | userclub == null){
+        if(user == null) {
             return ResponseEntity.status(401).body(MessageResponse.of(401, "잘못된 요청입니다"));
         }
-        boardService.createBoard(user, boardinfo, clubid);
+
+        User_Club_Join userclub = userClubService.getUserClubByUserIdandClubId(user.getId(), clubid);
+        if (userclub == null){
+            return ResponseEntity.status(401).body(MessageResponse.of(401, "잘못된 요청입니다"));
+        }
+        boardService.createBoard(user, boardinfo, clubid, boardThumbnail);
         return ResponseEntity.status(200).body(MessageResponse.of(200, "success"));
     }
 
@@ -128,4 +135,11 @@ public class BoardController {
         return ResponseEntity.status(200).body(MessageResponse.of(200, "success"));
     }
 
+    @GetMapping("/photo")
+    @ApiOperation(value = "게시글 전체 사진 조회")
+    public ResponseEntity<PhotoRes> getPhoto(@PathVariable("clubid") Long clubid) {
+        PhotoRes res = boardService.getPhotos(clubid);
+
+        return ResponseEntity.status(200).body(res);
+    }
 }

@@ -2,17 +2,21 @@ package com.blockback.init.service;
 
 
 import com.blockback.init.common.request.BoardRegisterReq;
-import com.blockback.init.entity.Board;
-import com.blockback.init.entity.Club;
-import com.blockback.init.entity.Comment;
-import com.blockback.init.entity.User;
+import com.blockback.init.common.response.PhotoRes;
+import com.blockback.init.common.response.Photos;
+import com.blockback.init.entity.*;
 import com.blockback.init.repository.BoardRepository;
 import com.blockback.init.repository.ClubRepository;
+import com.blockback.init.repository.FileRepository;
 import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +28,11 @@ public class BoardServiceImpl implements BoardService {
     BoardRepository boardRepository;
     @Autowired
     ClubRepository clubRepository;
+
+    @Autowired
+    FileRepository fileRepository;
+
+    String BASE_PATH = System.getProperty("user.dir") + "/Backend/init/src/main/resources/image/club/";
 
     @Override
     public List<Board> getBoardsByClubId(Long clubid) {
@@ -42,7 +51,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void createBoard(User user, BoardRegisterReq boardinfo, Long clubid) {
+    public void createBoard(User user, BoardRegisterReq boardinfo, Long clubid, MultipartFile boardThumbnail) {
         Club club = clubRepository.findById(clubid).get();
         Board board = new Board();
         board.setUser(user);
@@ -54,7 +63,30 @@ public class BoardServiceImpl implements BoardService {
         board.setView(0);
         board.setSection(boardinfo.getSection());
 
-        boardRepository.save(board);
+        try {
+            Board boardTmp = boardRepository.save(board);
+
+            if(boardThumbnail == null) return;
+
+            String newPath = BASE_PATH + clubid + "/" + boardTmp.getId() + "-" + boardThumbnail.getOriginalFilename();
+            File dest = new File(newPath);
+            boardThumbnail.transferTo(dest);
+
+            if(!dest.exists()) {
+                System.out.println("파일 업로드 실패");
+            }else {
+                BoardFile boardFile = new BoardFile();
+                boardFile.setOrigin_file(boardThumbnail.getOriginalFilename());
+                boardFile.setSave_file(boardTmp.getId() + "-" + boardThumbnail.getOriginalFilename());
+                boardFile.setSave_folder(getShortFilePath(newPath));
+                boardFile.setBoard(boardTmp);
+
+                fileRepository.save(boardFile);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -72,5 +104,35 @@ public class BoardServiceImpl implements BoardService {
     public void deleteBoard(Long boardid) {
         Board board = boardRepository.findById(boardid).get();
         boardRepository.delete(board);
+    }
+
+    @Override
+    public PhotoRes getPhotos(Long clubid) {
+        PhotoRes res = new PhotoRes();
+        List<Photos> photos = new ArrayList<>();
+        SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        List<Board> boards = boardRepository.findByClubId(clubid);
+
+        for(Board board : boards) {
+            List<BoardFile> bfs = fileRepository.findByBoard(board);
+
+            for(BoardFile bf : bfs) {
+                Photos photo = new Photos();
+                photo.setPhoto_address(bf.getSave_folder());
+                photo.setTime(transFormat.format(board.getCreated()));
+                photo.setUser_name(board.getUser().getUsernickname());
+
+                photos.add(photo);
+            }
+        }
+
+        res.setTotal(photos.size());
+        res.setList(photos);
+        return res;
+    }
+
+    private String getShortFilePath(String path) {
+        int idx = path.indexOf("image");
+        return path.substring(idx, path.length());
     }
 }
