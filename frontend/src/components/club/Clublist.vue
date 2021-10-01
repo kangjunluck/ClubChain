@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div class="profilearea">
-          <img alt="Vue logo" src="@/assets/logo.png" class="logo" />
+          <img alt="Vue logo" src="@/assets/CC_logo_symbol.svg" class="logo" />
           <img alt="profile" src="@/assets/profile.png" class="profile"/>
         </div>
         <div class="searcharea">
@@ -22,7 +22,7 @@
         </div>
         <div class="clubarea" >
           <div v-for="club in clublist" v-bind:key="club" class="club">
-            <img src="@/assets/logo.png" alt="클럽썸네일" @click="enterClub(1)">
+            <img src="@/assets/CC_logo_symbol.svg" alt="클럽썸네일" @click="enterClub(1)">
             <!--club 안에 썸네일 주소를 통해 이미지 불러와야함-->
             <div @click="enterClub(1)">
             {{club.name}}

@@ -2,7 +2,7 @@
     <div class="main">
         <div class="club">
             <div class="clubimage">
-                <img alt="Vue logo" src="@/assets/logo.png"/>
+                <img alt="Vue logo" src="@/assets/CC_logo_symbol.svg"/>
             </div>
             <div class="clubname">
                 {{name}}
