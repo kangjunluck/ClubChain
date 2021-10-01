@@ -4,7 +4,7 @@
 		create club
 		</div>
 		<div>
-			<input v-on:change="fileSelect" class="form-control" type="file" name="profile_thumbnail" id="profile_thumbnail">
+			<input v-on:change="fileSelect" class="form-control" ref="profile_thumbnail" type="file" name="profile_thumbnail" id="profile_thumbnail">
 		</div>
 		<!-- <b-form-file
 		v-model="file1"
@@ -58,6 +58,7 @@ export default {
 			clubtype: '타입',
 			file1: null,
 			clubinfos: {
+				profile_thumbnail: "",
 				clubaccount: "",
 				introduce: "",
 				name: "",
@@ -71,15 +72,20 @@ export default {
 			console.log('업데이트')
 			this.clubtype= $("select[name=test] option:checked").text()
 		},
-		fileSelect(file) {
-			console.log(file);
-			this.clubinfos.profile_thumbnail = file
+		// fileSelect(file) {
+			// console.log(file);
+			// this.clubinfos.profile_thumbnail = file
+		// },
+		fileSelect() {
+			console.log(this.$refs);
+			this.image = this.$refs.image.files[0];
 		},
 		createSubmit() {
-			var photoFile = document.getElementById("profile_thumbnail");
+			// var photoFile = document.getElementById("profile_thumbnail");
 			const formData = new FormData;
-			formData.append('profile_thumbnail', photoFile.files[0])
-			console.log('포토파일', photoFile.files[0])
+			// formData.append('profile_thumbnail', photoFile.files[0])
+			// console.log('포토파일', photoFile.files[0])
+			formData.append('profile_thumbnail', this.clubinfos.profile_thumbnail)
 			formData.append('clubaccount', this.clubinfos.clubaccount)
 			formData.append('introduce', this.clubinfos.introduce)
 			formData.append('name', this.clubinfos.name)
