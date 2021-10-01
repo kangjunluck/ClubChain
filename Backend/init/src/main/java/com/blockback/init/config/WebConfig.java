@@ -11,7 +11,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry
                 .addMapping("/**")
-                .allowedOrigins("*") // 나중에 https로 바꾸기 http://j5b1021.p.ssafy.io","http://j5b1021.p.ssafy.io:8080", "http://localhost:8080", "http://localhost:8081
+                .allowedOrigins("http://j5b1021.p.ssafy.io","http://j5b1021.p.ssafy.io:8080", "http://localhost:8080", "http://localhost:8081") // 나중에 https로 바꾸기
                 .allowedHeaders("*")
                 .allowedMethods("*")
                 .allowCredentials(true);
