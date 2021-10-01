@@ -78,7 +78,7 @@ export default {
 		// },
 		fileSelect() {
 			console.log(this.$refs);
-			this.image = this.$refs.image.files[0];
+			this.clubinfos.profile_thumbnail = this.$refs.profile_thumbnail.files[0];
 		},
 		createSubmit() {
 			// var photoFile = document.getElementById("profile_thumbnail");
