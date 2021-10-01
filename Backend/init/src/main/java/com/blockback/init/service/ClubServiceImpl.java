@@ -34,7 +34,7 @@ public class ClubServiceImpl implements ClubService {
     @Autowired
     UserClubRepository userClubRepository;
 
-    String BASE_PATH = System.getProperty("user.dir") + "/init/src/main/resources/image/club/";
+    String BASE_PATH = System.getProperty("user.dir") + "/Backend/init/src/main/resources/image/club/";
 
     @Override
     public List<ClubListRes> getClubList() {
