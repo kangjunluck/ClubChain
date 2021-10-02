@@ -16,6 +16,7 @@ export default new Vuex.Store({
       useraccount: null,
       usernickname: null,
       userthumbnail: null,
+      userId: null,
     },
     selectedClub: 0,
   },
@@ -29,7 +30,7 @@ export default new Vuex.Store({
     LOGIN_INFO: function (state, credentials) {
       state.credentials = credentials;
     },
-    IS_LOGIN: function(state) {
+    IS_LOGIN: function (state) {
       state.isLogin = !state.isLogin;
     },
     SELECTED_CLUB: function (state, clubid) {
@@ -44,7 +45,7 @@ export default new Vuex.Store({
   // mutations에 정의된 메서드를 commit 메서드로 호출
   actions: {
     logininfo: function (context, credentials) {
-      context.commit ('LOGIN_INFO', credentials)
+      context.commit('LOGIN_INFO', credentials)
     },
     isLogin: function (context) {
       context.commit('IS_LOGIN')
