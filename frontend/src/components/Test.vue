@@ -25,8 +25,14 @@
     </div>
     <div>이미지</div>
     <img src="/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/sss_뜨개질.jpg" alt="">
+    <img src="http://j5b1021.p.ssafy.io/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/sss_뜨개질.jpg" alt="">
+    <img src="j5b1021.p.ssafy.io/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/sss_뜨개질.jpg" alt="">
+    <img src="/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
+    <img src="http://j5b1021.p.ssafy.io/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
+    <img src="j5b1021.p.ssafy.io/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
     <img src="/main/resources/image/user/sss_뜨개질.jpg" alt="">
     <img src="/image/user/sss_뜨개질.jpg" alt="">
+    <div>이미지 끝</div>
   </div>
 </template>
 
