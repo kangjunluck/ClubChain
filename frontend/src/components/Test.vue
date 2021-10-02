@@ -35,7 +35,7 @@
     <div>이미지 끝</div>
     <div>1</div>
     <img src="/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
-    <div>2</div>
+    <div>2</div>  
     <img src="/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
     <div>3</div>
     <img src="/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
