@@ -11,12 +11,14 @@
         v-model="credentials.userEmail"
         placeholder="이메일"
         class="formuseremail"
+        autocomplete="new-password"
       />
       <b-form-input
         type="password"
         v-model="password"
         placeholder="비밀번호"
         class="formPassword"
+        autocomplete="new-password"
       />
       <!-- :state="validationPassword" -->
       <div

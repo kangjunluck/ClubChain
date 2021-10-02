@@ -8,6 +8,7 @@
     <div>{{ this.$store.state.credentials.usernickname }}</div>
     <div>{{ this.$store.state.credentials.userthumbnail }}</div>
     <div>{{ this.$store.state.credentials.userId }}</div> -->
+    
     <div class="small-12 medium-2 large-2 columns">
       <div class="circle">
         <!-- User Profile Image -->
@@ -22,6 +23,10 @@
 
       <input class="file-upload" type="file" accept="image/*" />
     </div>
+    <div>이미지</div>
+    <img src="/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/sss_뜨개질.jpg" alt="">
+    <img src="/main/resources/image/user/sss_뜨개질.jpg" alt="">
+    <img src="/image/user/sss_뜨개질.jpg" alt="">
   </div>
 </template>
 
