@@ -16,7 +16,6 @@
         type="password"
         v-model="password"
         placeholder="비밀번호"
-        
         class="formPassword"
       />
       <!-- :state="validationPassword" -->
@@ -61,6 +60,7 @@ export default {
         useraccount: null,
         usernickname: null,
         userthumbnail: null,
+        userId: null,
       },
     };
   },
@@ -94,10 +94,11 @@ export default {
             this.credentials.useraccount = res.data.useraccount;
             this.credentials.usernickname = res.data.usernickname;
             this.credentials.userthumbnail = res.data.userthumbnail;
+            this.credentials.userId = res.data.userId;
             this.$store.dispatch("logininfo", this.credentials);
             this.$store.dispatch("isLogin");
-            console.log('로그인 데이터')
-            console.log(res.data)
+            console.log("로그인 데이터");
+            console.log(res.data);
             this.$router.push("club/finance");
           }
         })
@@ -120,7 +121,7 @@ export default {
 <style scoped>
 .logo {
   width: 55%;
-  margin: 0 auto ;
+  margin: 0 auto;
 }
 .mainLogin {
   height: 100%;
