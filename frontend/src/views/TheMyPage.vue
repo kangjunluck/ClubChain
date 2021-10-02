@@ -56,11 +56,19 @@ export default {
     },
     userDelete() {
       console.log('탈퇴하기')
+      var userId = this.$store.state.credentials.userId 
+      var formdata = new FormData()
+      formdata.append("userId", userId)
+      var url = "api/users/" + userId
       http
-        .post("api/users/{userID}")
+        .delete(url, formdata, { withCredentials: true })
         .then((res)=>{
           console.log('탈퇴 응답')
           console.log(res)
+          if (res.status === 204) {
+            alert('회원 탈퇴')
+            this.$router.push("/")
+          }
         })
         .catch((error)=>{
           console.log("에러!")

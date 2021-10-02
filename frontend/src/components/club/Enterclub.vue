@@ -2,7 +2,7 @@
     <div class="main">
         <div class="club">
             <div class="clubimage">
-                <img alt="Vue logo" src="@/assets/logo.png"/>
+                <img alt="Vue logo" src="@/assets/CC_logo_symbol.svg"/>
             </div>
             <div class="clubname">
                 {{name}}
@@ -38,15 +38,15 @@ export default {
         name : "",
         image : "",
     };
-  },
+},
   methods: {
-      setSession: function () {
-      document.cookie
-      const token = localStorage.getItem('jwt')
-      const config = {
+    setSession: function () {
+    document.cookie
+    const token = localStorage.getItem('jwt')
+    const config = {
         Authorization: `JWT ${token}`
-      }
-      return config
+    }
+    return config
     },
     enterClub() {
         //var url = "/api/";

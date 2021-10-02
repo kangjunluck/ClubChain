@@ -2,8 +2,7 @@
   <div class="mainLogin">
     <!-- 나중에 trim도 추가하기 -->
     <!-- isLogin -->
-    <!-- 로고와 서비스이름 파일 들어갈 예정 -->
-    <img alt="Vue logo" src="@/assets/logo.png" class="logo" />
+    <img alt="Vue logo" src="@/assets/CC.svg" class="logo" />
     <!-- 로그인 폼 만들기 -->
     <div class="loginForm">
       <b-form-input
@@ -12,14 +11,16 @@
         v-model="credentials.userEmail"
         placeholder="이메일"
         class="formuseremail"
+        autocomplete="new-password"
       />
       <b-form-input
         type="password"
         v-model="password"
         placeholder="비밀번호"
-        :state="validationPassword"
         class="formPassword"
+        autocomplete="new-password"
       />
+      <!-- :state="validationPassword" -->
       <div
         :state="validationPassword"
         v-if="validationPassword"
@@ -29,7 +30,7 @@
         :state="validationPassword"
         class="validationPassword"
       >
-        비밀번호 길이는 4 이상이어야 합니다.
+        <!-- 비밀번호 길이는 4 이상이어야 합니다. -->
       </b-form-invalid-feedback>
     </div>
     <!-- 클릭할 때 함수 실행 -->
@@ -61,6 +62,7 @@ export default {
         useraccount: null,
         usernickname: null,
         userthumbnail: null,
+        userId: null,
       },
     };
   },
@@ -94,10 +96,11 @@ export default {
             this.credentials.useraccount = res.data.useraccount;
             this.credentials.usernickname = res.data.usernickname;
             this.credentials.userthumbnail = res.data.userthumbnail;
+            this.credentials.userId = res.data.userId;
             this.$store.dispatch("logininfo", this.credentials);
             this.$store.dispatch("isLogin");
-            console.log('로그인 데이터')
-            console.log(res.data)
+            console.log("로그인 데이터");
+            console.log(res.data);
             this.$router.push("club/finance");
           }
         })
@@ -119,8 +122,8 @@ export default {
 
 <style scoped>
 .logo {
-  width: 100px;
-  margin: 0 auto 3rem;
+  width: 55%;
+  margin: 0 auto;
 }
 .mainLogin {
   height: 100%;
@@ -158,13 +161,13 @@ export default {
   background-color: #1ec0ff;
   margin: 0 auto 0;
   width: 70%;
-  height: 2.3rem;
   border-radius: 3rem;
   font-size: 1rem;
   font-weight: 500;
   color: #fff;
   border: 1px solid transparent;
-  height: 2.5rem;
+  min-height: 2.5rem;
+  -webkit-appearance: none;
 }
 .links {
   margin: 1rem 1rem 3rem 0;
