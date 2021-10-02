@@ -6,7 +6,7 @@
       <b-row>
         <b-col offset="1">
           <div class="circle">
-            <img :src="selecturl" alt="" class="profile-pic" />
+            <img :src="selecturl" alt="" class="profile-pic"  ref="image"/>
           </div>
         </b-col>
         <b-col cols="4">
@@ -27,12 +27,31 @@
       v-model="usernickname"
       id="usernickname"
       class="usernickname"
+      onclick="this.value=''; return true"
     ></b-form-input>
     <b-form-input
       placeholder="이메일"
       v-model="useremail"
       id="useremail"
       class="useremail"
+      onclick="this.value=''; return true"
+    ></b-form-input>
+    <b-form-input
+      type="password"
+      placeholder="비밀번호"
+      v-model="password"
+      id="password"
+      class="password"
+      autocomplete="new-password" 
+    ></b-form-input>
+    <b-form-input
+      type="password"
+      placeholder="비밀번호 확인"
+      v-model="passwordconfirm"
+      id="passwordconfirm"
+      class="passwordconfirm"
+      autocomplete="new-password" 
+      
     ></b-form-input>
     <button @click="myInfoUpdate">수정하기</button>
   </div>
@@ -46,11 +65,14 @@ export default {
   name: "MyInfoUpdate",
   data() {
     return {
-      // usernickname: this.$store.state.credentials.usernickname,
-      // useremail: this.$store.state.credentials.useremail,
-      usernickname: "",
-      useremail: "",
+      startuseremail: this.$store.state.credentials.userEmail,
+      usernickname: this.$store.state.credentials.usernickname,
+      useremail: this.$store.state.credentials.userEmail,
+      // usernickname: "",
+      // useremail: "",
       image: "",
+      password:"",
+      passwordconfirm:"",
       selecturl: require("@/assets/profile.png"),
     };
   },
@@ -60,31 +82,31 @@ export default {
   methods: {
     myInfoUpdate() {
       console.log("업데이트");
-      console.log(this.usernickname);
-      console.log(this.useremail);
-      var userId = this.$store.state.credentials.userId;
-      var putUrl = "api/users/" + userId;
-      console.log(putUrl);
-      const formData = new FormData();
-      formData.append("file", this.image);
-      formData.append("password", this.password);
-      formData.append("userEmail", this.useremail);
-      formData.append("usernickname", this.usernickname);
-      // formData.append('userprivatekey', this.useremail);
-      formData.append("userId", userId);
-      formData.useraccount(
-        "useraccount",
-        this.$store.state.credentials.useraccount
-      );
 
-      http
-        .put(putUrl, formData)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (this.password === this.passwordconfirm) {
+        var userId = this.$store.state.credentials.userId;
+        var putUrl = "api/users/" + userId;
+        const formData = new FormData();
+        formData.append("file", this.image);
+        formData.append("password", this.password);
+        formData.append("userEmail", this.useremail);
+        formData.append("usernickname", this.usernickname);
+        formData.append("userId", userId);
+        formData.append(
+          "useraccount",
+          this.$store.state.credentials.useraccount
+        );
+        http
+          .put(putUrl, formData,  { withCredentials: true })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        alert("비밀번호를 확인해주세요.")
+      }
     },
     fileSelect() {
       this.image = this.$refs.image.files[0];
