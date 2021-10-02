@@ -33,6 +33,30 @@
     <img src="/main/resources/image/user/sss_뜨개질.jpg" alt="">
     <img src="/image/user/sss_뜨개질.jpg" alt="">
     <div>이미지 끝</div>
+    <div>1</div>
+    <img src="/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
+    <div>2</div>
+    <img src="/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
+    <div>3</div>
+    <img src="/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
+    <div>4</div>
+    <img src="/workspace/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
+    <div>5</div>
+    <img src="/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
+    <div>6</div>
+    <img src="/Backend/init/src/main/resources/image/user/default.png" alt="">
+    <div>7</div>
+    <img src="/init/src/main/resources/image/user/default.png" alt="">
+    <div>8</div>
+    <img src="/src/main/resources/image/user/default.png" alt="">
+    <div>9</div>
+    <img src="/main/resources/image/user/default.png" alt="">
+    <div>10</div>
+    <img src="/resources/image/user/default.png" alt="">
+    <div>11</div>
+    <img src="/image/user/default.png" alt="">
+    <div>12</div>
+    <img src="/user/default.png" alt="">
   </div>
 </template>
 
