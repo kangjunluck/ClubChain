@@ -13,7 +13,7 @@
 				<label class="photo-button" for="photo">업로드</label>
 				<input v-on:change="fileSelect()" ref="image" type="file" name="photo" id="photo" class="col-6" style="display:none;" /> -->
 				<!-- </div> -->
-				<input v-on:change="fileSelect()" class="button-color form-control" ref="image" type="file" name="photo" id="photo">
+				<input v-on:change="fileSelect()" class="form-control" ref="image" type="file" name="photo" id="photo">
 			</div>
 			<!-- 동호회명 입력 -->
 			<b-form-input
