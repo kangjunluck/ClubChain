@@ -45,7 +45,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(UserRegisterPostReq userRegisterInfo, MultipartFile thumbnail) {
         String BASE_PATH = System.getProperty("user.dir") + "/Backend/init/src/main/resources/image/user/";
-        System.out.println(BASE_PATH + "??");
 
         User user = new User();
         try {
@@ -55,16 +54,15 @@ public class UserServiceImpl implements UserService {
             if(thumbnail == null) { // 프로필 사진 입력 안함
                 //프로필 이미지 저장 (기본 이미지)
                 String filePath = BASE_PATH + "default.png";
-                user.setUserthumbnail(filePath);
+                user.setUserthumbnail(getShortFilePath(filePath));
             } else { // 프로필 사진 입력함
                 String filePath = BASE_PATH + userRegisterInfo.getUserEmail() + "_" + thumbnail.getOriginalFilename();
-                System.out.println(filePath);
                 File dest = new File(filePath);
                 thumbnail.transferTo(dest);
                 if (!dest.exists()) { // 파일 존재 x, 이 부분이 현재 null 값이 들어갈 수 있음, 추후 다시 해야됨
                     System.out.println("파일 업로드 실패");
                 } else {
-                    user.setUserthumbnail(filePath);
+                    user.setUserthumbnail(getShortFilePath(filePath));
                 }
             }
             user.setUserEmail(userRegisterInfo.getUserEmail());
@@ -88,23 +86,19 @@ public class UserServiceImpl implements UserService {
     public User putUser(UserPutReq putinfo, Long userId, MultipartFile thumbnail) {
         User user = userRepository.findById(userId).get();
         String BASE_PATH = System.getProperty("user.dir") + "/Backend/init/src/main/resources/image/user/";
-        String pic_place = user.getUserthumbnail();
+        String pic_place = System.getProperty("user.dir") + "/Backend/init/src/main/resources/" + user.getUserthumbnail();
         try {
-            /*
-             * 프로필 이미지 저장 순번-파일명으로 저장
-             */
             if(thumbnail == null) { // 프로필 사진 입력 안함
                 //프로필 이미지 저장 (기본 이미지)
                 if (!pic_place.substring(pic_place.length()-11, pic_place.length()).equals("default.png")){
-                    // 없을 수도 있잖아 오류가 안난다.
-                    File before = new File(user.getUserthumbnail());
+                    File before = new File(pic_place);
                     before.delete();
                 }
                 String filePath = BASE_PATH + "default.png";
-                user.setUserthumbnail(filePath);
+                user.setUserthumbnail(getShortFilePath(filePath));
             } else { // 프로필 사진 입력함
                 if (!pic_place.substring(pic_place.length()-11, pic_place.length()).equals("default.png")){
-                    File before = new File(user.getUserthumbnail());
+                    File before = new File(pic_place);
                     before.delete();
                 }
                 String filePath = BASE_PATH + putinfo.getUserEmail() + "-" + thumbnail.getOriginalFilename();
@@ -113,7 +107,7 @@ public class UserServiceImpl implements UserService {
                 if (!dest.exists()) { // 파일 존재 x, 이 부분이 현재 null 값이 들어갈 수 있음, 추후 다시 해야됨
                     System.out.println("파일 업로드 실패");
                 } else {
-                    user.setUserthumbnail(filePath);
+                    user.setUserthumbnail(getShortFilePath(filePath));
                 }
             }
             user.setUserEmail(putinfo.getUserEmail());
@@ -133,6 +127,11 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long userId) {
         User user = userRepository.findById(userId).get();
         userRepository.delete(user);
+    }
+
+    private String getShortFilePath(String path) {
+        int idx = path.indexOf("image");
+        return path.substring(idx, path.length());
     }
 
 }
