@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(UserRegisterPostReq userRegisterInfo, MultipartFile thumbnail) {
-        String BASE_PATH = System.getProperty("user.dir") + "/Backend/init/src/main/resources/image/user/";
+        String BASE_PATH = System.getProperty("user.dir") + "/init/src/main/resources/image/user/";
 
         User user = new User();
         try {
@@ -85,8 +85,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User putUser(UserPutReq putinfo, Long userId, MultipartFile thumbnail) {
         User user = userRepository.findById(userId).get();
-        String BASE_PATH = System.getProperty("user.dir") + "/Backend/init/src/main/resources/image/user/";
-        String pic_place = System.getProperty("user.dir") + "/Backend/init/src/main/resources/" + user.getUserthumbnail();
+        String BASE_PATH = System.getProperty("user.dir") + "/init/src/main/resources/image/user/";
+        String pic_place = System.getProperty("user.dir") + "/init/src/main/resources/" + user.getUserthumbnail();
         try {
             if(thumbnail == null) { // 프로필 사진 입력 안함
                 //프로필 이미지 저장 (기본 이미지)
@@ -110,10 +110,12 @@ public class UserServiceImpl implements UserService {
                     user.setUserthumbnail(getShortFilePath(filePath));
                 }
             }
-            user.setUserEmail(putinfo.getUserEmail());
-            user.setPassword(passwordEncoder.encode(putinfo.getPassword()));
+            user.setUserEmail(user.getUserEmail());
+            if (putinfo.getPassword() != null){
+                user.setPassword(passwordEncoder.encode(putinfo.getPassword()));
+            }
             user.setUsernickname(putinfo.getUsernickname());
-            user.setUseraccount(putinfo.getUseraccount());
+            user.setUseraccount(user.getUseraccount());
             userRepository.save(user);
             return user;
 

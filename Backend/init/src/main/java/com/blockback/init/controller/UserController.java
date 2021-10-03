@@ -177,4 +177,16 @@ public class UserController {
 
         return ResponseEntity.status(400).body(MessageResponse.of(400, FAIL));
     }
+
+    @GetMapping("/islogin")
+    @ApiOperation(value = "로그인여부확인", notes = "session이 있는지 없는지 확인")
+    public ResponseEntity<UserResponse> isLogin(@ApiIgnore HttpSession session) throws Exception {
+        String owner_email = (String) session.getAttribute("LoginUser");
+        User user = userService.getUserByUserEmail(owner_email);
+        System.out.println(owner_email);
+        if(user != null) {
+            return ResponseEntity.status(200).body(UserResponse.of(200, "Success", user));
+        }
+        return ResponseEntity.status(400).body(UserResponse.of(200, "Success", user));
+    }
 }

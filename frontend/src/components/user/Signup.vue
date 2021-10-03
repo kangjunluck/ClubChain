@@ -136,9 +136,6 @@ export default {
     },
     fileSelect() {
       this.image = this.$refs.image.files[0];
-      if (this.image == undefined){
-        this.selecturl = require("../../assets/profile.png");
-      }
       this.selecturl = URL.createObjectURL(this.image);
     },
     sendEth()
