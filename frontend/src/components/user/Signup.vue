@@ -99,7 +99,7 @@ export default {
           }
         )
         // 유저에게 privateKey 전달
-        this.saveFile(privateKey)
+        this.saveFile(privateKey.substring(2))
         console.log(wallet);
 
       const formData = new FormData;
