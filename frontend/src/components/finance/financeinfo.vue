@@ -1,13 +1,15 @@
 <template>
   <div class="finanaceInfo">
-    <div class="clubname">동아리 이름</div>
+    <div style="background-color: #0080FF; height:30px; color:#ffffff; font-size:1rem;">회비관리</div>
+    <div style="height:40px;"></div>
+    <div class="clubname" style="font-size: 1rem" >동아리 이름</div>
     <b-container class="infomation">
       <b-row>
         <b-col cols="1" align-self="center">◀</b-col>
         <b-col cols="10" class="ethCard">
           <div>계좌번호 : {{ myAccountNumber}} </div>
           <div></div>
-          <div style="font-size: 3rem">잔고: {{balance}} Token</div>
+          <div style="font-size: 3rem">잔고: {{balance}} <img src="@/assets/gold.png" width="40" height="40" /> </div>
           
           <div>
             <span class="button1" @click="transactionHistoryButton">거래내역</span>
