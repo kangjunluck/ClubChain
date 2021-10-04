@@ -1,11 +1,23 @@
 <template>
   <div class="container">
+    <b-row>
+        <b-col>내 계좌<input type="checkbox" id="checkbox1" v-model="my" @click="check1"></b-col>
+        <b-col>동호회 계좌<input type="checkbox" id="checkbox2" v-model="club" @click="check2"></b-col>
+    </b-row>
+    <div style="height:20px;"></div>
+    <div v-if="my==true">
     <div v-for="(item,index) in hst" v-bind:key="index">
       <b-row>
         <b-col style="font-size:1rem;">{{item.message}}</b-col>
         <b-col style="font-size:1rem;" v-if="item.fromAddr == myAddr">- {{item.value}} CC</b-col>
-        <b-col style="font-size:1rem;" v-else>+ {{item.value}}</b-col>
+        <b-col style="font-size:1rem;" v-else>+ {{item.value}} CC</b-col>
       </b-row>
+      <b-row>
+        <b-col style="font-size:0.8rem; color:#999999">{{item.date.substring(0,24)}}</b-col>
+        <b-col style="font-size:0.8rem; color:#999999">{{balances[index]}} CC</b-col>
+      </b-row>
+      <hr style=" color:#333333; margin: 0.3em;">
+    </div>
     </div>
   </div>
   
@@ -15,22 +27,55 @@
 import http from "@/util/http-common";
 export default {
   name: "TransactionHistory",
-  props: ["hst","cst"],
+  props: ["hst","cst","balance"],
   data() {
     return {
-      balance:"",
+      balances:[],
       myAddr:"",
+      my:true,
+      club:false,
     };
   },
   created(){
     let email = encodeURI(this.$store.state.credentials.userEmail)
     const url = "api/users/" + email;
-    console.log(url)
     http
       .get(url)
       .then(res=>{
         this.myAddr = res.data.useraccount;
       })
+  },
+  mounted(){
+    this.balances.push(this.balance)
+
+    for (let i = 0; i < this.hst.length; i++){
+      if(i==0)
+      {
+        if(this.hst[i].fromAddr == this.myAddr)
+        {
+          this.balances.push(this.hst[i].value*1 + this.balance)
+        }
+        else
+          this.balances.push(this.balance - this.hst[i].value*1)
+      }
+      else
+      {
+        if(this.hst[i].fromAddr == this.myAddr)
+        {
+          this.balances.push(this.balances[i] - this.hst[i].value*1)
+        }
+        else
+          this.balances.push(this.balances[i] + this.hst[i].value*1)
+      }
+    }
+  },
+  methods:{
+    check1(){
+      this.club = false;
+    },
+    check2(){
+      this.my = false;
+    }
   }
 }
 </script>

@@ -460,53 +460,59 @@ export default {
     },
     async gethTest()
     {
-      let today = new Date();
-      today = today.toString();
-      console.log(today);
-      console.log(typeof(today));
+    	let today = new Date();
+    	var year = today.getFullYear();
+		var month = ('0' + (today.getMonth() + 1)).slice(-2);
+		var day = ('0' + today.getDate()).slice(-2);
+		var hours = ('0' + today.getHours()).slice(-2); 
+		var minutes = ('0' + today.getMinutes()).slice(-2);
+		var dateString = year + '/' + month  + '/' + day + ' ' + hours+":"+minutes;
+      console.log(dateString);
 
 
-      var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
-      var contract = new web3.eth.Contract(this.abi,this.contractAddr,{from: '0x97415060E1Ff0d2c51BF6d92B959be7D6316a983'});
+    //   var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
+    //   var contract = new web3.eth.Contract(this.abi,this.contractAddr,{from: '0x97415060E1Ff0d2c51BF6d92B959be7D6316a983'});
 
-      let from = '0x97415060E1Ff0d2c51BF6d92B959be7D6316a983';
-      console.log("from ",from)
-      let to = '0x4FDbF82D9Bd5E85dcB6adF6Bee000B81D7738F67';
-      console.log("to ",to)
-      let val = '123'*1;
-      console.log('val ', val);
-      console.log("!!!!!",typeof(val));
-      let msg = 'kd'
-      console.log('msg ',msg);
+    //   let from = '0x97415060E1Ff0d2c51BF6d92B959be7D6316a983';
+    //   console.log("from ",from)
+    //   let to = '0x4FDbF82D9Bd5E85dcB6adF6Bee000B81D7738F67';
+    //   console.log("to ",to)
+    //   let val = '123'*1;
+    //   console.log('val ', val);
+    //   console.log("!!!!!",typeof(val));
+    //   let msg = 'kd'
+    //   console.log('msg ',msg);
 
       //거래내역 저장하기
 
-      const Tx = require('ethereumjs-tx').Transaction;
-      let privKey_= "27ddaa90db29f7740736e57703c437595a6f62707aa53d90773cb3fb4c91282d"; // 보내는사람의 개인키
-      let privKey= new Buffer.from(privKey_, "hex");
-      web3.eth.getTransactionCount("0x97415060E1Ff0d2c51BF6d92B959be7D6316a983",(err,txCount)=>{ //보내는 주소
-        const txObject = {
-          'from':'0x97415060E1Ff0d2c51BF6d92B959be7D6316a983', //보내는 주소
-          'nonce': web3.utils.toHex(txCount),
-          'gasLimit': web3.utils.toHex(1000000),
-          'gasPrice': web3.utils.toHex(web3.utils.toWei('10','gwei')),
-          'to': this.contractAddr, //계약 주소
-          'value': '0x0',
-          'data': contract.methods.saveRecode(from,to,
-          val,today,msg).encodeABI() //받는 주소, 토큰 갯수
-        }
-        let transaction = new Tx(txObject,{'chain':'ropsten'});
-        transaction.sign(privKey);
-        web3.eth.sendSignedTransaction('0x'+transaction.serialize().toString('hex'))
-        .on('transactionHash',console.log)
-      });
+    //   const Tx = require('ethereumjs-tx').Transaction;
+    //   let privKey_= "27ddaa90db29f7740736e57703c437595a6f62707aa53d90773cb3fb4c91282d"; // 보내는사람의 개인키
+    //   let privKey= new Buffer.from(privKey_, "hex");
+    //   web3.eth.getTransactionCount("0x97415060E1Ff0d2c51BF6d92B959be7D6316a983",(err,txCount)=>{ //보내는 주소
+    //     const txObject = {
+    //       'from':'0x97415060E1Ff0d2c51BF6d92B959be7D6316a983', //보내는 주소
+    //       'nonce': web3.utils.toHex(txCount),
+    //       'gasLimit': web3.utils.toHex(1000000),
+    //       'gasPrice': web3.utils.toHex(web3.utils.toWei('10','gwei')),
+    //       'to': this.contractAddr, //계약 주소
+    //       'value': '0x0',
+    //       'data': contract.methods.saveRecode(from,to,
+    //       val,today,msg).encodeABI() //받는 주소, 토큰 갯수
+    //     }
+    //     let transaction = new Tx(txObject,{'chain':'ropsten'});
+    //     transaction.sign(privKey);
+    //     web3.eth.sendSignedTransaction('0x'+transaction.serialize().toString('hex'))
+    //     .on('transactionHash',console.log)
+    //   });
 
 
       //거래내역 가져오기
-      // contract.methods.loadRecode().call()
-      // .then(data =>{
-      //   console.log(data);
-      // })
+    //   contract.methods.loadRecode().call()
+    //   .then(data =>{
+    //     console.log(data);
+	// 	let date = data[10].date
+	// 	console.log(date.substring(0,24));
+    //   })
 
 
 
