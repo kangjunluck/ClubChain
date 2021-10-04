@@ -44,13 +44,13 @@ public class ClubController {
             return ResponseEntity.status(200).body(res);
     }
 
-//    @GetMapping("/{clubid}")
-//    @ApiOperation(value = "동호회 단일 조회", notes = "동호회 하나를 조회한다.")
-//    public ResponseEntity<ClubRes> getClub(@RequestParam Long clubid) {
-//        ClubRes club = clubService.getClubByClubId(clubid);
-//
-//        return ResponseEntity.status(200).body(club);
-//    }
+    @GetMapping("/{clubid}")
+    @ApiOperation(value = "동호회 단일 조회", notes = "동호회 하나를 조회한다.")
+    public ResponseEntity<ClubRes> getClub(@RequestParam Long clubid) {
+        ClubRes club = clubService.getClubByClubId(clubid);
+
+        return ResponseEntity.status(200).body(club);
+    }
 
     @PostMapping("/")
     @ApiOperation(value = "동호회 생성하기", notes = "동호회를 만든다.")

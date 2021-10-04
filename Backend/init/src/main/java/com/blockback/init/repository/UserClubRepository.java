@@ -14,4 +14,5 @@ public interface UserClubRepository extends JpaRepository<User_Club_Join, Long> 
 
     Optional<User_Club_Join> findByUserAndClub(User user, Club club);
     List<User_Club_Join> findByUser(User user);
+    List<User_Club_Join> findByClubId(Long clubid);
 }
