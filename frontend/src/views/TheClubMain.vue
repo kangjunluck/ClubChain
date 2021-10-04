@@ -5,7 +5,7 @@
       </div>
       <img src="@/assets/profile.png" alt="" class="bgphoto">
       <div class="clubmember">
-        공개 그룹 - 5명
+        공개 그룹 - {{5}}명
       </div>
       <div class="notice">
         중요 공지
@@ -35,6 +35,7 @@ export default {
     return {
       schedule : "",
       postlist : "",
+      join_num : "",
     };
   },
   methods: {
@@ -71,6 +72,7 @@ export default {
         console.log(error);
         alert("게시글 가져오기 실패");
       })
+
   },
 };
 </script>
