@@ -42,6 +42,7 @@ import Web3 from "web3";
 import http from "@/util/http-common";
 export default {
   name: "Transaction",
+    props: ["clubhis","clubAddr"],
   data() {
     return {  
       abi: [
@@ -481,6 +482,11 @@ export default {
         const res2 = await http.get("api/users/"+this.toEmail);
         this.toAddr = res2.data.useraccount;
       }
+      else
+      {
+        this.toAddr = this.clubAddr;
+      }
+      
       this.myAddr = res.data.useraccount;
       
       this.saveHistory();

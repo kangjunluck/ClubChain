@@ -6,18 +6,32 @@
     </b-row>
     <div style="height:20px;"></div>
     <div v-if="my==true">
-    <div v-for="(item,index) in hst" v-bind:key="index">
-      <b-row>
-        <b-col style="font-size:1rem;">{{item.message}}</b-col>
-        <b-col style="font-size:1rem;" v-if="item.fromAddr == myAddr">- {{item.value}} CC</b-col>
-        <b-col style="font-size:1rem;" v-else>+ {{item.value}} CC</b-col>
-      </b-row>
-      <b-row>
-        <b-col style="font-size:0.8rem; color:#999999">{{item.date.substring(0,24)}}</b-col>
-        <b-col style="font-size:0.8rem; color:#999999">{{balances[index]}} CC</b-col>
-      </b-row>
-      <hr style=" color:#333333; margin: 0.3em;">
+      <div v-for="(item,index) in hst" v-bind:key="index">
+        <b-row>
+          <b-col style="font-size:1rem;">{{item.message}}</b-col>
+          <b-col style="font-size:1rem;" v-if="item.fromAddr == myAddr">- {{item.value}} CC</b-col>
+          <b-col style="font-size:1rem;" v-else>+ {{item.value}} CC</b-col>
+        </b-row>
+        <b-row>
+          <b-col style="font-size:0.8rem; color:#999999">{{item.date.substring(0,24)}}</b-col>
+          <b-col style="font-size:0.8rem; color:#999999">{{balances[index]}} CC</b-col>
+        </b-row>
+        <hr style=" color:#333333; margin: 0.3em;">
+      </div>
     </div>
+    <div v-else-if="club==true">
+            <div v-for="(item,index) in cst" v-bind:key="index">
+        <b-row>
+          <b-col style="font-size:1rem;">{{item.message}}</b-col>
+          <b-col style="font-size:1rem;" v-if="item.fromAddr == clubAddr">- {{item.value}} CC</b-col>
+          <b-col style="font-size:1rem;" v-else>+ {{item.value}} CC</b-col>
+        </b-row>
+        <b-row>
+          <b-col style="font-size:0.8rem; color:#999999">{{item.date.substring(0,24)}}</b-col>
+          <b-col style="font-size:0.8rem; color:#999999">{{balances[index]}} CC</b-col>
+        </b-row>
+        <hr style=" color:#333333; margin: 0.3em;">
+      </div>
     </div>
   </div>
   
@@ -27,7 +41,7 @@
 import http from "@/util/http-common";
 export default {
   name: "TransactionHistory",
-  props: ["hst","cst","balance"],
+  props: ["hst","cst","balance","clubAddr"],
   data() {
     return {
       balances:[],
