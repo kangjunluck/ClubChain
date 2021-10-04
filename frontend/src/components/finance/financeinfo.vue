@@ -15,15 +15,16 @@
             <span class="button1" @click="transactionHistoryButton">거래내역</span>
             <span class="button1" @click="transferButton">이체</span>
 
-            <span class="button2" @click="encharge">충전</span>
+            <span class="button2" @click="tokenEnchargeButton">충전</span>
           </div>
         </b-col> 
         <b-col cols="1" align-self="center">▶</b-col>
       </b-row>
      <div style="height:20px;"></div>
     <Transaction v-if= "componenetStateValue==='transfer'"/>
-    <TransactionHistory v-else-if= "componenetStateValue==='transactionHistory'" v-bind:hst="myhistory" v-bind:cst="clubhistory"
-    v-bind:balance="balance" />
+    <TransactionHistory v-else-if= "componenetStateValue==='transactionHistory'" v-bind:hst="myhistory" v-bind:cst="clubhistory" />
+    <Encharge v-else-if="componenetStateValue==='tokenEncharge'" v-bind:abi="contractAbi" v-bind:contractAddr="contractAddr" 
+    v-bind:myAddr="myAccountNumber" />
     <div v-else v-for="(item,index) in myhistory" v-bind:key="index">
       {{item.message}}
     </div>
@@ -41,6 +42,7 @@ import http from "@/util/http-common";
 import Web3 from "web3";
 import Transaction from './transaction.vue';
 import TransactionHistory from './transactionHistory.vue';
+import Encharge from './encharge.vue';
 export default {
   name: "FinanceInfo",
   data: function () {
@@ -58,7 +60,8 @@ export default {
   },
   components: {
     Transaction,
-    TransactionHistory
+    TransactionHistory,
+    Encharge,
   },
   props: {
     componenetState: {
@@ -530,31 +533,19 @@ export default {
       {
         this.componenetStateValue = "";
       }
-      
     },
-    encharge()
+    tokenEnchargeButton()
     {
-      const Tx = require('ethereumjs-tx').Transaction;
-      var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
-      var contract = new web3.eth.Contract(this.contractAbi,this.contractAddr,{from: '0x97415060E1Ff0d2c51BF6d92B959be7D6316a983'}); //보내는사람 주소
-      let privKey_= "27ddaa90db29f7740736e57703c437595a6f62707aa53d90773cb3fb4c91282d"; // 보내는사람의 개인키
-      let privKey= new Buffer.from(privKey_, "hex");
-      
-      web3.eth.getTransactionCount('0x97415060E1Ff0d2c51BF6d92B959be7D6316a983',(err,txCount)=>{ //보내는 주소
-        const txObject = {
-          'from':'0x97415060E1Ff0d2c51BF6d92B959be7D6316a983', //보내는 주소
-          'nonce': web3.utils.toHex(txCount),
-          'gasLimit': web3.utils.toHex(1000000),
-          'gasPrice': web3.utils.toHex(web3.utils.toWei('10','gwei')),
-          'to': this.contractAddr, //계약 주소
-          'value': '0x0',
-          'data': contract.methods.transfer(this.myAccountNumber,100).encodeABI() //받는 주소, 토큰 갯수
-        }
-        let transaction = new Tx(txObject,{'chain':'ropsten'});
-        transaction.sign(privKey);
-        web3.eth.sendSignedTransaction('0x'+transaction.serialize().toString('hex'))
-        .on('transactionHash',console.log)
-      })
+      if(this.componenetStateValue != "tokenEncharge")
+      {
+        this.componenetStateValue = "tokenEncharge";
+        console.log(this.componenetStateValue);
+        // this.$emit("componenetState", this.componenetStateValue);
+      }
+      else
+      {
+        this.componenetStateValue = "";
+      }
     }
   }
 }

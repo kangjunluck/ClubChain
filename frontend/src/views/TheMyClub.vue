@@ -21,7 +21,7 @@
           <img alt="plusbtn" src="@/assets/plusbtn.png" class="plusbtn" />
         </div>
         <div class="clubarea">
-          <div v-for="club in clublist" v-bind:key="club" class="club" @click="enterClub(club.id)">
+          <div v-for="club in clublist" v-bind:key="club" class="club" @click="enterClub(club.clubid)">
             <img src="@/assets/CC_logo_symbol.svg" alt="클럽썸네일">
             <!--club 안에 썸네일 주소를 통해 이미지 불러와야함-->
             <div>
