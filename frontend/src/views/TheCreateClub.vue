@@ -140,8 +140,8 @@ export default {
 <style>
 .cancel {
 	position: relative;
-	left: 10px;
-	top: 10px;
+	left: 15px;
+	top: 15px;
 }
 
 .clubCreate {
@@ -170,7 +170,7 @@ export default {
 }
 
 .signup_header {
-    width: 60%;
+    width: 100%;
     font-size: 2em;
     text-align: left;
 }
@@ -178,5 +178,6 @@ export default {
 .button {
 	border: 0;
 	outline: 0;
+	height: 6%;
 }
 </style>

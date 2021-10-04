@@ -115,10 +115,16 @@ export default {
 </script>
 
 <style scoped>
+.cancel {
+	position: relative;
+	left: 15px;
+	top: 15px;
+}
+
 .cancel-btn-style {
     background-color: #999999;
     color: #ffffff;
-    width: 120px;
+    width: 100%;
     border: 0;
     outline: 0;
 }
@@ -126,7 +132,7 @@ export default {
 .enter-btn-style {
     background-color:#1ec0ff;
     color: #ffffff;
-    width: 120px;
+    width: 100%;
     border: 0;
     outline: 0;
 }
