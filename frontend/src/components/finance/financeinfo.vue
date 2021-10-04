@@ -2,12 +2,12 @@
   <div class="finanaceInfo">
     <div style="background-color: #0080FF; height:30px; color:#ffffff; font-size:1rem;">회비관리</div>
     <div style="height:40px;"></div>
-    <div class="clubname" style="font-size: 1rem" >동아리 이름</div>
-    <b-container class="infomation">
+    <div class="clubname" style="font-size: 1rem" >{{clubname}}</div>
+    <b-container style="" class="infomation">
       <b-row>
         <b-col cols="1" align-self="center">◀</b-col>
         <b-col cols="10" class="ethCard">
-          <div>계좌번호 : {{ myAccountNumber}} </div>
+          <div style="font-size: 0.8rem;">{{ myAccountNumber}} </div>
           <div></div>
           <div style="font-size: 3rem">잔고: {{balance}} <img src="@/assets/gold.png" width="40" height="40" /> </div>
           
@@ -20,6 +20,12 @@
         </b-col> 
         <b-col cols="1" align-self="center">▶</b-col>
       </b-row>
+     <div style="height:40px;"></div>
+    <Transaction v-if= "componenetStateValue==='transfer'"/>
+    <TransactionHistory v-else-if= "componenetStateValue==='transactionHistory'" v-bind:hst="myhistory" v-bind:cst="clubhistory" />
+    <div v-else v-for="(item,index) in myhistory" v-bind:key="index">
+      {{item.message}}
+    </div>
     </b-container>
   </div>
 
@@ -32,6 +38,8 @@
 <script>
 import http from "@/util/http-common";
 import Web3 from "web3";
+import Transaction from './transaction.vue';
+import TransactionHistory from './transactionHistory.vue';
 export default {
   name: "FinanceInfo",
   data: function () {
@@ -41,7 +49,15 @@ export default {
       contractAbi:"",
       contractAddr:"",
       balance:"",
+      history:[],
+      myhistory:[],
+      clubhistory:[],
+      clubname:"",
     }
+  },
+  components: {
+    Transaction,
+    TransactionHistory
   },
   props: {
     componenetState: {
@@ -472,6 +488,20 @@ export default {
           this.contractAddr = contractAddr;
           this.balance = data;
         })
+
+      contract.methods.loadRecode().call()
+      .then(data =>{
+        console.log(data)
+        this.history = data;
+        for(var i in data)
+        {
+          if(data[i].fromAddr == this.myAccountNumber || data[i].toAddr == this.myAccountNumber)
+            this.myhistory.push(data[i]);
+        }
+
+        console.log(this.myhistory);
+      })
+
       })
       .catch((error) => {
         console.log(error)
@@ -480,14 +510,29 @@ export default {
   },
   methods: {
     transactionHistoryButton() {
-      this.componenetStateValue = "transactionHistory"
-      console.log(this.componenetStateValue)
-      this.$emit("componenetState", this.componenetStateValue);
+
+      if(this.componenetStateValue !="transactionHistory")
+      {
+        this.componenetStateValue = "transactionHistory"
+        console.log(this.componenetStateValue)
+        // this.$emit("componenetState", this.componenetStateValue);
+      }
+      else{
+        this.componenetStateValue = "";
+      }
     },
     transferButton() {
-      this.componenetStateValue = "transfer";
-      console.log(this.componenetStateValue);
-      this.$emit("componenetState", this.componenetStateValue);
+      if(this.componenetStateValue != "transfer")
+      {
+        this.componenetStateValue = "transfer";
+        console.log(this.componenetStateValue);
+        // this.$emit("componenetState", this.componenetStateValue);
+      }
+      else
+      {
+        this.componenetStateValue = "";
+      }
+      
     },
     encharge()
     {

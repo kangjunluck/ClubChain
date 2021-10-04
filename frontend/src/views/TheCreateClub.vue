@@ -102,6 +102,8 @@ export default {
       // this.selecturl = URL.createObjectURL(this.clubinfos.club_thumbnail);
 		},
 		createSubmit() {
+
+			
 			// var photoFile = document.getElementById("profile_thumbnail");
 			const formData = new FormData;
 			// formData.append('profile_thumbnail', photoFile.files[0])
