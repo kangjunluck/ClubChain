@@ -21,8 +21,8 @@
         <b-col cols="1" align-self="center">▶</b-col>
       </b-row>
      <div style="height:20px;"></div>
-    <Transaction v-if= "componenetStateValue==='transfer'"/>
-    <TransactionHistory v-else-if= "componenetStateValue==='transactionHistory'" v-bind:hst="myhistory" v-bind:cst="clubhistory" />
+    <Transaction v-if= "componenetStateValue==='transfer'" v-bind:clubAddr="clubAddr" />
+    <TransactionHistory v-else-if= "componenetStateValue==='transactionHistory'" v-bind:clubAddr="clubAddr"  v-bind:hst="myhistory" v-bind:cst="clubhistory" />
     <Encharge v-else-if="componenetStateValue==='tokenEncharge'" v-bind:abi="contractAbi" v-bind:contractAddr="contractAddr" 
     v-bind:myAddr="myAccountNumber" />
     <div v-else v-for="(item,index) in myhistory" v-bind:key="index">
@@ -56,6 +56,7 @@ export default {
       myhistory:[],
       clubhistory:[],
       clubname:"",
+      clubAddr:"",
     }
   },
   components: {
@@ -490,10 +491,21 @@ export default {
           this.balance = data;
         })
 
+      let url = "api/club/{clubid}?clubid=" + this.$store.state.selectedClub;
+      console.log('동호회정보 가져오기',url);
+
+      http.get(url)
+      .then(res =>{
+        console.log(res);
+        this.clubname = res.data.name;
+        this.clubAddr = res.data.clubaccount;
+      })
+
       contract.methods.loadRecode().call()
       .then(data =>{
         this.history = data;
         let temp = [];
+        let temp2 = [];
         for(var i in data)
         {
           if(data[i].fromAddr == this.myAccountNumber || data[i].toAddr == this.myAccountNumber)
@@ -501,8 +513,16 @@ export default {
             temp.push(data[i]);
             // this.myhistory.push(data[i]);
           }
+          if(data[i].fromAddr == this.clubAddr || data[i].toAddr == this.clubAddr)
+          {
+            temp2.push(data[i]);
+            // this.myhistory.push(data[i]);
+          }
+          
         }
         this.myhistory = temp.reverse();
+        this.clubhistory = temp2.reverse();
+        console.log('동호회 거래내역',this.clubhistory);
       })
 
       })
