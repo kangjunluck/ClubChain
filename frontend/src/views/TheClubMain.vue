@@ -1,7 +1,7 @@
 <template>
     <div class="main">
       <div class="toparea">
-        상단바 영역
+        <img src="@/assets/plusbtn.png" alt="글쓰기" class="plusbtn" @click="write()">
       </div>
       <img src="@/assets/profile.png" alt="" class="bgphoto">
       <div class="clubmember">
@@ -39,9 +39,8 @@ export default {
     };
   },
   methods: {
-    write(postid) {
-      this.$store.dispatch("postId", postid);
-      this.$router.push("club/finance");
+    write() {
+      this.$router.push("/club/post/write");
     }
   },
   created() {
@@ -67,7 +66,7 @@ export default {
         withCredentials : true
       }).then((res) => {
         console.log(res.data);
-        this.post = res.data;
+        this.postlist = res.data;
       }).catch((error) => {
         console.log(error);
         alert("게시글 가져오기 실패");
@@ -78,6 +77,12 @@ export default {
 </script>
 
 <style scoped>
+.plusbtn {
+  width:1rem;
+  height: 1rem;
+  float:right;
+}
+
 .main {
   width: 100%;
   text-align: left;
