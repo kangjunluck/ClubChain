@@ -49,12 +49,12 @@ export default {
     enterClub(clubid) {
       this.$store.dispatch("selectedClub", clubid);
       console.log(this.$store.state.selectedClub);
-      this.$router.push({name : "Enterclub"});
+      this.$router.push({name : "EnterClub"});
     },
   },
   created() {
     http.
-      get("/api/club/", {}, {
+      get("/api/club/", {
         withCredentials : true
       })
       .then((res) => {

@@ -21,7 +21,7 @@
           <img alt="plusbtn" src="@/assets/plusbtn.png" class="plusbtn" />
         </div>
         <div class="clubarea">
-          <div v-for="club in clublist" v-bind:key="club" class="club">
+          <div v-for="club in clublist" v-bind:key="club" class="club" @click="enterClub(club.id)">
             <img src="@/assets/CC_logo_symbol.svg" alt="클럽썸네일">
             <!--club 안에 썸네일 주소를 통해 이미지 불러와야함-->
             <div>
@@ -32,7 +32,7 @@
         <div class="notexist" v-if="!clubexist">
             가입한 동호회가 없습니다
         </div>
-        
+
     </div>
 </template>
 
@@ -47,7 +47,11 @@ export default {
     };
   },
   methods: {
-    
+    enterClub(clubid) {
+      this.$store.dispatch("selectedClub", clubid);
+      console.log(this.$store.state.selectedClub);
+      this.$router.push({name : "ClubMain"});
+    },
   },
   created() {
     http.
