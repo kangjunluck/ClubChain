@@ -57,30 +57,29 @@ export default {
       .get(url)
       .then(res=>{
         this.myAddr = res.data.useraccount;
+
+        this.balances.push(this.balance)
+        for (let i = 0; i < this.hst.length; i++){
+          if(i==0)
+          {
+            if(this.hst[i].fromAddr == this.myAddr)
+            {
+              this.balances.push(this.hst[i].value*1 + this.balance*1)
+            }
+            else
+              this.balances.push(this.balance*1 - this.hst[i].value*1)
+          }
+          else
+          {
+            if(this.hst[i].fromAddr == this.myAddr)
+            {
+              this.balances.push(this.balances[i]*1 + this.hst[i].value*1)
+            }
+            else
+              this.balances.push(this.balances[i]*1 - this.hst[i].value*1)
+          }
+        }
       })
-  },
-  mounted(){
-    this.balances.push(this.balance)
-    for (let i = 0; i < this.hst.length; i++){
-      if(i==0)
-      {
-        if(this.hst[i].fromAddr == this.myAddr)
-        {
-          this.balances.push(this.hst[i].value*1 + this.balance)
-        }
-        else
-          this.balances.push(this.balance - this.hst[i].value*1)
-      }
-      else
-      {
-        if(this.hst[i].fromAddr == this.myAddr)
-        {
-          this.balances.push(this.balances[i] - this.hst[i].value*1)
-        }
-        else
-          this.balances.push(this.balances[i] + this.hst[i].value*1)
-      }
-    }
   },
   methods:{
     check1(){

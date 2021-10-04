@@ -22,7 +22,7 @@
       </b-row>
      <div style="height:20px;"></div>
     <Transaction v-if= "componenetStateValue==='transfer'" v-bind:clubAddr="clubAddr" />
-    <TransactionHistory v-else-if= "componenetStateValue==='transactionHistory'" v-bind:clubAddr="clubAddr"  v-bind:hst="myhistory" v-bind:cst="clubhistory" />
+    <TransactionHistory v-else-if= "componenetStateValue==='transactionHistory'" v-bind:balance="balance" v-bind:clubAddr="clubAddr"  v-bind:hst="myhistory" v-bind:cst="clubhistory" />
     <Encharge v-else-if="componenetStateValue==='tokenEncharge'" v-bind:abi="contractAbi" v-bind:contractAddr="contractAddr" 
     v-bind:myAddr="myAccountNumber" />
     <div v-else>
@@ -509,11 +509,9 @@ export default {
         })
 
       let url = "api/club/{clubid}?clubid=" + this.$store.state.selectedClub;
-      console.log('동호회정보 가져오기',url);
 
       http.get(url)
       .then(res =>{
-        console.log(res);
         this.clubname = res.data.name;
         this.clubAddr = res.data.clubaccount;
       })
@@ -539,7 +537,29 @@ export default {
         }
         this.myhistory = temp.reverse();
         this.clubhistory = temp2.reverse();
-        console.log('동호회 거래내역',this.clubhistory);
+        // console.log('동호회 거래내역',this.clubhistory);
+
+        this.balances.push(this.balance)
+        for (let i = 0; i < this.myhistory.length; i++){
+          if(i==0)
+          {
+            if(this.myhistory[i].fromAddr == this.myAddr)
+            {
+              this.balances.push(this.myhistory[i].value*1 + this.balance*1)
+            }
+            else
+              this.balances.push(this.balance*1 - this.myhistory[i].value*1)
+          }
+          else
+          {
+            if(this.myhistory[i].fromAddr == this.myAddr)
+            {
+              this.balances.push(this.balances[i]*1 + this.myhistory[i].value*1)
+            }
+            else
+              this.balances.push(this.balances[i]*1 - this.myhistory[i].value*1)
+          }
+        }
       })
 
       })
@@ -547,29 +567,6 @@ export default {
         console.log(error)
         this.myAccountNumber = error
       });
-  },
-    mounted(){
-    this.balances.push(this.balance)
-    for (let i = 0; i < this.myhistory.length; i++){
-      if(i==0)
-      {
-        if(this.myhistory[i].fromAddr == this.myAccountNumber)
-        {
-          this.balances.push(this.myhistory[i].value*1 + this.balance)
-        }
-        else
-          this.balances.push(this.balance - this.myhistory[i].value*1)
-      }
-      else
-      {
-        if(this.myhistory[i].fromAddr == this.myAccountNumber)
-        {
-          this.balances.push(this.balances[i] - this.myhistory[i].value*1)
-        }
-        else
-          this.balances.push(this.balances[i] + this.myhistory[i].value*1)
-      }
-    }
   },
   methods: {
     transactionHistoryButton() {
