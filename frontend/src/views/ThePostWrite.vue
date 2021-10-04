@@ -35,6 +35,7 @@ export default {
     return {
       title: "",
       content: "",
+      section: "",
     };
   },
   methods: {
@@ -42,7 +43,13 @@ export default {
         const formData = new FormData;
         formData.append('title', this.title);
         formData.append('content', this.content);
-        http.post("", formData
+        formData.append('section', "section");
+        formData.append('clubid', this.$store.state.selectedClub);
+        formData.append('userid', this.$store.state.credentials.userId);
+        var url = "/api/";
+        url += this.$store.state.selectedClub;
+        url += /board/;
+        http.post(url, formData
         ).then( (res) => {
             console.log(res.data);
         }).catch((error) => {
@@ -69,8 +76,12 @@ export default {
 }
 .title {
     font-size:1rem;
+    width: 100%;
+    height: 3rem;
 }
 .content {
     font-size:1rem;
+    width: 100%;
+    height: 10rem;
 }
 </style>
