@@ -5,13 +5,12 @@
 			<i class="far fa-times-circle fa-2x"></i>
 		</div>
         <!-- 동호회 이미지 align-v="center"-->
-        <b-container align-v="center" class="mt-5">
+        <b-container align-v="center" class="margin-style">
             <b-row class="justify-content-center" >
                 <b-col cols="8">
                     <b-card
                         img-src="https://placekitten.com/500/350"
                         img-alt=logo
-                        img-top
                         tag="article"
                         img-height=300
                         img-width=400
@@ -37,6 +36,7 @@
                 </b-col>
             </b-row>
             <b-row class="justify-content-center align-content mt-1">
+                <b-col cols="2"></b-col>
                 <b-col cols="4">
                     <b-button block class="cancel-btn-style" @click="goBack">취소</b-button>
                 </b-col>
@@ -44,6 +44,7 @@
                 <b-col cols="4">
                     <b-button block class="enter-btn-style" @click="enterClub">가입</b-button>
                 </b-col>
+                <b-col cols="2"></b-col>
                 
             </b-row>
         </b-container>
@@ -113,7 +114,7 @@ export default {
 .cancel-btn-style {
     background-color: #999999;
     color: #ffffff;
-    width: 125px;
+    width: 120px;
     border: 0;
     outline: 0;
 }
@@ -121,8 +122,12 @@ export default {
 .enter-btn-style {
     background-color:#1ec0ff;
     color: #ffffff;
-    width: 125px;
+    width: 120px;
     border: 0;
     outline: 0;
+}
+
+.margin-style {
+    margin-top: 100px;
 }
 </style>
