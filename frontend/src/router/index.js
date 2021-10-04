@@ -1,18 +1,19 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Main from "../views/Main.vue";
-import Signup from "../components/user/Signup.vue";
-import Enterclub from "../components/club/Enterclub.vue";
+import SignUp from "../views/TheSignUp.vue";
+import EnterClub from "../views/TheEnterClub.vue";
 import Vote from "../components/vote/Vote.vue";
 import Test from "../components/Test.vue";
-import Clublist from "../components/club/Clublist.vue";
+import ClubList from "../views/TheClubList.vue";
 import sendToken from "../components/Token/sendToken.vue";
 import Finance from "../views/finance.vue"
 import ClubCreate from "../views/TheCreateClub.vue"
-import Myclub from "../components/club/Myclub.vue"
+import MyClub from "../views/TheMyClub.vue"
 import MyPage from "../views/TheMyPage.vue"
 import MyinfoUpdate from "../views/TheMyInfoUpdate.vue"
 import Photos from "../views/Photos.vue"
+import ClubMain from "../views/TheClubMain.vue"
 
 Vue.use(VueRouter);
 
@@ -24,13 +25,13 @@ const routes = [
   },
   {
     path: "/signup",
-    name: "Signup",
-    component: Signup,
+    name: "SignUp",
+    component: SignUp,
   },
   {
     path: "/club/enter",
-    name: "Enterclub",
-    component: Enterclub,
+    name: "EnterClub",
+    component: EnterClub,
   },
   {
     path: "/vote",
@@ -44,8 +45,8 @@ const routes = [
   },
   {
     path: "/club/list",
-    name: "Clublist",
-    component: Clublist,
+    name: "ClubList",
+    component: ClubList,
   },
   {
     path: "/sendToken",
@@ -64,8 +65,8 @@ const routes = [
   },
   {
     path: "/club/myclub",
-    name: "Myclub",
-    component: Myclub,
+    name: "MyClub",
+    component: MyClub,
   },
   {
     path: "/mypage",
@@ -81,7 +82,12 @@ const routes = [
     path: "/photos",
     name: "Photos",
     component: Photos,
-  }
+  },
+  {
+    path: "/club/main",
+    name: "ClubMain",
+    component: ClubMain,
+  },
 ];
 
 const router = new VueRouter({

@@ -83,7 +83,7 @@ export default {
       usernickname: "",
       addr: "",
 
-      selecturl: require("../../assets/profile.png"),
+      selecturl: require("@/assets/profile.png"),
     };
   },
   methods: {
