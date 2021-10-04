@@ -32,7 +32,7 @@
         <div class="notexist" v-if="!clubexist">
             가입한 동호회가 없습니다
         </div>
-
+        
     </div>
 </template>
 

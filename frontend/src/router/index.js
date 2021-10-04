@@ -14,6 +14,7 @@ import MyPage from "../views/TheMyPage.vue"
 import MyinfoUpdate from "../views/TheMyInfoUpdate.vue"
 import Photos from "../views/Photos.vue"
 import ClubMain from "../views/TheClubMain.vue"
+import PostWrite from "../views/ThePostWrite.vue"
 
 Vue.use(VueRouter);
 
@@ -87,6 +88,11 @@ const routes = [
     path: "/club/main",
     name: "ClubMain",
     component: ClubMain,
+  },
+  {
+    path: "/club/write",
+    name: "PostWrite",
+    component: PostWrite,
   },
 ];
 
