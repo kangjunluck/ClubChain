@@ -2,11 +2,16 @@
   <div>
     <b-container>
       <b-row>
-        <b-col offset="1" cols="10" class="ethCard">
+        <b-col offset="1" cols="10" class="ethCard" style="padding-top:10px; padding-bottom:10px;">
           <b-row>
             <b-col>받는사람</b-col>
             <b-col><b-form-input v-model="toEmail"></b-form-input></b-col>
           </b-row>
+          <b-row>
+            <b-col style="font-size: 0.8rem">동호회 계좌</b-col>
+            <b-col><input type="checkbox" id="checkbox" v-model="checked"></b-col>
+          </b-row>
+          
           <b-row>
             <b-col>송금액</b-col>
             <b-col><b-form-input type="number" v-model="value"></b-form-input></b-col>
@@ -15,14 +20,17 @@
             <b-col>송금 메세지</b-col>
             <b-col><b-form-input v-model="message"></b-form-input></b-col>
           </b-row>
-          <b-row>
-            <b-col>PrivateKey 업로드</b-col>
-            <input id="PK" type="file" accept="text/*" @change="updatePK">
+          <b-row style="text-align">
+            <!-- <b-col>PrivateKey 업로드</b-col> -->
+            <input id="PK" type="file" accept="text/*" value="개인키 파일" @change="updatePK">
           </b-row>
-          <div class="btn btn-primary" @click="sendTx">
+        </b-col>
+        <div>
+          <div style="height:30px"></div>
+        <div class="btn btn-primary" @click="sendTx">
             송금
           </div>
-        </b-col>
+          </div>
       </b-row>
     </b-container>
     
@@ -447,15 +455,34 @@ export default {
       message:"",
     };
   },
+  computed:{
+    checked:
+    {
+      set: function(e)
+      {
+        if(e === true)
+        {
+          this.toEmail = "동호회 주소";
+        }
+        else
+        {
+          this.toEmail ="";
+        }
+      }
+    }
+  },
 
   methods:{
     async sendTx()
     {
       const res = await http.get("api/users/"+ encodeURI(this.$store.state.credentials.userEmail));
-      const res2 = await http.get("api/users/"+this.toEmail);
-
+      if(this.toEmail != "동호회 주소")
+      {
+        const res2 = await http.get("api/users/"+this.toEmail);
+        this.toAddr = res2.data.useraccount;
+      }
       this.myAddr = res.data.useraccount;
-      this.toAddr = res2.data.useraccount;
+      
       this.saveHistory();
       
       this.sendToken();
