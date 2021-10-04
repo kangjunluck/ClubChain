@@ -53,7 +53,7 @@ export default {
         ).then( (res) => {
             console.log(res.data);
         }).catch((error) => {
-            alert("회원가입 실패");
+            alert("글쓰기 실패");
             console.dir(error);
         })
     }
