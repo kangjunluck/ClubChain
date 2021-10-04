@@ -1,12 +1,13 @@
 <template>
   <div class="main">
+    <!-- 로그인 여부에 따라 컴포넌트 하나 추가로 쓸 예정 -->
     <MainLogin />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import MainLogin from "@/components/MainLogin.vue";
+import MainLogin from "@/components/main/MainLogin.vue";
 
 export default {
   name: "Main",
