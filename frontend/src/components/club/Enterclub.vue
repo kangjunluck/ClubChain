@@ -1,31 +1,52 @@
 <template>
     <div class="main">
-        <div class="club">
-            <div class="clubimage">
-                <img alt="Vue logo" src="@/assets/CC_logo_symbol.svg"/>
-            </div>
-            <div class="clubname">
-                {{name}}
-            </div>
-        </div>
-        <input
-                type="password"
-                id="password"
-                name="password"
-                v-model="password"
-                ref="password"
-                placeholder="비밀번호"
-                class="form-control mb-2"
-        />
-        <!--v-if로 비밀번호가 필요한 동호회에만 표시하게끔 수정해야함-->
-        <div class="buttonarea">
-            <div class="cancel btn btn-secondary" @click="goBack">
-                취소
-            </div>
-            <div class="enter btn btn-primary" @click="enterClub">
-                가입
-            </div>
-        </div>
+        <!-- 뒤로가기 아이콘 -->
+		<div align="left" class="cancel">
+			<i class="far fa-times-circle fa-2x"></i>
+		</div>
+        <!-- 동호회 이미지 align-v="center"-->
+        <b-container align-v="center" class="mt-5">
+            <b-row class="justify-content-center" >
+                <b-col cols="8">
+                    <b-card
+                        img-src="https://placekitten.com/500/350"
+                        img-alt=logo
+                        img-top
+                        tag="article"
+                        img-height=300
+                        img-width=400
+                        class="mb-2 center"
+                    >
+                        <b-card-text><h3>{{name}}</h3></b-card-text>
+                    </b-card>
+                </b-col>
+            </b-row>
+            <b-row class="justify-content-center mt-1">
+                <b-col cols="8">
+                    <!-- 비밀번호 입력 -->
+                    <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            v-model="password"
+                            ref="password"
+                            placeholder="비밀번호"
+                            class="form-control mb-2"
+                    />
+                    <!--v-if로 비밀번호가 필요한 동호회에만 표시하게끔 수정해야함-->
+                </b-col>
+            </b-row>
+            <b-row class="justify-content-center align-content mt-1">
+                <b-col cols="4">
+                    <b-button block class="cancel-btn-style" @click="goBack">취소</b-button>
+                </b-col>
+                
+                <b-col cols="4">
+                    <b-button block class="enter-btn-style" @click="enterClub">가입</b-button>
+                </b-col>
+                
+            </b-row>
+        </b-container>
     </div>
 </template>
 
@@ -89,36 +110,19 @@ export default {
 </script>
 
 <style scoped>
-
-.club {
-    border: 1px solid black;
-    width: 80%;
-    margin-left: 10%;
-}
-.clubimage {
-    border: 1px solid black;
+.cancel-btn-style {
+    background-color: #999999;
+    color: #ffffff;
+    width: 125px;
+    border: 0;
+    outline: 0;
 }
 
-.club img {
-    width: 80%;
-}
-
-.clubname {
-    font-size: 200%;
-    border: 1px solid black;
-}
-
-.buttonarea {
-    margin-top: 10%;
-}
-
-.cancel {
-    margin-right: 50px;
-}
-
-#password {
-    width: 80%;
-    margin-left: 10%;
-    margin-top: 10%;
+.enter-btn-style {
+    background-color:#1ec0ff;
+    color: #ffffff;
+    width: 125px;
+    border: 0;
+    outline: 0;
 }
 </style>
