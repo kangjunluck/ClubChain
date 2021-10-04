@@ -61,7 +61,6 @@ export default {
   },
   mounted(){
     this.balances.push(this.balance)
-
     for (let i = 0; i < this.hst.length; i++){
       if(i==0)
       {

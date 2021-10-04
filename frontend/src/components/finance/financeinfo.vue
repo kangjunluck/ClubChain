@@ -25,8 +25,24 @@
     <TransactionHistory v-else-if= "componenetStateValue==='transactionHistory'" v-bind:clubAddr="clubAddr"  v-bind:hst="myhistory" v-bind:cst="clubhistory" />
     <Encharge v-else-if="componenetStateValue==='tokenEncharge'" v-bind:abi="contractAbi" v-bind:contractAddr="contractAddr" 
     v-bind:myAddr="myAccountNumber" />
-    <div v-else v-for="(item,index) in myhistory" v-bind:key="index">
-      {{item.message}}
+    <div v-else>
+      <b-row>
+        <b-col style="font-size:1.2rem; text-align: left; font-weight: bolder; 
+            margin-left: 12px; ">최근거래</b-col>
+      </b-row>
+    <div style="height:20px;"></div>
+      <div v-for="(item,index) in myhistory.slice(0,5)" v-bind:key="index">
+        <b-row>
+          <b-col style="font-size:1rem;">{{item.message}}</b-col>
+          <b-col style="font-size:1rem;" v-if="item.fromAddr == myAccountNumber">- {{item.value}} CC</b-col>
+          <b-col style="font-size:1rem;" v-else>+ {{item.value}} CC</b-col>
+        </b-row>
+        <b-row>
+          <b-col style="font-size:0.8rem; color:#999999">{{item.date.substring(0,24)}}</b-col>
+          <b-col style="font-size:0.8rem; color:#999999">{{balances[index]}} CC</b-col>
+        </b-row>
+        <hr style=" color:#333333; margin: 0.3em;">
+      </div>
     </div>
     </b-container>
   </div>
@@ -52,6 +68,7 @@ export default {
       contractAbi:"",
       contractAddr:"",
       balance:"",
+      balances:[],
       history:[],
       myhistory:[],
       clubhistory:[],
@@ -530,6 +547,29 @@ export default {
         console.log(error)
         this.myAccountNumber = error
       });
+  },
+    mounted(){
+    this.balances.push(this.balance)
+    for (let i = 0; i < this.myhistory.length; i++){
+      if(i==0)
+      {
+        if(this.myhistory[i].fromAddr == this.myAccountNumber)
+        {
+          this.balances.push(this.myhistory[i].value*1 + this.balance)
+        }
+        else
+          this.balances.push(this.balance - this.myhistory[i].value*1)
+      }
+      else
+      {
+        if(this.myhistory[i].fromAddr == this.myAccountNumber)
+        {
+          this.balances.push(this.balances[i] - this.myhistory[i].value*1)
+        }
+        else
+          this.balances.push(this.balances[i] + this.myhistory[i].value*1)
+      }
+    }
   },
   methods: {
     transactionHistoryButton() {
