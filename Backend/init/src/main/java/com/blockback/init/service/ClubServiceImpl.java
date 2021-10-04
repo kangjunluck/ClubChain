@@ -48,7 +48,10 @@ public class ClubServiceImpl implements ClubService {
             tmp.setName(club.getName());
             tmp.setIntroduce(club.getIntroduce());
             tmp.setProfile_thumbnail(club.getProfile_thumbnail());
-            tmp.setPassword(club.getPassword());
+
+            if(club.getPassword() != null) {
+                tmp.setPassword(club.getPassword());
+            }
             tmp.setOwner_id(club.getUser().getId());
             tmp.setOwner_name(club.getUser().getUsernickname());
 
@@ -171,7 +174,11 @@ public class ClubServiceImpl implements ClubService {
             tmp.setName(club.getName());
             tmp.setIntroduce(club.getIntroduce());
             tmp.setProfile_thumbnail(club.getProfile_thumbnail());
-            tmp.setPassword(club.getPassword());
+
+            if(club.getPassword() != null) {
+                tmp.setPassword(club.getPassword());
+            }
+
             tmp.setOwner_id(club.getUser().getId());
             tmp.setOwner_name(club.getUser().getUsernickname());
 
@@ -192,7 +199,11 @@ public class ClubServiceImpl implements ClubService {
             tmp.setName(club.getName());
             tmp.setIntroduce(club.getIntroduce());
             tmp.setProfile_thumbnail(club.getProfile_thumbnail());
-            tmp.setPassword(club.getPassword());
+
+            if(club.getPassword() != null) {
+                tmp.setPassword(club.getPassword());
+            }
+
             tmp.setOwner_id(club.getUser().getId());
             tmp.setOwner_name(club.getUser().getUsernickname());
             res.add(tmp);
