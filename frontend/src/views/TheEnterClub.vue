@@ -71,15 +71,12 @@ export default {
     return config
     },
     enterClub() {
-        //var url = "/api/";
-        //url += "4" + "/";     //가입할 동호회id로 변경
-        //console.log(this.$store.state.credentials.userEmail);
-        //console.log(this.$store.state.credentials.usernickname);
-        //this.$session.set('LoginUser', this.$store.state.credentials.userEmail);
-        //console.log(this.$session.get('LoginUser'));
-        //console.log(this.$session.get('userEmail') + "aaaa");
+        var url = "/api/";
+        url += this.$store.state.selectedClub;
+        url += "/";
+        console.log(url);
       http
-        .post("/api/4/", {},
+        .post(url, {},
         { withCredentials: true }
         ).then( () => {
         });
@@ -93,7 +90,8 @@ export default {
         //clubid를 스토어에서 가져와서 경로에 붙여야함. 현재는 4로 고정
         console.log(this.$store.state.selectedClub);
         console.log("aaa");
-        var url = "/api/club/{clubid}?clubid=4"
+        var url = "/api/club/{clubid}?clubid="
+        url += this.$store.state.selectedClub;
         http
         .get(url,{
             withCredentials : true

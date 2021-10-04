@@ -19,6 +19,7 @@ export default new Vuex.Store({
       userId: null,
     },
     selectedClub: 0,
+    postId: 0,
   },
 
   // actionsm 에서 commit() 메서드에 의해 호출
@@ -36,6 +37,9 @@ export default new Vuex.Store({
     SELECTED_CLUB: function (state, clubid) {
       state.selectedClub = clubid;
     },
+    POST_ID: function (state, postid) {
+      state.postId = postid;
+    }
   },
   // 뷰에서 사용자 입력에 대해 반응적으로 상태를 바꾸는 법 (methods)
   // 컴포넌트는 dispatch() 를 사용하여 actions 내의 메소드를 호출
@@ -50,8 +54,11 @@ export default new Vuex.Store({
     isLogin: function (context) {
       context.commit('IS_LOGIN')
     },
-    selectedClub(context) {
-      context.commit('SELECTED_CLUB')
+    selectedClub(context, clubid) {
+      context.commit('SELECTED_CLUB', clubid)
+    },
+    postId(context, postid) {
+      context.commit('POST_ID', postid)
     }
   },
   getters: {
