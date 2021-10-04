@@ -539,19 +539,18 @@ export default {
       var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
       var contract = new web3.eth.Contract(this.abi,this.contractAddr,{from: '0x97415060E1Ff0d2c51BF6d92B959be7D6316a983'}); 
       let today = new Date();
-      today = today.toString();
+    	var year = today.getFullYear();
+		  var month = ('0' + (today.getMonth() + 1)).slice(-2);
+		  var day = ('0' + today.getDate()).slice(-2);
+		  var hours = ('0' + today.getHours()).slice(-2); 
+		  var minutes = ('0' + today.getMinutes()).slice(-2);
+		  var dateString = year + '/' + month  + '/' + day + ' ' + hours+":"+minutes;
      //거래내역 저장하기
 
      let from = this.myAddr;
      let to = this.toAddr;
      let val = this.value *1;
      let msg = this.message;
-     console.log("from ",from);
-     console.log("to ",to);
-     console.log("val ",val);
-     console.log(typeof(val));
-     console.log("today ", today)
-     console.log("msg ", msg)
 
       const Tx = require('ethereumjs-tx').Transaction;
       let privKey= new Buffer.from("27ddaa90db29f7740736e57703c437595a6f62707aa53d90773cb3fb4c91282d", "hex");
@@ -564,7 +563,7 @@ export default {
           'gasPrice': web3.utils.toHex(web3.utils.toWei('10','gwei')),
           'to': this.contractAddr, //계약 주소
           'value': '0x0',
-          'data': contract.methods.saveRecode(from,to,val,today,msg).encodeABI() //받는 주소, 토큰 갯수
+          'data': contract.methods.saveRecode(from,to,val,dateString,msg).encodeABI() //받는 주소, 토큰 갯수
         }
         let transaction = new Tx(txObject,{'chain':'ropsten'});
         transaction.sign(privKey);

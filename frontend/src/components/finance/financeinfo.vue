@@ -20,7 +20,7 @@
         </b-col> 
         <b-col cols="1" align-self="center">▶</b-col>
       </b-row>
-     <div style="height:40px;"></div>
+     <div style="height:20px;"></div>
     <Transaction v-if= "componenetStateValue==='transfer'"/>
     <TransactionHistory v-else-if= "componenetStateValue==='transactionHistory'" v-bind:hst="myhistory" v-bind:cst="clubhistory" />
     <Encharge v-else-if="componenetStateValue==='tokenEncharge'" v-bind:abi="contractAbi" v-bind:contractAddr="contractAddr" 
@@ -73,11 +73,9 @@ export default {
     // let emailAddr = email[0]+"%40"+email[1];
     let email = encodeURI(this.$store.state.credentials.userEmail)
     const url = "api/users/" + email;
-    console.log(url)
     http
       .get(url)
       .then((res) => {
-        console.log(res);
         this.myAccountNumber = res.data.useraccount;
         //잔액 조회
         var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
@@ -487,7 +485,6 @@ export default {
       var contract = new web3.eth.Contract(abi,contractAddr); 
         contract.methods.balanceOf(this.myAccountNumber).call() // this.myAccountNumber
         .then(data => {
-          console.log(data);
           this.contractAbi = abi;
           this.contractAddr = contractAddr;
           this.balance = data;
@@ -495,15 +492,17 @@ export default {
 
       contract.methods.loadRecode().call()
       .then(data =>{
-        console.log(data)
         this.history = data;
+        let temp = [];
         for(var i in data)
         {
           if(data[i].fromAddr == this.myAccountNumber || data[i].toAddr == this.myAccountNumber)
-            this.myhistory.push(data[i]);
+          {
+            temp.push(data[i]);
+            // this.myhistory.push(data[i]);
+          }
         }
-
-        console.log(this.myhistory);
+        this.myhistory = temp.reverse();
       })
 
       })
@@ -518,7 +517,6 @@ export default {
       if(this.componenetStateValue !="transactionHistory")
       {
         this.componenetStateValue = "transactionHistory"
-        console.log(this.componenetStateValue)
         // this.$emit("componenetState", this.componenetStateValue);
       }
       else{
@@ -529,7 +527,6 @@ export default {
       if(this.componenetStateValue != "transfer")
       {
         this.componenetStateValue = "transfer";
-        console.log(this.componenetStateValue);
         // this.$emit("componenetState", this.componenetStateValue);
       }
       else
