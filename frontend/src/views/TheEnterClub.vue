@@ -16,7 +16,7 @@
                         img-width=400
                         class="mb-2 center"
                     >
-                        <b-card-text><h3>{{name}}</h3></b-card-text>
+                        <b-card-text class="name">{{name}}</b-card-text>
                     </b-card>
                 </b-col>
             </b-row>
@@ -139,5 +139,10 @@ export default {
 
 .margin-style {
     margin-top: 100px;
+}
+
+.name {
+    font-size: 150%;
+    font-weight: bold;
 }
 </style>

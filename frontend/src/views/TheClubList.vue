@@ -83,7 +83,7 @@ export default {
 
 .logo, .profile{
     width: 10%;
-    height: 50%;
+    height: 60%;
 }
 .profile{
     float:right;
