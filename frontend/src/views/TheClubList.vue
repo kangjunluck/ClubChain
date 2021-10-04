@@ -4,7 +4,7 @@
           <img alt="Vue logo" src="@/assets/CC_logo_symbol.svg" class="logo" />
           <img alt="profile" src="@/assets/profile.png" class="profile"/>
         </div>
-        <div class="searcharea">
+        <div class="searcharea m-3">
             <input 
                 type="text"
                 id="search"
@@ -12,19 +12,19 @@
                 v-model="search"
                 ref="search"
                 placeholder="검색어를 입력해주세요"
-                class="form-control mt-5 mb-2"
+                class="form-control"
             />
             <img alt="searchbtn" src="@/assets/search.png" class="searchbtn"/>
         </div>
-        <div class="textarea">
+        <div class="textarea m-3">
           <div class="clubtext">동호회 리스트</div>
           <img alt="plusbtn" src="@/assets/plusbtn.png" class="plusbtn" />
         </div>
         <div class="clubarea" >
           <div v-for="club in clublist" v-bind:key="club" class="club">
-            <img src="@/assets/CC_logo_symbol.svg" alt="클럽썸네일" @click="enterClub(club.clubid)">
+            <img src="https://picsum.photos/250/250/?image=54" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
             <!--club 안에 썸네일 주소를 통해 이미지 불러와야함-->
-            <div @click="enterClub(club.id)">
+            <div @click="enterClub(club.id)" class="club-name-style">
             {{club.name}}
             </div>
           </div>
@@ -83,7 +83,7 @@ export default {
 
 .logo, .profile{
     width: 10%;
-    height: 50%;
+    height: 60%;
 }
 .profile{
     float:right;
@@ -99,8 +99,9 @@ export default {
   width: 90%;
   display:inline-block;
 }
-.searcharea{
-  
+.club-name-style{
+  font-weight: bold;
+  text-align: left;
 }
 .searchbtn{
   width: 10%;
@@ -123,6 +124,13 @@ export default {
   width: 40%;
   height: 20%;
   float:left;
-  margin-left: 5%;
+  margin-left: 7%;
+  margin-bottom: 7px;
 }
+
+.img-style {
+  width: 100%;
+  height: 100%;
+}
+
 </style>
