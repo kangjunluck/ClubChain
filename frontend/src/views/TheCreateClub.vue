@@ -67,7 +67,7 @@
 import $ from "jquery";
 import http from "@/util/http-common";
 // import axios from "axios";
-
+import Web3 from "web3";
 export default {
 	name: 'ClubCreate',
 	data: function () {
@@ -102,17 +102,27 @@ export default {
       // this.selecturl = URL.createObjectURL(this.clubinfos.club_thumbnail);
 		},
 		createSubmit() {
+			var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
+		// 계정생성, 지갑생성
+			let {address,privateKey} = web3.eth.accounts.create();
 
-			
+			let wallet = web3.eth.accounts.wallet.add(
+			{
+				privateKey: privateKey,
+				address: address
+			})
+			console.log(wallet);
+
 			// var photoFile = document.getElementById("profile_thumbnail");
 			const formData = new FormData;
 			// formData.append('profile_thumbnail', photoFile.files[0])
 			// console.log('포토파일', photoFile.files[0])
 			formData.append('club_thumbnail', this.clubinfos.club_thumbnail)
-			formData.append('clubaccount', this.clubinfos.clubaccount)
+			formData.append('clubaccount', address)
 			formData.append('introduce', this.clubinfos.introduce)
 			formData.append('name', this.clubinfos.name)
 			formData.append('password', this.clubinfos.password)
+
 			console.log(formData)	
 		
 			// FormData의 값 확인 
