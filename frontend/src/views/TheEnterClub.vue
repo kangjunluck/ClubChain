@@ -59,6 +59,7 @@ export default {
     return {
         name : "",
         image : "",
+        password : "",
     };
 },
   methods: {
@@ -76,9 +77,15 @@ export default {
         url += "/";
         console.log(url);
       http
-        .post(url, {},
+        .post(url, {
+            clubid : this.$store.state.selectedClub,
+        },
         { withCredentials: true }
         ).then( () => {
+            console.log("가입 성공");
+        }).catch((error) => {
+            console.log(error);
+            alert("가입 실패");
         });
 
     },
@@ -87,7 +94,6 @@ export default {
     },
   },
   created() {
-        //clubid를 스토어에서 가져와서 경로에 붙여야함. 현재는 4로 고정
         console.log(this.$store.state.selectedClub);
         console.log("aaa");
         var url = "/api/club/{clubid}?clubid="
