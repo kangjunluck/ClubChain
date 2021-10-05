@@ -2,7 +2,7 @@
     <div class="main">
         <!-- 뒤로가기 아이콘 -->
 		<div align="left" class="cancel">
-			<i class="far fa-times-circle fa-2x"></i>
+			<i class="far fa-times-circle fa-2x" @click="goback"></i>
 		</div>
         <!-- 동호회 이미지 align-v="center"-->
         <b-container align-v="center" class="margin-style">
@@ -63,6 +63,9 @@ export default {
     };
 },
   methods: {
+    goback () {
+        this.$router.push("/club/list");
+    },
     setSession: function () {
     document.cookie
     const token = localStorage.getItem('jwt')
