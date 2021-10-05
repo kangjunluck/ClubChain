@@ -61,7 +61,7 @@ export default {
       this.$router.push('/club/post/detail');
     },
     getClubinfo(){
-      var url = "/api/club/";
+      var url = "/api/club/{clubid}?clubid=";
       url += this.$store.state.selectedClub;
       http.
         get(url, {
