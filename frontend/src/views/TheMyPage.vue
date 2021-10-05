@@ -144,7 +144,8 @@ export default {
       .then((res)=>{
         if(res.data.owner_name == this.userinfo.usernickname)
         {
-          console.log('동호회 설정창으로 이동');
+          // console.log('동호회 설정창으로 이동');
+          this.$router.push("/club/update");
         }
         else{
           alert('동호회장만 설정할 수 있습니다.');
