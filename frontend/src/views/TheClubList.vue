@@ -2,7 +2,7 @@
     <div class="main">
         <b-container class="mt-3">
           <!-- 상단 로고와 프로필 이미지 -->
-          <!-- <b-row class="mb-3">
+          <b-row class="mb-3">
             <b-col cols="2" class="text-style">
               <img alt="Vue logo" src="@/assets/CC_logo_symbol.svg" />
             </b-col>
@@ -12,7 +12,7 @@
                 <img alt="profile" :src="selecturl" class="round"/>
               </div>
             </b-col>
-          </b-row> -->
+          </b-row>
 
           <!-- 검색창 -->
           <b-row class="justify-content-center">
@@ -34,7 +34,7 @@
           <!-- 가입한 동호회 리스트 -->
           <div class="clubarea mt-2" >
             <div v-for="club in clublist" v-bind:key="club" class="club">
-              <img src="resources/{club.profile_thumbnail}" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
+              <img :src="'resources/' + club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
               <!--club 안에 썸네일 주소를 통해 이미지 불러와야함-->
               <div @click="enterClub(club.id)" class="club-name-style">
               {{club.name}}
@@ -55,7 +55,7 @@
           <!-- 전체 동호회 리스트 -->
           <div class="clubarea mt-2" >
             <div v-for="club in totalclublist" v-bind:key="club" class="club">
-              <img :src="resources/club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
+              <img :src="'resources/' + club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
               <!--club 안에 썸네일 주소를 통해 이미지 불러와야함-->
               <div @click="enterClub(club.id)" class="club-name-style">
               {{club.name}}
@@ -92,18 +92,18 @@ export default {
       this.$router.push({name : "EnterClub"});
     },
     // 모든 vue에서 실행될 checklogin 함수 #######
-    // checkLogin() {
-    //   http
-    //     .get("api/users/islogin", { withCredentials: true })
-    //     .then((res) => {
-    //       this.userinfo = res.data;
-    //       this.selecturl = "resources/" + res.data.userthumbnail;
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //       this.$router.push("/");
-    //     });
-    // },
+    checkLogin() {
+      http
+        .get("api/users/islogin", { withCredentials: true })
+        .then((res) => {
+          this.userinfo = res.data;
+          this.selecturl = "resources/" + res.data.userthumbnail;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$router.push("/");
+        });
+    },
     searchClub() {
       http
         .get("api/club/search/", {
@@ -122,7 +122,7 @@ export default {
     }
   },
   created() { 
-    // this.checkLogin();
+    this.checkLogin();
     http.
       get("/api/club/", {
         withCredentials : true
