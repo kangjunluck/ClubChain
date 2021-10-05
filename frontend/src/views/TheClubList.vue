@@ -6,10 +6,10 @@
             <b-col cols="2" class="text-style">
               <img alt="Vue logo" src="@/assets/CC_logo_symbol.svg" />
             </b-col>
-            <b-col class="text-style">ssafy님</b-col>
+            <b-col class="text-style">{{userinfo.usernickname}}님</b-col>
             <b-col cols="2" align-self="end" class="padding-style">
               <div class="round-box">
-                <img alt="profile" src="https://picsum.photos/1024/400/?image=41" class="round"/>
+                <img alt="profile" :src="selecturl" class="round"/>
               </div>
             </b-col>
           </b-row>
@@ -17,10 +17,10 @@
           <!-- 검색창 -->
           <b-row class="justify-content-center">
             <b-col cols="10" class="mt-1 padding-right-style">
-              <b-form-input placeholder="동호회 이름을 입력해주세요"></b-form-input>
+              <b-form-input placeholder="동호회 이름을 입력해주세요" v-model="word"></b-form-input>
             </b-col>
             <b-col class="padding-style">
-              <img alt="searchbtn" src="@/assets/search.png" class="searchbtn"/>
+              <img alt="searchbtn" src="@/assets/search.png" class="searchbtn" @click="searchClub"/>
             </b-col>
           </b-row>
 
@@ -34,7 +34,7 @@
           <!-- 가입한 동호회 리스트 -->
           <div class="clubarea mt-2" >
             <div v-for="club in clublist" v-bind:key="club" class="club">
-              <img src="https://picsum.photos/250/250/?image=54" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
+              <img :src="resources/club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
               <!--club 안에 썸네일 주소를 통해 이미지 불러와야함-->
               <div @click="enterClub(club.id)" class="club-name-style">
               {{club.name}}
@@ -55,7 +55,7 @@
           <!-- 전체 동호회 리스트 -->
           <div class="clubarea mt-2" >
             <div v-for="club in totalclublist" v-bind:key="club" class="club">
-              <img src="https://picsum.photos/250/250/?image=54" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
+              <img :src="resources/club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
               <!--club 안에 썸네일 주소를 통해 이미지 불러와야함-->
               <div @click="enterClub(club.id)" class="club-name-style">
               {{club.name}}
@@ -72,7 +72,6 @@
 
 <script>
 import http from "@/util/http-common";
-import {mapGetters} from 'vuex'; 
 
 export default {
   data() {
@@ -81,6 +80,9 @@ export default {
       totalclublist : null,
       clubexist: false,
       totalclubexist : false,
+      userinfo: null,
+      selecturl: "@/assets/profile.png",
+      word: ""
     };
   },
   methods: {
@@ -89,11 +91,34 @@ export default {
       console.log(this.$store.state.selectedClub);
       this.$router.push({name : "EnterClub"});
     },
+    // 모든 vue에서 실행될 checklogin 함수 #######
+    checkLogin() {
+      http
+        .get("api/users/islogin", { withCredentials: true })
+        .then((res) => {
+          this.userinfo = res.data;
+          this.selecturl = "resources/" + res.data.userthumbnail;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$router.push("/");
+        });
+    },
+    searchClub() {
+      http
+        .get("api/club/search/", this.word, { withCredentials: true })
+        .then((res) => {
+          this.totalclublist = res.data;
+          if(this.totalclublist.length > 0) this.totalclubexist = true;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$router.push("/")
+        })
+    }
   },
-  computed: {
-    ...mapGetters(['logininfo'])
-  },
-  created() {
+  created() { 
+    this.checkLogin();
     http.
       get("/api/club/", {
         withCredentials : true
