@@ -72,7 +72,7 @@ export default {
         console.log("게시글 찍히나 확인");
         console.log(res.data[0]);
         this.postlist = res.data;
-        console.log(postlist);
+        console.log(this.postlist);
       }).catch((error) => {
         console.log(error);
         alert("게시글 가져오기 실패");
