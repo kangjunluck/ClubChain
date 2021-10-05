@@ -24,6 +24,9 @@
             placeholder="내용을 입력해주세요"
             class="content"
             />
+            <img :src="selecturl" alt="url" class="col-6 px-0" style="width:3rem; height:3rem;">
+          <label class="photo-button" for="photo">업로드</label>
+          <input v-on:change="fileSelect()" ref="image" type="file" name="photo" id="photo" class="col-6" style="display:none;" />
     </div>
 </template>
 
@@ -36,6 +39,8 @@ export default {
       title: "",
       content: "",
       section: "",
+      image: "",
+      selecturl: require("@/assets/profile.png"),
     };
   },
   methods: {
@@ -46,7 +51,7 @@ export default {
         formData.append('section', "분류");
         formData.append('clubid', this.$store.state.selectedClub);
         formData.append('userid', this.$store.state.credentials.userId);
-        formData.append('file', "");
+        formData.append('file', this.image);
         
         console.log('title : ' + this.title);
         console.log('content :' + this.content);
@@ -63,7 +68,11 @@ export default {
             alert("글쓰기 실패");
             console.dir(error);
         })
-    }
+    },
+    fileSelect() {
+      this.image = this.$refs.image.files[0];
+      this.selecturl = URL.createObjectURL(this.image);
+    },
   },
 };
 </script>
@@ -90,5 +99,12 @@ export default {
     font-size:1rem;
     width: 100%;
     height: 10rem;
+}
+.photo-button{
+  padding: 3px 15px;
+  background-color:#1ec0ff;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
 }
 </style>
