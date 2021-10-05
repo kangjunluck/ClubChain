@@ -46,6 +46,8 @@ export default {
         formData.append('section', "분류");
         formData.append('clubid', this.$store.state.selectedClub);
         formData.append('userid', this.$store.state.credentials.userId);
+        formData.append('file', "");
+        
         console.log('title : ' + this.title);
         console.log('content :' + this.content);
         console.log('clubid : ' + this.$store.state.selectedClub);
