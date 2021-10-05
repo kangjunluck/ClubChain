@@ -9,6 +9,7 @@ import ClubList from "../views/TheClubList.vue";
 import sendToken from "../components/Token/sendToken.vue";
 import Finance from "../views/finance.vue"
 import ClubCreate from "../views/TheCreateClub.vue"
+import ClubUpdate from "../views/TheClubUpdate.vue"
 import MyPage from "../views/TheMyPage.vue"
 import MyinfoUpdate from "../views/TheMyInfoUpdate.vue"
 import Photos from "../views/Photos.vue"
@@ -106,6 +107,11 @@ const routes = [
     name: "Album",
     component: Album,
   },
+  {
+    path:"/club/update",
+    name:"ClubUpdate",
+    component:ClubUpdate,
+  }
 ];
 
 const router = new VueRouter({

@@ -43,7 +43,7 @@
 			></b-form-input>
 			
 			<button  class="inputMargin button button-color" @click="updateSubmit">
-				동호회 생성
+				동호회 수정
 			</button>
 		</div>
 		
@@ -64,7 +64,7 @@ import http from "@/util/http-common";
 // import axios from "axios";
 
 export default {
-	name: 'ClubCreate',
+	name: 'ClubUpdate',
 	data: function () {
 		return {
 			clubtype: '타입',
@@ -121,7 +121,7 @@ export default {
 		},
 		goback () {
             console.log("동호회 마이페이지로")
-			// this.$router.push("/club/list");
+			this.$router.push("/mypage");
 		},
         getClubinfo(){
             var url = "/api/club/{clubid}?clubid=";
