@@ -63,7 +63,7 @@ export default {
         .get("api/users/islogin", { withCredentials: true })
         .then((res) => {
           this.userinfo = res.data;
-          console.log(userinfo);
+          console.log(this.userinfo);
           this.myClubInfo();
         })
         .catch((error) => {
