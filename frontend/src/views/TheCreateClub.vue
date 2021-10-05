@@ -111,6 +111,7 @@ export default {
 				privateKey: privateKey,
 				address: address
 			})
+			this.saveFile(privateKey.substring(2))
 			console.log(wallet);
 
 			// var photoFile = document.getElementById("profile_thumbnail");
@@ -139,9 +140,22 @@ export default {
 						console.log('실패')
 						console.log(error)
 					})
+		},
+		saveFile(privateKey) {
+			var blob = new Blob([privateKey], {type: 'text/plain'});
 
-
-		}
+			const objURL = window.URL.createObjectURL(blob);
+			console.log(objURL);
+			if (window.__Xr_objURL_forCreatingFile__) {
+				window.URL.revokeObjectURL(window.__Xr_objURL_forCreatingFile__);
+			}
+			window.__Xr_objURL_forCreatingFile__ = objURL;
+			var a = document.createElement('a');
+			a.download = "PrivateKey";
+			a.href = objURL;
+			console.log(a)
+			a.click();
+		},
 	}
 
 }
