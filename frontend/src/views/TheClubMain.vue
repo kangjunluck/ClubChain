@@ -28,6 +28,7 @@
         </div>
       </div>
       <div class="exist" v-if="postlist.length == 0">등록된 게시물이 없습니다</div>
+      <Footer />
     </div>
 </template>
 
