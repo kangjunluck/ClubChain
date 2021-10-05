@@ -93,7 +93,10 @@
     <div>13</div>
     <img src="/image/user/testing@testing.com_FAgd1lMVcAQNVoc.jpg" alt="" />
     <div>14</div>
-    <img src="/user/testing@testing.com_FAgd1lMVcAQNVoc.jpg" alt="" />"
+    <img
+      src="/resources/user/testing@testing.com_FAgd1lMVcAQNVoc.jpg"
+      alt=""
+    />"
   </div>
 </template>
 

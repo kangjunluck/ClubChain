@@ -63,7 +63,7 @@ export default {
         .get("api/users/islogin", { withCredentials: true })
         .then((res) => {
           this.userinfo = res.data;
-          this.selecturl = res.data.userthumbnail;
+          this.selecturl = "resources" + res.data.userthumbnail;
           this.myClubInfo();
         })
         .catch((error) => {
