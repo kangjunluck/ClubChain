@@ -118,7 +118,7 @@ export default {
         })
     },
     profile() {
-      this.$router.push("/myinfoUpdate")
+      this.$router.push("/mypage")
     }
   },
   created() { 
