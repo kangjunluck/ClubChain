@@ -16,6 +16,7 @@ import ClubMain from "../views/TheClubMain.vue"
 import PostWrite from "../views/ThePostWrite.vue"
 import PostDetail from "../views/ThePostDetail.vue"
 import PostSearch from "../views/ThePostSearch.vue"
+import Album from "../views/Album.vue"
 
 Vue.use(VueRouter);
 
@@ -99,6 +100,11 @@ const routes = [
     path: "/club/post/Search",
     name: "PostSearch",
     component: PostSearch,
+  },
+  {
+    path: "/club/album",
+    name: "Album",
+    component: Album,
   },
 ];
 
