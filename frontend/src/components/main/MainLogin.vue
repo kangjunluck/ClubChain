@@ -101,7 +101,7 @@ export default {
             this.$store.dispatch("isLogin");
             console.log("로그인 데이터");
             console.log(res.data);
-            this.$router.push("club/finance");
+            this.$router.push("club/list");
           }
         })
         .catch((error) => {
