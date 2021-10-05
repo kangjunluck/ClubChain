@@ -14,23 +14,20 @@
       </div>
     </div>
     <div class="row w-50">
-      <div class="h2 p-0 mb-3" style="text-align: left">MyPage</div>
-    </div>
-    <div class="row w-50">
       <div class="d-flex justify-content-between align-items-center mb-3 p-0">
         <img
           :src="selecturl"
           alt=""
           class="px-0"
-          style="width: 3rem; height: 3rem"
+          style="width: 5rem; height: 5rem"
         />
         <div class="w-50">
           <p class="m-0 h5 text-left">{{ this.userinfo.usernickname }}</p>
           <p class="m-0 h6 text-left">{{ this.userinfo.userEmail }}</p>
         </div>
       </div>
-      <button @click="profileUpdate" class="btn update-button w-50">
-        설정
+      <button @click="profileUpdate" class="btn update-button">
+        프로필 설정
       </button>
     </div>
     <hr size="1px" width="60%" />
