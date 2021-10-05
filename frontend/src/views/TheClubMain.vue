@@ -27,6 +27,7 @@
           테스트
         </div>
       </div>
+      <div class="exist" v-if="postlist.length == 0">등록된 게시물이 없습니다</div>
     </div>
 </template>
 
@@ -44,6 +45,10 @@ export default {
   methods: {
     write() {
       this.$router.push("/club/post/write");
+    },
+    detail(postid){
+      this.$store.dispatch("postId", postid);
+      this.$router.push('/club/post/detail');
     }
   },
   created() {
