@@ -2,6 +2,7 @@ package com.blockback.init.service;
 
 import com.blockback.init.common.request.ClubCreatedReq;
 import com.blockback.init.common.response.ClubListRes;
+import com.blockback.init.common.response.ClubRes;
 import com.blockback.init.entity.Board;
 import com.blockback.init.entity.Club;
 import com.blockback.init.entity.User;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,7 +50,10 @@ public class ClubServiceImpl implements ClubService {
             tmp.setName(club.getName());
             tmp.setIntroduce(club.getIntroduce());
             tmp.setProfile_thumbnail(club.getProfile_thumbnail());
-            tmp.setPassword(club.getPassword());
+
+            if(club.getPassword() != null) {
+                tmp.setPassword(club.getPassword());
+            }
             tmp.setOwner_id(club.getUser().getId());
             tmp.setOwner_name(club.getUser().getUsernickname());
 
@@ -59,15 +64,41 @@ public class ClubServiceImpl implements ClubService {
     }
 
     @Override
-    public Club getClubByClubId(Long clubid) {
+    public ClubRes getClubByClubId(Long clubid) {
         Optional<Club> club = clubRepository.findById(clubid);
-        if (club.isPresent()) {
-            return club.get();
+        if (!club.isPresent()) {
+            return null;
         }
-        return null;
+
+        ClubRes res = new ClubRes();
+        res.setId(club.get().getId());
+        res.setName(club.get().getName());
+        res.setIntroduce(club.get().getIntroduce());
+        res.setProfile_thumbnail(club.get().getProfile_thumbnail());
+        res.setClubaccount(club.get().getClubaccount());
+
+        if(club.get().getPassword() != null) {
+            res.setPassword(club.get().getPassword());
+        }
+
+        res.setOwner_name(club.get().getUser().getUsernickname());
+
+        // 시간 설정
+        res.setCreated(dateFormat(club.get().getCreated()));
+
+        // 가입 수 설정
+        List<User_Club_Join> join = userClubRepository.findByClubId(clubid);
+        res.setJoin_num(join.size());
+
+        return res;
     }
 
-    @Override
+    public String dateFormat(Date date) { // 날짜 형식 변환
+        DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return sdFormat.format(date);
+    }
+
+   @Override
     public void createClub(User user, ClubCreatedReq req, MultipartFile clubThumbnail) throws IOException {
 
         Club club = new Club();
@@ -171,7 +202,11 @@ public class ClubServiceImpl implements ClubService {
             tmp.setName(club.getName());
             tmp.setIntroduce(club.getIntroduce());
             tmp.setProfile_thumbnail(club.getProfile_thumbnail());
-            tmp.setPassword(club.getPassword());
+
+            if(club.getPassword() != null) {
+                tmp.setPassword(club.getPassword());
+            }
+
             tmp.setOwner_id(club.getUser().getId());
             tmp.setOwner_name(club.getUser().getUsernickname());
 
@@ -192,7 +227,11 @@ public class ClubServiceImpl implements ClubService {
             tmp.setName(club.getName());
             tmp.setIntroduce(club.getIntroduce());
             tmp.setProfile_thumbnail(club.getProfile_thumbnail());
-            tmp.setPassword(club.getPassword());
+
+            if(club.getPassword() != null) {
+                tmp.setPassword(club.getPassword());
+            }
+
             tmp.setOwner_id(club.getUser().getId());
             tmp.setOwner_name(club.getUser().getUsernickname());
             res.add(tmp);

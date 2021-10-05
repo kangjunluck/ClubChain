@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="footer">
 		<!-- <div>
       <i class="fas fa-wallet fa-lg"></i>
       <i class="fas fa-comment-dollar fa-lg"></i>
@@ -17,11 +17,11 @@
       <i class="far fa-user fa-lg "></i>
       <i class="fas fa-edit fa-lg"></i>
     </div> -->
-    <div>
-      <i class="fas fa-wallet fa-lg walletIcon" @click="moveToFinance"></i>
-      <i class="fas fa-edit fa-lg" @click="moveToWrite"></i>
-      <i class="fas fa-images fa-lg" @click="moveToImage"></i>
-      <i class="fas fa-user fa-lg myPageIcon" @click="moveToMyPage"></i>
+    <div class="d-flex justify-content-around h-100 align-items-center">
+      <p class="fas fa-wallet fa-lg walletIcon" @click="moveToFinance"></p>
+      <p class="fas fa-edit fa-lg" @click="moveToWrite"></p>
+      <p class="fas fa-images fa-lg" @click="moveToImage"></p>
+      <p class="fas fa-user fa-lg myPageIcon" @click="moveToMyPage"></p>
     </div>
   </div>
 </template>
@@ -50,9 +50,16 @@ export default {
 
 <style scoped>
 .walletIcon {
-
 }
-.myPageIcon {
-  font-size: 1.25rem;
+.fas {
+  font-size: 2rem;
+  margin: 0;
+}
+#footer {
+  position: absolute;
+  bottom: 0;
+  height: 4rem;
+  width: 100%;
+  background-color: rgb(219, 234, 253);
 }
 </style>
