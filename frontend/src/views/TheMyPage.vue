@@ -31,18 +31,27 @@
       </button>
     </div>
     <hr size="1px" width="60%" />
-    <div class="row w-50">
-      <div class="p-0 mb-1" style="text-align: left" @click="myClubInfo">
+      <div @click="showmyclub" style="height:30px; width:100%; text-align:left; border-top:1px solid; border-bottom:1px solid">
         가입한 동호회
       </div>
-      <div v-for="club in myclubinfo" :key="club.pk">
-        <p class="mb-1">{{ club.introduce }}</p>
+      <div v-if="showclub">
+        <div v-for="club in myclubinfo" :key="club.pk">
+          <p class="mb-1">{{ club.introduce }}</p>
+        </div>
       </div>
-    </div>
+      <div @click="createInvitation" style="height:30px; width:100%; text-align:left;border-bottom:1px solid">
+        초대장 생성
+      </div>
+      <div @click="goSetting" style="height:30px; width:100%; text-align:left;border-bottom:1px solid">
+        동호회 설정
+      </div>
+      <div v-if="checkuser" @click="userDelete" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
+        동호회 탈퇴
+      </div>
+      <div v-else @click="clubDismantle" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
+        동호회 해체
+      </div>
     <hr />
-    <div class="row w-50">
-      <button @click="userDelete" class="btn delete-button w-50">탈퇴</button>
-    </div>
   </div>
 </template>
 
@@ -54,7 +63,8 @@ export default {
     return {
       userinfo: null,
       myclubinfo: null,
-
+      showclub : false,
+      checkuser : true,
       selecturl: "@/assets/profile.png",
     };
   },
@@ -114,11 +124,58 @@ export default {
     goback() {
       this.$router.push("club/list");
     },
+    showmyclub()
+    {
+      if(this.showclub === false)
+      {
+        this.showclub = true;
+      }
+      else
+        this.showclub = false;
+    },
+    createInvitation()
+    {
+
+    },
+    goSetting()
+    {
+      let url = "/api/club/{clubid}?clubid=" + this.$store.state.selectedClub;
+      http.get(url)
+      .then((res)=>{
+        if(res.data.owner_name == this.userinfo.usernickname)
+        {
+          console.log('동호회 설정창으로 이동');
+        }
+        else{
+          alert('동호회장만 설정할 수 있습니다.');
+        }
+      })
+
+    },
+    checkUser()
+    {
+      let url = "/api/club/{clubid}?clubid=" + this.$store.state.selectedClub;
+      http.get(url)
+      .then((res)=>{
+        if(res.data.owner_name == this.userinfo.usernickname)
+        {
+          this.checkuser = false;
+        }
+        else{
+          this.checkuser = true;
+        }
+      })
+    },
+    clubDismantle()
+    {
+      console.log('동호회 해체');
+    },
   },
   created() {
     this.checkLogin();
+    this.checkUser();
   },
-};
+}
 </script>
 
 <style scoped>
