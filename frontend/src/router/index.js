@@ -9,7 +9,6 @@ import ClubList from "../views/TheClubList.vue";
 import sendToken from "../components/Token/sendToken.vue";
 import Finance from "../views/finance.vue"
 import ClubCreate from "../views/TheCreateClub.vue"
-import MyClub from "../views/TheMyClub.vue"
 import MyPage from "../views/TheMyPage.vue"
 import MyinfoUpdate from "../views/TheMyInfoUpdate.vue"
 import Photos from "../views/Photos.vue"
@@ -65,11 +64,6 @@ const routes = [
     path: "/create",
     name: "ClubCreate",
     component: ClubCreate,
-  },
-  {
-    path: "/club/myclub",
-    name: "MyClub",
-    component: MyClub,
   },
   {
     path: "/mypage",
