@@ -22,8 +22,8 @@
           style="width: 5rem; height: 5rem"
         />
         <div class="w-50">
-          <p class="m-0 h5">{{ this.userinfo.userEmail }}</p>
-          <p class="m-0 h5">{{ this.userinfo.usernickname }}</p>
+          <p class="m-0 h5 text-left">{{ this.userinfo.usernickname }}</p>
+          <p class="m-0 h6 text-left">{{ this.userinfo.userEmail }}</p>
         </div>
       </div>
       <button @click="profileUpdate" class="btn update-button">
