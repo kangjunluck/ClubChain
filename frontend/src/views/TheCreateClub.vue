@@ -2,7 +2,7 @@
 	<div>
 		<!-- 뒤로가기 아이콘 -->
 		<div align="left" class="cancel">
-			<i class="far fa-times-circle fa-2x"></i>
+			<i class="far fa-times-circle fa-2x" @click="goback"></i>
 		</div>
 		<div class="clubCreate form">
 			<h2 class="signup_header">동호회 생성</h2>
@@ -67,7 +67,7 @@
 import $ from "jquery";
 import http from "@/util/http-common";
 // import axios from "axios";
-
+import Web3 from "web3";
 export default {
 	name: 'ClubCreate',
 	data: function () {
@@ -102,17 +102,27 @@ export default {
       // this.selecturl = URL.createObjectURL(this.clubinfos.club_thumbnail);
 		},
 		createSubmit() {
+			var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
+		// 계정생성, 지갑생성
+			let {address,privateKey} = web3.eth.accounts.create();
+			let wallet = web3.eth.accounts.wallet.add(
+			{
+				privateKey: privateKey,
+				address: address
+			})
+			this.saveFile(privateKey.substring(2))
+			console.log(wallet);
 
-			
 			// var photoFile = document.getElementById("profile_thumbnail");
 			const formData = new FormData;
 			// formData.append('profile_thumbnail', photoFile.files[0])
 			// console.log('포토파일', photoFile.files[0])
 			formData.append('club_thumbnail', this.clubinfos.club_thumbnail)
-			formData.append('clubaccount', this.clubinfos.clubaccount)
+			formData.append('clubaccount', address)
 			formData.append('introduce', this.clubinfos.introduce)
 			formData.append('name', this.clubinfos.name)
 			formData.append('password', this.clubinfos.password)
+
 			console.log(formData)	
 		
 			// FormData의 값 확인 
@@ -129,9 +139,25 @@ export default {
 						console.log('실패')
 						console.log(error)
 					})
+		},
+		saveFile(privateKey) {
+			var blob = new Blob([privateKey], {type: 'text/plain'});
 
-
-		}
+			const objURL = window.URL.createObjectURL(blob);
+			console.log(objURL);
+			if (window.__Xr_objURL_forCreatingFile__) {
+				window.URL.revokeObjectURL(window.__Xr_objURL_forCreatingFile__);
+			}
+			window.__Xr_objURL_forCreatingFile__ = objURL;
+			var a = document.createElement('a');
+			a.download = "PrivateKey";
+			a.href = objURL;
+			console.log(a)
+			a.click();
+		},
+		goback () {
+			this.$router.push("/club/list");
+		},
 	}
 
 }
@@ -140,8 +166,8 @@ export default {
 <style>
 .cancel {
 	position: relative;
-	left: 10px;
-	top: 10px;
+	left: 15px;
+	top: 15px;
 }
 
 .clubCreate {
@@ -170,7 +196,7 @@ export default {
 }
 
 .signup_header {
-    width: 60%;
+    width: 100%;
     font-size: 2em;
     text-align: left;
 }
@@ -178,5 +204,6 @@ export default {
 .button {
 	border: 0;
 	outline: 0;
+	height: 6%;
 }
 </style>

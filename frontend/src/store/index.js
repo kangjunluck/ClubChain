@@ -67,6 +67,9 @@ export default new Vuex.Store({
     },
     selectedClub(state) {
       return state.selectedClub;
+    },
+    logininfo(state) {
+      return state.credentials;
     }
   },
   modules: {},

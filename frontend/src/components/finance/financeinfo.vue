@@ -15,16 +15,34 @@
             <span class="button1" @click="transactionHistoryButton">거래내역</span>
             <span class="button1" @click="transferButton">이체</span>
 
-            <span class="button2" @click="encharge">충전</span>
+            <span class="button2" @click="tokenEnchargeButton">충전</span>
           </div>
         </b-col> 
         <b-col cols="1" align-self="center">▶</b-col>
       </b-row>
-     <div style="height:40px;"></div>
-    <Transaction v-if= "componenetStateValue==='transfer'"/>
-    <TransactionHistory v-else-if= "componenetStateValue==='transactionHistory'" v-bind:hst="myhistory" v-bind:cst="clubhistory" />
-    <div v-else v-for="(item,index) in myhistory" v-bind:key="index">
-      {{item.message}}
+     <div style="height:20px;"></div>
+    <Transaction v-if= "componenetStateValue==='transfer'" v-bind:clubAddr="clubAddr" />
+    <TransactionHistory v-else-if= "componenetStateValue==='transactionHistory'" v-bind:balance="balance" v-bind:clubAddr="clubAddr"  v-bind:hst="myhistory" v-bind:cst="clubhistory" />
+    <Encharge v-else-if="componenetStateValue==='tokenEncharge'" v-bind:nickname="myNickName" v-bind:abi="contractAbi" v-bind:contractAddr="contractAddr" 
+    v-bind:myAddr="myAccountNumber" />
+    <div v-else>
+      <b-row>
+        <b-col style="font-size:1.2rem; text-align: left; font-weight: bolder; 
+            margin-left: 12px; ">최근거래</b-col>
+      </b-row>
+    <div style="height:20px;"></div>
+      <div v-for="(item,index) in myhistory.slice(0,5)" v-bind:key="index">
+        <b-row>
+          <b-col style="font-size:1rem;">{{item.message}}</b-col>
+          <b-col style="font-size:1rem;" v-if="item.fromAddr == myAccountNumber">- {{item.value}} CC</b-col>
+          <b-col style="font-size:1rem;" v-else>+ {{item.value}} CC</b-col>
+        </b-row>
+        <b-row>
+          <b-col style="font-size:0.8rem; color:#999999">{{item.date.substring(0,24)}}</b-col>
+          <b-col style="font-size:0.8rem; color:#999999">{{balances[index]}} CC</b-col>
+        </b-row>
+        <hr style=" color:#333333; margin: 0.3em;">
+      </div>
     </div>
     </b-container>
   </div>
@@ -40,24 +58,29 @@ import http from "@/util/http-common";
 import Web3 from "web3";
 import Transaction from './transaction.vue';
 import TransactionHistory from './transactionHistory.vue';
+import Encharge from './encharge.vue';
 export default {
   name: "FinanceInfo",
   data: function () {
     return {
       componenetStateValue: "",
       myAccountNumber: "",
+      myNickName:"",
       contractAbi:"",
       contractAddr:"",
       balance:"",
+      balances:[],
       history:[],
       myhistory:[],
       clubhistory:[],
       clubname:"",
+      clubAddr:"",
     }
   },
   components: {
     Transaction,
-    TransactionHistory
+    TransactionHistory,
+    Encharge,
   },
   props: {
     componenetState: {
@@ -69,12 +92,11 @@ export default {
     // let emailAddr = email[0]+"%40"+email[1];
     let email = encodeURI(this.$store.state.credentials.userEmail)
     const url = "api/users/" + email;
-    console.log(url)
     http
       .get(url)
       .then((res) => {
-        console.log(res);
         this.myAccountNumber = res.data.useraccount;
+        this.myNickName = res.data.usernickname;
         //잔액 조회
         var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
         let contractAddr = '0xbC9e278a4F4ceAb626324Cf9cF1D7ea46F469dB3';
@@ -483,23 +505,64 @@ export default {
       var contract = new web3.eth.Contract(abi,contractAddr); 
         contract.methods.balanceOf(this.myAccountNumber).call() // this.myAccountNumber
         .then(data => {
-          console.log(data);
           this.contractAbi = abi;
           this.contractAddr = contractAddr;
           this.balance = data;
         })
 
+      let url = "api/club/{clubid}?clubid=" + this.$store.state.selectedClub;
+
+      http.get(url)
+      .then(res =>{
+        this.clubname = res.data.name;
+        this.clubAddr = res.data.clubaccount;
+      })
+
       contract.methods.loadRecode().call()
       .then(data =>{
-        console.log(data)
         this.history = data;
+        let temp = [];
+        let temp2 = [];
         for(var i in data)
         {
           if(data[i].fromAddr == this.myAccountNumber || data[i].toAddr == this.myAccountNumber)
-            this.myhistory.push(data[i]);
+          {
+            temp.push(data[i]);
+            // this.myhistory.push(data[i]);
+          }
+          if(data[i].fromAddr == this.clubAddr || data[i].toAddr == this.clubAddr)
+          {
+            temp2.push(data[i]);
+            // this.myhistory.push(data[i]);
+          }
+          
         }
+        this.myhistory = temp.reverse();
+        this.clubhistory = temp2.reverse();
+        // console.log(this.myhistory)
+        // console.log('동호회 거래내역',this.clubhistory);
 
-        console.log(this.myhistory);
+        this.balances.push(this.balance)
+        for (let i = 0; i < this.myhistory.length; i++){
+          if(i==0)
+          {
+            if(this.myhistory[i].fromAddr == this.myAddr)
+            {
+              this.balances.push(this.myhistory[i].value*1 + this.balance*1)
+            }
+            else
+              this.balances.push(this.balance*1 - this.myhistory[i].value*1)
+          }
+          else
+          {
+            if(this.myhistory[i].fromAddr == this.myAddr)
+            {
+              this.balances.push(this.balances[i]*1 + this.myhistory[i].value*1)
+            }
+            else
+              this.balances.push(this.balances[i]*1 - this.myhistory[i].value*1)
+          }
+        }
       })
 
       })
@@ -514,7 +577,6 @@ export default {
       if(this.componenetStateValue !="transactionHistory")
       {
         this.componenetStateValue = "transactionHistory"
-        console.log(this.componenetStateValue)
         // this.$emit("componenetState", this.componenetStateValue);
       }
       else{
@@ -525,6 +587,18 @@ export default {
       if(this.componenetStateValue != "transfer")
       {
         this.componenetStateValue = "transfer";
+        // this.$emit("componenetState", this.componenetStateValue);
+      }
+      else
+      {
+        this.componenetStateValue = "";
+      }
+    },
+    tokenEnchargeButton()
+    {
+      if(this.componenetStateValue != "tokenEncharge")
+      {
+        this.componenetStateValue = "tokenEncharge";
         console.log(this.componenetStateValue);
         // this.$emit("componenetState", this.componenetStateValue);
       }
@@ -532,32 +606,6 @@ export default {
       {
         this.componenetStateValue = "";
       }
-      
-    },
-    encharge()
-    {
-      const Tx = require('ethereumjs-tx').Transaction;
-      var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
-      var contract = new web3.eth.Contract(this.contractAbi,this.contractAddr,{from: '0x97415060E1Ff0d2c51BF6d92B959be7D6316a983'}); //보내는사람 주소
-      let privKey_= "27ddaa90db29f7740736e57703c437595a6f62707aa53d90773cb3fb4c91282d"; // 보내는사람의 개인키
-      let privKey= new Buffer.from(privKey_, "hex");
-      
-      console.log("privateKey = ",privKey);
-      web3.eth.getTransactionCount('0x97415060E1Ff0d2c51BF6d92B959be7D6316a983',(err,txCount)=>{ //보내는 주소
-        const txObject = {
-          'from':'0x97415060E1Ff0d2c51BF6d92B959be7D6316a983', //보내는 주소
-          'nonce': web3.utils.toHex(txCount),
-          'gasLimit': web3.utils.toHex(1000000),
-          'gasPrice': web3.utils.toHex(web3.utils.toWei('10','gwei')),
-          'to': this.contractAddr, //계약 주소
-          'value': '0x0',
-          'data': contract.methods.transfer(this.myAccountNumber,100).encodeABI() //받는 주소, 토큰 갯수
-        }
-        let transaction = new Tx(txObject,{'chain':'ropsten'});
-        transaction.sign(privKey);
-        web3.eth.sendSignedTransaction('0x'+transaction.serialize().toString('hex'))
-        .on('transactionHash',console.log)
-      })
     }
   }
 }

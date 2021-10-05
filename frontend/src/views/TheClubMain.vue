@@ -1,8 +1,12 @@
 <template>
     <div class="main">
       <div class="toparea">
-        <img src="@/assets/plusbtn.png" alt="글쓰기" class="plusbtn" @click="write()">
+        <div class="d-flex justify-content-between h-100 align-items-center">
+          <i class="fas fa-arrow-left"></i>
+          <i class="fas fa-plus" @click="write()" ></i>
+        </div>
       </div>
+
       <img src="@/assets/profile.png" alt="" class="bgphoto">
       <div class="clubmember">
         공개 그룹 - {{5}}명
@@ -34,6 +38,7 @@
 
 <script>
 import http from "@/util/http-common";
+import Footer from '../components/footer/footer.vue';
 
 export default {
   data() {
@@ -42,6 +47,9 @@ export default {
       postlist : "",
       join_num : "",
     };
+  },
+  components: {
+    Footer,
   },
   methods: {
     write() {
@@ -89,6 +97,15 @@ export default {
 </script>
 
 <style scoped>
+.toparea {
+  top: 0;
+  height: 3rem;
+  width: 100%;
+}
+.fas {
+  font-size: 1.5rem;
+  margin: 1rem;
+}
 .plusbtn {
   width:1rem;
   height: 1rem;
@@ -98,11 +115,6 @@ export default {
 .main {
   width: 100%;
   text-align: left;
-}
-.toparea {
-  background-color: pink;
-  height: 3rem;
-  
 }
 .bgphoto {
   width:100%;

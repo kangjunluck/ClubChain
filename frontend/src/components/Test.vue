@@ -8,7 +8,7 @@
     <div>{{ this.$store.state.credentials.usernickname }}</div>
     <div>{{ this.$store.state.credentials.userthumbnail }}</div>
     <div>{{ this.$store.state.credentials.userId }}</div> -->
-    
+
     <div class="small-12 medium-2 large-2 columns">
       <div class="circle">
         <!-- User Profile Image -->
@@ -24,39 +24,80 @@
       <input class="file-upload" type="file" accept="image/*" />
     </div>
     <div>이미지</div>
-    <img src="/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/sss_뜨개질.jpg" alt="">
-    <img src="http://j5b1021.p.ssafy.io/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/sss_뜨개질.jpg" alt="">
-    <img src="j5b1021.p.ssafy.io/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/sss_뜨개질.jpg" alt="">
-    <img src="/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
-    <img src="http://j5b1021.p.ssafy.io/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
-    <img src="j5b1021.p.ssafy.io/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
-    <img src="/main/resources/image/user/sss_뜨개질.jpg" alt="">
-    <img src="/image/user/sss_뜨개질.jpg" alt="">
+    <img
+      src="/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/sss_뜨개질.jpg"
+      alt=""
+    />
+    <img
+      src="http://j5b1021.p.ssafy.io/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/sss_뜨개질.jpg"
+      alt=""
+    />
+    <img
+      src="j5b1021.p.ssafy.io/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/sss_뜨개질.jpg"
+      alt=""
+    />
+    <img
+      src="/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png"
+      alt=""
+    />
+    <img
+      src="http://j5b1021.p.ssafy.io/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png"
+      alt=""
+    />
+    <img
+      src="j5b1021.p.ssafy.io/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png"
+      alt=""
+    />
+    <img src="/main/resources/image/user/sss_뜨개질.jpg" alt="" />
+    <img src="/image/user/sss_뜨개질.jpg" alt="" />
     <div>이미지 끝</div>
     <div>1</div>
-    <img src="/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
-    <div>2</div>  
-    <img src="/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
+    <img
+      src="/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png"
+      alt=""
+    />
+    <div>2</div>
+    <img
+      src="/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png"
+      alt=""
+    />
     <div>3</div>
-    <img src="/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
+    <img
+      src="/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png"
+      alt=""
+    />
     <div>4</div>
-    <img src="/workspace/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
+    <img
+      src="/workspace/PJT/Backend/init/src/main/resources/image/user/default.png"
+      alt=""
+    />
     <div>5</div>
-    <img src="/PJT/Backend/init/src/main/resources/image/user/default.png" alt="">
+    <img
+      src="/PJT/Backend/init/src/main/resources/image/user/default.png"
+      alt=""
+    />
     <div>6</div>
-    <img src="/Backend/init/src/main/resources/image/user/default.png" alt="">
+    <img src="/Backend/init/src/main/resources/image/user/default.png" alt="" />
     <div>7</div>
-    <img src="/init/src/main/resources/image/user/default.png" alt="">
+    <img src="/init/src/main/resources/image/user/default.png" alt="" />
     <div>8</div>
-    <img src="/src/main/resources/image/user/default.png" alt="">
+    <img src="/src/main/resources/image/user/default.png" alt="" />
     <div>9</div>
-    <img src="/main/resources/image/user/default.png" alt="">
+    <img src="/main/resources/image/user/default.png" alt="" />
     <div>10</div>
-    <img src="/resources/image/user/default.png" alt="">
+    <img src="/resources/image/user/default.png" alt="" />
     <div>11</div>
-    <img src="/image/user/default.png" alt="">
+    <img src="/image/user/default.png" alt="" />
     <div>12</div>
-    <img src="/user/default.png" alt="">
+    <img src="/user/default.png" alt="" />
+    <div>13</div>
+    <img src="/image/user/testing@testing.com_FAgd1lMVcAQNVoc.jpg" alt="" />
+    <div>14</div>
+    <img
+      src="/resources/user/testing@testing.com_FAgd1lMVcAQNVoc.jpg"
+      alt=""
+    />"
+    <div style="background-color: red">1</div>
   </div>
 </template>
 
