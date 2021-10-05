@@ -34,7 +34,7 @@
           <!-- 가입한 동호회 리스트 -->
           <div class="clubarea mt-2" >
             <div v-for="club in clublist" v-bind:key="club" class="club">
-              <img :src="resources/club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
+              <img :src="'resources/' + club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
               <!--club 안에 썸네일 주소를 통해 이미지 불러와야함-->
               <div @click="enterClub(club.id)" class="club-name-style">
               {{club.name}}
@@ -55,7 +55,7 @@
           <!-- 전체 동호회 리스트 -->
           <div class="clubarea mt-2" >
             <div v-for="club in totalclublist" v-bind:key="club" class="club">
-              <img :src="resources/club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
+              <img :src="'resources/' + club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
               <!--club 안에 썸네일 주소를 통해 이미지 불러와야함-->
               <div @click="enterClub(club.id)" class="club-name-style">
               {{club.name}}
@@ -106,14 +106,18 @@ export default {
     },
     searchClub() {
       http
-        .get("api/club/search/", this.word, { withCredentials: true })
+        .get("api/club/search/", {
+            params: {
+              word: this.word
+            }
+        })
         .then((res) => {
           this.totalclublist = res.data;
           if(this.totalclublist.length > 0) this.totalclubexist = true;
         })
         .catch((error) => {
           console.log(error);
-          this.$router.push("/")
+          this.$router.push("/club/list")
         })
     }
   },
