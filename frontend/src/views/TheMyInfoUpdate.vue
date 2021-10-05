@@ -1,50 +1,70 @@
 <template>
-      <div class="container d-flex flex-column justify-content-center align-items-center">
-        <div class="row signup_header">
-          <div class="col-9"><span>프로필수정</span></div>
-        </div>
-        <div class="row signup_form">
-          <div class="col-12">
-            <div class="mb-2 d-flex justify-content-between align-items-center">
-              <div class="circle">
-                <img :src="beforeurl" alt="" class="profile-pic"  ref="image"/>
-              </div>
-              <label class="photo-button" for="photo">업로드</label>
-              <input v-on:change="fileSelect()" ref="image" type="file" name="photo" id="photo" class="col-6" style="display:none;" />
-            </div>
+  <div
+    class="
+      container
+      d-flex
+      flex-column
+      justify-content-center
+      align-items-center
+    "
+  >
+    <div class="row signup_header">
+      <div class="col-9"><span>프로필수정</span></div>
+    </div>
+    <div class="row signup_form">
+      <div class="col-12">
+        <div class="mb-2 d-flex justify-content-between align-items-center">
+          <div class="circle">
+            <img :src="beforeurl" alt="" class="profile-pic" ref="image" />
           </div>
-          <input 
-              type="text"
-              id="usernickname"
-              name="usernickname"
-              v-model="usernickname"
-              ref="usernickname"
-              placeholder="닉네임"
-              class="form-control col-12"
-          />
+          <label class="photo-button" for="photo">업로드</label>
           <input
-              type="password"
-              id="password"
-              name="password"
-              v-model="password"
-              ref="password"
-              placeholder="비밀번호"
-              class="form-control"
+            v-on:change="fileSelect()"
+            ref="image"
+            type="file"
+            name="photo"
+            id="photo"
+            class="col-6"
+            style="display: none"
           />
-          <input
-              type="password"
-              id="passwordconfirm"
-              name="passwordconfirm"
-              v-model="passwordconfirm"
-              ref="passwordconfirm"
-              placeholder="비밀번호 확인"
-              class="form-control"
-          />
-          <div class="btn photo-button" @keyup.enter="myInfoUpdate" @click="myInfoUpdate">
-              정보 수정하기
-          </div>
         </div>
       </div>
+      <input
+        type="text"
+        id="usernickname"
+        name="usernickname"
+        v-model="usernickname"
+        ref="usernickname"
+        placeholder="닉네임"
+        class="form-control col-12"
+      />
+      <input
+        type="password"
+        id="password"
+        name="password"
+        v-model="password"
+        ref="password"
+        placeholder="비밀번호"
+        class="form-control"
+      />
+      <input
+        type="password"
+        id="passwordconfirm"
+        name="passwordconfirm"
+        v-model="passwordconfirm"
+        ref="passwordconfirm"
+        placeholder="비밀번호 확인"
+        class="form-control"
+      />
+      <div
+        class="btn photo-button"
+        @keyup.enter="myInfoUpdate"
+        @click="myInfoUpdate"
+      >
+        정보 수정하기
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -55,16 +75,16 @@ export default {
   name: "MyInfoUpdate",
   data() {
     return {
-      userinfo : null,
-      beforeurl : require("@/assets/profile.png"),
+      userinfo: null,
+      beforeurl: this.userinfo.userthumbnail,
 
       usernickname: "",
       useremail: "",
       // usernickname: "",
       // useremail: "",
       image: "",
-      password:"",
-      passwordconfirm:"",
+      password: "",
+      passwordconfirm: "",
       selecturl: "",
     };
   },
@@ -75,17 +95,17 @@ export default {
   methods: {
     checkLogin() {
       http
-        .get("api/users/islogin",{ withCredentials: true })
+        .get("api/users/islogin", { withCredentials: true })
         .then((res) => {
-          console.log(res)
+          console.log(res);
           this.userinfo = res.data;
           this.usernickname = this.userinfo.usernickname;
           this.useremail = this.userinfo.useremail;
         })
-        .catch((error)=>{
-          console.log(error)
-          this.$router.push('Main')
-        })
+        .catch((error) => {
+          console.log(error);
+          this.$router.push("Main");
+        });
     },
     myInfoUpdate() {
       console.log("업데이트");
@@ -98,16 +118,16 @@ export default {
         formData.append("userEmail", this.useremail);
         formData.append("usernickname", this.usernickname);
         http
-          .put(putUrl, formData,  { withCredentials: true })
+          .put(putUrl, formData, { withCredentials: true })
           .then((res) => {
             console.log(res);
-            this.$router.push('MyPage')
+            this.$router.push("MyPage");
           })
           .catch((error) => {
             console.log(error);
           });
       } else {
-        alert("비밀번호를 확인해주세요.")
+        alert("비밀번호를 확인해주세요.");
       }
     },
     fileSelect() {
@@ -159,22 +179,22 @@ export default {
 }
 
 .signup_header {
-    width: 60%;
-    font-size: 1.5rem;
-    text-align: left;
+  width: 60%;
+  font-size: 1.5rem;
+  text-align: left;
 }
 
 .signup_form {
-    width: 60%;
+  width: 60%;
 }
-.photo-button{
+.photo-button {
   padding: 3px 15px;
-  background-color:#1ec0ff;
+  background-color: #1ec0ff;
   border-radius: 2px;
   color: white;
   cursor: pointer;
 }
-.form-control{
+.form-control {
   margin-bottom: 8px;
 }
 </style>
