@@ -65,6 +65,7 @@ export default {
         console.log(error);
         alert("가져오기 실패");
       });
+      
   },
 };
 </script>
