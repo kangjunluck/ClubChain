@@ -8,7 +8,7 @@
             </b-col>
             <b-col class="text-style">{{userinfo.usernickname}}님</b-col>
             <b-col cols="2" align-self="end" class="padding-style">
-              <div class="round-box">
+              <div class="round-box" @click="profile">
                 <img alt="profile" :src="selecturl" class="round"/>
               </div>
             </b-col>
@@ -55,7 +55,7 @@
           <!-- 전체 동호회 리스트 -->
           <div class="clubarea mt-2" >
             <div v-for="club in totalclublist" v-bind:key="club" class="club">
-              <img :src="'resources/' + club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
+              <img :src="'resources/image/club/default.png'" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
               <!--club 안에 썸네일 주소를 통해 이미지 불러와야함-->
               <div @click="enterClub(club.clubid)" class="club-name-style">
               {{club.name}}
@@ -123,6 +123,9 @@ export default {
           console.log(error);
           this.$router.push("/club/list")
         })
+    },
+    profile() {
+      this.$router.push("/myinfoupdate")
     }
   },
   created() { 
