@@ -107,17 +107,17 @@ export default {
 			// FormData의 값 확인 
 			for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
 
-
-
+            var url = "api/club/"
+            url += this.$store.state.selectedClub;
 			http
-				.post("api/club/", formData, { withCredentials: true })
+				.put(url, formData, { withCredentials: true })
 				.then( (res) => {
 					console.log('성공')
 					console.log(res)})
 				.catch((error) => {		
-						console.log('실패')
-						console.log(error)
-					})
+                    console.log('실패')
+                    console.log(error)
+				})
 		},
 		goback () {
             console.log("동호회 마이페이지로")
