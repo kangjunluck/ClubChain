@@ -53,7 +53,7 @@ export default {
       userinfo: null,
       myclubinfo: null,
 
-      selecturl: "@/asserts/profile.png",
+      selecturl: "@/assets/profile.png",
     };
   },
   methods: {
@@ -63,7 +63,7 @@ export default {
         .get("api/users/islogin", { withCredentials: true })
         .then((res) => {
           this.userinfo = res.data;
-          console.log(this.userinfo);
+          this.selecturl = res.data.userthumbnail;
           this.myClubInfo();
         })
         .catch((error) => {
