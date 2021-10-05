@@ -23,7 +23,7 @@
      <div style="height:20px;"></div>
     <Transaction v-if= "componenetStateValue==='transfer'" v-bind:clubAddr="clubAddr" />
     <TransactionHistory v-else-if= "componenetStateValue==='transactionHistory'" v-bind:balance="balance" v-bind:clubAddr="clubAddr"  v-bind:hst="myhistory" v-bind:cst="clubhistory" />
-    <Encharge v-else-if="componenetStateValue==='tokenEncharge'" v-bind:abi="contractAbi" v-bind:contractAddr="contractAddr" 
+    <Encharge v-else-if="componenetStateValue==='tokenEncharge'" v-bind:nickname="myNickName" v-bind:abi="contractAbi" v-bind:contractAddr="contractAddr" 
     v-bind:myAddr="myAccountNumber" />
     <div v-else>
       <b-row>
@@ -65,6 +65,7 @@ export default {
     return {
       componenetStateValue: "",
       myAccountNumber: "",
+      myNickName:"",
       contractAbi:"",
       contractAddr:"",
       balance:"",
@@ -95,6 +96,7 @@ export default {
       .get(url)
       .then((res) => {
         this.myAccountNumber = res.data.useraccount;
+        this.myNickName = res.data.usernickname;
         //잔액 조회
         var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
         let contractAddr = '0xbC9e278a4F4ceAb626324Cf9cF1D7ea46F469dB3';
@@ -537,6 +539,7 @@ export default {
         }
         this.myhistory = temp.reverse();
         this.clubhistory = temp2.reverse();
+        // console.log(this.myhistory)
         // console.log('동호회 거래내역',this.clubhistory);
 
         this.balances.push(this.balance)
