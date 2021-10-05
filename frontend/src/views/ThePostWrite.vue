@@ -61,7 +61,9 @@ export default {
         var url = "/api/";
         url += this.$store.state.selectedClub;
         url += /board/;
-        http.post(url, formData
+        http.post(url, formData, {
+            withCredentials : true
+        }
         ).then( (res) => {
             console.log(res.data);
         }).catch((error) => {
