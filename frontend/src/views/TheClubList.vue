@@ -122,7 +122,7 @@ export default {
     }
   },
   created() { 
-    // this.checkLogin();
+    this.checkLogin();
     http.
       get("/api/club/", {
         withCredentials : true
