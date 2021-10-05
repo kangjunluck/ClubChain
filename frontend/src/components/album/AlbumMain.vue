@@ -31,29 +31,29 @@ export default {
       photoList: null,
     };
   },
-  // created() {
-  //   this.getAlbum();
-  // },
   methods: {
-    // getAlbum() {
-    //   console.log("동호회 사진 불러오기");
-    //   http
-    //     .get("api/" + this.clubId + "board/photo")
-    //     .then((res) => {
-    //       console.log(res);
-    //       console.log(res.total, "전체사진");
-    //       console.log("리스트", res.list);
-    //       this.photoCount = res.total;
-    //       this.photoList = res.list;
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
+    getAlbum() {
+      console.log("동호회 사진 불러오기");
+      http
+        .get("api/" + this.clubId + "board/photo")
+        .then((res) => {
+          console.log(res);
+          console.log(res.total, "전체사진");
+          console.log("리스트", res.list);
+          this.photoCount = res.total;
+          this.photoList = res.list;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     uploadButton() {
       console.log("사진 업로드 버튼");
       this.$emit("stateChange");
     },
+  },
+  created() {
+    this.getAlbum();
   },
 };
 </script>
