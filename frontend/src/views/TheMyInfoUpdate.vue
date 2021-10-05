@@ -129,6 +129,13 @@ export default {
           .put(putUrl, formData, { withCredentials: true })
           .then((res) => {
             console.log(res);
+            this.credentials.userEmail = res.data.userEmail;
+            this.credentials.useraccount = res.data.useraccount;
+            this.credentials.usernickname = res.data.usernickname;
+            this.credentials.userthumbnail = res.data.userthumbnail;
+            this.credentials.userId = res.data.userId;
+            this.$store.dispatch("logininfo", this.credentials);
+            this.$store.dispatch("isLogin");
             this.$router.push("MyPage");
           })
           .catch((error) => {
