@@ -8,7 +8,7 @@
             </b-col>
             <b-col class="text-style">{{userinfo.usernickname}}님</b-col>
             <b-col cols="2" align-self="end" class="padding-style">
-              <div class="round-box">
+              <div class="round-box" @click="profile">
                 <img alt="profile" :src="selecturl" class="round"/>
               </div>
             </b-col>
@@ -123,6 +123,9 @@ export default {
           console.log(error);
           this.$router.push("/club/list")
         })
+    },
+    profile() {
+      this.$router.push("/myinfoupdate")
     }
   },
   created() { 
