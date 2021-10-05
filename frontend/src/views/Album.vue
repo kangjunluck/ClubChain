@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <AlbumNavigator
       v-on:stateChange="doStateChange"
       v-bind:componenetStateEmit="componenetStateEmit"
@@ -10,7 +10,7 @@
       v-on:photoInfo="checkPhotoInfo"
     />
     <AlbumDetail v-if="componenetStateEmit === false" v-bind:photoIndex="photoIndex"/>
-    <Footer />
+    <Footer v-if="componenetStateEmit === true" />
   </div>
 </template>
 
@@ -47,5 +47,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.box{
+  width: 100%;
+  height: 100%;
+}
 </style>

@@ -1,22 +1,5 @@
 <template>
   <div id="footer">
-		<!-- <div>
-      <i class="fas fa-wallet fa-lg"></i>
-      <i class="fas fa-comment-dollar fa-lg"></i>
-      <i class="fas fa-image fa-lg"></i>
-      <i class="far fa-images fa-lg"></i>
-      <i class="fas fa-images fa-lg"></i>
-      <i class="fas fa-user fa-lg"></i>
-      <i class="far fa-user fa-lg "></i>
-      <i class="fas fa-user-circle fa-lg"></i>
-      <i class="fas fa-edit fa-lg"></i>
-    </div>
-    <div>
-      <i class="fas fa-wallet fa-lg"></i>
-      <i class="far fa-images fa-lg"></i>
-      <i class="far fa-user fa-lg "></i>
-      <i class="fas fa-edit fa-lg"></i>
-    </div> -->
     <div class="d-flex justify-content-around h-100 align-items-center">
       <p class="fas fa-wallet fa-lg walletIcon" @click="moveToFinance"></p>
       <p class="fas fa-edit fa-lg" @click="moveToWrite"></p>
