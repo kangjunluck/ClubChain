@@ -2,7 +2,7 @@
 	<div>
 		<!-- 뒤로가기 아이콘 -->
 		<div align="left" class="cancel">
-			<i class="far fa-times-circle fa-2x"></i>
+			<i class="far fa-times-circle fa-2x" @click="goback"></i>
 		</div>
 		<div class="clubCreate form">
 			<h2 class="signup_header">동호회 생성</h2>
@@ -105,12 +105,12 @@ export default {
 			var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
 		// 계정생성, 지갑생성
 			let {address,privateKey} = web3.eth.accounts.create();
-
 			let wallet = web3.eth.accounts.wallet.add(
 			{
 				privateKey: privateKey,
 				address: address
 			})
+			this.saveFile(privateKey.substring(2))
 			console.log(wallet);
 
 			// var photoFile = document.getElementById("profile_thumbnail");
@@ -139,9 +139,25 @@ export default {
 						console.log('실패')
 						console.log(error)
 					})
+		},
+		saveFile(privateKey) {
+			var blob = new Blob([privateKey], {type: 'text/plain'});
 
-
-		}
+			const objURL = window.URL.createObjectURL(blob);
+			console.log(objURL);
+			if (window.__Xr_objURL_forCreatingFile__) {
+				window.URL.revokeObjectURL(window.__Xr_objURL_forCreatingFile__);
+			}
+			window.__Xr_objURL_forCreatingFile__ = objURL;
+			var a = document.createElement('a');
+			a.download = "PrivateKey";
+			a.href = objURL;
+			console.log(a)
+			a.click();
+		},
+		goback () {
+			this.$router.push("/club/list");
+		},
 	}
 
 }

@@ -39,9 +39,7 @@
     </button>
     <div class="links">
       <span class="lostPassword">비밀번호 찾기</span>
-      <router-link :to="{ name: 'Signup' }" class="signUp"
-        >회원가입</router-link
-      >
+      <router-link to="/signup" class="signUp">회원가입</router-link>
       <!-- <span class="signup" @click="signupLink">회원가입</span> -->
     </div>
   </div>
@@ -101,7 +99,7 @@ export default {
             this.$store.dispatch("isLogin");
             console.log("로그인 데이터");
             console.log(res.data);
-            this.$router.push("club/finance");
+            this.$router.push("club/list");
           }
         })
         .catch((error) => {

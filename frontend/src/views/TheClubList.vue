@@ -118,6 +118,7 @@ export default {
       }).catch((error) => {
         console.log(error);
         alert("가져오기 실패");
+
       });    
   },
 };

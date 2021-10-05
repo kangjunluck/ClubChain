@@ -43,9 +43,16 @@ export default {
         const formData = new FormData;
         formData.append('title', this.title);
         formData.append('content', this.content);
-        formData.append('section', "section");
+        formData.append('section', "분류");
         formData.append('clubid', this.$store.state.selectedClub);
         formData.append('userid', this.$store.state.credentials.userId);
+        formData.append('file', "");
+        
+        console.log('title : ' + this.title);
+        console.log('content :' + this.content);
+        console.log('clubid : ' + this.$store.state.selectedClub);
+        console.log('userid : ' + this.$store.state.credentials.userId);
+
         var url = "/api/";
         url += this.$store.state.selectedClub;
         url += /board/;
