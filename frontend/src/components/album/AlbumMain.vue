@@ -21,7 +21,7 @@
 </template>
 
 <script>
-// import http from "@/util/http-common";
+import http from "@/util/http-common";
 export default {
   props: ["componenetStateEmit"],
   data() {
