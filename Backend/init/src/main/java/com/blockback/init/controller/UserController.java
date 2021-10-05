@@ -104,7 +104,7 @@ public class UserController {
             @RequestPart(value = "image", required = false) MultipartFile thumbnail) {
         User user = userService.putUser(putinfo, userId, thumbnail);
 
-        return ResponseEntity.status(201).body(UserResponse.of(201, "Success"));
+        return ResponseEntity.status(201).body(UserResponse.of(201, "Success", user));
     }
 
     @DeleteMapping("/{userId}")
