@@ -20,7 +20,7 @@
           style="width: 3rem; height: 3rem"
         />
         <div class="w-50">
-          <!-- <p class="m-0 h5">{{ this.userinfo.userEmail }}</p> -->
+          <p class="m-0 h5">{{ this.userinfo.userEmail }}</p>
           <p class="m-0 h5">{{ this.userinfo.usernickname }}</p>
         </div>
       </div>
@@ -53,7 +53,7 @@ export default {
       userinfo: null,
       myclubinfo: null,
 
-      // selecturl: this.userinfo.userthumbnail,
+      selecturl: "@/asserts/profile.png",
     };
   },
   methods: {
