@@ -534,6 +534,9 @@ export default {
         transaction.sign(privKey);
         web3.eth.sendSignedTransaction('0x'+transaction.serialize().toString('hex'))
         .on('transactionHash',console.log)
+
+          alert("송금에는 1분가량 시간이 소요됩니다.")
+          location.reload();
       })
     },
     async saveHistory()
