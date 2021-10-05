@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>네비게이터입니다! {{ componenetStateEmit }}</div>
+    <!-- <div>네비게이터입니다! {{ componenetStateEmit }}</div> -->
     <b-container>
       <b-row v-if="componenetStateEmit === true">
         <b-col>앨범</b-col>
