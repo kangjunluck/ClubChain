@@ -18,7 +18,7 @@
       </div>
       <div class="post" v-for="post in postlist" v-bind:key="post">
         <div class="nickname" @click="detail(post.id)">
-          {{post.user.id}}
+          {{post.user.usernickname}}
         </div>
         <div class="content">
           {{post.content}}
@@ -66,6 +66,8 @@ export default {
         withCredentials : true
       }).then((res) => {
         console.log(res.data);
+        console.log("게시글 찍히나 확인");
+        console.log(res.data[0]);
         this.postlist = res.data;
       }).catch((error) => {
         console.log(error);
