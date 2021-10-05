@@ -8,6 +8,11 @@
       align-items-center
     "
   >
+    <div class="toparea position-absolute">
+      <div class="d-flex justify-content-between h-100 align-items-center">
+        <i class="fas fa-arrow-left" @click="goback"></i>
+      </div>
+    </div>
     <div class="row signup_header">
       <div class="col-9"><span>프로필수정</span></div>
     </div>
@@ -138,6 +143,9 @@ export default {
       this.selecturl = URL.createObjectURL(this.image);
       this.beforeurl = URL.createObjectURL(this.image);
     },
+    goback() {
+      this.$router.push("/mypage");
+    },
   },
 };
 </script>
@@ -200,5 +208,14 @@ export default {
 }
 .form-control {
   margin-bottom: 8px;
+}
+.toparea {
+  top: 0;
+  height: 3rem;
+  width: 100%;
+}
+.fas {
+  font-size: 1.5rem;
+  margin: 1rem;
 }
 </style>
