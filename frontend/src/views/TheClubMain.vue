@@ -2,7 +2,7 @@
     <div class="main">
       <div class="toparea">
         <div class="d-flex justify-content-between h-100 align-items-center">
-          <i class="fas fa-arrow-left"></i>
+          <i class="fas fa-arrow-left" @click="goback"></i>
           <i class="fas fa-plus" @click="write()" ></i>
         </div>
       </div>
@@ -94,6 +94,9 @@ export default {
           console.log(error);
           alert("게시글 가져오기 실패");
       })
+    },
+    goback () {
+      this.$router.push('/club/list');
     },
   },
   created() {

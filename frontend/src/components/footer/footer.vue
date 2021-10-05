@@ -36,7 +36,7 @@ export default {
       if(this.$route.path!=='/club/finance') {this.$router.push("finance")}
     },
     moveToWrite() {
-      console.log('글쓰기로 이동')
+      this.$router.push("/club/post/write");
     },
     moveToImage() {
       console.log('사진첩으로 이동')
