@@ -97,6 +97,7 @@
       src="/resources/user/testing@testing.com_FAgd1lMVcAQNVoc.jpg"
       alt=""
     />"
+    <div style="background-color: red">1</div>
   </div>
 </template>
 
