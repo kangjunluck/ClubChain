@@ -49,7 +49,7 @@ public class ClubServiceImpl implements ClubService {
             tmp.setClubid(club.getId());
             tmp.setName(club.getName());
             tmp.setIntroduce(club.getIntroduce());
-            tmp.setProfile_thumbnail(club.getProfile_thumbnail());
+            tmp.setProfile_thumbnail("resources/" + club.getProfile_thumbnail());
 
             if(club.getPassword() != null) {
                 tmp.setPassword(club.getPassword());

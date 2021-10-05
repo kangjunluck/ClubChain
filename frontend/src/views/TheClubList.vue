@@ -32,18 +32,15 @@
           </b-row>
 
           <!-- 가입한 동호회 리스트 -->
-          <div class="clubarea mt-2" >
-            <div v-for="club in clublist" v-bind:key="club" class="club">
-              <img :src="'resources/' + club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="goClub(club.clubid)">
-              <!--club 안에 썸네일 주소를 통해 이미지 불러와야함-->
-              <div @click="goClub(club.clubid)" class="club-name-style">
-              {{club.name}}
-              </div>
-            </div>
-          </div>
-          <div class="notexist" v-if="!clubexist">
-              가입한 동호회가 없습니다.
-          </div>
+          <b-row  v-for="club in clublist" v-bind:key="club">
+            <b-col class="m-2">
+              <img src="https://picsum.photos/1024/400/?image=41" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
+              <b-col @click="enterClub(club.clubid)" class="club-name-style">{{club.name}}</b-col>
+            </b-col>
+          </b-row>
+          <b-row  class="notexist" v-if="!clubexist">
+            <b-col>가입한 동호회가 없습니다.</b-col>
+          </b-row>  
 
           <!-- 전체 동호회 리스트 제목 -->
           <b-row class="mt-3">
@@ -53,19 +50,15 @@
           </b-row>
 
           <!-- 전체 동호회 리스트 -->
-          <div class="clubarea mt-2" >
-            <div v-for="club in totalclublist" v-bind:key="club" class="club">
-              <img :src="'resources/image/club/default.png'" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
-              <!--club 안에 썸네일 주소를 통해 이미지 불러와야함-->
-              <div @click="enterClub(club.clubid)" class="club-name-style">
-              {{club.name}}
-              </div>
-            </div>
-          </div>
-          <div class="notexist" v-if="!totalclubexist">
-              동호회가 존재하지 않습니다.
-          </div>
-
+          <b-row  v-for="club in totalclublist" v-bind:key="club">
+            <b-col class="m-2">
+              <img :src="club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
+              <b-col @click="enterClub(club.clubid)" class="club-name-style">{{club.name}}</b-col>
+            </b-col>
+          </b-row>
+          <b-row  class="notexist" v-if="!totalclubexist">
+            <b-col>동호회가 존재하지 않습니다.</b-col>
+          </b-row>
         </b-container>
     </div>
 </template>
@@ -125,11 +118,11 @@ export default {
         })
     },
     profile() {
-      this.$router.push("/myinfoupdate")
+      this.$router.push("MyinfoUpdate")
     }
   },
   created() { 
-    this.checkLogin();
+    // this.checkLogin();
     http.
       get("/api/club/", {
         withCredentials : true
