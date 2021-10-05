@@ -8,6 +8,11 @@
       align-items-center
     "
   >
+    <div class="toparea position-absolute">
+      <div class="d-flex justify-content-between h-100 align-items-center">
+        <i class="fas fa-arrow-left" @click="goback"></i>
+      </div>
+    </div>
     <div class="row w-50">
       <div class="h2 p-0 mb-3" style="text-align: left">MyPage</div>
     </div>
@@ -109,6 +114,9 @@ export default {
           console.log(error);
         });
     },
+    goback() {
+      this.$router.push("club/list");
+    },
   },
   created() {
     this.checkLogin();
@@ -155,5 +163,14 @@ export default {
   border-radius: 2px;
   color: rgb(255, 10, 10);
   cursor: pointer;
+}
+.toparea {
+  top: 0;
+  height: 3rem;
+  width: 100%;
+}
+.fas {
+  font-size: 1.5rem;
+  margin: 1rem;
 }
 </style>

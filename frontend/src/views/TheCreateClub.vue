@@ -2,7 +2,7 @@
 	<div>
 		<!-- 뒤로가기 아이콘 -->
 		<div align="left" class="cancel">
-			<i class="far fa-times-circle fa-2x"></i>
+			<i class="far fa-times-circle fa-2x" @click="goback"></i>
 		</div>
 		<div class="clubCreate form">
 			<h2 class="signup_header">동호회 생성</h2>
@@ -105,7 +105,6 @@ export default {
 			var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
 		// 계정생성, 지갑생성
 			let {address,privateKey} = web3.eth.accounts.create();
-
 			let wallet = web3.eth.accounts.wallet.add(
 			{
 				privateKey: privateKey,
@@ -155,6 +154,9 @@ export default {
 			a.href = objURL;
 			console.log(a)
 			a.click();
+		},
+		goback () {
+			this.$router.push("/club/list");
 		},
 	}
 
