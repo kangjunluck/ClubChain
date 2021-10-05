@@ -9,7 +9,7 @@
 
       <img src="@/assets/profile.png" alt="" class="bgphoto">
       <div class="clubmember">
-        공개 그룹 - {{5}}명
+        공개 그룹 - {{club.join_num}}명
       </div>
       <div class="notice">
         중요 공지
@@ -43,6 +43,7 @@ import Footer from '../components/footer/footer.vue';
 export default {
   data() {
     return {
+      club : null,
       schedule : "",
       postlist : "",
       join_num : "",
@@ -58,40 +59,46 @@ export default {
     detail(postid){
       this.$store.dispatch("postId", postid);
       this.$router.push('/club/post/detail');
-    }
+    },
+    getClubinfo(){
+      var url = "/api/club/";
+      url += this.$store.state.selectedClub;
+      http.
+        get(url, {
+          withCredentials : true
+        }).then((res) => {
+          console.log(res.data);
+          console.log("동호회 정보");
+          console.log(res.data);
+          this.club = res.data;
+          console.log(this.club);
+        }).catch((error) => {
+          console.log(error);
+          alert("동호회 가져오기 실패");
+      })
+    },
+    getBoardinfo(){
+      var url = "/api/";
+      url += this.$store.state.selectedClub;
+      url += "/board/";
+      http.
+        get(url, {
+          withCredentials : true
+        }).then((res) => {
+          console.log(res.data);
+          console.log("게시글 찍히나 확인");
+          console.log(res.data[0]);
+          this.postlist = res.data;
+          console.log(this.postlist);
+        }).catch((error) => {
+          console.log(error);
+          alert("게시글 가져오기 실패");
+      })
+    },
   },
   created() {
-    var url = "/api/";
-    url += this.$store.state.selectedClub;
-    url += "/schedule/";
-    http.
-      get(url, {
-        withCredentials : true
-      }).then((res) => {
-        console.log(res.data[0]);
-        this.schedule = res.data[0];
-      }).catch((error) => {
-        console.log(error);
-        alert("일정 가져오기 실패");
-      })
-
-    url = "/api/";
-    url += this.$store.state.selectedClub;
-    url += "/board/";
-    http.
-      get(url, {
-        withCredentials : true
-      }).then((res) => {
-        console.log(res.data);
-        console.log("게시글 찍히나 확인");
-        console.log(res.data[0]);
-        this.postlist = res.data;
-        console.log(this.postlist);
-      }).catch((error) => {
-        console.log(error);
-        alert("게시글 가져오기 실패");
-      })
-
+    this.getClubinfo();
+    this.getBoardinfo();
   },
 };
 </script>

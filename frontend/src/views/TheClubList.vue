@@ -36,7 +36,7 @@
             <div v-for="club in clublist" v-bind:key="club" class="club">
               <img :src="'resources/' + club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
               <!--club 안에 썸네일 주소를 통해 이미지 불러와야함-->
-              <div @click="enterClub(club.id)" class="club-name-style">
+              <div @click="goClub(club.id)" class="club-name-style">
               {{club.name}}
               </div>
             </div>
@@ -86,6 +86,10 @@ export default {
     };
   },
   methods: {
+    goClub(clubid) {
+      this.$store.dispatch("selectedClub", clubid);
+      this.$router.push({name : "ClubMain"});
+    },
     enterClub(clubid) {
       this.$store.dispatch("selectedClub", clubid);
       console.log(this.$store.state.selectedClub);
