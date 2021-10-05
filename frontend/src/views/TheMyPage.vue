@@ -51,6 +51,9 @@
       <div v-else @click="clubDismantle" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
         동호회 해체
       </div>
+      <div @click="logout" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
+        로그아웃
+      </div>
     <hr />
   </div>
 </template>
@@ -171,9 +174,19 @@ export default {
     {
       console.log('동호회 해체');
     },
+    logout() {
+      http
+        .delete("api/users/logout", { withCredentials: true })
+        .then((res) => {
+          console.log("logout");
+          console.log(res.data);
+        })
+
+        this.$router.push("/");
+    }
   },
   created() {
-    this.checkLogin();
+    // this.checkLogin();
     this.checkUser();
   },
 }
