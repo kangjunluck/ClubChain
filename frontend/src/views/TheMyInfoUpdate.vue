@@ -76,12 +76,9 @@ export default {
   data() {
     return {
       userinfo: null,
-      beforeurl: this.userinfo.userthumbnail,
-
+      beforeurl: "@/assets/profile.png",
       usernickname: "",
       useremail: "",
-      // usernickname: "",
-      // useremail: "",
       image: "",
       password: "",
       passwordconfirm: "",
@@ -101,10 +98,16 @@ export default {
           this.userinfo = res.data;
           this.usernickname = this.userinfo.usernickname;
           this.useremail = this.userinfo.useremail;
+          if (
+            this.userinfo.userthumbnail !== null ||
+            this.userinfo.userthumbnail !== ""
+          ) {
+            this.beforeurl = "resources/" + this.userinfo.userthumbnail;
+          }
         })
         .catch((error) => {
           console.log(error);
-          this.$router.push("Main");
+          this.$router.push("/");
         });
     },
     myInfoUpdate() {
@@ -162,7 +165,7 @@ export default {
   overflow: hidden;
   width: 6rem;
   height: 6rem;
-  border: 6px solid rgba(0, 0, 0, 0.1);
+  /* border: 6px solid rgba(0, 0, 0, 0.1); */
   /* background-color: red; */
   display: flex;
   align-items: center;
