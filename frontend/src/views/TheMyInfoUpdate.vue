@@ -68,6 +68,12 @@
       >
         정보 수정하기
       </div>
+      <div
+        class="btn logout-button"
+        @click="logout"
+      >
+        로그아웃
+      </div>
     </div>
   </div>
 </template>
@@ -91,7 +97,7 @@ export default {
     };
   },
   created: function () {
-    this.checkLogin();
+    // this.checkLogin();
     $(document).ready(function () {});
   },
   methods: {
@@ -153,6 +159,16 @@ export default {
     goback() {
       this.$router.push("/mypage");
     },
+    logout() {
+      http
+        .delete("api/users/logout", { withCredentials: true })
+        .then((res) => {
+          console.log("logout");
+          console.log(res.data);
+        })
+
+        this.$router.push("/");
+    }
   },
 };
 </script>
@@ -224,5 +240,13 @@ export default {
 .fas {
   font-size: 1.5rem;
   margin: 1rem;
+}
+.logout-button {
+  padding: 3px 15px;
+  background-color: #999999;
+  margin-top: 7px;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
 }
 </style>
