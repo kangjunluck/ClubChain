@@ -43,9 +43,10 @@ public class BoardController {
     public List<Board> searchAll(@PathVariable("clubid") Long clubid)
     {
         List<Board> boardList = boardService.getBoardsByClubId(clubid);
+
+
         return boardList;
     }
-
     @GetMapping(value = "/{boardid}")
     @ApiOperation(value = "게시글 단일 조회")
     @ApiResponses({

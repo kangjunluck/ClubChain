@@ -7,6 +7,7 @@ import com.blockback.init.common.request.UserPutReq;
 import com.blockback.init.common.request.UserRegisterPostReq;
 import com.blockback.init.common.response.MessageResponse;
 import com.blockback.init.common.response.UserResponse;
+import com.blockback.init.entity.Board;
 import com.blockback.init.entity.User;
 import com.blockback.init.service.EmailService;
 import com.blockback.init.service.UserService;
@@ -22,6 +23,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 
 @RestController
@@ -188,5 +190,19 @@ public class UserController {
             return ResponseEntity.status(200).body(UserResponse.of(200, "Success", user));
         }
         return ResponseEntity.status(400).body(UserResponse.of(200, "Success", user));
+    }
+
+    @GetMapping("/board")
+    @ApiOperation(value = "모든 게시글 조회")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "성공"),
+            @ApiResponse(code = 500, message = "서버 오류")
+    })
+    public List<Board> getBoards()
+    {
+        List<Board> boardList = userService.getBoards();
+
+//        System.out.println(boardList.get(0).toString());
+        return boardList;
     }
 }

@@ -13,12 +13,12 @@
         <i class="fas fa-arrow-left" @click="goback"></i>
       </div>
     </div>
-    <div class="row w-50">
+    <div class="row" style="padding-left: 33px; padding-right: 33px;">
       <div class="d-flex justify-content-between align-items-center mb-3 p-0">
         <img
           :src="selecturl"
           alt=""
-          class="px-0"
+          class="px-0 circle"
           style="width: 5rem; height: 5rem"
         />
         <div class="w-50">
@@ -31,7 +31,8 @@
       </button>
     </div>
     <hr size="1px" width="60%" />
-      <div @click="showmyclub" style="height:30px; width:100%; text-align:left; border-top:1px solid; border-bottom:1px solid">
+    <div style="width:85%;">
+      <div @click="showmyclub" style="line-height: 1.9; height:30px; width:100%; text-align:left; border-top:1px solid; border-bottom:1px solid">
         가입한 동호회
       </div>
       <div v-if="showclub">
@@ -39,15 +40,21 @@
           <p class="mb-1">{{ club.name }}</p>
         </div>
       </div>
-      <div @click="myWrite" style="height:30px; width:100%; text-align:left;border-bottom:1px solid">
+      <div @click="showBoard" style="line-height: 1.9; height:30px; width:100%; text-align:left;border-bottom:1px solid">
         내가 쓴 글
       </div>
-      <div @click="logout" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
+        <div v-if="showboard">
+          <div v-for="board in boards" :key="board.id">
+              <p style="line-height: 1.9; text-align: left; padding-left: 20px; margin-bottom: 0;">● {{board.title}}</p>
+          </div>
+      </div>
+      <div @click="logout" style="line-height: 1.9; height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
         로그 아웃
       </div>
-      <div @click="userDelete" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
+      <div @click="userDelete" style="line-height: 1.9; height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
         회원 탈퇴
       </div>
+    </div>
   
     <hr />
   </div>
@@ -62,7 +69,9 @@ export default {
       userinfo: null,
       myclubinfo: null,
       showclub : false,
+      showboard: false,
       selecturl: "@/assets/profile.png",
+      boards:[],
     };
   },
   methods: {
@@ -144,9 +153,32 @@ export default {
       else
         this.showclub = false;
     },
+    showBoard()
+    {
+        if(!this.showboard)
+        {
+            this.showboard = true;
+            this.myWrite();
+        }
+        else
+        {
+            this.showboard = false;
+            this.boards = [];
+        }
+    },
     myWrite()
     {
-      console.log("내가 쓴 글목록")
+      let url = "/api/users/board";
+        http.get(url)
+        .then((res)=>{
+            // console.log(res);
+            res.data.forEach(item => {
+                if(item.user.userEmail == this.$store.state.credentials.userEmail)
+                {
+                    this.boards.push(item);
+                }
+            });
+        })
     },
   },
   created() {
