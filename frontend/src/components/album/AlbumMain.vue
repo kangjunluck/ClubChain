@@ -114,10 +114,11 @@ export default {
     },
     divSizeChange() {
       console.log('Works!')          
-      var a = $(".EqHeihtDiv").width()
-      console.log('높이', a)
-      $(".EqHeihtDiv").each(function(index, item){
-        $(item).height(a)
+      $(".EqHeihtDiv").each(function(){
+        var a = $(".EqHeihtDiv").width()
+        $(this).height(a)
+        console.log('높이', a)
+    
       })
     },
     test() {
