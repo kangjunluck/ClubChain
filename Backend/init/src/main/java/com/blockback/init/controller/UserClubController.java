@@ -2,8 +2,10 @@ package com.blockback.init.controller;
 
 import com.blockback.init.common.request.ClubCreatedReq;
 import com.blockback.init.common.response.ClubListRes;
+import com.blockback.init.common.response.ClubRes;
 import com.blockback.init.common.response.MessageResponse;
 import com.blockback.init.entity.Board;
+import com.blockback.init.entity.Club;
 import com.blockback.init.entity.User;
 import com.blockback.init.entity.User_Club_Join;
 import com.blockback.init.service.ClubService;
@@ -23,6 +25,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/{clubid}")
@@ -57,7 +60,7 @@ public class UserClubController {
     @ApiOperation(value = "동호회 가입하기", notes = "동호회를 가입한다.")
     public ResponseEntity<MessageResponse> signClub(
             @ApiIgnore HttpSession session,
-            @PathVariable("clubid") Long clubid) throws IOException {
+            @PathVariable("clubid") Long clubid, @RequestBody Map<String, String> password) throws IOException {
         String owner_email = (String) session.getAttribute("LoginUser");
         // 유저 정보
         User user = userService.getUserByUserEmail(owner_email);
@@ -66,6 +69,14 @@ public class UserClubController {
         if (userclub != null){
             return ResponseEntity.status(401).body(MessageResponse.of(401, "잘못된 요청입니다."));
         }
+
+        // 비밀번호 추출
+        ClubRes club = clubService.getClubByClubId(clubid);
+        String pass = password.get("password");
+        if(club.getPassword() != null && !club.getPassword().equals(pass)) {
+            return ResponseEntity.status(400).body(MessageResponse.of(400, "FAIL"));
+        }
+
         // 동호회 가입
         userClubService.signClub(user, clubid);
         return ResponseEntity.status(200).body(MessageResponse.of(200, "Success"));
