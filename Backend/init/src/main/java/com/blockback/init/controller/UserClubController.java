@@ -60,7 +60,7 @@ public class UserClubController {
     @ApiOperation(value = "동호회 가입하기", notes = "동호회를 가입한다.")
     public ResponseEntity<MessageResponse> signClub(
             @ApiIgnore HttpSession session,
-            @PathVariable("clubid") Long clubid, @RequestBody Map<String, String> password) throws IOException {
+            @PathVariable("clubid") Long clubid, @RequestParam String password) throws IOException {
         String owner_email = (String) session.getAttribute("LoginUser");
         // 유저 정보
         User user = userService.getUserByUserEmail(owner_email);
@@ -71,9 +71,8 @@ public class UserClubController {
         }
 
         // 비밀번호 추출
-        ClubRes club = clubService.getClubByClubId(clubid);
-        String pass = password.get("password");
-        if(club.getPassword() != null && !club.getPassword().equals(pass)) {
+        ClubRes club = clubService.getClubByClubId(clubid);;
+        if(club.getPassword() != null && !club.getPassword().equals(password)) {
             return ResponseEntity.status(400).body(MessageResponse.of(400, "FAIL"));
         }
 
