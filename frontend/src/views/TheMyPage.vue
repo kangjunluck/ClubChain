@@ -186,7 +186,7 @@ export default {
     }
   },
   created() {
-    // this.checkLogin();
+    this.checkLogin();
     this.checkUser();
   },
 }
