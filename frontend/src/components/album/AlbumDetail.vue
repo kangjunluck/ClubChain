@@ -1,16 +1,22 @@
 <template>
-  <div class="box">
+  <div class="container
+      d-flex
+      flex-column
+      justify-content-center
+      align-items-center">
 
     <div class="image_area">
-      <!-- <img class="image" :src="'/resources/'+photo.photo_address" alt="상세 이미지"> -->
-      <img class="image" src="@/assets/cats.jpg" alt="이미지">
+      <img class="image" :src="'/resources/'+photo.photo_address" alt="상세 이미지">
+      <!-- <img class="image" src="@/assets/cats.jpg" alt="이미지"> -->
     </div>
-    <div>
-      <div>야근 중</div>
-      <img :src="'/resources/'+photo.userthumbnail" alt="">
-      <div>2021-10-06 07:54:09</div>
-      <div>{{photo.user_name}}</div>
-      <div>{{afterDayFormat}}</div>
+    <div class="row w-50">
+      <div class="d-flex justify-content-between align-items-center mb-3 p-0">
+        <img class="circle px-0" :src="'/resources/'+photo.userthumbnail" alt="">
+        <div>
+          <p class="m-0 h5" style="text-align:left;">>{{photo.user_name}}</p>
+          <p class="m-0 h6" style="text-align:left;">{{afterDayFormat}}</p>
+        </div>
+      </div>
     </div>
 
     <!-- <div>{{photo}}</div>
@@ -58,7 +64,22 @@ export default {
 </script>
 
 <style scoped>
-.box{
+.circle {
+  /* box-sizing: border-box; */
+  box-sizing: content-box;
+  position: relative;
+  border-radius: 1000px !important;
+  overflow: hidden;
+  width: 20vw;
+  height: 20vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: -webkit-flex;
+  -webkit-align-item: center;
+  -webkit-justify-content: center;
+}
+.container{
   width:100%;
   min-height:80%;
 }
