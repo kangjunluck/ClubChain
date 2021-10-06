@@ -81,6 +81,7 @@ export default {
 }
 #footer {
   border-top: 1px solid;
+  border-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   bottom: 0;
   height: 3.5rem;
