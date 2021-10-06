@@ -131,7 +131,6 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* background-color: aqua; */
   justify-content: center;
 }
 .empty {
