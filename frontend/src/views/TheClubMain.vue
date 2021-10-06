@@ -8,7 +8,7 @@
       </div>
 
       <div class="clubname">
-        clubname
+        {{club.clubname}}
       </div>
       <div class="clubmember">
         공개 그룹 - {{club.join_num}}명
@@ -95,7 +95,7 @@ export default {
       var url = "/api/";
       url += this.$store.state.selectedClub;
       url += "/board/";
-      url = "/api/30/board/";   //로컬 테스트용
+      //url = "/api/30/board/";   //로컬 테스트용
       http.
         get(url, {
           withCredentials : true
