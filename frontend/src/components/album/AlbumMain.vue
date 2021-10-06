@@ -46,29 +46,8 @@
       <br />
       첫 사진을 업로드 해주세요.
     </div>
-    <!-- <button @click="test()">클릭</button>
-    <div>뭔데</div>
-    <b-row>
-      <b-col
-        id="test"
-        cols="4"
-      >
-        모야모야
-      </b-col>
-      <b-col
-        id="test"
-        cols="4"
-      >
-        모야모
-      </b-col>
-      <b-col
-        id="test"
-        cols="4"
-      >
-        모야
-      </b-col>
-    </b-row>
-    <div>뭐야</div> -->
+    <button @click="test()">클릭</button>
+
   </div>
   
 </template>
