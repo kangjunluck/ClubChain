@@ -3,7 +3,7 @@
     <!-- <div>앨범 상세 페이지</div> -->
     <!-- <div>{{photoIndex}}</div> -->
     <div class="image_area">
-      <img :src="'/resources/'+photo.photo_address" alt="상세 이미지">
+      <img class="image" :src="'/resources/'+photo.photo_address" alt="상세 이미지">
       
       <!-- <img class="image" src="@/assets/cats.jpg" alt="이미지"> -->
     </div>
@@ -36,8 +36,6 @@ export default {
   margin: 0 0 0 0;
 }
 .image{
-  width:100%;
-
   object-fit:cover;
 }
 </style>
