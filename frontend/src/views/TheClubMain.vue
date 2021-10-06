@@ -25,8 +25,8 @@
       <div class="space"></div>
       <div class="post" v-for="post in postlist" v-bind:key="post" @click="detail(post.id)">
         <div class="nickname">
-            <!--<img :src="getThumbnail(post.userthumbnail)" alt="프로필" class="round">-->
-            <img src="@/assets/gold.png" alt="a" class="round"> 
+            <img :src="getThumbnail(post.userthumbnail)" alt="프로필" class="round">
+            <!--<img src="@/assets/gold.png" alt="a" class="round"> -->
           <div class="profile">
             <div class="usernickname">{{post.usernickname}}</div>
             <div class="created">{{post.created}}</div>
@@ -36,8 +36,8 @@
         <div class="title">
           {{post.title}}
         </div>
-          <!--<img :src="getPhotoThumbnail(post.photo_thumbnail)" alt="이미지" class="postimage">로컬 테스트용-->
-        <img src="@/assets/gold.png" alt="a" class="postimage"> 
+        <img :src="getPhotoThumbnail(post.photo_thumbnail)" alt="이미지" class="postimage">
+        <!--<img src="@/assets/gold.png" alt="a" class="postimage"> 로컬 테스트용-->
         <div class="content">
           {{post.content}}
         </div>
