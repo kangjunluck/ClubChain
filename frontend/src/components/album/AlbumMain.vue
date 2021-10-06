@@ -57,8 +57,10 @@ export default {
           // console.log(res.data.total, "전체사진");
           // console.log("리스트", res.data.list);
           console.log(res.data);
-          // this.photoCount = res.data.total;
-          // this.photoList = res.data.list;
+          console.log(res.data.total);
+          console.log(res.data.List);
+          this.photoCount = res.data.total;
+          this.photoList = res.data.List;
         })
         .catch((error) => {
           console.log(error);
