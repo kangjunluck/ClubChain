@@ -3,15 +3,15 @@
     <AlbumNavigator
       v-on:stateChange="doStateChange"
       v-bind:componenetStateEmit="componenetStateEmit"
-      v-bind:photo="photo"
       v-bind:index="index"
+      v-bind:photoCoun="photoCount"
     />
     <AlbumMain
       v-if="componenetStateEmit === true"
       v-on:stateChange="doStateChange"
       v-on:photoInfo="checkPhotoInfo"
     />
-    <AlbumDetail v-if="componenetStateEmit === false" v-bind:photoIndex="photoIndex"/>
+    <AlbumDetail v-if="componenetStateEmit === false" v-bind:index="index" v-bind:photo="photo" v-bind:photoCoun="photoCount"/>
     <Footer v-if="componenetStateEmit === true" />
   </div>
 </template>
@@ -35,20 +35,19 @@ export default {
       componenetStateEmit: true,
       index: "",
       photo: "",
+      photoCount: 0,
     };
   },
   methods: {
     doStateChange() {
       this.componenetStateEmit = !this.componenetStateEmit;
     },
-    checkPhotoInfo(photo, index){
+    checkPhotoInfo(photo, index, photoCount){
       this.photo = photo
       this.index = index
-      console.log('부모', this.photoIndex, this.index)
-
+      this.photoCount = photoCount
+      console.log('부모', this.photo, this.index)
     },
-
-
   },
 };
 </script>

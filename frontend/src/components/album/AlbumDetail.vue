@@ -3,7 +3,11 @@
     <!-- <div>앨범 상세 페이지</div> -->
     <!-- <div>{{photoIndex}}</div> -->
     <div class="image_area">
-      웅
+      <div>{{photo}}</div>
+      <div>{{photo.photo_address}}</div>
+      <div>{{photo.time}}</div>
+      <div>{{photo.user_name}}</div>
+      <div>{{index}}</div>
       <!-- <img class="image" src="@/assets/cats.jpg" alt="이미지"> -->
     </div>
     <div>하단</div>
@@ -12,7 +16,7 @@
 
 <script>
 export default {
-  props: ["photoIndex"],
+  props: ["photo", "index"],
 };
 </script>
 

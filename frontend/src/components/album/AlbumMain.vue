@@ -10,7 +10,6 @@
         cols="4"
         style="overflow: hidden"
       >
-        <div>{{index}}</div>
         <img
           class="image_resize"
           :src="'/resources/' + photo.photo_address"
@@ -96,7 +95,7 @@ export default {
       console.log("자식2", photo);
       console.log("자식2=index", index);
       this.$emit("stateChange");
-      this.$emit("photoInfo", photo, index);
+      this.$emit("photoInfo", photo, index, this.photoCount);
       // ?
     },
     test() {
