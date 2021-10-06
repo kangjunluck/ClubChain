@@ -91,7 +91,7 @@ export default {
     };
   },
   created: function () {
-    // this.checkLogin();
+    this.checkLogin();
     $(document).ready(function () {});
   },
   methods: {
