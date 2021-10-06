@@ -28,15 +28,13 @@ export default {
       this.makeinit()
       this.onwallet = true;
       console.log(this.onwallet+"11111111111")
-      if(this.$route.path!=='/club/finance') {
-        this.$router.push("finance")
-        }
+      this.$router.push("/club/finance")
     },
     moveToWrite() {
       this.$router.push("/club/post/write");
     },
     moveToImage() {
-      console.log('사진첩으로 이동')
+      this.$router.push("/club/album");
     },
     moveToMyPage() {
       this.$router.push("/club/mypage")
