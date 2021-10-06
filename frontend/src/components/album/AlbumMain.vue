@@ -77,7 +77,7 @@ export default {
           // console.log(res.data.total);
           // console.log(res.data.list);
           this.photoCount = res.data.total;
-          this.photoList = res.data.List;
+          this.photoList = res.data.list;
           console.log(this.photoCount);
           console.log(this.photoList);
           console.log(this.photoList[0]);
