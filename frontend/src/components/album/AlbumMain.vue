@@ -49,6 +49,7 @@ export default {
     getAlbum() {
       console.log("동호회 사진 불러오기");
       console.log("this.clubId");
+      console.log(this.clubId);
       http
         .get("api/" + this.clubId + "board/photo")
         .then((res) => {
