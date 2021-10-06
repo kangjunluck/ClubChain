@@ -152,7 +152,7 @@ export default {
     },
     goback() {
       this.$router.push("/mypage");
-    }
+    },
   },
 };
 </script>
