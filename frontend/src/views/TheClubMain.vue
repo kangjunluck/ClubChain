@@ -30,12 +30,15 @@
             {{post.usernickname}}
             {{post.created}}
           </div>
-          
         </div>
+
         <div class="title">
           {{post.title}}
         </div>
-        <img :src="getPhotoThumbnail(post.photo_thumbnail)" alt="이미지" class="postimage">
+        <div class="photo-box">
+          <img :src="getPhotoThumbnail(post.photo_thumbnail)" alt="이미지" class="postimage">
+          <!--<img src="@/assets/gold.png" alt="a" class="postimage"> 로컬 테스트용-->
+        </div>
         <div class="content">
           {{post.content}}
         </div>
@@ -93,7 +96,7 @@ export default {
       var url = "/api/";
       url += this.$store.state.selectedClub;
       url += "/board/";
-      //url = "/api/30/board/";   //배포시 지울것
+      //url = "/api/30/board/";   //로컬 테스트용
       http.
         get(url, {
           withCredentials : true
@@ -117,22 +120,7 @@ export default {
     getPhotoThumbnail(url) {
       return "/resources/" + url;
     }
-    /*
-    imageexist(post) {
-      var url = "/api/";
-      url += this.$store.state.selectedClub;
-      http.
-        get(url, {
-          withCredentials : true
-        }).then((res) => {
-          
-          
-        }).catch((error) => {
-          console.log(error);
-      })
-      if(post.)
-    }
-    */
+    
   },
   created() {
     this.getClubinfo();
@@ -178,15 +166,14 @@ export default {
   height: 3rem;
   border-bottom : 1px solid black;
 }
-.post{
-  height: 12rem;
-}
+
 .nickname{
   height: 3rem;
 }
 
 .title {
   margin-top: 2rem;
+  font-weight: 600;
 }
 
 .content{
