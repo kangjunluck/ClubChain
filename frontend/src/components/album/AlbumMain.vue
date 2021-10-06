@@ -7,11 +7,12 @@
       <b-col
         v-for="photo in photoList"
         v-bind:key="photo"
-        class="photo_list EqHeightDiv"
+        class="EqHeightDiv photo_list"
         cols="4"
         style="overflow: hidden"
       >
         <img
+          class="image_resize"
           :src="'/resources/' + photo.photo_address"
           alt="앨범 이미지"
           @click="photoClick(photo)"
@@ -31,7 +32,7 @@
       <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
      -->
 
-    <!-- <div  class="image_area EqHeightDiv" @click="photoClick()">
+    <div  class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
     </div>
     <div class="image_area EqHeightDiv" @click="photoClick()">
@@ -40,7 +41,7 @@
 
     <div class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
-    </div> -->
+    </div>
     <div v-if="photoCount === 0" class="photos_area">
       업로드 된 사진이 없습니다.
       <br />
@@ -53,9 +54,16 @@
 </template>
 
 <script>
-
+$(window).resize(function(){
+  $('.EqHeightDiv').each(function() {
+  console.log('너비', a)
+  var a = $('.EqHeightDiv').width()
+  $('.EqHeightDiv').height(a)
+  })
+}).resize();
 import http from "@/util/http-common";
 import $ from "jquery";
+
 export default {
   props: ["componenetStateEmit"],
   data() {
@@ -77,13 +85,13 @@ export default {
           console.log('응답', res);
           this.photoCount = res.data.total;
           this.photoList = res.data.list;        
-            console.log('Works!')          
-            var a = $(".EqHeightDiv").width()
-            $(".EqHeightDiv").each(function(){
-            $(this).height(a)
-            console.log('높이', a)
-          })
-          console.log('end')
+            // console.log('Works!')          
+            // var a = $(".EqHeightDiv").width()
+            // $(".EqHeightDiv").each(function(){
+            // $(this).height(a)
+            // console.log('높이', a)
+          // })
+          // console.log('end')
           
         })
         .catch((error) => {
@@ -111,25 +119,19 @@ export default {
   },
   created() {
     this.getAlbum();
-    var viewportWidth = $(window).width();
-    this.rowHeight = viewportWidth/3
-    console.log(viewportWidth)
-    console.log(this.rowHeight)
+    // var viewportWidth = $(window).width();
+    // this.rowHeight = viewportWidth/3
+    // console.log(viewportWidth)
+    // console.log(this.rowHeight)
   },
-  mounted() {
-      console.log('Works!')          
-      $(".EqHeightDiv").each(function(){
-      var a = $(this).width()
-      $(this).height(a)
-      console.log('높이', a)
-      console.log('end')
-
-    // this.$nextTick(function(){
-    //   console.log("넥스트");
-    //   this.divSizeChange();
-    // }
-      })
-  },
+  // mounted() {          
+  //     var a = $(this).width()
+  //     $(".EqHeightDiv").each(function(){
+  //     $(this).height(a)
+  //     console.log('높이', a)
+  //     console.log('end')
+  //     })
+  // },
 };
 </script>
 
@@ -151,6 +153,7 @@ export default {
 }
 .photo_list {
   background-color: yellow;
+  padding: 2px 2px 2px 2px;
 }
 .image_area {
   background-color: aquamarine;
@@ -170,5 +173,10 @@ export default {
   padding: 0 0 0 4.5%;
   font-size: 1.3rem;
   font-weight: bold;
+}
+.image_resize{
+  width: 100%;
+  min-height: 30vw;
+  max-height: 33vw;
 }
 </style>
