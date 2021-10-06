@@ -18,7 +18,7 @@
             </b-col>
           </b-row>
 
-          <div>
+          <!-- <div>
             <div>club 테스트</div><img src="/resources/image/club/default.png" alt="클럽썸네일" class="img-style">
             <div>club 테스트2</div><img src="resources/image/club/default.png" alt="클럽썸네일" class="img-style">
           </div>
@@ -26,7 +26,7 @@
           <b-container>
             <div>club 테스트</div><img src="/resources/image/club/default.png" alt="클럽썸네일" class="img-style">
             <div>club 테스트2</div><img src="resources/image/club/default.png" alt="클럽썸네일" class="img-style">
-          </b-container>
+          </b-container> -->
 
           <!-- 검색창 -->
           <b-row class="justify-content-center">
@@ -66,7 +66,7 @@
           <!-- 전체 동호회 리스트 -->
           <b-row  v-for="club in totalclublist" v-bind:key="club">
             <b-col class="m-2">
-              <img src="resources/image/club/default.png" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
+              <img :src="'/'+club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
               <b-col @click="enterClub(club.clubid)" class="club-name-style">{{club.name}}</b-col>
             </b-col>
           </b-row>
@@ -112,7 +112,7 @@ export default {
         .get("api/users/islogin", { withCredentials: true })
         .then((res) => {
           this.userinfo = res.data;
-          this.selecturl = "resources/" + res.data.userthumbnail;
+          this.selecturl = "/resources/" + res.data.userthumbnail;
         })
         .catch((error) => {
           console.log(error);
