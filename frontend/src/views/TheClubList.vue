@@ -23,11 +23,11 @@
           </b-row>
 
           <!-- 가입한 동호회 리스트 제목 -->
-          <b-row class="mt-3">
-            <b-col class="font-style">
+          <b-row class="mt-3" align-h="start">
+            <b-col class="font-style padding-right-style" cols="5" style="width: 130px;">
               나의 동호회
             </b-col>
-            <b-col><i class="fas fa-plus-circle"></i></b-col>
+            <b-col cols="1" class="padding-style" @click="createClub"><i class="fas fa-plus-circle"></i></b-col>
           </b-row>
 
           <!-- 가입한 동호회 리스트 -->
@@ -78,6 +78,9 @@ export default {
     };
   },
   methods: {
+    createClub() {
+      this.$router.push("/create");
+    },
     goClub(clubid) {
       this.$store.dispatch("selectedClub", clubid);
       this.$router.push({name : "ClubMain"});

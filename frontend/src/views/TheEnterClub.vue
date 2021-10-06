@@ -9,7 +9,7 @@
             <b-row class="justify-content-center" >
                 <b-col cols="8">
                     <b-card
-                        img-src="https://placekitten.com/500/350"
+                        :img-src="image"
                         img-alt=logo
                         tag="article"
                         img-height=300
@@ -20,7 +20,7 @@
                     </b-card>
                 </b-col>
             </b-row>
-            <b-row class="justify-content-center mt-1">
+            <b-row class="justify-content-center mt-1" v-if="password">
                 <b-col cols="8">
                     <!-- 비밀번호 입력 -->
                     <input
@@ -32,7 +32,6 @@
                             placeholder="비밀번호"
                             class="form-control mb-2"
                     />
-                    <!--v-if로 비밀번호가 필요한 동호회에만 표시하게끔 수정해야함-->
                 </b-col>
             </b-row>
             <b-row class="justify-content-center align-content mt-1">
@@ -109,6 +108,8 @@ export default {
         .then((res) => {
             console.log(res.data);
             this.name = res.data.name;
+            this.image = "/resources/" + res.data.profile_thumbnail;
+            this.password = res.data.password;
         }).catch((error) => {
             console.log(error);
             alert("가져오기 실패");
