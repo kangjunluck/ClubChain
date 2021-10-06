@@ -1,24 +1,24 @@
 <template>
   <div class="finanaceInfo">
-    <div style="background-color: #0080FF; height:30px; color:#ffffff; font-size:1rem;">회비관리</div>
-    <div style="height:40px;"></div>
+    <div style="background-color: #0080FF; height:40px; color:#ffffff; font-size:1rem; line-height:40px;">지갑관리</div>
+    <div style="height:30px;"></div>
     <div class="clubname" style="font-size: 1rem" >{{clubname}}</div>
     <b-container style="" class="infomation">
       <b-row>
-        <b-col cols="1" align-self="center">◀</b-col>
+        <b-col cols="1" align-self="center"></b-col>
         <b-col cols="10" class="ethCard">
           <div style="font-size: 0.8rem;">{{ myAccountNumber}} </div>
-          <div></div>
-          <div style="font-size: 3rem">잔고: {{balance}} <img src="@/assets/gold.png" width="40" height="40" /> </div>
+          <div>
+            <div style="font-size: 2rem"><i class="fas fa-coins"></i>&nbsp; 잔고: {{balance}}</div>
+          </div>
           
           <div>
             <span class="button1" @click="transactionHistoryButton">거래내역</span>
             <span class="button1" @click="transferButton">이체</span>
-
             <span class="button2" @click="tokenEnchargeButton">충전</span>
           </div>
         </b-col> 
-        <b-col cols="1" align-self="center">▶</b-col>
+        <b-col cols="1" align-self="center"></b-col>
       </b-row>
      <div style="height:20px;"></div>
     <Transaction v-if= "componenetStateValue==='transfer'" v-bind:clubAddr="clubAddr" />

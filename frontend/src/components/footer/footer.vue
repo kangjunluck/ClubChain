@@ -39,7 +39,7 @@ export default {
       console.log('사진첩으로 이동')
     },
     moveToMyPage() {
-      console.log('마이페이지로 이동')
+      this.$router.push("/club/mypage")
     },
     makeinit() {
       console.log(this.$props.footernum)
@@ -67,17 +67,18 @@ export default {
 
 <style scoped>
 .select {
-  color: #1ec0ff;
+  color: #0080FF;
 }
 .fas {
   font-size: 2rem;
   margin: 0;
 }
 #footer {
+  border-top: solid;
   position: fixed;
   bottom: 0;
   height: 4rem;
   width: 100%;
-  background-color: rgb(219, 234, 253);
+  background-color: rgb(255, 255, 255);
 }
 </style>

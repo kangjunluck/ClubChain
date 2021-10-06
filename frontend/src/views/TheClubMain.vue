@@ -20,16 +20,19 @@
         {{schedule.title}}
         </div>
       </div>
-      <div class="post" v-for="post in postlist" v-bind:key="post">
-        <div class="nickname" @click="detail(post.id)">
+      <div class="post" v-for="post in postlist" v-bind:key="post" @click="detail(post.id)">
+        <div class="nickname" >
           {{post.user.usernickname}}
+        </div>
+        <div class="title">
+          {{post.title}}
         </div>
         <div class="content">
           {{post.content}}
         </div>
       </div>
       <div class="exist" v-if="postlist.length == 0">등록된 게시물이 없습니다</div>
-      <Footer :statenum="statenum" />
+      <Footer :footernum="footernum" />
     </div>
 </template>
 
@@ -45,7 +48,7 @@ export default {
       postlist : "",
       join_num : "",
 
-      statenum : 0,
+      footernum : 0,
     };
   },
   components: {
