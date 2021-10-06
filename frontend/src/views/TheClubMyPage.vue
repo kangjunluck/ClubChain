@@ -94,7 +94,7 @@ export default {
     },
     profileUpdate() {
       console.log("프로필 업뎃");
-      this.$router.push("myinfoupdate");
+      this.$router.push("/myinfoupdate");
     },
     myClubInfo() {
       console.log("가입한 동호회");
