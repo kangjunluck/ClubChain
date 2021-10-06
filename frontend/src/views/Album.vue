@@ -67,10 +67,10 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: red;
+  /* background-color: red; */
 }
 .item{
   flex: 1;
-  background-color:blueviolet;
+  /* background-color:blueviolet; */
 }
 </style>

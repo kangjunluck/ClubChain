@@ -97,10 +97,11 @@ export default {
     photoClick(photo, index) {
       console.log("특정 사진 클릭");
       // console.log("자식", this.photo);
+      var indexAdd = index + 1
       console.log("자식2", photo);
-      console.log("자식2=index", index);
+      console.log("자식2=index", indexAdd);
       this.$emit("stateChange");
-      this.$emit("photoInfo", photo, index, this.photoCount);
+      this.$emit("photoInfo", photo, indexAdd, this.photoCount);
       // ?
     },
     test() {
@@ -130,28 +131,24 @@ export default {
 </script>
 
 <style scoped>
-.upload_button {
-  background-color: #1ec0ff;
-  margin: 0 auto 0;
-  width: 70%;
-  border-radius: 0.5rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #fff;
-  border: 1px solid transparent;
-  min-height: 2.5rem;
-  -webkit-appearance: none;
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  
 }
 .photos_area {
-  background-color: red;
-  padding:2vw;
+  /* background-color: red; */
+  padding:27vh 0 0 0;
+
 }
 .photo_list {
-  background-color: yellow;
+  /* background-color: yellow; */
   padding: 2px 2px 2px 2px;
 }
 .image_area {
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
   width: 30%;
   height: 25%;
   overflow: hidden;
@@ -165,9 +162,11 @@ export default {
 }
 .photo_count {
   text-align: left;
-  padding: 0 0 0 4.5%;
+  margin: 1vw 0 0 1vw;
+  padding: 0 0 0 0%;
   font-size: 1.3rem;
   font-weight: bold;
+  align-self: start;
 }
 .image_resize{
   width: 100%;
