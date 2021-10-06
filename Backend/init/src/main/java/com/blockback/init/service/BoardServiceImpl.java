@@ -159,7 +159,7 @@ public class BoardServiceImpl implements BoardService {
                 photo.setPhoto_address(bf.getSave_folder());
                 photo.setTime(transFormat.format(board.getCreated()));
                 photo.setUser_name(board.getUser().getUsernickname());
-
+                photo.setUserthumbnail(board.getUser().getUserthumbnail());
                 photos.add(photo);
             }
         }
