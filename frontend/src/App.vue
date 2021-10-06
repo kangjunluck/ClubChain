@@ -31,15 +31,39 @@ export default {
 
 
 <style>
+@font-face{
+  font-family: "SpoqaHanSansNeo";
+  src: url(./font/SpoqaHanSansNeo-Bold.ttf) format('truetype');
+  font-weight: 600;
+}
+@font-face{
+  font-family: "SpoqaHanSansNeo";
+  src: url(./font/SpoqaHanSansNeo-Light.ttf) format('truetype');
+  font-weight: 300;
+},
+@font-face{
+  font-family: "SpoqaHanSansNeo";
+  src: url(./font/SpoqaHanSansNeo-Medium.ttf) format('truetype');
+  font-weight: 500;
+}
+@font-face{
+  font-family: "SpoqaHanSansNeo";
+  src: url(./font/SpoqaHanSansNeo-Regular.ttf) format('truetype');
+  font-weight: 400;
+}
+@font-face{
+  font-family: "SpoqaHanSansNeo";
+  src: url(./font/SpoqaHanSansNeo-Thin.ttf) format('truetype') ;
+  font-weight: 100;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: SpoqaHanSansNeo, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   height: 100%;
 }
-
 #nav {
   padding: 30px;
 }
