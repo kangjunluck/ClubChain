@@ -66,9 +66,8 @@ export default {
         usernickname: null,
         userthumbnail: null,
         userId: null,
-      },
-
-    };
+      }
+    }
   },
   computed: {
     validationPassword() {
