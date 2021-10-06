@@ -51,7 +51,7 @@
 <script>
 import http from "@/util/http-common";
 import Footer from '../components/footer/footer.vue';
-
+import $ from "jquery";
 export default {
   data() {
     return {
@@ -117,6 +117,9 @@ export default {
     },
     getPhotoThumbnail(url) {
       return url;
+    },
+    goTop(){
+      $( 'html, body' ).animate( { scrollTop : 0 }, 400 ); 
     }
     
   },
