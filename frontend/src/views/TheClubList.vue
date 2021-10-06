@@ -1,12 +1,12 @@
 <template>
     <div class="main">
         <b-container class="mt-3">
-          <!-- 상단 로고와 프로필 이미지 -->
+          <!-- 상단 로고와 프로필 이미지 {{userinfo.usernickname}}-->
           <b-row class="mb-3">
             <b-col cols="2" class="text-style">
               <img alt="Vue logo" src="@/assets/CC_logo_symbol.svg" />
             </b-col>
-            <b-col v-if="userinfo" class="text-style">{{userinfo.usernickname}}님</b-col>
+            <b-col v-if="userinfo" class="text-style">님</b-col>
             <b-col cols="2" align-self="end" class="padding-style">
               <div class="round-box" @click="profile">
                 <img alt="profile" :src="selecturl" class="round"/>
@@ -23,11 +23,11 @@
           </b-row>
 
           <!-- 가입한 동호회 리스트 제목 -->
-          <b-row class="mt-3">
-            <b-col class="font-style">
+          <b-row class="mt-3" align-h="start">
+            <b-col class="font-style padding-right-style" cols="5" style="width: 130px;">
               나의 동호회
             </b-col>
-            <b-col><i class="fas fa-plus-circle"></i></b-col>
+            <b-col cols="1" class="padding-style" @click="createClub"><i class="fas fa-plus-circle"></i></b-col>
           </b-row>
 
           <!-- 가입한 동호회 리스트 -->
@@ -78,6 +78,9 @@ export default {
     };
   },
   methods: {
+    createClub() {
+      this.$router.push("/create");
+    },
     goClub(clubid) {
       this.$store.dispatch("selectedClub", clubid);
       this.$router.push({name : "ClubMain"});
@@ -121,7 +124,7 @@ export default {
     }
   },
   created() { 
-    this.checkLogin();
+    // this.checkLogin();
     http.
       get("/api/club/", {
         withCredentials : true
