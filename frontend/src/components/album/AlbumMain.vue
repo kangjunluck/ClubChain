@@ -2,13 +2,29 @@
   <div>
     <!-- <div>앨범 메인페이지 {{ componenetStateEmit }}</div> -->
     <div class="photo_count">전체 사진 {{ photoCount }}개</div>
-    <div v-if="photoCount !== 0" class="photos_area">
-      <div
+
+    <b-row v-if="photoCount !== 0" class="photos_area">
+      <b-col
         v-for="photo in photoList"
         v-bind:key="photo"
         class="photo_list"
-      ></div>
-    </div>
+        cols="6"
+        style="overflow: hidden"
+      >
+        <img
+          :src="'/resources/' + photo.photo_address"
+          alt="앨범 이미지"
+          @click="photoClick(photo)"
+        />
+        <!-- <b-col @click="goClub(club.clubid)" class="club-name-style">{{club.name}}</b-col> -->
+      </b-col>
+    </b-row>
+
+    <!-- <div v-if="photoCount !== 0" class="photos_area">
+      <div v-for="photo in photoList" v-bind:key="photo" class="photo_list">
+        <img :src="'/resources/' + photo.photo_address" alt="앨범 이미지" />
+      </div>
+    </div> -->
 
     <!-- <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
       <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
@@ -70,11 +86,12 @@ export default {
       console.log("사진 업로드 버튼");
       this.$emit("stateChange");
     },
-    photoClick() {
+    photoClick(photo) {
       console.log("특정 사진 클릭");
       console.log("자식", this.photo);
+      console.log("자식2", photo);
       this.$emit("stateChange");
-      this.$emit("photoInfo", this.photo);
+      this.$emit("photoInfo", photo);
     },
   },
   created() {

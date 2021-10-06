@@ -88,6 +88,7 @@
 
 <script>
 import http from "@/util/http-common";
+// import $ from "jquery";
 import Web3 from "web3";
 export default {
   data() {
@@ -103,6 +104,9 @@ export default {
     };
   },
   methods: {
+    // imageclick(){
+    //   $
+    // },
     insertUser() {
       var web3 = new Web3(
         new Web3.providers.HttpProvider(
