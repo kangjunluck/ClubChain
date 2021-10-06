@@ -203,6 +203,9 @@ export default {
   height: 40px;
   border-radius: 70%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .round {
@@ -213,7 +216,9 @@ export default {
 
 .text-style {
   text-align: right;
-  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .padding-style {
