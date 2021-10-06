@@ -59,6 +59,9 @@
           </p>
         </div>
       </div>
+      <div @click="goSend" style="line-height: 1.9; height:30px; width:100%; text-align:left;border-bottom:1px solid">
+        지갑 관리
+      </div>
       <div @click="logout" style="line-height: 1.9; height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
         로그 아웃
       </div>
@@ -154,6 +157,10 @@ export default {
     },
     goback() {
       this.$router.push("club/list");
+    },
+    goSend()
+    {
+      this.$router.push("club/finance");
     },
     showmyclub()
     {

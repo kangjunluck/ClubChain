@@ -1,10 +1,10 @@
 <template>
   <div>
-    <b-container>
+    <b-container style="padding-left: 0px; padding-right: 0px;">
       <b-row>
         <b-col offset="1" cols="10" class="ethCard" style="padding-top:10px; padding-bottom:10px;">
           <b-row>
-            <b-col class="d-flex flex-column justify-content-center">
+            <b-col class="d-flex flex-column justify-content-center" >
               <div>충전금액</div>
             </b-col>
             <b-col><b-form-input v-model="value"></b-form-input></b-col>
@@ -64,8 +64,11 @@ export default {
         transaction.sign(privKey);
         web3.eth.sendSignedTransaction('0x'+transaction.serialize().toString('hex'))
         .on('transactionHash',console.log)
-          alert("토큰을 충전하는데 1분가량 시간이 소요됩니다.")
+        .then((res)=>{
+          alert("충전이 완료되었습니다.")
+          console.log(res);
           location.reload();
+        })
       })
     },
     async saveHistory()
