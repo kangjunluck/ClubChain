@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import $ from "jquery";
 export default {
 	name: "Footer",
   props: ['footernum'],
@@ -25,6 +26,8 @@ export default {
   methods: {
     moveToHome() {
       this.$router.push("/club/ClubMain")
+      console.log('올라가!')
+      $( 'html, body' ).animate( { scrollTop : 0 }, 400 ); 
     },
     moveToFinance() {
       console.log('계좌로이동')
