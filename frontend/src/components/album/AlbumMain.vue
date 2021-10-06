@@ -19,7 +19,7 @@
       </b-col>
     </b-row>
 
-    <div  class="image_area EqHeightDiv" @click="photoClick()">
+    <!-- <div  class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
     </div>
     <div class="image_area EqHeightDiv" @click="photoClick()">
@@ -32,9 +32,9 @@
     
     <div class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
-    </div>
+    </div> -->
 
-    <div v-if="photoCount === 0" class="photos_area">
+    <div v-if="photoCount === 0" class="no_photo">
       업로드 된 사진이 없습니다.
       <br />
       첫 사진을 업로드 해주세요.
@@ -138,7 +138,10 @@ export default {
   flex-direction: column;
   
 }
-.photos_area {
+.photos_area{
+  padding: 1% 0 0 0;
+}
+.no_photo {
   /* background-color: red; */
   padding:27vh 0 0 0;
 
