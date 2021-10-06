@@ -38,6 +38,6 @@ export default {
 .image{
   width:100%;
 
-  object-fit:contain;
+  object-fit:cover;
 }
 </style>
