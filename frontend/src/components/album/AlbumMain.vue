@@ -3,7 +3,7 @@
     <!-- <div>앨범 메인페이지 {{ componenetStateEmit }}</div> -->
     <div class="photo_count">전체 사진 {{ photoCount }}개</div>
     <!-- <div>앨범 영역</div> -->
-    <b-row v-if="photoCount !== 0" class="photos_area">
+    <b-row v-if="photoCount !== 0" class="photos_area" >
       <b-col
         v-for="photo in photoList"
         v-bind:key="photo"
@@ -56,15 +56,6 @@
 
 import http from "@/util/http-common";
 import $ from "jquery";
-// $(document).ready(function(){
-//         console.log('Works!')          
-//         $(".EqHeightDiv").each(function(){
-//         var a = $(this).width()
-//         $(this).height(a)
-//         console.log('높이', a)
-//       })
-//       console.log('end')
-//       })
 export default {
   props: ["componenetStateEmit"],
   data() {
@@ -73,6 +64,7 @@ export default {
       clubId: this.$store.state.selectedClub,
       photoList: null,
       photo: 1,
+      rowHeight: 0,
     };
   },
   methods: {
@@ -84,17 +76,15 @@ export default {
         .then((res) => {
           console.log('응답', res);
           this.photoCount = res.data.total;
-          this.photoList = res.data.list;
-          $(document).ready(function(){
+          this.photoList = res.data.list;        
             console.log('Works!')          
             var a = $(".EqHeightDiv").width()
             $(".EqHeightDiv").each(function(){
-            
             $(this).height(a)
             console.log('높이', a)
           })
           console.log('end')
-          })
+          
         })
         .catch((error) => {
           console.log('에러', error);
@@ -134,6 +124,10 @@ export default {
   },
   created() {
     this.getAlbum();
+    var viewportWidth = $(window).width();
+    this.rowHeight = viewportWidth/3
+    console.log(viewportWidth)
+    console.log(this.rowHeight)
   },
   // mounted() {
   //   this.$nextTick(function(){
