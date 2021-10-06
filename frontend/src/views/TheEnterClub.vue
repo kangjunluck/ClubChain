@@ -83,6 +83,7 @@ export default {
         { withCredentials: true }
         ).then( () => {
             console.log("가입 성공");
+            this.$router.push("/club/list");
         }).catch((error) => {
             console.log(error);
             alert("가입 실패");

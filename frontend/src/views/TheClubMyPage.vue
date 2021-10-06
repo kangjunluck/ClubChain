@@ -14,11 +14,11 @@
       </div>
     </div>
     <div class="row w-50">
-      <div class="d-flex justify-content-between align-items-center mb-3 p-0">
+      <div class=" d-flex justify-content-between align-items-center mb-3 p-0">
         <img
           :src="selecturl"
           alt=""
-          class="px-0"
+          class="circle px-0 "
           style="width: 5rem; height: 5rem"
         />
         <div class="w-50">
@@ -39,13 +39,24 @@
           <p class="mb-1">{{ club.introduce }}</p>
         </div>
       </div>
-      <div @click="myWrite" style="height:30px; width:100%; text-align:left;border-bottom:1px solid">
+      <div @click="showBoard" style="height:30px; width:100%; text-align:left;border-bottom:1px solid">
         내가 쓴 글
       </div>
-      <div @click="userDelete" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
-        회원 탈퇴
+      <div v-if="showboard">
+          <div v-for="board in boards" :key="board.id">
+              <p>{{board.title}}</p>
+          </div>
       </div>
-  
+
+      <div @click="goSetting" style="height:30px; width:100%; text-align:left;border-bottom:1px solid">
+        동호회 설정
+      </div>
+      <div v-if="checkuser" @click="userDelete" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
+        동호회 탈퇴
+      </div>
+      <div v-else @click="clubDismantle" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
+        동호회 해체
+      </div>
     <hr />
   </div>
 </template>
@@ -53,13 +64,16 @@
 <script>
 import http from "@/util/http-common";
 export default {
-  name: "myInfoPage",
+  name: "ClubMypage",
   data: function () {
     return {
       userinfo: null,
       myclubinfo: null,
       showclub : false,
+      showboard: false,
+      checkuser : true,
       selecturl: "@/assets/profile.png",
+      boards:[],
     };
   },
   methods: {
@@ -96,27 +110,19 @@ export default {
     },
     userDelete() {
       console.log("탈퇴하기");
-      var userId = this.$store.state.credentials.userId;
-      var formdata = new FormData();
-      formdata.append("userId", userId);
-      var url = "api/users/" + userId;
-      http
-        .delete(url, formdata, { withCredentials: true })
-        .then((res) => {
-          console.log("탈퇴 응답");
-          console.log(res);
-          if (res.status === 204) {
-            alert("회원 탈퇴");
-            this.$router.push("/");
-          }
-        })
-        .catch((error) => {
-          console.log("에러!");
-          console.log(error);
-        });
+      var url = "api/"
+    url += this.$store.state.selectedClub+"/";
+      http.delete(url)
+      .then(()=>{
+          alert("동호회에 탈퇴하셨습니다.")
+          this.$router.push("club/list");
+      })
+      .catch((error)=>{
+          console.log(error)
+      })
     },
     goback() {
-      this.$router.push("club/list");
+      this.$router.push("ClubMain");
     },
     showmyclub()
     {
@@ -127,13 +133,71 @@ export default {
       else
         this.showclub = false;
     },
+    showBoard()
+    {
+        if(!this.showboard)
+        {
+            this.showboard = true;
+            this.myWrite();
+        }
+        else
+        {
+            this.showboard = false;
+            this.boards = [];
+        }
+    },
     myWrite()
     {
-      console.log("내가 쓴 글목록")
+        let url = "/api/"+ this.$store.state.selectedClub+"/board/";
+        http.get(url)
+        .then((res)=>{
+            // console.log(res);
+            res.data.forEach(item => {
+                if(item.user.userEmail == this.$store.state.credentials.userEmail)
+                {
+                    this.boards.push(item);
+                }
+            });
+        })
+    },
+    goSetting()
+    {
+      let url = "/api/club/{clubid}?clubid=" + this.$store.state.selectedClub;
+      http.get(url)
+      .then((res)=>{
+        if(res.data.owner_name == this.userinfo.usernickname)
+        {
+          // console.log('동호회 설정창으로 이동');
+          this.$router.push("/club/update");
+        }
+        else{
+          alert('동호회장만 설정할 수 있습니다.');
+        }
+      })
+
+    },
+    checkUser()
+    {
+      let url = "/api/club/{clubid}?clubid=" + this.$store.state.selectedClub;
+      http.get(url)
+      .then((res)=>{
+        if(res.data.owner_name == this.userinfo.usernickname)
+        {
+          this.checkuser = false;
+        }
+        else{
+          this.checkuser = true;
+        }
+      })
+    },
+    clubDismantle()
+    {
+      console.log('동호회 해체');
     },
   },
   created() {
     this.checkLogin();
+    this.checkUser();
   },
 }
 </script>
