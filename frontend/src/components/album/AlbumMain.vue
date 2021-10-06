@@ -32,7 +32,7 @@
       <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
      -->
 
-    <!-- <div class="image_area EqHeightDiv" @click="photoClick()">
+    <!-- <div  class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
     </div>
     <div class="image_area EqHeightDiv" @click="photoClick()">
@@ -47,6 +47,7 @@
       <br />
       첫 사진을 업로드 해주세요.
     </div>
+    <button @click="test()">클릭</button>
   </div>
 </template>
 
@@ -66,12 +67,11 @@ export default {
   methods: {
     getAlbum() {
       console.log("동호회 사진 불러오기");
-      console.log("this.clubId");
-      console.log(this.clubId);
+      console.log('클럽 아이디', this.clubId);
       http
         .get("api/" + this.clubId + "/board/photo")
         .then((res) => {
-          console.log(res);
+          console.log('응답', res);
           // console.log(res.data.total, "전체사진");
           // console.log("리스트", res.data.list);
           // console.log(res.data);
@@ -79,12 +79,12 @@ export default {
           // console.log(res.data.list);
           this.photoCount = res.data.total;
           this.photoList = res.data.list;
-          console.log(this.photoCount);
-          console.log(this.photoList);
-          console.log(this.photoList[0]);
+          // console.log(this.photoCount);
+          // console.log(this.photoList);
+          // console.log(this.photoList[0]);
         })
         .catch((error) => {
-          console.log(error);
+          console.log('에러', error);
         });
     },
     uploadButton() {
@@ -99,25 +99,24 @@ export default {
       this.$emit("photoInfo", photo);
     },
     divSizeChange() {
-      $(document).ready(function () {
-        $(".container").each(function () {
-          // var highestBox = 0;
-
-          $(".EqHeightDiv", this).each(function () {
-            $(this).height($(this).width());
-            // if ($(this).height() > highestBox) highestBox = $(this).height();
-          });
-
-          // $(".EqHeightDiv", this).height(highestBox);
-        });
-      });
-    },
+      console.log('Works!')          
+      var a =$(".EqHeihtDiv").width()
+      console.log('높이', a)
+      $(".EqHeihtDiv").each(function(index, item){
+        $(item).height(a)
+        })
+      },
+  
   },
   created() {
     this.getAlbum();
   },
   mounted() {
-    this.divSizeChange();
+    this.$nextTick(function(){
+      console.log("넥스트");
+      this.divSizeChange();
+    }
+      )
   },
 };
 </script>
