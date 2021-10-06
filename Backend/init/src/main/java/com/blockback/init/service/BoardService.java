@@ -1,6 +1,7 @@
 package com.blockback.init.service;
 
 import com.blockback.init.common.request.BoardRegisterReq;
+import com.blockback.init.common.response.BoardRes;
 import com.blockback.init.common.response.PhotoRes;
 import com.blockback.init.entity.Board;
 import com.blockback.init.entity.User;
@@ -9,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface BoardService {
-    List<Board> getBoardsByClubId(Long clubid);
+    List<BoardRes> getBoardsByClubId(Long clubid);
 
     Board getBoardByBoardId(Long boardid);
 

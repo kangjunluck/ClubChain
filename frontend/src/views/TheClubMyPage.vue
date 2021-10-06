@@ -13,12 +13,12 @@
         <i class="fas fa-arrow-left" @click="goback"></i>
       </div>
     </div>
-    <div class="row w-50">
+    <div class="row" style="padding-left: 33px; padding-right: 33px;">
       <div class=" d-flex justify-content-between align-items-center mb-3 p-0">
         <img
           :src="selecturl"
           alt=""
-          class="circle px-0 "
+          class="circle px-0"
           style="width: 5rem; height: 5rem"
         />
         <div class="w-50">
@@ -31,40 +31,48 @@
       </button>
     </div>
     <hr size="1px" width="60%" />
-      <div @click="showmyclub" style="height:30px; width:100%; text-align:left; border-top:1px solid; border-bottom:1px solid">
+        <div style="width:85%;">
+      <div @click="showmyclub" style="line-height: 1.9; height:30px; width:100%; text-align:left; border-top:1px solid; border-bottom:1px solid">
         가입한 동호회
       </div>
       <div v-if="showclub">
         <div v-for="club in myclubinfo" :key="club.pk">
-          <p class="mb-1">{{ club.name }}</p>
+          <p style="line-height: 1.9; text-align: left; padding-left: 20px; margin-bottom: 0;"> ● {{ club.name }}</p>
         </div>
       </div>
-      <div @click="showBoard" style="height:30px; width:100%; text-align:left;border-bottom:1px solid">
+      <div @click="showBoard" style="line-height: 1.9; height:30px; width:100%; text-align:left;border-bottom:1px solid">
         내가 쓴 글
       </div>
       <div v-if="showboard">
           <div v-for="board in boards" :key="board.id">
-              <p>{{board.title}}</p>
+              <p style="line-height: 1.9; text-align: left; padding-left: 20px; margin-bottom: 0;">● {{board.title}}</p>
           </div>
       </div>
 
-      <div @click="goSetting" style="height:30px; width:100%; text-align:left;border-bottom:1px solid">
+      <div @click="goSetting" style="line-height: 1.9; height:30px; width:100%; text-align:left;border-bottom:1px solid">
         동호회 설정
       </div>
-      <div v-if="checkuser" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
+      <div v-if="checkuser" @click="userDelete" style="line-height: 1.9; height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
         동호회 탈퇴
       </div>
-      <div v-else @click="clubDismantle" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
+      <div v-else @click="clubDismantle" style="line-height: 1.9; height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
         동호회 해체
       </div>
+      </div>
     <hr />
+    <Footer :footernum="footernum" />
   </div>
 </template>
 
 <script>
 import http from "@/util/http-common";
+import Footer from '../components/footer/footer.vue';
+
 export default {
   name: "ClubMypage",
+  components: {
+    Footer,
+  },
   data: function () {
     return {
       userinfo: null,
@@ -72,8 +80,10 @@ export default {
       showclub : false,
       showboard: false,
       checkuser : true,
-      selecturl: null,
+      selecturl: "@/assets/profile.png",
       boards:[],
+
+      footernum : 4,
     };
   },
   methods: {
@@ -83,7 +93,7 @@ export default {
         .get("api/users/islogin", { withCredentials: true })
         .then((res) => {
           this.userinfo = res.data;
-          this.selecturl = "resources/" + res.data.userthumbnail;
+          this.selecturl = "/resources/" + res.data.userthumbnail;
           console.log(this.selecturl)
           this.myClubInfo();
         })
@@ -94,7 +104,7 @@ export default {
     },
     profileUpdate() {
       console.log("프로필 업뎃");
-      this.$router.push("myinfoupdate");
+      this.$router.push("/myinfoupdate");
     },
     myClubInfo() {
       console.log("가입한 동호회");

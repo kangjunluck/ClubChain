@@ -18,7 +18,7 @@
     
     <AlbumDetail class="" v-if="componenetStateEmit === false" v-bind:index="index" v-bind:photo="photo" v-bind:photoCount="photoCount"/>
     </div>
-    <Footer v-if="componenetStateEmit === true" />
+    <Footer :footernum="footernum" v-if="componenetStateEmit === true" />
 
   </div>
 </template>
@@ -43,6 +43,8 @@ export default {
       index: "",
       photo: "",
       photoCount: 0,
+
+      footernum : 3,
     };
   },
   methods: {

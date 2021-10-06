@@ -2,6 +2,7 @@ package com.blockback.init.service;
 
 
 import com.blockback.init.common.request.BoardRegisterReq;
+import com.blockback.init.common.response.BoardRes;
 import com.blockback.init.common.response.PhotoRes;
 import com.blockback.init.common.response.Photos;
 import com.blockback.init.entity.*;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,10 +37,47 @@ public class BoardServiceImpl implements BoardService {
     String BASE_PATH = System.getProperty("user.dir") + "/Backend/init/src/main/resources/image/club/";
 
     @Override
-    public List<Board> getBoardsByClubId(Long clubid) {
-        Club club = clubRepository.findById(clubid).get();
-        List<Board> boardList = boardRepository.findByClub(club);
-        return boardList;
+    public List<BoardRes> getBoardsByClubId(Long clubid) {
+        Optional<Club> club = clubRepository.findById(clubid);
+        if(!club.isPresent()) {
+            return null;
+        }
+
+        List<BoardRes> res = new ArrayList<>();
+        List<Board> boards = boardRepository.findByClub(club.get());
+        for(Board board : boards) {
+            BoardRes br = new BoardRes();
+
+            Optional<BoardFile> boardf = fileRepository.findByBoardId(board.getId());
+            if(boardf.isPresent()) {
+                br.setPhoto_thumbnail("/resources/" + boardf.get().getSave_folder());
+            }
+
+            br.setClubid(clubid);
+            br.setId(board.getId());
+            br.setCreated(dateFormat(board.getCreated()));
+            br.setContent(board.getContent());
+            br.setSection(board.getSection());
+            br.setTitle(board.getTitle());
+
+            br.setUsernickname(board.getUser().getUsernickname());
+            br.setUseraccount(board.getUser().getUseraccount());
+            br.setUserEmail(board.getUser().getUserEmail());
+            br.setUserthumbnail("/resources/" + board.getUser().getUserthumbnail());
+            br.setUserid(board.getUser().getId());
+            br.setPassword(board.getUser().getPassword());
+
+            br.setView(board.getView());
+            br.setClubname(club.get().getName());
+            res.add(br);
+        }
+
+        return res;
+    }
+
+    public String dateFormat(Date date) { // 날짜 형식 변환
+        DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return sdFormat.format(date);
     }
 
     @Override
@@ -121,7 +160,7 @@ public class BoardServiceImpl implements BoardService {
                 photo.setPhoto_address(bf.getSave_folder());
                 photo.setTime(transFormat.format(board.getCreated()));
                 photo.setUser_name(board.getUser().getUsernickname());
-
+                photo.setUserthumbnail(board.getUser().getUserthumbnail());
                 photos.add(photo);
             }
         }

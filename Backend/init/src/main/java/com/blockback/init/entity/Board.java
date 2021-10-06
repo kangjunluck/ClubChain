@@ -30,4 +30,17 @@ public class Board extends BaseEntity {
     Date updated;
     String section;
 
+    @Override
+    public String toString() {
+        return "Board{" +
+                "user=" + user +
+                ", club=" + club +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", view=" + view +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", section='" + section + '\'' +
+                '}';
+    }
 }

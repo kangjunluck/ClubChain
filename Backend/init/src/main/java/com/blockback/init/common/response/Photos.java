@@ -14,6 +14,9 @@ public class Photos {
     @ApiModelProperty(name="user_name", example = "아무개")
     String user_name;
 
+    @ApiModelProperty(name="userthumbnail", example = "image/~")
+    String userthumbnail;
+
     @ApiModelProperty(name="time", example = "")
     String time;
 }

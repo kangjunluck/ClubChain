@@ -1,7 +1,7 @@
 <template>
     <div class="main">
-        <div class="header">
-            <div class="cancel">
+        <div class="toparea">
+            <div class="cancel" @click="goBack()">
                 취소
             </div>
             <div class="done" @click="write()">
@@ -16,22 +16,25 @@
             placeholder="제목을 입력해주세요"
             class="title"
         />
-        <input 
-            type="text"
+        <textarea 
             name="content"
             v-model="content"
             ref="content"
             placeholder="내용을 입력해주세요"
             class="content"
             />
-            <img :src="selecturl" alt="url" class="col-6 px-0" style="width:3rem; height:3rem;">
-          <label class="photo-button" for="photo">업로드</label>
-          <input v-on:change="fileSelect()" ref="image" type="file" name="photo" id="photo" class="col-6" style="display:none;" />
+        <div class="photoarea">
+        <img :src="selecturl" alt="url" class="col-6 px-0 photo" style="width:3rem; height:3rem;">
+        <label class="photo-button" for="photo">사진 업로드</label>
+        <input v-on:change="fileSelect()" ref="image" type="file" name="photo" id="photo" class="col-6" style="display:none;" />
+        </div>
+        <Footer :footernum="footernum" />
     </div>
 </template>
 
 <script>
 import http from "@/util/http-common";
+import Footer from '../components/footer/footer.vue';
 
 export default {
   data() {
@@ -40,8 +43,13 @@ export default {
       content: "",
       section: "",
       image: "",
-      selecturl: require("@/assets/profile.png"),
+      selecturl: require("@/assets/picture.png"),
+
+      footernum : 2,
     };
+  },
+  components: {
+    Footer,
   },
   methods: {
     write() {
@@ -79,38 +87,58 @@ export default {
       this.selecturl = URL.createObjectURL(this.image);
       console.log(this.image);
     },
+    goBack() {
+        this.$router.push("/club/ClubMain");
+    }
   },
 };
 </script>
 
 <style scoped>
-.header {
+.toparea {
     height: 3rem;
-    background-color: sandybrown;
 }
 .cancel {
     font-size:1rem;
+    box-sizing: border-box;
     float:left;
+    width: 3rem;
 }
 .done {
     font-size:1rem;
+    box-sizing: border-box;
     float:right;
+    width: 3rem;
+    padding-top: 0.9rem;
+    padding-right: 1rem;
 }
 .title {
     font-size:1rem;
     width: 100%;
     height: 3rem;
+    border: 1px solid white;
+    border-bottom: 1px solid #999999;
 }
 .content {
     font-size:1rem;
     width: 100%;
     height: 10rem;
+    height: 60%;
+    border: 1px solid white;
+    padding-top: 0.5rem;
 }
+input:focus{outline:none;}
+textarea:focus{outline: none;}
 .photo-button{
   padding: 3px 15px;
   background-color:#1ec0ff;
   border-radius: 2px;
   color: white;
   cursor: pointer;
+}
+
+.photoarea {
+    text-align: left;
+    margin-left: 2rem;
 }
 </style>

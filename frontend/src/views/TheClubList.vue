@@ -1,10 +1,10 @@
 <template>
   <div class="main">
-    <b-container class="mt-3">
+    <b-container>
       <!-- 상단 로고와 프로필 이미지 -->
-      <b-row class="mb-3">
-        <b-col cols="2" class="text-style">
-          <img alt="Vue logo" src="@/assets/CC_logo_symbol.svg" />
+      <b-row class="mt-3 mb-2">
+        <b-col cols="2" align-self="start">
+          <img alt="Vue" class="logo" src="@/assets/CC_logo_symbol.svg" />
         </b-col>
         <b-col v-if="userinfo" class="text-style"
           >{{ userinfo.usernickname }}님</b-col
@@ -18,7 +18,7 @@
 
       <!-- 검색창 -->
       <b-row class="justify-content-center">
-        <b-col class="mt-1 box">
+        <b-col class=" box">
           <b-form-input
             placeholder="동호회 이름을 입력해주세요"
             v-model="word"
@@ -29,7 +29,7 @@
       </b-row>
 
       <!-- 가입한 동호회 리스트 제목 -->
-      <b-row class="mt-3" align-h="start">
+      <b-row class="mt-3 padding-style-text" align-h="start">
         <b-col
           class="font-style padding-right-style"
           cols="5"
@@ -67,7 +67,7 @@
       </b-row>
 
       <!-- 전체 동호회 리스트 제목 -->
-      <b-row class="mt-3">
+      <b-row class="mt-3 padding-style-text">
         <b-col class="font-style"> 전체 동호회 </b-col>
       </b-row>
 
@@ -193,6 +193,11 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+  width: 50px;
+  height: 50px;
+}
+
 .round-box {
   width: 50px;
   height: 50px;
@@ -208,7 +213,7 @@ export default {
 
 .text-style {
   text-align: right;
-  margin-top: 15px;
+  margin-top: 16px;
 }
 
 .padding-style {
@@ -230,13 +235,14 @@ export default {
 }
 
 .img-style {
+  border-radius: 0.3rem;
   width: 150px;
   height: 150px;
 }
 
 .club-name-style {
   font-weight: bold;
-  font-size: 100%;
+  font-size: 105%;
   text-align: left;
 }
 
@@ -260,13 +266,18 @@ export default {
   padding: 10px;
 }
 
+.padding-style-text {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
 .box {
   position: relative;
 }
 
 .icon-box {
   position: absolute;
-  left: 320px;
+  left: 87vw;
   top: 11px;
   color: #999999;
 }
