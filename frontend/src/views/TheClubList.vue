@@ -1,9 +1,5 @@
 <template>
     <div class="main">
-        <div>
-          <div>club 테스트</div><img src="/resources/image/club/default.png" alt="클럽썸네일" class="img-style">
-          <div>club 테스트2</div><img src="resources/image/club/default.png" alt="클럽썸네일" class="img-style">
-        </div>
         <b-container class="mt-3">
           <!-- 상단 로고와 프로필 이미지 {{userinfo.usernickname}}-->
           <b-row class="mb-3">
@@ -17,16 +13,6 @@
               </div>
             </b-col>
           </b-row>
-
-          <!-- <div>
-            <div>club 테스트</div><img src="/resources/image/club/default.png" alt="클럽썸네일" class="img-style">
-            <div>club 테스트2</div><img src="resources/image/club/default.png" alt="클럽썸네일" class="img-style">
-          </div>
-
-          <b-container>
-            <div>club 테스트</div><img src="/resources/image/club/default.png" alt="클럽썸네일" class="img-style">
-            <div>club 테스트2</div><img src="resources/image/club/default.png" alt="클럽썸네일" class="img-style">
-          </b-container> -->
 
           <!-- 검색창 -->
           <b-row class="justify-content-center">
@@ -46,9 +32,9 @@
           </b-row>
 
           <!-- 가입한 동호회 리스트 -->
-          <b-row  v-for="club in clublist" v-bind:key="club">
-            <b-col class="m-2">
-              <img src="https://picsum.photos/1024/400/?image=41" class="img-style" alt="클럽썸네일" @click="goClub(club.clubid)">
+          <b-row class="padding-style-all">
+            <b-col class="mb-1" v-for="club in clublist" v-bind:key="club" cols="6" style="overflow: hidden;">
+              <img :src="'/resources/' + club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="goClub(club.clubid)">
               <b-col @click="goClub(club.clubid)" class="club-name-style">{{club.name}}</b-col>
             </b-col>
           </b-row>
@@ -64,9 +50,9 @@
           </b-row>
 
           <!-- 전체 동호회 리스트 -->
-          <b-row  v-for="club in totalclublist" v-bind:key="club">
-            <b-col class="m-2">
-              <img :src="'/'+club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
+          <b-row class="padding-style-all">
+            <b-col class="mb-1" v-for="club in totalclublist" v-bind:key="club" cols="6" style="overflow: hidden;">
+              <img :src="'/' + club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
               <b-col @click="enterClub(club.clubid)" class="club-name-style">{{club.name}}</b-col>
             </b-col>
           </b-row>
@@ -74,12 +60,8 @@
             <b-col>동호회가 존재하지 않습니다.</b-col>
           </b-row>
         </b-container>
-        <div>
-          <div>club 테스트</div><img src="/resources/image/club/default.png" alt="클럽썸네일" class="img-style">
-          <div>club 테스트2</div><img src="resources/image/club/default.png" alt="클럽썸네일" class="img-style">
-        </div>
     </div>
-</template>
+</template> 
 
 <script>
 import http from "@/util/http-common";
@@ -209,7 +191,8 @@ export default {
 }
 
 .img-style {
-  width: 100%;
+  width: 150px;
+  height: 150px;
 }
 
 .club-name-style{
@@ -232,5 +215,9 @@ export default {
   float:left;
   margin-left: 7%;
   margin-bottom: 7px;
+}
+
+.padding-style-all {
+  padding: 10px;
 }
 </style>
