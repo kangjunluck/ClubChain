@@ -7,7 +7,9 @@
         </div>
       </div>
 
-      <img src="@/assets/profile.png" alt="" class="bgphoto">
+      <div class="clubname">
+        clubname
+      </div>
       <div class="clubmember">
         공개 그룹 - {{club.join_num}}명
       </div>
@@ -23,22 +25,19 @@
       <div class="space"></div>
       <div class="post" v-for="post in postlist" v-bind:key="post" @click="detail(post.id)">
         <div class="nickname">
-          <div class="round-box">
-            <img :src="getThumbnail(post.userthumbnail)" alt="프로필" class="round">
-          </div>
+            <!--<img :src="getThumbnail(post.userthumbnail)" alt="프로필" class="round">-->
+            <img src="@/assets/gold.png" alt="a" class="round"> 
           <div class="profile">
-            {{post.usernickname}}
-            {{post.created}}
+            <div class="usernickname">{{post.usernickname}}</div>
+            <div class="created">{{post.created}}</div>
           </div>
         </div>
 
         <div class="title">
           {{post.title}}
         </div>
-        <div class="photo-box">
-          <img :src="getPhotoThumbnail(post.photo_thumbnail)" alt="이미지" class="postimage">
-          <!--<img src="@/assets/gold.png" alt="a" class="postimage"> 로컬 테스트용-->
-        </div>
+          <!--<img :src="getPhotoThumbnail(post.photo_thumbnail)" alt="이미지" class="postimage">로컬 테스트용-->
+        <img src="@/assets/gold.png" alt="a" class="postimage"> 
         <div class="content">
           {{post.content}}
         </div>
@@ -96,7 +95,7 @@ export default {
       var url = "/api/";
       url += this.$store.state.selectedClub;
       url += "/board/";
-      //url = "/api/30/board/";   //로컬 테스트용
+      url = "/api/30/board/";   //로컬 테스트용
       http.
         get(url, {
           withCredentials : true
@@ -149,9 +148,12 @@ export default {
   width: 100%;
   text-align: left;
 }
-.bgphoto {
+.clubname {
+  font-weight: 600;
+  font-size: 2rem;
   width:100%;
   height: 3rem;
+  text-align: center;
 }
 
 .clubmember{
@@ -167,17 +169,16 @@ export default {
   border-bottom : 1px solid black;
 }
 
-.nickname{
-  height: 3rem;
-}
 
 .title {
   margin-top: 2rem;
+  margin-left: 5%;
   font-weight: 600;
 }
 
 .content{
   height: 6rem;
+  margin-left: 5%;
 }
 .comment{
   height: 3rem;
@@ -187,26 +188,39 @@ export default {
   background-color: #999999;
 }
 .round-box {
-  width: 50px;
-  height: 50px;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 70%;
   overflow: hidden;
   display:inline-block;
 }
 
 .round {
-  width: 100%;
-  height: 100%;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 70%;
   object-fit:cover;
+  display:inline-block;
 }
 
 .profile {
   display:inline-block;
   margin-left: 2rem;
+  height: 100%;
 }
 
 .postimage {
-  width:10rem;
-  height: 10rem;
+  width: 100%;
 }
+
+.usernickname {
+  display:block;
+}
+
+.created {
+  color: #999999;
+  font-size:0.5rem;
+  display:block;
+}
+
 </style>
