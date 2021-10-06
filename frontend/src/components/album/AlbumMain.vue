@@ -126,8 +126,8 @@ export default {
         var b = $(this).width()
         console.log('높이', b)
         $(this).height(b)
+    })
     }
-  
   },
   created() {
     this.getAlbum();
