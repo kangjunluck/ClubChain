@@ -40,7 +40,7 @@ export default {
   font-family: "SpoqaHanSansNeo";
   src: url(./font/SpoqaHanSansNeo-Light.ttf) format('truetype');
   font-weight: 300;
-},
+}
 @font-face{
   font-family: "SpoqaHanSansNeo";
   src: url(./font/SpoqaHanSansNeo-Medium.ttf) format('truetype');
