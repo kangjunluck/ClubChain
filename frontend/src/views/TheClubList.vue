@@ -6,7 +6,7 @@
             <b-col cols="2" class="text-style">
               <img alt="Vue logo" src="@/assets/CC_logo_symbol.svg" />
             </b-col>
-            <b-col class="text-style">aaa님</b-col>
+            <b-col v-if="userinfo" class="text-style">{{userinfo.usernickname}}님</b-col>
             <b-col cols="2" align-self="end" class="padding-style">
               <div class="round-box" @click="profile">
                 <img alt="profile" :src="selecturl" class="round"/>
