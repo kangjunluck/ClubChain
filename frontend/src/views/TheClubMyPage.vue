@@ -58,13 +58,19 @@
         동호회 해체
       </div>
     <hr />
+    <Footer :footernum="footernum" />
   </div>
 </template>
 
 <script>
 import http from "@/util/http-common";
+import Footer from '../components/footer/footer.vue';
+
 export default {
   name: "ClubMypage",
+  components: {
+    Footer,
+  },
   data: function () {
     return {
       userinfo: null,
@@ -74,6 +80,8 @@ export default {
       checkuser : true,
       selecturl: "@/assets/profile.png",
       boards:[],
+
+      footernum : 4,
     };
   },
   methods: {
