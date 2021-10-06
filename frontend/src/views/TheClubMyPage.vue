@@ -72,7 +72,7 @@ export default {
       showclub : false,
       showboard: false,
       checkuser : true,
-      selecturl: null,
+      selecturl: "@/assets/profile.png",
       boards:[],
     };
   },

@@ -66,7 +66,7 @@ export default {
     };
   },
   methods: {
-    // 모든 vue에서 실행될 checklogin 함수 #######
+    // 모든 vue에서 실행될 checklogin 함수 ######
     checkLogin() {
       http
         .get("api/users/islogin", { withCredentials: true })
