@@ -42,6 +42,9 @@
       <div @click="myWrite" style="height:30px; width:100%; text-align:left;border-bottom:1px solid">
         내가 쓴 글
       </div>
+      <div @click="logout" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
+        로그 아웃
+      </div>
       <div @click="userDelete" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
         회원 탈퇴
       </div>
@@ -109,6 +112,20 @@ export default {
             alert("회원 탈퇴");
             this.$router.push("/");
           }
+        })
+        .catch((error) => {
+          console.log("에러!");
+          console.log(error);
+        });
+    },
+    logout () {
+      var url = "api/users/logout";
+      http
+        .delete(url, { withCredentials: true })
+        .then((res) => {
+          console.log("로그아웃");
+          console.log(res);
+          this.$router.push("/");
         })
         .catch((error) => {
           console.log("에러!");

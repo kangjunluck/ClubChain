@@ -3,26 +3,31 @@
     <b-container>
       <b-row>
         <b-col offset="1" cols="10" class="ethCard" style="padding-top:10px; padding-bottom:10px;">
-          <b-row>
-            <b-col>받는사람</b-col>
+          <b-row class="mb-1">
+            <b-col class="d-flex flex-column justify-content-center">
+              <div>받는사람</div>
+            </b-col>
             <b-col><b-form-input v-model="toEmail"></b-form-input></b-col>
           </b-row>
-          <b-row>
-            <b-col style="font-size: 0.8rem">동호회 계좌</b-col>
+          <b-row class="mb-1">
+            <b-col class="d-flex flex-column justify-content-center" style="font-size: 0.8rem">
+              <div>동호회 계좌</div>
+            </b-col>
             <b-col><input type="checkbox" id="checkbox" v-model="checked"></b-col>
           </b-row>
           
-          <b-row>
-            <b-col>송금액</b-col>
+          <b-row class="mb-1">
+            <b-col class="d-flex flex-column justify-content-center"><div>송금액</div></b-col>
             <b-col><b-form-input type="number" v-model="value"></b-form-input></b-col>
           </b-row>
-          <b-row>
-            <b-col>송금 메세지</b-col>
+          <b-row class="mb-1">
+            <b-col class="d-flex flex-column justify-content-center"><div>송금 메세지</div></b-col>
             <b-col><b-form-input v-model="message"></b-form-input></b-col>
           </b-row>
-          <b-row style="text-align">
+          <b-row class="d-flex justify-content-center" style="text-align">
             <!-- <b-col>PrivateKey 업로드</b-col> -->
-            <input id="PK" type="file" accept="text/*" value="개인키 파일" @change="updatePK">
+            <b-col class="d-flex flex-column justify-content-center"><div>Private Key</div></b-col>
+            <input class="col" id="PK" type="file" accept="text/*" value="개인키 파일" @change="updatePK">
           </b-row>
         </b-col>
         <div>
