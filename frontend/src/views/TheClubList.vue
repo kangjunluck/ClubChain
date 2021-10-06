@@ -1,5 +1,9 @@
 <template>
     <div class="main">
+        <div>
+          <div>club 테스트</div><img src="/resources/image/club/default.png" alt="클럽썸네일" class="img-style">
+          <div>club 테스트2</div><img src="resources/image/club/default.png" alt="클럽썸네일" class="img-style">
+        </div>
         <b-container class="mt-3">
           <!-- 상단 로고와 프로필 이미지 {{userinfo.usernickname}}-->
           <b-row class="mb-3">
@@ -60,6 +64,10 @@
             <b-col>동호회가 존재하지 않습니다.</b-col>
           </b-row>
         </b-container>
+        <div>
+          <div>club 테스트</div><img src="/resources/image/club/default.png" alt="클럽썸네일" class="img-style">
+          <div>club 테스트2</div><img src="resources/image/club/default.png" alt="클럽썸네일" class="img-style">
+        </div>
     </div>
 </template>
 
