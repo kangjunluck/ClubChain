@@ -119,7 +119,7 @@ export default {
         });
     },
     goback() {
-      this.$router.push("club/list");
+      this.$router.push("/club/list");
     },
     showmyclub()
     {
