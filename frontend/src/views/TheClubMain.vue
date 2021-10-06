@@ -23,7 +23,9 @@
       <div class="space"></div>
       <div class="post" v-for="post in postlist" v-bind:key="post" @click="detail(post.id)">
         <div class="nickname">
-          <img :src="getThumbnail(post.user.userthumbnail)" alt="프로필" class="postprofile">
+          <div class="round-box">
+            <img :src="getThumbnail(post.user.userthumbnail)" alt="프로필" class="round">
+          </div>
           {{post.user.usernickname}}
           {{post.updated}}
         </div>
@@ -185,5 +187,17 @@ export default {
 .space {
   height: 1rem;
   background-color: #999999;
+}
+.round-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 70%;
+  overflow: hidden;
+}
+
+.round {
+  width: 100%;
+  height: 100%;
+  object-fit:cover;
 }
 </style>
