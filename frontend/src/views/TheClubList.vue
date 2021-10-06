@@ -1,12 +1,12 @@
 <template>
     <div class="main">
         <b-container class="mt-3">
-          <!-- 상단 로고와 프로필 이미지 {{userinfo.usernickname}}-->
+          <!-- 상단 로고와 프로필 이미지 -->
           <b-row class="mb-3">
             <b-col cols="2" class="text-style">
               <img alt="Vue logo" src="@/assets/CC_logo_symbol.svg" />
             </b-col>
-            <b-col v-if="userinfo" class="text-style">님</b-col>
+            <b-col v-if="userinfo" class="text-style">{{userinfo.usernickname}}님</b-col>
             <b-col cols="2" align-self="end" class="padding-style">
               <div class="round-box" @click="profile">
                 <img alt="profile" :src="selecturl" class="round"/>
@@ -124,7 +124,7 @@ export default {
     }
   },
   created() { 
-    // this.checkLogin();
+    this.checkLogin();
     http.
       get("/api/club/", {
         withCredentials : true
