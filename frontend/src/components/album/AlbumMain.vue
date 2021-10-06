@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <!-- <div>앨범 메인페이지 {{ componenetStateEmit }}</div> -->
     <div class="photo_count">전체 사진 {{ photoCount }}개</div>
     <div>앨범 영역</div>
@@ -12,6 +12,7 @@
         style="overflow: hidden"
       >
         <img
+          class="EqHeightDiv"
           :src="'/resources/' + photo.photo_address"
           alt="앨범 이미지"
           @click="photoClick(photo)"
@@ -52,6 +53,7 @@
 
 <script>
 import http from "@/util/http-common";
+import $ from "jquery";
 export default {
   props: ["componenetStateEmit"],
   data() {
@@ -97,9 +99,24 @@ export default {
       this.$emit("stateChange");
       this.$emit("photoInfo", photo);
     },
+    divSizeChange() {
+      $(document).ready(function () {
+        $(".container").each(function () {
+          var highestBox = 0;
+          $(".EqHeightDiv", this).each(function () {
+            if ($(this).height() > highestBox) highestBox = $(this).height();
+          });
+
+          $(".EqHeightDiv", this).height(highestBox);
+        });
+      });
+    },
   },
   created() {
     this.getAlbum();
+  },
+  mounted() {
+    this.divSizeChange();
   },
 };
 </script>
