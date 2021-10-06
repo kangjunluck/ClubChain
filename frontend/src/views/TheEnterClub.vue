@@ -40,11 +40,15 @@
                 </b-col>
             </b-row>
         </b-container>
+        <CompleteModal v-if="completeModal" :message="message" @close="moveTo"/>
+        <FailModal v-if="failModal" :message="message" @close="failModal=false"/>
     </div>
 </template>
 
 <script>
 import http from "@/util/http-common";
+import CompleteModal from "../components/modal/complete.vue"
+import FailModal from "../components/modal/fail.vue"
 
 export default {
   data() {
@@ -52,9 +56,17 @@ export default {
         name : "",
         image : "",
         password : "",
-        inputPassword: ""
+        inputPassword: "",
+
+        completeModal : false,
+        failModal : false,
+        message : "",
     };
-},
+  },
+  components :{
+    CompleteModal,
+    FailModal,
+  },
   methods: {
     goback () {
         this.$router.push("/club/list");
@@ -69,7 +81,8 @@ export default {
     },
     enterClub() {
         if(this.inputPassword != this.password) {
-            alert("비밀번호를 다시 입력해주세요.");
+            this.message = "비밀번호를 다시 입력해주세요"
+            this.failModal = true;
             this.inputPassword = "";
             return 
         }
@@ -85,16 +98,21 @@ export default {
         { withCredentials: true }
         ).then( () => {
             console.log("가입 성공");
-            this.$router.push("/club/list");
+            this.message = "회원가입 완료";
+            this.completeModal = true;
+            
         }).catch((error) => {
             console.log(error);
-            alert("가입 실패");
+            this.message = "가입실패"
+            this.failModal = true;
         });
+    },
+    moveTo () {
+      this.completeModal = false;
+      this.$router.push("/club/list");
     },
   },
   created() {
-        console.log(this.$store.state.selectedClub);
-        console.log("aaa");
         var url = "/api/club/{clubid}?clubid="
         url += this.$store.state.selectedClub;
         http

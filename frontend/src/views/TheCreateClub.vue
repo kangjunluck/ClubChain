@@ -51,7 +51,8 @@
 				동호회 생성
 			</button>
 		</div>
-		
+		<CompleteModal v-if="completeModal" :message="message" @close="moveTo"/>
+        <FailModal v-if="failModal" :message="message" @close="failModal=false"/>
 		<!-- <b-form-file
 		v-model="file1"
 		:state="Boolean(file1)"
@@ -68,6 +69,9 @@ import $ from "jquery";
 import http from "@/util/http-common";
 // import axios from "axios";
 import Web3 from "web3";
+import CompleteModal from "../components/modal/complete.vue"
+import FailModal from "../components/modal/fail.vue"
+
 export default {
 	name: 'ClubCreate',
 	data: function () {
@@ -81,9 +85,17 @@ export default {
 				name: "",
 				password: "",
 			},
+
+			completeModal : false,
+        	failModal : false,
+        	message : "",
 			// selecturl: require("../assets/profile.png"),
 		}
 	},
+	components :{
+		CompleteModal,
+		FailModal,
+  	},
 	methods: {
 		updatetpye() {
 			console.log('업데이트')
@@ -133,12 +145,15 @@ export default {
 			http
 				.post("api/club/", formData, { withCredentials: true })
 				.then( (res) => {
-					console.log('성공')
-					console.log(res)})
+					console.log(res)
+					this.message = "동호회 생성 완료";
+            		this.completeModal = true;
+				})
 				.catch((error) => {		
-						console.log('실패')
-						console.log(error)
-					})
+					console.log(error);
+					this.message = error;
+					this.failModal = true;
+				})
 		},
 		saveFile(privateKey) {
 			var blob = new Blob([privateKey], {type: 'text/plain'});
@@ -158,6 +173,10 @@ export default {
 		goback () {
 			this.$router.push("/club/list");
 		},
+		moveTo () {
+      		this.completeModal = false;
+      		this.$router.push("/club/list");
+    },
 	}
 
 }
