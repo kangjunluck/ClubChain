@@ -79,7 +79,8 @@ export default {
           this.photoCount = res.data.total;
           this.photoList = res.data.List;
           console.log(this.photoCount);
-          console.log(photoList[0]);
+          console.log(this.photoList);
+          console.log(this.photoList[0]);
         })
         .catch((error) => {
           console.log(error);
