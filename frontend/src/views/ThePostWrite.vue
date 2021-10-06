@@ -28,11 +28,13 @@
         <label class="photo-button" for="photo">사진 업로드</label>
         <input v-on:change="fileSelect()" ref="image" type="file" name="photo" id="photo" class="col-6" style="display:none;" />
         </div>
+        <Footer :footernum="footernum" />
     </div>
 </template>
 
 <script>
 import http from "@/util/http-common";
+import Footer from '../components/footer/footer.vue';
 
 export default {
   data() {
@@ -42,7 +44,12 @@ export default {
       section: "",
       image: "",
       selecturl: require("@/assets/picture.png"),
+
+      footernum : 2,
     };
+  },
+  components: {
+    Footer,
   },
   methods: {
     write() {
