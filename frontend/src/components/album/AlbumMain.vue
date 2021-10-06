@@ -115,7 +115,7 @@ export default {
     divSizeChange() {
       console.log('Works!')          
       $(".EqHeightDiv").each(function(){
-        var a = $(".EqHeightDiv").width()
+        var a = $(this).width()
         $(this).height(a)
         console.log('높이', a)
       })
