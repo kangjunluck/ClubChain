@@ -68,6 +68,7 @@ public class BoardServiceImpl implements BoardService {
             br.setPassword(board.getUser().getPassword());
 
             br.setView(board.getView());
+            br.setClubname(club.get().getName());
             res.add(br);
         }
 

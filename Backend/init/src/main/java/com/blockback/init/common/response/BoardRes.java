@@ -13,6 +13,9 @@ public class BoardRes {
     @ApiModelProperty(name="clubid", example = "3")
     long clubid;
 
+    @ApiModelProperty(name="clubname", example = "3")
+    String clubname;
+
     @ApiModelProperty(name="id", example = "3")
     long id;
 
