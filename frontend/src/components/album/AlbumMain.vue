@@ -51,7 +51,7 @@ export default {
       console.log("this.clubId");
       console.log(this.clubId);
       http
-        .get("api/" + this.clubId + "board/photo")
+        .get("api/" + this.clubId + "/board/photo")
         .then((res) => {
           console.log(res);
           console.log(res.total, "전체사진");
