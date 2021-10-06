@@ -115,7 +115,7 @@ export default {
       http.delete(url)
       .then(()=>{
           alert("동호회에 탈퇴하셨습니다.")
-          this.$router.push("club/list");
+          this.$router.push("/club/list");
       })
       .catch((error)=>{
           console.log(error)
