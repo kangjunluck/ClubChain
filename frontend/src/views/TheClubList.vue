@@ -18,6 +18,16 @@
             </b-col>
           </b-row>
 
+          <div>
+            <div>club 테스트</div><img src="/resources/image/club/default.png" alt="클럽썸네일" class="img-style">
+            <div>club 테스트2</div><img src="resources/image/club/default.png" alt="클럽썸네일" class="img-style">
+          </div>
+
+          <b-container>
+            <div>club 테스트</div><img src="/resources/image/club/default.png" alt="클럽썸네일" class="img-style">
+            <div>club 테스트2</div><img src="resources/image/club/default.png" alt="클럽썸네일" class="img-style">
+          </b-container>
+
           <!-- 검색창 -->
           <b-row class="justify-content-center">
             <b-col cols="10" class="mt-1 padding-right-style">
