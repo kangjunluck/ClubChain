@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div class="toparea">
-            <div class="cancel">
+            <div class="cancel" @click="goBack()">
                 취소
             </div>
             <div class="done" @click="write()">
@@ -80,6 +80,9 @@ export default {
       this.selecturl = URL.createObjectURL(this.image);
       console.log(this.image);
     },
+    goBack() {
+        this.$router.push("/club/ClubMain");
+    }
   },
 };
 </script>
