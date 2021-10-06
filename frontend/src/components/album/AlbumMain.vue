@@ -10,6 +10,7 @@
         cols="4"
         style="overflow: hidden"
       >
+        <div>{{index}}</div>
         <img
           class="image_resize"
           :src="'/resources/' + photo.photo_address"
@@ -92,9 +93,10 @@ export default {
     photoClick(photo, index) {
       console.log("특정 사진 클릭");
       // console.log("자식", this.photo);
-      console.log("자식2", photo, index);
+      console.log("자식2", photo);
+      console.log("자식2=index", index);
       this.$emit("stateChange");
-      this.$emit("photoInfo", photo, index);
+      // this.$emit("photoInfo", {photo, index});
     },
     test() {
       $(".EqHeightDiv").each(function(){
