@@ -51,7 +51,7 @@ export default {
         formData.append('section', "분류");
         formData.append('clubid', this.$store.state.selectedClub);
         formData.append('userid', this.$store.state.credentials.userId);
-        formData.append('file', this.image);
+        formData.append('board_thumbnail', this.image);
         
         console.log('title : ' + this.title);
         console.log('content :' + this.content);
@@ -66,6 +66,8 @@ export default {
         }
         ).then( (res) => {
             console.log(res.data);
+            alert("글 작성 완료");
+            this.$router.push("club/main");
         }).catch((error) => {
             alert("글쓰기 실패");
             console.dir(error);
