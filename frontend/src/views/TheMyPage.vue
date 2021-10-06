@@ -39,9 +39,13 @@
           <p class="mb-1">{{ club.introduce }}</p>
         </div>
       </div>
-      <div @click="logout" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
-        로그아웃
+      <div @click="myWrite" style="height:30px; width:100%; text-align:left;border-bottom:1px solid">
+        내가 쓴 글
       </div>
+      <div @click="userDelete" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
+        회원 탈퇴
+      </div>
+  
     <hr />
   </div>
 </template>
@@ -55,7 +59,6 @@ export default {
       userinfo: null,
       myclubinfo: null,
       showclub : false,
-      checkuser : true,
       selecturl: "@/assets/profile.png",
     };
   },
@@ -124,16 +127,10 @@ export default {
       else
         this.showclub = false;
     },
-    logout() {
-      http
-        .delete("api/users/logout", { withCredentials: true })
-        .then((res) => {
-          console.log("logout");
-          console.log(res.data);
-        })
-
-        this.$router.push("/");
-    }
+    myWrite()
+    {
+      console.log("내가 쓴 글목록")
+    },
   },
   created() {
     this.checkLogin();

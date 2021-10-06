@@ -14,11 +14,11 @@
       </div>
     </div>
     <div class="row w-50">
-      <div class="d-flex justify-content-between align-items-center mb-3 p-0">
+      <div class=" d-flex justify-content-between align-items-center mb-3 p-0">
         <img
           :src="selecturl"
           alt=""
-          class="px-0"
+          class="circle px-0 "
           style="width: 5rem; height: 5rem"
         />
         <div class="w-50">
@@ -39,20 +39,23 @@
           <p class="mb-1">{{ club.introduce }}</p>
         </div>
       </div>
-      <div @click="createInvitation" style="height:30px; width:100%; text-align:left;border-bottom:1px solid">
-        초대장 생성
+      <div @click="showBoard" style="height:30px; width:100%; text-align:left;border-bottom:1px solid">
+        내가 쓴 글
       </div>
+      <div v-if="showboard">
+          <div v-for="board in boards" :key="board.id">
+              <p>{{board.title}}</p>
+          </div>
+      </div>
+
       <div @click="goSetting" style="height:30px; width:100%; text-align:left;border-bottom:1px solid">
         동호회 설정
       </div>
-      <div v-if="checkuser" @click="resignClub" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
+      <div v-if="checkuser" @click="userDelete" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
         동호회 탈퇴
       </div>
       <div v-else @click="clubDismantle" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
         동호회 해체
-      </div>
-      <div @click="logout" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
-        로그아웃
       </div>
     <hr />
   </div>
@@ -61,14 +64,16 @@
 <script>
 import http from "@/util/http-common";
 export default {
-  name: "myInfoPage",
+  name: "ClubMypage",
   data: function () {
     return {
       userinfo: null,
       myclubinfo: null,
       showclub : false,
+      showboard: false,
       checkuser : true,
       selecturl: "@/assets/profile.png",
+      boards:[],
     };
   },
   methods: {
@@ -103,23 +108,21 @@ export default {
           console.log(error);
         });
     },
-    resignClub() {
+    userDelete() {
       console.log("탈퇴하기");
-      var url = "api/" + this.$store.state.selectedClub + "/";
-      http
-        .delete(url, { withCredentials: true })
-        .then((res) => {
-            console.log(res)
-            alert("동호회 탈퇴");
-            this.$router.push("/club/list");
-        })
-        .catch((error) => {
-          console.log("에러!");
-          console.log(error);
-        });
+      var url = "api/"
+    url += this.$store.state.selectedClub+"/";
+      http.delete(url)
+      .then(()=>{
+          alert("동호회에 탈퇴하셨습니다.")
+          this.$router.push("club/list");
+      })
+      .catch((error)=>{
+          console.log(error)
+      })
     },
     goback() {
-      this.$router.push("/club/list");
+      this.$router.push("ClubMain");
     },
     showmyclub()
     {
@@ -130,9 +133,32 @@ export default {
       else
         this.showclub = false;
     },
-    createInvitation()
+    showBoard()
     {
-
+        if(!this.showboard)
+        {
+            this.showboard = true;
+            this.myWrite();
+        }
+        else
+        {
+            this.showboard = false;
+            this.boards = [];
+        }
+    },
+    myWrite()
+    {
+        let url = "/api/"+ this.$store.state.selectedClub+"/board/";
+        http.get(url)
+        .then((res)=>{
+            // console.log(res);
+            res.data.forEach(item => {
+                if(item.user.userEmail == this.$store.state.credentials.userEmail)
+                {
+                    this.boards.push(item);
+                }
+            });
+        })
     },
     goSetting()
     {
@@ -168,16 +194,6 @@ export default {
     {
       console.log('동호회 해체');
     },
-    logout() {
-      http
-        .delete("api/users/logout", { withCredentials: true })
-        .then((res) => {
-          console.log("logout");
-          console.log(res.data);
-        })
-
-        this.$router.push("/");
-    }
   },
   created() {
     this.checkLogin();
