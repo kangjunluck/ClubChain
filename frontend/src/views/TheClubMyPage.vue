@@ -51,7 +51,7 @@
       <div @click="goSetting" style="height:30px; width:100%; text-align:left;border-bottom:1px solid">
         동호회 설정
       </div>
-      <div v-if="checkuser" @click="userDelete" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
+      <div v-if="checkuser" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
         동호회 탈퇴
       </div>
       <div v-else @click="clubDismantle" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
