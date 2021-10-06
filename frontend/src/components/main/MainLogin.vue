@@ -1,7 +1,6 @@
 <template>
   <div class="mainLogin">
     <!-- 나중에 trim도 추가하기 -->
-    <!-- isLogin -->
     <img alt="Vue logo" src="@/assets/CC.svg" class="logo" />
     <!-- 로그인 폼 만들기 -->
     <div class="loginForm">
@@ -191,19 +190,19 @@ export default {
   margin: 2px 0 0 4px;
   height: 22px;
 }
-.font1{
+.font1 {
   font-weight: 100;
 }
-.font2{
+.font2 {
   font-weight: 200;
 }
-.font3{
+.font3 {
   font-weight: 300;
 }
-.font4{
+.font4 {
   font-weight: 400;
 }
-.font5{
+.font5 {
   font-weight: 500;
 }
 </style>
