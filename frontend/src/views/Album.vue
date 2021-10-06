@@ -1,18 +1,25 @@
 <template>
   <div class="box">
+    
     <AlbumNavigator
-      v-on:stateChange="doStateChange"
-      v-bind:componenetStateEmit="componenetStateEmit"
-      v-bind:index="index"
-      v-bind:photoCount="photoCount"
-    />
+        class="nav"
+        v-on:stateChange="doStateChange"
+        v-bind:componenetStateEmit="componenetStateEmit"
+        v-bind:index="index"
+        v-bind:photoCount="photoCount"
+      />
+    <div class="item">
     <AlbumMain
+      
       v-if="componenetStateEmit === true"
       v-on:stateChange="doStateChange"
       v-on:photoInfo="checkPhotoInfo"
     />
-    <AlbumDetail v-if="componenetStateEmit === false" v-bind:index="index" v-bind:photo="photo" v-bind:photoCoun="photoCount"/>
+    
+    <AlbumDetail class="" v-if="componenetStateEmit === false" v-bind:index="index" v-bind:photo="photo" v-bind:photoCount="photoCount"/>
+    </div>
     <Footer :footernum="footernum" v-if="componenetStateEmit === true" />
+
   </div>
 </template>
 
@@ -58,5 +65,12 @@ export default {
 .box{
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: red;
+}
+.item{
+  flex: 1;
+  background-color:blueviolet;
 }
 </style>
