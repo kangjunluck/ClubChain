@@ -37,7 +37,7 @@
             <b-row class="justify-content-center align-content mt-1">
                 <b-col cols="2"></b-col>
                 <b-col cols="4">
-                    <b-button block class="cancel-btn-style" @click="goBack">취소</b-button>
+                    <b-button block class="cancel-btn-style" @click="goback">취소</b-button>
                 </b-col>
                 
                 <b-col cols="4">
@@ -92,9 +92,6 @@ export default {
             console.log(error);
             alert("가입 실패");
         });
-    },
-    goBack() {
-        this.$router.push({ name : "Main"});
     },
   },
   created() {
