@@ -114,10 +114,10 @@ export default {
       this.$router.push('/club/list');
     },
     getThumbnail(url) {
-      return "/resources/" + url;
+      return url;
     },
     getPhotoThumbnail(url) {
-      return "/resources/" + url;
+      return url;
     }
     
   },
