@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="exist" v-if="postlist.length == 0">등록된 게시물이 없습니다</div>
-      <Footer />
+      <Footer :statenum="statenum" />
     </div>
 </template>
 
@@ -44,6 +44,8 @@ export default {
       schedule : "",
       postlist : "",
       join_num : "",
+
+      statenum : 0,
     };
   },
   components: {

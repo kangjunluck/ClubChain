@@ -7,7 +7,7 @@
     <!-- <div v-if="componenetStateEmit===''">여기에 최근 거래 몇개 보여줘야 함</div> -->
     <!-- <TransactionHistory v-if= "componenetStateEmit==='transactionHistory'" /> -->
     <!-- <Transaction v-if= "componenetStateEmit==='transfer'" /> -->
-    <Footer />
+    <Footer :footernum="footernum" />
     <!-- footer 어따 달지? -->
   </div>
 </template>
@@ -24,6 +24,8 @@ export default {
   data: function () {
     return {
       componenetStateEmit: "",
+
+      footernum: 1,
     }
   },
   methods: {
