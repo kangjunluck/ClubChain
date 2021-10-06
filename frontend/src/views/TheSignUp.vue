@@ -1,19 +1,11 @@
 <template>
-  <div
-    class="
-      container
-      d-flex
-      flex-column
-      justify-content-center
-      align-items-center
-    "
-  >
+  <div class="container d-flex flex-column justify-content-center">
     <div class="toparea position-absolute">
       <div class="d-flex justify-content-between h-100 align-items-center">
         <i class="fas fa-arrow-left" @click="goback"></i>
       </div>
     </div>
-    <div class="row signup_header">회원가입</div>
+    <div class="row signup_header mb-3">회원가입</div>
     <div class="row signup_form">
       <div
         class="mb-2 d-flex justify-content-between align-items-end photo-set"
