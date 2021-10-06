@@ -54,7 +54,7 @@
 // import { mapActions } from "vuex";
 // import $ from "jquery";
 import http from "@/util/http-common";
-import FailModal from "../components/modal/fail.vue"
+import FailModal from "../modal/fail.vue"
 
 export default {
   name: "Login",
