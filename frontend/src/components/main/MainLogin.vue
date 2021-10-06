@@ -54,7 +54,7 @@
 // import { mapActions } from "vuex";
 // import $ from "jquery";
 import http from "@/util/http-common";
-import FailModal from "../modal/fail.vue"
+import FailModal from "../modal/fail.vue";
 
 export default {
   name: "Login",
@@ -67,11 +67,9 @@ export default {
         usernickname: null,
         userthumbnail: null,
         userId: null,
-
-        failModal : false,
-        message : "",
       },
-
+      failModal : false,
+      message : "",
     };
   },
   components :{
