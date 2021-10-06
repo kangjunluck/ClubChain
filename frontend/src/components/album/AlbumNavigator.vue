@@ -29,7 +29,7 @@
 <script>
 export default {
   // name: "Navigator",
-  props: ["componenetStateEmit"],
+  props: ["componenetStateEmit", "index", "photoCount"],
   methods: {
     goBack() {
       this.$emit("stateChange");
