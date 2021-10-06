@@ -36,7 +36,7 @@
         <div class="title">
           {{post.title}}
         </div>
-        <img :src="getPhotoThumbnail(post.photo_thumbnail)" alt="이미지" class="postimage">
+        <img :src="getPhotoThumbnail(post.photo_thumbnail)" alt="이미지" class="postimage" v-if="post.photo_thumbnail">
         <!--<img src="@/assets/gold.png" alt="a" class="postimage"> 로컬 테스트용-->
         <div class="content">
           {{post.content}}
@@ -95,7 +95,7 @@ export default {
       var url = "/api/";
       url += this.$store.state.selectedClub;
       url += "/board/";
-      //url = "/api/30/board/";   //로컬 테스트용
+      //url = "/api/8/board/";   //로컬 테스트용
       http.
         get(url, {
           withCredentials : true
@@ -104,7 +104,6 @@ export default {
           console.log("게시글 찍히나 확인");
           console.log(res.data[0]);
           this.postlist = res.data;
-          console.log(this.postlist);
         }).catch((error) => {
           console.log(error);
           alert("게시글 가져오기 실패");
