@@ -55,7 +55,7 @@ import Footer from '../components/footer/footer.vue';
 export default {
   data() {
     return {
-      club : null,
+      club : "",
       schedule : "",
       postlist : "",
       join_num : "",
