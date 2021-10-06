@@ -13,6 +13,7 @@
         <i class="fas fa-arrow-left" @click="goback"></i>
       </div>
     </div>
+    <div></div>
     <div class="row" style="padding-left: 33px; padding-right: 33px;">
       <div class="d-flex justify-content-between align-items-center mb-3 p-0">
         <img
@@ -35,18 +36,28 @@
       <div @click="showmyclub" style="line-height: 1.9; height:30px; width:100%; text-align:left; border-top:1px solid; border-bottom:1px solid">
         가입한 동호회
       </div>
-      <div v-if="showclub">
-        <div v-for="club in myclubinfo" :key="club.pk">
-          <p style="line-height: 1.9; text-align: left; padding-left: 20px; margin-bottom: 0;"> ● {{ club.name }}</p>
+      <div v-if="showclub" style="overflow: auto; height: 100px;">
+        <div v-if="myclubinfo.length==0">
+          가입한 동호회가 없습니다.
+        </div>
+        <div v-for="club in myclubinfo" :key="club.pk" style="height:30px;">
+          <p style="text-align: left;">
+            <i class="fas fa-chevron-right" style="font-size: 1rem;"></i>{{ club.name }}
+          </p>
         </div>
       </div>
       <div @click="showBoard" style="line-height: 1.9; height:30px; width:100%; text-align:left;border-bottom:1px solid">
         내가 쓴 글
       </div>
-        <div v-if="showboard">
-          <div v-for="board in boards" :key="board.id">
-              <p style="line-height: 1.9; text-align: left; padding-left: 20px; margin-bottom: 0;">● {{board.title}}</p>
-          </div>
+      <div v-if="showboard" style="overflow: auto; height: 100px;">
+        <div v-if="boards.length==0">
+          게시글이 없습니다.
+        </div>
+        <div v-for="board in boards" :key="board.id" style="height:30px;">
+          <p style="text-align: left;">
+            <i class="fas fa-chevron-right" style="font-size: 1rem;"></i>{{ board.title }}
+          </p>
+        </div>
       </div>
       <div @click="logout" style="line-height: 1.9; height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
         로그 아웃
