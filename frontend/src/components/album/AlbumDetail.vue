@@ -9,15 +9,7 @@
         <!-- <img class="image" src="@/assets/cats.jpg" alt="이미지"> -->
         
       </div>
-      <!-- <div class="row w-50">
-        <div class="d-flex justify-content-between align-items-center mb-3 p-0">
-          <img class="circle px-0" :src="'/resources/'+photo.userthumbnail" alt="">
-          <div class="image_info_div">
-            <p class="m-0 h5" style="text-align:left;">{{photo.user_name}}</p>
-            <p class="m-0 h6" style="text-align:left;">{{photo.user_name}}</p>
-          </div>
-        </div>
-      </div> -->
+
     </div>
     <div class="row">
       <div class="detail_info d-flex justify-content-left">
@@ -82,11 +74,11 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color:cornflowerblue
+  /* background-color:cornflowerblue */
 }
 .item1{
   flex: 1;
-  background-color: #00ff00;
+  
 }
 .circle {
   
@@ -102,7 +94,7 @@ export default {
   display: -webkit-flex;
   -webkit-align-item: center;
   -webkit-justify-content: center;
-  background-color: aquamarine;
+  
   margin: 0 0 0 1rem;
 }
 .container{
@@ -110,15 +102,14 @@ export default {
   min-height:100%;
 }
 .image_area{
-  background-color:aquamarine;
+  
   width:100%;
   height:100vw;
   overflow:hidden;
   margin: 0 0 0 0;
-   height: 100%;
-    display: flex;
+  height: 100%;
+  display: flex;
   flex-direction: column;
-  /* background-color: aqua; */
   justify-content: center;
 }
 .image{
@@ -127,7 +118,7 @@ export default {
   width: 100%;
   height: 130vw;
   object-fit: contain;
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
 }
 .image_info_div{
   padding: 0 0 0 1rem;
@@ -137,7 +128,7 @@ export default {
 }
 .detail_info{
   margin: 0 0 0 0;
-  padding: 0 0 0 0;
+  padding: 0 0 2vh 0 ;
 }
 .row {
   margin:0 0 0 0;

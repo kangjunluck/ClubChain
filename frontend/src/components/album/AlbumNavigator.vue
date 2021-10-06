@@ -10,15 +10,14 @@
       </b-row>
       <b-row v-if="componenetStateEmit === false" class="nav_row">
         <b-col
-          class="nav_album_detail arrow"
-          style="vertical-align:middle"
+          class="nav_album_detail count_photo arrow"
           cols="2"
           @click="goBack"
         >
           <i class="fas fa-arrow-left"></i>
         </b-col>
-        <b-col class="nav_album_detail" cols="8">
-          <div>{{index}} / {{photoCount}}</div>
+        <b-col class="count_photo nav_album_detail" cols="8">
+          {{index}} / {{photoCount}}
         </b-col>
         <b-col cols="2"></b-col>
       </b-row>
@@ -61,14 +60,20 @@ export default {
   font-size: 1.7rem;
 }
 .nav_album_detail{
+  height: 3rem;
   margin: 0 0 0 0;
-  flex-direction: column;
-  justify-content: center;
+  /* flex-direction: column;
+  justify-content: center; */
   /* background-color: #0080FF; */
 }
 .arrow{
-  padding:0 0 0 5%;
-  text-align: left;
+  /* 이모티콘이라 중앙정렬 안맞아서 셀프 추가 */
+  padding: 0 0 1vw 0;
+}
+.count_photo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 </style>
