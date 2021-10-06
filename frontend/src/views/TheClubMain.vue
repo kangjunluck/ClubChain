@@ -8,7 +8,7 @@
       </div>
 
       <div class="clubname">
-        {{club.clubname}}
+        {{club.name}}
       </div>
       <div class="clubmember">
         공개 그룹 - {{club.join_num}}명
