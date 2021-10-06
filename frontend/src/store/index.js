@@ -20,8 +20,6 @@ export default new Vuex.Store({
     },
     selectedClub: 0,
     postId: 0,
-
-    footerposition: null,
   },
 
   // actionsm 에서 commit() 메서드에 의해 호출
