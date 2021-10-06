@@ -46,7 +46,6 @@
     <div class="font3">3</div>
     <div class="font4">4</div>
     <div class="font5">5</div> -->
-    <FailModal v-if="failModal" :message="message" @close="failModal=false"/>
   </div>
 </template>
 
@@ -54,7 +53,7 @@
 // import { mapActions } from "vuex";
 // import $ from "jquery";
 import http from "@/util/http-common";
-import FailModal from "../modal/fail.vue";
+
 
 export default {
   name: "Login",
@@ -68,12 +67,8 @@ export default {
         userthumbnail: null,
         userId: null,
       },
-      failModal : false,
-      message : "",
+
     };
-  },
-  components :{
-    FailModal,
   },
   computed: {
     validationPassword() {
@@ -113,8 +108,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          this.message = "유저 정보를 확인해주세요"
-          this.failModal = true;
+          alert("로그인 실패");
         });
     },
   },
@@ -137,6 +131,7 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
+  /* background-color: aqua; */
   justify-content: center;
 }
 .empty {
