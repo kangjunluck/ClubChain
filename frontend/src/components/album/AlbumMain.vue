@@ -96,7 +96,8 @@ export default {
       console.log("자식2", photo);
       console.log("자식2=index", index);
       this.$emit("stateChange");
-      // this.$emit("photoInfo", {photo, index});
+      this.$emit("photoInfo", photo, index);
+      // ?
     },
     test() {
       $(".EqHeightDiv").each(function(){
