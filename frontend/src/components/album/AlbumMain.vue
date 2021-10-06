@@ -122,8 +122,10 @@ export default {
       console.log('end')
     },
     test() {
-      var b = $("#test").width()
-      console.log('b', b)
+      $(".EqHeightDiv").each(function(){
+        var b = $(this).width()
+        console.log('높이', b)
+        $(this).height(b)
     }
   
   },
