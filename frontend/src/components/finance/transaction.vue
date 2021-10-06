@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container>
+    <b-container style="padding-left: 0px; padding-right: 0px;">
       <b-row>
         <b-col offset="1" cols="10" class="ethCard" style="padding-top:10px; padding-bottom:10px;">
           <b-row class="mb-1">
@@ -27,7 +27,10 @@
           <b-row class="d-flex justify-content-center" style="text-align">
             <!-- <b-col>PrivateKey 업로드</b-col> -->
             <b-col class="d-flex flex-column justify-content-center"><div>Private Key</div></b-col>
-            <input class="col" id="PK" type="file" accept="text/*" value="개인키 파일" @change="updatePK">
+            <!-- <input class="col" id="PK" type="file" accept="text/*" value="개인키 파일" @change="updatePK"> -->
+          </b-row>
+          <b-row>
+            <b-col> <input @change="updatePK" class="form-control" accept="text/*" type="file" name="photo" id="PK"></b-col>
           </b-row>
         </b-col>
         <div>
@@ -539,9 +542,11 @@ export default {
         transaction.sign(privKey);
         web3.eth.sendSignedTransaction('0x'+transaction.serialize().toString('hex'))
         .on('transactionHash',console.log)
-
-          alert("송금에는 1분가량 시간이 소요됩니다.")
+        .then((res)=>{
+          alert("송금이 완료되었습니다.")
+          console.log(res);
           location.reload();
+        })
       })
     },
     async saveHistory()
