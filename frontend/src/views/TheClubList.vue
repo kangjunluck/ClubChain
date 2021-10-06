@@ -2,7 +2,7 @@
   <div class="main">
     <b-container>
       <!-- 상단 로고와 프로필 이미지 -->
-      <b-row class="mt-3 mb-2">
+      <b-row class="m-0 m-0" style="height:3rem; background-color:red;">
         <b-col cols="2" align-self="start">
           <img alt="Vue" class="logo" src="@/assets/CC_logo_symbol.svg" />
         </b-col>
