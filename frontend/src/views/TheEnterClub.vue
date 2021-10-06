@@ -25,10 +25,10 @@
                     <!-- 비밀번호 입력 -->
                     <input
                             type="password"
-                            id="password"
-                            name="password"
+                            id="inputPassword"
+                            name="inputPassword"
                             v-model="inputPassword"
-                            ref="password"
+                            ref="inputPassword"
                             placeholder="비밀번호"
                             class="form-control mb-2"
                     />
@@ -77,13 +77,13 @@ export default {
     enterClub() {
         var url = "/api/";
         url += this.$store.state.selectedClub;
-        url += "/";
+        url += "?password=";
+        url += this.inputPassword;
         console.log(url);
       http
         .post(url, {
             clubid : this.$store.state.selectedClub,
         },
-        {password: {password : this.inputPassword}},
         { withCredentials: true }
         ).then( () => {
             console.log("가입 성공");
