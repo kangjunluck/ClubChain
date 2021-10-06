@@ -2,7 +2,7 @@
   <div class="container">
     <!-- <div>앨범 메인페이지 {{ componenetStateEmit }}</div> -->
     <div class="photo_count">전체 사진 {{ photoCount }}개</div>
-    <div>앨범 영역</div>
+    <!-- <div>앨범 영역</div> -->
     <b-row v-if="photoCount !== 0" class="photos_area">
       <b-col
         v-for="photo in photoList"
@@ -16,10 +16,9 @@
           alt="앨범 이미지"
           @click="photoClick(photo)"
         />
-        <!-- <b-col @click="goClub(club.clubid)" class="club-name-style">{{club.name}}</b-col> -->
       </b-col>
     </b-row>
-    <div>앨범영역 끝</div>
+    <!-- <div>앨범영역 끝</div> -->
 
     <!-- <div v-if="photoCount !== 0" class="photos_area">
       <div v-for="photo in photoList" v-bind:key="photo" class="photo_list">
@@ -47,8 +46,31 @@
       <br />
       첫 사진을 업로드 해주세요.
     </div>
-    <button @click="test()">클릭</button>
+    <!-- <button @click="test()">클릭</button>
+    <div>뭔데</div>
+    <b-row>
+      <b-col
+        id="test"
+        cols="4"
+      >
+        모야모야
+      </b-col>
+      <b-col
+        id="test"
+        cols="4"
+      >
+        모야모
+      </b-col>
+      <b-col
+        id="test"
+        cols="4"
+      >
+        모야
+      </b-col>
+    </b-row>
+    <div>뭐야</div> -->
   </div>
+  
 </template>
 
 <script>
@@ -72,16 +94,8 @@ export default {
         .get("api/" + this.clubId + "/board/photo")
         .then((res) => {
           console.log('응답', res);
-          // console.log(res.data.total, "전체사진");
-          // console.log("리스트", res.data.list);
-          // console.log(res.data);
-          // console.log(res.data.total);
-          // console.log(res.data.list);
           this.photoCount = res.data.total;
           this.photoList = res.data.list;
-          // console.log(this.photoCount);
-          // console.log(this.photoList);
-          // console.log(this.photoList[0]);
         })
         .catch((error) => {
           console.log('에러', error);
@@ -100,12 +114,16 @@ export default {
     },
     divSizeChange() {
       console.log('Works!')          
-      var a =$(".EqHeihtDiv").width()
+      var a = $(".EqHeihtDiv").width()
       console.log('높이', a)
       $(".EqHeihtDiv").each(function(index, item){
         $(item).height(a)
-        })
-      },
+      })
+    },
+    test() {
+      var b = $("#test").width()
+      console.log('b', b)
+    }
   
   },
   created() {
