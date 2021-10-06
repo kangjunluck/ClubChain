@@ -185,7 +185,7 @@ export default {
 }
 .space {
   height: 1rem;
-  background-color: #999999;
+  background-color: #DDE0E3;
 }
 .round-box {
   width: 3.5rem;
