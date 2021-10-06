@@ -54,10 +54,10 @@ export default {
         .get("api/" + this.clubId + "/board/photo")
         .then((res) => {
           console.log(res);
-          console.log(res.total, "전체사진");
-          console.log("리스트", res.list);
-          this.photoCount = res.total;
-          this.photoList = res.list;
+          console.log(res.data.total, "전체사진");
+          console.log("리스트", res.data.list);
+          this.photoCount = res.data.total;
+          this.photoList = res.data.list;
         })
         .catch((error) => {
           console.log(error);
