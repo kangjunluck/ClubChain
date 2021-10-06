@@ -1,6 +1,7 @@
 package com.blockback.init.controller;
 
 import com.blockback.init.common.request.BoardRegisterReq;
+import com.blockback.init.common.response.BoardRes;
 import com.blockback.init.common.response.MessageResponse;
 import com.blockback.init.common.response.PhotoRes;
 import com.blockback.init.entity.Board;
@@ -40,12 +41,19 @@ public class BoardController {
             @ApiResponse(code = 201, message = "성공"),
             @ApiResponse(code = 500, message = "서버 오류")
     })
+<<<<<<< HEAD
     public List<Board> searchAll(@PathVariable("clubid") Long clubid)
     {
         List<Board> boardList = boardService.getBoardsByClubId(clubid);
 
 
         return boardList;
+=======
+    public ResponseEntity<List<BoardRes>> searchAll(@PathVariable("clubid") Long clubid) {
+        List<BoardRes> boardList = boardService.getBoardsByClubId(clubid);
+
+        return ResponseEntity.status(200).body(boardList);
+>>>>>>> 2f21234d8d24839fab6069c77790e589c29bc835
     }
     @GetMapping(value = "/{boardid}")
     @ApiOperation(value = "게시글 단일 조회")

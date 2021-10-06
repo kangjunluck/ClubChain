@@ -7,7 +7,9 @@
         </div>
       </div>
 
-      <img src="@/assets/profile.png" alt="" class="bgphoto">
+      <div class="clubname">
+        clubname
+      </div>
       <div class="clubmember">
         공개 그룹 - {{club.join_num}}명
       </div>
@@ -23,13 +25,19 @@
       <div class="space"></div>
       <div class="post" v-for="post in postlist" v-bind:key="post" @click="detail(post.id)">
         <div class="nickname">
-          <img :src="post.user.userthumbnail" alt="프로필" class="postprofile">
-          {{post.user.usernickname}}
-          {{post.updated}}
+            <img :src="getThumbnail(post.userthumbnail)" alt="프로필" class="round">
+            <!--<img src="@/assets/gold.png" alt="a" class="round"> -->
+          <div class="profile">
+            <div class="usernickname">{{post.usernickname}}</div>
+            <div class="created">{{post.created}}</div>
+          </div>
         </div>
+
         <div class="title">
           {{post.title}}
         </div>
+        <img :src="getPhotoThumbnail(post.photo_thumbnail)" alt="이미지" class="postimage">
+        <!--<img src="@/assets/gold.png" alt="a" class="postimage"> 로컬 테스트용-->
         <div class="content">
           {{post.content}}
         </div>
@@ -87,6 +95,7 @@ export default {
       var url = "/api/";
       url += this.$store.state.selectedClub;
       url += "/board/";
+      url = "/api/30/board/";   //로컬 테스트용
       http.
         get(url, {
           withCredentials : true
@@ -104,6 +113,13 @@ export default {
     goback () {
       this.$router.push('/club/list');
     },
+    getThumbnail(url) {
+      return "/resources/" + url;
+    },
+    getPhotoThumbnail(url) {
+      return "/resources/" + url;
+    }
+    
   },
   created() {
     this.getClubinfo();
@@ -132,9 +148,12 @@ export default {
   width: 100%;
   text-align: left;
 }
-.bgphoto {
+.clubname {
+  font-weight: 600;
+  font-size: 2rem;
   width:100%;
   height: 3rem;
+  text-align: center;
 }
 
 .clubmember{
@@ -149,14 +168,17 @@ export default {
   height: 3rem;
   border-bottom : 1px solid black;
 }
-.post{
-  height: 12rem;
+
+
+.title {
+  margin-top: 2rem;
+  margin-left: 5%;
+  font-weight: 600;
 }
-.nickname{
-  height: 3rem;
-}
+
 .content{
   height: 6rem;
+  margin-left: 5%;
 }
 .comment{
   height: 3rem;
@@ -165,4 +187,40 @@ export default {
   height: 1rem;
   background-color: #999999;
 }
+.round-box {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 70%;
+  overflow: hidden;
+  display:inline-block;
+}
+
+.round {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 70%;
+  object-fit:cover;
+  display:inline-block;
+}
+
+.profile {
+  display:inline-block;
+  margin-left: 2rem;
+  height: 100%;
+}
+
+.postimage {
+  width: 100%;
+}
+
+.usernickname {
+  display:block;
+}
+
+.created {
+  color: #999999;
+  font-size:0.5rem;
+  display:block;
+}
+
 </style>

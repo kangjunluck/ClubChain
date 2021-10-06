@@ -25,26 +25,19 @@
                     <!-- 비밀번호 입력 -->
                     <input
                             type="password"
-                            id="password"
-                            name="password"
+                            id="inputPassword"
+                            name="inputPassword"
                             v-model="inputPassword"
-                            ref="password"
+                            ref="inputPassword"
                             placeholder="비밀번호"
                             class="form-control mb-2"
                     />
                 </b-col>
             </b-row>
             <b-row class="justify-content-center align-content mt-1">
-                <b-col cols="2"></b-col>
-                <b-col cols="4">
-                    <b-button block class="cancel-btn-style" @click="goBack">취소</b-button>
-                </b-col>
-                
-                <b-col cols="4">
+                <b-col cols="8">
                     <b-button block class="enter-btn-style" @click="enterClub">가입</b-button>
                 </b-col>
-                <b-col cols="2"></b-col>
-                
             </b-row>
         </b-container>
     </div>
@@ -75,6 +68,12 @@ export default {
     return config
     },
     enterClub() {
+        if(this.inputPassword != this.password) {
+            alert("비밀번호를 다시 입력해주세요.");
+            this.inputPassword = "";
+            return 
+        }
+
         var url = "/api/";
         url += this.$store.state.selectedClub;
         url += "/";
@@ -83,7 +82,6 @@ export default {
         .post(url, {
             clubid : this.$store.state.selectedClub,
         },
-        {password: {password : this.inputPassword}},
         { withCredentials: true }
         ).then( () => {
             console.log("가입 성공");
@@ -92,9 +90,6 @@ export default {
             console.log(error);
             alert("가입 실패");
         });
-    },
-    goBack() {
-        this.$router.push({ name : "Main"});
     },
   },
   created() {
@@ -141,6 +136,7 @@ export default {
     width: 100%;
     border: 0;
     outline: 0;
+    border-radius: 3rem;
 }
 
 .margin-style {

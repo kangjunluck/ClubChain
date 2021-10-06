@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService {
                     File before = new File(pic_place);
                     before.delete();
                 }
-                String filePath = BASE_PATH + putinfo.getUserEmail() + "-" + thumbnail.getOriginalFilename();
+                String filePath = BASE_PATH + user.getUserEmail() + "-" + thumbnail.getOriginalFilename();
                 File dest = new File(filePath);
                 thumbnail.transferTo(dest);
                 if (!dest.exists()) { // 파일 존재 x, 이 부분이 현재 null 값이 들어갈 수 있음, 추후 다시 해야됨
@@ -119,7 +119,7 @@ public class UserServiceImpl implements UserService {
                 }
             }
             user.setUserEmail(user.getUserEmail());
-            if (putinfo.getPassword() != null){
+            if (!putinfo.getPassword().equals("")){
                 user.setPassword(passwordEncoder.encode(putinfo.getPassword()));
             }
             user.setUsernickname(putinfo.getUsernickname());

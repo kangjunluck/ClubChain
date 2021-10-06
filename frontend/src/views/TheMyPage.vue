@@ -37,7 +37,7 @@
       </div>
       <div v-if="showclub">
         <div v-for="club in myclubinfo" :key="club.pk">
-          <p class="mb-1">{{ club.name }}</p>
+          <p style="line-height: 1.9; text-align: left; padding-left: 20px; margin-bottom: 0;"> ● {{ club.name }}</p>
         </div>
       </div>
       <div @click="showBoard" style="line-height: 1.9; height:30px; width:100%; text-align:left;border-bottom:1px solid">
@@ -75,7 +75,7 @@ export default {
     };
   },
   methods: {
-    // 모든 vue에서 실행될 checklogin 함수 #######
+    // 모든 vue에서 실행될 checklogin 함수 ######
     checkLogin() {
       http
         .get("api/users/islogin", { withCredentials: true })

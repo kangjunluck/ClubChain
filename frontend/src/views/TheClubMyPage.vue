@@ -18,7 +18,7 @@
         <img
           :src="selecturl"
           alt=""
-          class="circle px-0 "
+          class="circle px-0"
           style="width: 5rem; height: 5rem"
         />
         <div class="w-50">
@@ -60,13 +60,19 @@
       </div>
       </div>
     <hr />
+    <Footer :footernum="footernum" />
   </div>
 </template>
 
 <script>
 import http from "@/util/http-common";
+import Footer from '../components/footer/footer.vue';
+
 export default {
   name: "ClubMypage",
+  components: {
+    Footer,
+  },
   data: function () {
     return {
       userinfo: null,
@@ -74,8 +80,10 @@ export default {
       showclub : false,
       showboard: false,
       checkuser : true,
-      selecturl: null,
+      selecturl: "@/assets/profile.png",
       boards:[],
+
+      footernum : 4,
     };
   },
   methods: {
@@ -85,7 +93,7 @@ export default {
         .get("api/users/islogin", { withCredentials: true })
         .then((res) => {
           this.userinfo = res.data;
-          this.selecturl = "resources/" + res.data.userthumbnail;
+          this.selecturl = "/resources/" + res.data.userthumbnail;
           console.log(this.selecturl)
           this.myClubInfo();
         })
@@ -96,7 +104,7 @@ export default {
     },
     profileUpdate() {
       console.log("프로필 업뎃");
-      this.$router.push("myinfoupdate");
+      this.$router.push("/myinfoupdate");
     },
     myClubInfo() {
       console.log("가입한 동호회");
