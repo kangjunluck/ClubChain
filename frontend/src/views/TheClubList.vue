@@ -2,7 +2,7 @@
   <div class="main">
     <b-container>
       <!-- 상단 로고와 프로필 이미지 -->
-      <b-row class="m-0 m-0" style="height:3rem; background-color:red;">
+      <b-row class="m-0" style="height:3rem;">
         <b-col cols="2" align-self="start">
           <img alt="Vue" class="logo" src="@/assets/CC_logo_symbol.svg" />
         </b-col>
@@ -144,7 +144,7 @@ export default {
         .get("api/club/search/", {
           params: {
             word: this.word,
-          },
+          },r
         })
         .then((res) => {
           this.totalclublist = res.data;
@@ -199,8 +199,8 @@ export default {
 }
 
 .round-box {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 70%;
   overflow: hidden;
 }
