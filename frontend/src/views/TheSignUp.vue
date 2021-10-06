@@ -83,13 +83,15 @@
         회원가입
       </div>
     </div>
+    <CompleteModal v-if="showModal" :message="message" @close="showModal = false"/>
   </div>
 </template>
 
 <script>
 import http from "@/util/http-common";
-// import $ from "jquery";
+import CompleteModal from "../components/modal/complete.vue"
 import Web3 from "web3";
+
 export default {
   data() {
     return {
@@ -101,7 +103,13 @@ export default {
       addr: "",
 
       selecturl: require("@/assets/profile.png"),
+
+      showModal : false,
+      message : "회원가입완료",
     };
+  },
+  components :{
+    CompleteModal,
   },
   methods: {
     // imageclick(){
@@ -137,22 +145,17 @@ export default {
         .post(
           "/api/users/regist",
           formData
-          // {
-          //   headers: {
-          //     'Content-Type' : 'multipart/form-data'
-          //   }
-          // }
         )
         .then((res) => {
           this.sendEth();
           console.log(res.data);
-          alert(msg);
-          let msg = "회원가입 완료";
-
+          this.message = "회원가입 완료";
+          this.showModal = true;
           this.$router.push("/");
         })
         .catch((error) => {
-          alert("회원가입 실패");
+          this.message = error
+          this.showModal = true;
           console.dir(error);
         });
     },

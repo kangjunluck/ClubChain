@@ -54,6 +54,7 @@
 // import $ from "jquery";
 import http from "@/util/http-common";
 
+
 export default {
   name: "Login",
   data: function () {
@@ -66,6 +67,7 @@ export default {
         userthumbnail: null,
         userId: null,
       },
+
     };
   },
   computed: {
@@ -93,7 +95,6 @@ export default {
         // withcredentials를 넣어야 쿠키에 담겨있는 세션 id가 전달됨
         .then((res) => {
           if (res.data.statusCode === 200) {
-            console.log(res);
             this.credentials.userEmail = res.data.userEmail;
             this.credentials.useraccount = res.data.useraccount;
             this.credentials.usernickname = res.data.usernickname;
@@ -102,7 +103,6 @@ export default {
             this.$store.dispatch("logininfo", this.credentials);
             this.$store.dispatch("isLogin");
             console.log("로그인 데이터");
-            console.log(res.data);
             this.$router.push("club/list");
           }
         })

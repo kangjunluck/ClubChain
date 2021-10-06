@@ -75,8 +75,8 @@ export default {
   },
   data: function () {
     return {
-      userinfo: null,
-      myclubinfo: null,
+      userinfo: "",
+      myclubinfo: "",
       showclub : false,
       showboard: false,
       checkuser : true,

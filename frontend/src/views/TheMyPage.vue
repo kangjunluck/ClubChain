@@ -66,8 +66,8 @@ export default {
   name: "myInfoPage",
   data: function () {
     return {
-      userinfo: null,
-      myclubinfo: null,
+      userinfo: "",
+      myclubinfo: "",
       showclub : false,
       showboard: false,
       selecturl: "@/assets/profile.png",
