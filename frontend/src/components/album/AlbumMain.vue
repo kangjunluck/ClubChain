@@ -8,7 +8,7 @@
         v-for="photo in photoList"
         v-bind:key="photo"
         class="photo_list"
-        cols="6"
+        cols="4"
         style="overflow: hidden"
       >
         <img
@@ -33,14 +33,14 @@
       <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
      -->
 
-    <div class="image_area" @click="photoClick()">
+    <div class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
     </div>
-    <div class="image_area" @click="photoClick()">
+    <div class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
     </div>
 
-    <div class="image_area" @click="photoClick()">
+    <div class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
     </div>
     <div v-if="photoCount === 0" class="photos_area">
@@ -102,12 +102,14 @@ export default {
     divSizeChange() {
       $(document).ready(function () {
         $(".container").each(function () {
-          var highestBox = 0;
+          // var highestBox = 0;
+
           $(".EqHeightDiv", this).each(function () {
-            if ($(this).height() > highestBox) highestBox = $(this).height();
+            $(this).height($(this).width());
+            // if ($(this).height() > highestBox) highestBox = $(this).height();
           });
 
-          $(".EqHeightDiv", this).height(highestBox);
+          // $(".EqHeightDiv", this).height(highestBox);
         });
       });
     },
