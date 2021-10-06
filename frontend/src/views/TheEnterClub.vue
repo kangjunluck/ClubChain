@@ -91,9 +91,6 @@ export default {
             alert("가입 실패");
         });
     },
-    goBack() {
-        this.$router.push({ name : "Main"});
-    },
   },
   created() {
         console.log(this.$store.state.selectedClub);
