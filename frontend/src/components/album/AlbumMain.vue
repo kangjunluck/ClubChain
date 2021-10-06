@@ -31,7 +31,7 @@
       <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
      -->
 
-    <!-- <div  class="image_area EqHeightDiv" @click="photoClick()">
+    <div  class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
     </div>
     <div class="image_area EqHeightDiv" @click="photoClick()">
@@ -40,7 +40,7 @@
 
     <div class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
-    </div> -->
+    </div>
     <div v-if="photoCount === 0" class="photos_area">
       업로드 된 사진이 없습니다.
       <br />
@@ -53,8 +53,18 @@
 </template>
 
 <script>
+
 import http from "@/util/http-common";
 import $ from "jquery";
+// $(document).ready(function(){
+//         console.log('Works!')          
+//         $(".EqHeightDiv").each(function(){
+//         var a = $(this).width()
+//         $(this).height(a)
+//         console.log('높이', a)
+//       })
+//       console.log('end')
+//       })
 export default {
   props: ["componenetStateEmit"],
   data() {
@@ -75,6 +85,16 @@ export default {
           console.log('응답', res);
           this.photoCount = res.data.total;
           this.photoList = res.data.list;
+          $(document).ready(function(){
+            console.log('Works!')          
+            var a = $(".EqHeightDiv").width()
+            $(".EqHeightDiv").each(function(){
+            
+            $(this).height(a)
+            console.log('높이', a)
+          })
+          console.log('end')
+          })
         })
         .catch((error) => {
           console.log('에러', error);
@@ -91,15 +111,19 @@ export default {
       this.$emit("stateChange");
       this.$emit("photoInfo", photo);
     },
-    divSizeChange() {
-      console.log('Works!')          
-      $(".EqHeightDiv").each(function(){
-        var a = $(this).width()
-        $(this).height(a)
-        console.log('높이', a)
-      })
-      console.log('end')
-    },
+    // divSizeChange() {
+    //   $(document).ready(function(){
+    //     console.log('Works!')          
+    //     $(".EqHeightDiv").each(function(){
+    //     var a = $(this).width()
+    //     $(this).height(a)
+    //     console.log('높이', a)
+    //   })
+    //   console.log('end')
+
+    //   })
+      
+    // },
     test() {
       $(".EqHeightDiv").each(function(){
         var b = $(this).width()
@@ -111,13 +135,13 @@ export default {
   created() {
     this.getAlbum();
   },
-  mounted() {
-    this.$nextTick(function(){
-      console.log("넥스트");
-      this.divSizeChange();
-    }
-      )
-  },
+  // mounted() {
+  //   this.$nextTick(function(){
+  //     console.log("넥스트");
+  //     this.divSizeChange();
+  //   }
+  //     )
+  // },
 };
 </script>
 
