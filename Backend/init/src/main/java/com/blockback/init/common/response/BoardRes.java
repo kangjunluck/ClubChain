@@ -36,4 +36,19 @@ public class BoardRes {
 
     @ApiModelProperty(name="usernickname", example = "닉네임")
     String usernickname;
+
+    @ApiModelProperty(name="userEmail", example = "닉네임")
+    String userEmail;
+
+    @ApiModelProperty(name="password", example = "닉네임")
+    String password;
+
+    @ApiModelProperty(name="userthumbnail", example = "닉네임")
+    String userthumbnail;
+
+    @ApiModelProperty(name="useraccount", example = "닉네임")
+    String useraccount;
+
+    @ApiModelProperty(name="userid", example = "닉네임")
+    long userid;
 }
