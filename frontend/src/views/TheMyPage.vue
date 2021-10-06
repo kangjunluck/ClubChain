@@ -45,7 +45,7 @@
       <div @click="logout" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
         로그 아웃
       </div>
-      <div @click="userDelete" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
+      <div style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
         회원 탈퇴
       </div>
   
