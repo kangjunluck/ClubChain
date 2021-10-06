@@ -1,29 +1,42 @@
 <template>
-  <div class="container
-      d-flex
-      flex-column
-      justify-content-center
-      align-items-center">
-
-    <div class="image_area">
-      <img class="image" :src="'/resources/'+photo.photo_address" alt="상세 이미지">
-      <!-- <img class="image" src="@/assets/cats.jpg" alt="이미지"> -->
+  <div class="table-content">
+    <div class="
+        item1
+        ">
+      <div class="image_area">
+        
+        <img class="image" :src="'/resources/'+photo.photo_address" alt="상세 이미지">
+        <!-- <img class="image" src="@/assets/cats.jpg" alt="이미지"> -->
+        
+      </div>
+      <!-- <div class="row w-50">
+        <div class="d-flex justify-content-between align-items-center mb-3 p-0">
+          <img class="circle px-0" :src="'/resources/'+photo.userthumbnail" alt="">
+          <div class="image_info_div">
+            <p class="m-0 h5" style="text-align:left;">{{photo.user_name}}</p>
+            <p class="m-0 h6" style="text-align:left;">{{photo.user_name}}</p>
+          </div>
+        </div>
+      </div> -->
     </div>
-    <div class="row w-50">
-      <div class="d-flex justify-content-between align-items-center mb-3 p-0">
-        <img class="circle px-0" :src="'/resources/'+photo.userthumbnail" alt="">
-        <div>
-          <p class="m-0 h5" style="text-align:left;">>{{photo.user_name}}</p>
-          <p class="m-0 h6" style="text-align:left;">{{afterDayFormat}}</p>
+    <div class="row">
+      <div class="detail_info d-flex justify-content-left">
+        <img class=" circle" :src="'/resources/'+photo.userthumbnail" alt="이미지">
+        <div class="image_info_div">
+          <p class="m-0 h5 p-tag" style="text-align:left;">{{photo.user_name}}</p>
+          <p class="m-0 h6 p-tag" style="text-align:left;">{{photo.user_name}}</p>
         </div>
       </div>
     </div>
-
-    <!-- <div>{{photo}}</div>
-      <div>{{photo.photo_address}}</div>
-      <div>{{photo.time}}</div>
-      <div>{{photo.user_name}}</div>
-      <div>{{index}}</div> -->
+    <!-- <div class="row">
+      <div class="detail_info d-flex justify-content-left">
+        <img class=" circle" src="@/assets/cats.jpg" alt="이미지">
+        <div class="image_info_div">
+          <p class="m-0 h5 p-tag" style="text-align:left;">살려줘</p>
+          <p class="m-0 h6 p-tag" style="text-align:left;">2021년 10월 7일</p>
+        </div>
+      </div>
+    </div> -->
   </div>
 </template>
 
@@ -64,8 +77,19 @@ export default {
 </script>
 
 <style scoped>
+.table-content{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color:cornflowerblue
+}
+.item1{
+  flex: 1;
+  background-color: #00ff00;
+}
 .circle {
-  /* box-sizing: border-box; */
+  
   box-sizing: content-box;
   position: relative;
   border-radius: 1000px !important;
@@ -78,24 +102,49 @@ export default {
   display: -webkit-flex;
   -webkit-align-item: center;
   -webkit-justify-content: center;
+  background-color: aquamarine;
+  margin: 0 0 0 1rem;
 }
 .container{
   width:100%;
-  min-height:80%;
+  min-height:100%;
 }
-/* .image_area{
+.image_area{
   background-color:aquamarine;
   width:100%;
   height:100vw;
   overflow:hidden;
   margin: 0 0 0 0;
-} */
+   height: 100%;
+    display: flex;
+  flex-direction: column;
+  /* background-color: aqua; */
+  justify-content: center;
+}
 .image{
-  /* width: 200px;
-  height: 200px; */
+  width: 200px;
+  height: 200px; 
   width: 100%;
-  height: 150vw;
+  height: 130vw;
   object-fit: contain;
-  border: 1px solid #000    
+  border: 1px solid #000;
+}
+.image_info_div{
+  padding: 0 0 0 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.detail_info{
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+.row {
+  margin:0 0 0 0;
+  padding:0 0 0 0;
+}
+.p-tag {
+  margin:0 0 0 0;
+  padding:0 0 0 0;
 }
 </style>
