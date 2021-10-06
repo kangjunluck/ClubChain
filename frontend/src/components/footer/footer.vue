@@ -1,6 +1,7 @@
 <template>
   <div id="footer">
     <div class="d-flex justify-content-around h-100 align-items-center">
+      <p class="fas fa-home fa-lg" @click="moveToHome"></p>
       <p class="fas fa-wallet fa-lg walletIcon" :class="{select: onwallet}" @click="moveToFinance"></p>
       <p class="fas fa-edit fa-lg" :class="{select: onedit}" @click="moveToWrite"></p>
       <p class="fas fa-images fa-lg" :class="{select: onimage}" @click="moveToImage"></p>
@@ -22,6 +23,9 @@ export default {
     };
   },
   methods: {
+    moveToHome() {
+      this.$router.push("/club/list")
+    },
     moveToFinance() {
       console.log('계좌로이동')
       console.log(this.$route.path)
