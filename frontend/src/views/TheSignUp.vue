@@ -83,7 +83,7 @@
         회원가입
       </div>
     </div>
-    <CompleteModal v-if="showModal" :message="message" @close="showModal = false"/>
+    <CompleteModal v-if="showModal" :message="message" @close="moveTo"/>
   </div>
 </template>
 
@@ -151,12 +151,11 @@ export default {
           console.log(res.data);
           this.message = "회원가입 완료";
           this.showModal = true;
-          this.$router.push("/");
+          
         })
         .catch((error) => {
           this.message = error
           this.showModal = true;
-          console.dir(error);
         });
     },
     home() {
@@ -219,6 +218,12 @@ export default {
     },
     goback() {
       this.$router.push("/");
+    },
+    moveTo () {
+      this.showModal = false;
+      if (this.message == "회원가입 완료"){
+        this.$router.push("/");
+      }
     },
   },
 };
