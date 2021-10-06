@@ -42,6 +42,11 @@
       <router-link to="/signup" class="signUp">회원가입</router-link>
       <!-- <span class="signup" @click="signupLink">회원가입</span> -->
     </div>
+    <!-- <div class="font1">1</div>
+    <div class="font2">2</div>
+    <div class="font3">3</div>
+    <div class="font4">4</div>
+    <div class="font5">5</div> -->
   </div>
 </template>
 
@@ -185,5 +190,20 @@ export default {
   font-size: 0.8rem;
   margin: 2px 0 0 4px;
   height: 22px;
+}
+.font1{
+  font-weight: 100;
+}
+.font2{
+  font-weight: 200;
+}
+.font3{
+  font-weight: 300;
+}
+.font4{
+  font-weight: 400;
+}
+.font5{
+  font-weight: 500;
 }
 </style>
