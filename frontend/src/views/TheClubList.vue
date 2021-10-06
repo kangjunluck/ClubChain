@@ -34,8 +34,8 @@
           <!-- 가입한 동호회 리스트 -->
           <b-row  v-for="club in clublist" v-bind:key="club">
             <b-col class="m-2">
-              <img src="https://picsum.photos/1024/400/?image=41" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
-              <b-col @click="enterClub(club.clubid)" class="club-name-style">{{club.name}}</b-col>
+              <img src="https://picsum.photos/1024/400/?image=41" class="img-style" alt="클럽썸네일" @click="goClub(club.clubid)">
+              <b-col @click="goClub(club.clubid)" class="club-name-style">{{club.name}}</b-col>
             </b-col>
           </b-row>
           <b-row  class="notexist" v-if="!clubexist">
