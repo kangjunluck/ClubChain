@@ -144,7 +144,7 @@ export default {
         .get("api/club/search/", {
           params: {
             word: this.word,
-          },r
+          },
         })
         .then((res) => {
           this.totalclublist = res.data;
