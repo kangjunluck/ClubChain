@@ -68,7 +68,7 @@ export default {
         ).then( (res) => {
             console.log(res.data);
             alert("글 작성 완료");
-            this.$router.push("/club/main");
+            this.$router.push("/club/ClubMain");
         }).catch((error) => {
             alert("글쓰기 실패");
             console.dir(error);
