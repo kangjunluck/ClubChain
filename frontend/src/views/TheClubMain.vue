@@ -20,9 +20,12 @@
         {{schedule.title}}
         </div>
       </div>
+      <div class="space"></div>
       <div class="post" v-for="post in postlist" v-bind:key="post" @click="detail(post.id)">
-        <div class="nickname" >
+        <div class="nickname">
+          <img :src="post.user.userthumbnail" alt="프로필" class="postprofile">
           {{post.user.usernickname}}
+          {{post.updated}}
         </div>
         <div class="title">
           {{post.title}}
@@ -30,6 +33,7 @@
         <div class="content">
           {{post.content}}
         </div>
+        <div class="space"></div>
       </div>
       <div class="exist" v-if="postlist.length == 0">등록된 게시물이 없습니다</div>
       <Footer />
@@ -145,7 +149,6 @@ export default {
 }
 .post{
   height: 12rem;
-  background-color: sandybrown;
 }
 .nickname{
   height: 3rem;
@@ -155,5 +158,9 @@ export default {
 }
 .comment{
   height: 3rem;
+}
+.space {
+  height: 1rem;
+  background-color: #999999;
 }
 </style>
