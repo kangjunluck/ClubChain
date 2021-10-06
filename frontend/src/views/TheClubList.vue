@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <b-container class="mt-3">
-          <!-- 상단 로고와 프로필 이미지 {{userinfo.usernickname}}-->
+          <!-- 상단 로고와 프로필 이미지 -->
           <b-row class="mb-3">
             <b-col cols="2" class="text-style">
               <img alt="Vue logo" src="@/assets/CC_logo_symbol.svg" />
@@ -16,11 +16,9 @@
 
           <!-- 검색창 -->
           <b-row class="justify-content-center">
-            <b-col cols="10" class="mt-1 padding-right-style">
-              <b-form-input placeholder="동호회 이름을 입력해주세요" v-model="word"></b-form-input>
-            </b-col>
-            <b-col class="padding-style">
-              <img alt="searchbtn" src="@/assets/search.png" class="searchbtn" @click="searchClub"/>
+            <b-col class="mt-1 box">
+              <b-form-input placeholder="동호회 이름을 입력해주세요" v-model="word" v-on:keyup.enter="searchClub"></b-form-input>
+              <i class="fas fa-search icon-box"></i>
             </b-col>
           </b-row>
 
@@ -29,6 +27,7 @@
             <b-col class="font-style">
               나의 동호회
             </b-col>
+            <b-col><i class="fas fa-plus-circle"></i></b-col>
           </b-row>
 
           <!-- 가입한 동호회 리스트 -->
@@ -219,5 +218,16 @@ export default {
 
 .padding-style-all {
   padding: 10px;
+}
+
+.box {
+  position: relative;
+}
+
+.icon-box {
+  position: absolute;
+  left: 320px;
+  top: 11px;
+  color: #999999;
 }
 </style>
