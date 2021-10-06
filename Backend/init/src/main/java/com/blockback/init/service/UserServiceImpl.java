@@ -2,7 +2,11 @@ package com.blockback.init.service;
 
 import com.blockback.init.common.request.UserPutReq;
 import com.blockback.init.common.request.UserRegisterPostReq;
+import com.blockback.init.common.response.ClubListRes;
+import com.blockback.init.entity.Board;
+import com.blockback.init.entity.Club;
 import com.blockback.init.entity.User;
+import com.blockback.init.repository.BoardRepository;
 import com.blockback.init.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service("userService")
@@ -18,6 +24,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    BoardRepository boardRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -101,7 +109,7 @@ public class UserServiceImpl implements UserService {
                     File before = new File(pic_place);
                     before.delete();
                 }
-                String filePath = BASE_PATH + putinfo.getUserEmail() + "-" + thumbnail.getOriginalFilename();
+                String filePath = BASE_PATH + user.getUserEmail() + "-" + thumbnail.getOriginalFilename();
                 File dest = new File(filePath);
                 thumbnail.transferTo(dest);
                 if (!dest.exists()) { // 파일 존재 x, 이 부분이 현재 null 값이 들어갈 수 있음, 추후 다시 해야됨
@@ -129,6 +137,11 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long userId) {
         User user = userRepository.findById(userId).get();
         userRepository.delete(user);
+    }
+
+    @Override
+    public List<Board> getBoards() {
+        return boardRepository.findAll();
     }
 
     private String getShortFilePath(String path) {

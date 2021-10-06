@@ -9,84 +9,7 @@
     <div>{{ this.$store.state.credentials.userthumbnail }}</div>
     <div>{{ this.$store.state.credentials.userId }}</div> -->
 
-    <div class="small-12 medium-2 large-2 columns">
-      <div class="circle">
-        <!-- User Profile Image -->
-        <img
-          class="profile-pic"
-          src="http://cdn.cutestpaw.com/wp-content/uploads/2012/07/l-Wittle-puppy-yawning.jpg"
-        />
-
-        <!-- Default Image -->
-        <!-- <i class="fa fa-user fa-5x"></i> -->
-      </div>
-
-      <input class="file-upload" type="file" accept="image/*" />
-    </div>
-    <div>이미지</div>
-    <img
-      src="/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/sss_뜨개질.jpg"
-      alt=""
-    />
-    <img
-      src="http://j5b1021.p.ssafy.io/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/sss_뜨개질.jpg"
-      alt=""
-    />
-    <img
-      src="j5b1021.p.ssafy.io/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/sss_뜨개질.jpg"
-      alt=""
-    />
-    <img
-      src="/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png"
-      alt=""
-    />
-    <img
-      src="http://j5b1021.p.ssafy.io/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png"
-      alt=""
-    />
-    <img
-      src="j5b1021.p.ssafy.io/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png"
-      alt=""
-    />
-    <img src="/main/resources/image/user/sss_뜨개질.jpg" alt="" />
-    <img src="/image/user/sss_뜨개질.jpg" alt="" />
-    <div>이미지 끝</div>
-    <div>1</div>
-    <img
-      src="/var/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png"
-      alt=""
-    />
-    <div>2</div>
-    <img
-      src="/lib/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png"
-      alt=""
-    />
-    <div>3</div>
-    <img
-      src="/jenkins/workspace/PJT/Backend/init/src/main/resources/image/user/default.png"
-      alt=""
-    />
-    <div>4</div>
-    <img
-      src="/workspace/PJT/Backend/init/src/main/resources/image/user/default.png"
-      alt=""
-    />
-    <div>5</div>
-    <img
-      src="/PJT/Backend/init/src/main/resources/image/user/default.png"
-      alt=""
-    />
-    <div>6</div>
-    <img src="/Backend/init/src/main/resources/image/user/default.png" alt="" />
-    <div>7</div>
-    <img src="/init/src/main/resources/image/user/default.png" alt="" />
-    <div>8</div>
-    <img src="/src/main/resources/image/user/default.png" alt="" />
-    <div>9</div>
-    <img src="/main/resources/image/user/default.png" alt="" />
-    <div>10</div>
-    <img src="/resources/image/user/default.png" alt="" />
-    <div>11</div>
+    <!-- <div>11</div>
     <img src="/image/user/default.png" alt="" />
     <div>12</div>
     <img src="/user/default.png" alt="" />
@@ -99,42 +22,37 @@
     />"
     <div style="background-color: red">1</div>
     <div>club 테스트</div><img src="/resources/image/club/default.png" alt="클럽썸네일" class="img-style">
-    <div>club 테스트2</div><img src="resources/image/club/default.png" alt="클럽썸네일" class="img-style">
+    <div>club 테스트2</div><img src="resources/image/club/default.png" alt="클럽썸네일" class="img-style"> -->
+    <b-row>
+      <b-col class="EqHeightDiv" v-for="photo in photos" v-bind:key="photo" cols="4"
+      >
+      <div>{{photo}}</div>
+        <img class="testimage" :src="url" alt="이미지">
+      </b-col>
+    </b-row>
+
   </div>
 </template>
 
 <script>
 import $ from "jquery";
-$(document).ready(function () {
-  var readURL = function (input) {
-    // console.log("input", input.files);
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
 
-      reader.onload = function (e) {
-        $(".profile-pic").attr("src", e.target.result);
-      };
-
-      reader.readAsDataURL(input.files[0]);
-    }
-  };
-
-  $(".file-upload").on("change", function () {
-    // console.log(this, "this");
-    readURL(this);
-  });
-
-  // $(".upload-button").on("click", function () {
-  //   $(".file-upload").click();
-  // });
-});
 export default {
-  // methods: {
-  //   myaccount() {
-  //     http
-  //       .get("api/account/" + userid)
-  //   }
-  // }
+  data(){
+    return{
+      photos: [1, 2, 3, 4, 5],
+      // photos: [1, 2, 3, 4]
+      url: require('@/assets/profile.png')
+    }
+  },
+  mounted(){
+    var a = $(".EqHeightDiv").width()
+    $(".EqHeightDiv").each(function(){
+    console.log('높이', a)
+    $(this).height('1000px')
+    
+    $(".testimage").height('200px')
+  })}
 };
 </script>
 
@@ -151,6 +69,9 @@ body {
 
 .file-upload {
   /* display: none; */
+}
+.EqHeightDiv{
+  background-color: red;
 }
 .circle {
   border-radius: 1000px !important;

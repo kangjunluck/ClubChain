@@ -7,7 +7,9 @@
         </div>
       </div>
 
-      <img src="@/assets/profile.png" alt="" class="bgphoto">
+      <div class="clubname">
+        {{club.clubname}}
+      </div>
       <div class="clubmember">
         공개 그룹 - {{club.join_num}}명
       </div>
@@ -23,17 +25,19 @@
       <div class="space"></div>
       <div class="post" v-for="post in postlist" v-bind:key="post" @click="detail(post.id)">
         <div class="nickname">
-          <div class="round-box">
-            <img :src="getThumbnail(post.user.userthumbnail)" alt="프로필" class="round">
+            <img :src="getThumbnail(post.userthumbnail)" alt="프로필" class="round">
+            <!--<img src="@/assets/gold.png" alt="a" class="round"> -->
+          <div class="profile">
+            <div class="usernickname">{{post.usernickname}}</div>
+            <div class="created">{{post.created}}</div>
           </div>
-          {{post.user.usernickname}}
-          {{post.updated}}
         </div>
+
         <div class="title">
           {{post.title}}
         </div>
-        <!--<div class="postimage" v-if="imageexist(post)">
-        </div>-->
+        <img :src="getPhotoThumbnail(post.photo_thumbnail)" alt="이미지" class="postimage" v-if="post.photo_thumbnail">
+        <!--<img src="@/assets/gold.png" alt="a" class="postimage"> 로컬 테스트용-->
         <div class="content">
           {{post.content}}
         </div>
@@ -91,6 +95,7 @@ export default {
       var url = "/api/";
       url += this.$store.state.selectedClub;
       url += "/board/";
+      //url = "/api/8/board/";   //로컬 테스트용
       http.
         get(url, {
           withCredentials : true
@@ -99,7 +104,6 @@ export default {
           console.log("게시글 찍히나 확인");
           console.log(res.data[0]);
           this.postlist = res.data;
-          console.log(this.postlist);
         }).catch((error) => {
           console.log(error);
           alert("게시글 가져오기 실패");
@@ -109,24 +113,12 @@ export default {
       this.$router.push('/club/list');
     },
     getThumbnail(url) {
-      return "/resources/" + url;
+      return url;
     },
-    /*
-    imageexist(post) {
-      var url = "/api/";
-      url += this.$store.state.selectedClub;
-      http.
-        get(url, {
-          withCredentials : true
-        }).then((res) => {
-          
-          
-        }).catch((error) => {
-          console.log(error);
-      })
-      if(post.)
+    getPhotoThumbnail(url) {
+      return url;
     }
-    */
+    
   },
   created() {
     this.getClubinfo();
@@ -155,9 +147,12 @@ export default {
   width: 100%;
   text-align: left;
 }
-.bgphoto {
+.clubname {
+  font-weight: 600;
+  font-size: 2rem;
   width:100%;
   height: 3rem;
+  text-align: center;
 }
 
 .clubmember{
@@ -172,32 +167,59 @@ export default {
   height: 3rem;
   border-bottom : 1px solid black;
 }
-.post{
-  height: 12rem;
+
+
+.title {
+  margin-top: 2rem;
+  margin-left: 5%;
+  font-weight: 600;
 }
-.nickname{
-  height: 3rem;
-}
+
 .content{
   height: 6rem;
+  margin-left: 5%;
 }
 .comment{
   height: 3rem;
 }
 .space {
   height: 1rem;
-  background-color: #999999;
+  background-color: #DDE0E3;
 }
 .round-box {
-  width: 50px;
-  height: 50px;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 70%;
   overflow: hidden;
+  display:inline-block;
 }
 
 .round {
-  width: 100%;
-  height: 100%;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 70%;
   object-fit:cover;
+  display:inline-block;
 }
+
+.profile {
+  display:inline-block;
+  margin-left: 2rem;
+  height: 100%;
+}
+
+.postimage {
+  width: 100%;
+}
+
+.usernickname {
+  display:block;
+}
+
+.created {
+  color: #999999;
+  font-size:0.5rem;
+  display:block;
+}
+
 </style>

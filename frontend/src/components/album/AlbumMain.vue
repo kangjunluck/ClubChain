@@ -2,45 +2,31 @@
   <div class="container">
     <!-- <div>앨범 메인페이지 {{ componenetStateEmit }}</div> -->
     <div class="photo_count">전체 사진 {{ photoCount }}개</div>
-    <div>앨범 영역</div>
-    <b-row v-if="photoCount !== 0" class="photos_area">
+    <b-row v-if="photoCount !== 0" class="photos_area" >
       <b-col
-        v-for="photo in photoList"
-        v-bind:key="photo"
-        class="photo_list"
-        cols="6"
+        v-for="(photo, index) in photoList"
+        v-bind:key="index"
+        class="EqHeightDiv photo_list"
+        cols="4"
         style="overflow: hidden"
       >
         <img
-          class="EqHeightDiv"
+          class="image_resize"
           :src="'/resources/' + photo.photo_address"
           alt="앨범 이미지"
-          @click="photoClick(photo)"
+          @click="photoClick(photo, index)"
         />
-        <!-- <b-col @click="goClub(club.clubid)" class="club-name-style">{{club.name}}</b-col> -->
       </b-col>
     </b-row>
-    <div>앨범영역 끝</div>
 
-    <!-- <div v-if="photoCount !== 0" class="photos_area">
-      <div v-for="photo in photoList" v-bind:key="photo" class="photo_list">
-        <img :src="'/resources/' + photo.photo_address" alt="앨범 이미지" />
-      </div>
-    </div> -->
-
-    <!-- <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
-      <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
-      <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
-     -->
-
-    <div class="image_area" @click="photoClick()">
+    <div  class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
     </div>
-    <div class="image_area" @click="photoClick()">
+    <div class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
     </div>
 
-    <div class="image_area" @click="photoClick()">
+    <div class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
     </div>
     <div v-if="photoCount === 0" class="photos_area">
@@ -48,12 +34,23 @@
       <br />
       첫 사진을 업로드 해주세요.
     </div>
+    <!-- <button @click="test()">클릭</button> -->
+
   </div>
+  
 </template>
 
 <script>
+$(window).resize(function(){
+  $('.EqHeightDiv').each(function() {
+  console.log('너비', a)
+  var a = $('.EqHeightDiv').width()
+  $('.EqHeightDiv').height(a)
+  })
+}).resize();
 import http from "@/util/http-common";
 import $ from "jquery";
+
 export default {
   props: ["componenetStateEmit"],
   data() {
@@ -62,62 +59,68 @@ export default {
       clubId: this.$store.state.selectedClub,
       photoList: null,
       photo: 1,
+      rowHeight: 0,
     };
   },
   methods: {
     getAlbum() {
       console.log("동호회 사진 불러오기");
-      console.log("this.clubId");
-      console.log(this.clubId);
+      console.log('클럽 아이디', this.clubId);
       http
         .get("api/" + this.clubId + "/board/photo")
         .then((res) => {
-          console.log(res);
-          // console.log(res.data.total, "전체사진");
-          // console.log("리스트", res.data.list);
-          // console.log(res.data);
-          // console.log(res.data.total);
-          // console.log(res.data.list);
+          console.log('응답', res);
           this.photoCount = res.data.total;
-          this.photoList = res.data.list;
-          console.log(this.photoCount);
-          console.log(this.photoList);
-          console.log(this.photoList[0]);
+          this.photoList = res.data.list;        
+            // console.log('Works!')          
+            // var a = $(".EqHeightDiv").width()
+            // $(".EqHeightDiv").each(function(){
+            // $(this).height(a)
+            // console.log('높이', a)
+          // })
+          // console.log('end')
+          
         })
         .catch((error) => {
-          console.log(error);
+          console.log('에러', error);
         });
     },
     uploadButton() {
       console.log("사진 업로드 버튼");
       this.$emit("stateChange");
     },
-    photoClick(photo) {
+    photoClick(photo, index) {
       console.log("특정 사진 클릭");
-      console.log("자식", this.photo);
+      // console.log("자식", this.photo);
       console.log("자식2", photo);
+      console.log("자식2=index", index);
       this.$emit("stateChange");
-      this.$emit("photoInfo", photo);
+      this.$emit("photoInfo", photo, index, this.photoCount);
+      // ?
     },
-    divSizeChange() {
-      $(document).ready(function () {
-        $(".container").each(function () {
-          var highestBox = 0;
-          $(".EqHeightDiv", this).each(function () {
-            if ($(this).height() > highestBox) highestBox = $(this).height();
-          });
-
-          $(".EqHeightDiv", this).height(highestBox);
-        });
-      });
-    },
+    test() {
+      $(".EqHeightDiv").each(function(){
+        var b = $(this).width()
+        console.log('높이', b)
+        $(this).height(b)
+    })
+    }
   },
   created() {
     this.getAlbum();
+    // var viewportWidth = $(window).width();
+    // this.rowHeight = viewportWidth/3
+    // console.log(viewportWidth)
+    // console.log(this.rowHeight)
   },
-  mounted() {
-    this.divSizeChange();
-  },
+  // mounted() {          
+  //     var a = $(this).width()
+  //     $(".EqHeightDiv").each(function(){
+  //     $(this).height(a)
+  //     console.log('높이', a)
+  //     console.log('end')
+  //     })
+  // },
 };
 </script>
 
@@ -136,9 +139,11 @@ export default {
 }
 .photos_area {
   background-color: red;
+  padding:2vw;
 }
 .photo_list {
   background-color: yellow;
+  padding: 2px 2px 2px 2px;
 }
 .image_area {
   background-color: aquamarine;
@@ -158,5 +163,10 @@ export default {
   padding: 0 0 0 4.5%;
   font-size: 1.3rem;
   font-weight: bold;
+}
+.image_resize{
+  width: 100%;
+  min-height: 30vw;
+  max-height: 33vw;
 }
 </style>

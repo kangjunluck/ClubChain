@@ -121,7 +121,7 @@ export default {
 		},
 		goback () {
             console.log("동호회 마이페이지로")
-			this.$router.push("/mypage");
+			this.$router.push("/club/mypage");
 		},
         getClubinfo(){
             var url = "/api/club/{clubid}?clubid=";
