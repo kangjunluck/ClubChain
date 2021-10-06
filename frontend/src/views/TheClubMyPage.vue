@@ -22,8 +22,8 @@
           style="width: 5rem; height: 5rem"
         />
         <div class="w-50">
-          <p class="m-0 h5 text-left">{{ this.userinfo.usernickname }}</p>
-          <p class="m-0 h6 text-left">{{ this.userinfo.userEmail }}</p>
+          <p class="m-0 h5" style="text-align:left;">{{ this.userinfo.usernickname }}</p>
+          <p class="m-0 h6" style="text-align:left;">{{ this.userinfo.userEmail }}</p>
         </div>
       </div>
       <button @click="profileUpdate" class="btn update-button">
@@ -72,7 +72,7 @@ export default {
       showclub : false,
       showboard: false,
       checkuser : true,
-      selecturl: "@/assets/profile.png",
+      selecturl: null,
       boards:[],
     };
   },
@@ -84,6 +84,7 @@ export default {
         .then((res) => {
           this.userinfo = res.data;
           this.selecturl = "resources/" + res.data.userthumbnail;
+          console.log(this.selecturl)
           this.myClubInfo();
         })
         .catch((error) => {
