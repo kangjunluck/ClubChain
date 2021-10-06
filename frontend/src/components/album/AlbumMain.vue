@@ -2,7 +2,7 @@
   <div>
     <!-- <div>앨범 메인페이지 {{ componenetStateEmit }}</div> -->
     <div class="photo_count">전체 사진 {{ photoCount }}개</div>
-
+    <div>앨범 영역</div>
     <b-row v-if="photoCount !== 0" class="photos_area">
       <b-col
         v-for="photo in photoList"
@@ -19,6 +19,7 @@
         <!-- <b-col @click="goClub(club.clubid)" class="club-name-style">{{club.name}}</b-col> -->
       </b-col>
     </b-row>
+    <div>앨범영역 끝</div>
 
     <!-- <div v-if="photoCount !== 0" class="photos_area">
       <div v-for="photo in photoList" v-bind:key="photo" class="photo_list">
@@ -77,6 +78,8 @@ export default {
           // console.log(res.data.list);
           this.photoCount = res.data.total;
           this.photoList = res.data.List;
+          console.log(this.photoCount);
+          console.log(photoList[0]);
         })
         .catch((error) => {
           console.log(error);

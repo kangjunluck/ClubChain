@@ -1,65 +1,101 @@
 <template>
-    <div class="main">
-        <b-container class="mt-3">
-          <!-- 상단 로고와 프로필 이미지 -->
-          <b-row class="mb-3">
-            <b-col cols="2" class="text-style">
-              <img alt="Vue logo" src="@/assets/CC_logo_symbol.svg" />
-            </b-col>
-            <b-col v-if="userinfo" class="text-style">{{userinfo.usernickname}}님</b-col>
-            <b-col cols="2" align-self="end" class="padding-style">
-              <div class="round-box" @click="profile">
-                <img alt="profile" :src="selecturl" class="round"/>
-              </div>
-            </b-col>
-          </b-row>
+  <div class="main">
+    <b-container class="mt-3">
+      <!-- 상단 로고와 프로필 이미지 -->
+      <b-row class="mb-3">
+        <b-col cols="2" class="text-style">
+          <img alt="Vue logo" src="@/assets/CC_logo_symbol.svg" />
+        </b-col>
+        <b-col v-if="userinfo" class="text-style"
+          >{{ userinfo.usernickname }}님</b-col
+        >
+        <b-col cols="2" align-self="end" class="padding-style">
+          <div class="round-box" @click="profile">
+            <img alt="profile" :src="selecturl" class="round" />
+          </div>
+        </b-col>
+      </b-row>
 
-          <!-- 검색창 -->
-          <b-row class="justify-content-center">
-            <b-col class="mt-1 box">
-              <b-form-input placeholder="동호회 이름을 입력해주세요" v-model="word" v-on:keyup.enter="searchClub"></b-form-input>
-              <i class="fas fa-search icon-box"></i>
-            </b-col>
-          </b-row>
+      <!-- 검색창 -->
+      <b-row class="justify-content-center">
+        <b-col class="mt-1 box">
+          <b-form-input
+            placeholder="동호회 이름을 입력해주세요"
+            v-model="word"
+            v-on:keyup.enter="searchClub"
+          ></b-form-input>
+          <i class="fas fa-search icon-box"></i>
+        </b-col>
+      </b-row>
 
-          <!-- 가입한 동호회 리스트 제목 -->
-          <b-row class="mt-3" align-h="start">
-            <b-col class="font-style padding-right-style" cols="5" style="width: 130px;">
-              나의 동호회
-            </b-col>
-            <b-col cols="1" class="padding-style" @click="createClub"><i class="fas fa-plus-circle"></i></b-col>
-          </b-row>
+      <!-- 가입한 동호회 리스트 제목 -->
+      <b-row class="mt-3" align-h="start">
+        <b-col
+          class="font-style padding-right-style"
+          cols="5"
+          style="width: 130px"
+        >
+          나의 동호회
+        </b-col>
+        <b-col cols="1" class="padding-style" @click="createClub"
+          ><i class="fas fa-plus-circle"></i
+        ></b-col>
+      </b-row>
 
-          <!-- 가입한 동호회 리스트 -->
-          <b-row class="padding-style-all">
-            <b-col class="mb-1" v-for="club in clublist" v-bind:key="club" cols="6" style="overflow: hidden;">
-              <img :src="'/resources/' + club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="goClub(club.clubid)">
-              <b-col @click="goClub(club.clubid)" class="club-name-style">{{club.name}}</b-col>
-            </b-col>
-          </b-row>
-          <b-row  class="notexist" v-if="!clubexist">
-            <b-col>가입한 동호회가 없습니다.</b-col>
-          </b-row>  
+      <!-- 가입한 동호회 리스트 -->
+      <b-row class="padding-style-all">
+        <b-col
+          class="mb-1"
+          v-for="club in clublist"
+          v-bind:key="club"
+          cols="6"
+          style="overflow: hidden"
+        >
+          <img
+            :src="'/resources/' + club.profile_thumbnail"
+            class="img-style"
+            alt="클럽썸네일"
+            @click="goClub(club.clubid)"
+          />
+          <b-col @click="goClub(club.clubid)" class="club-name-style">{{
+            club.name
+          }}</b-col>
+        </b-col>
+      </b-row>
+      <b-row class="notexist" v-if="!clubexist">
+        <b-col>가입한 동호회가 없습니다.</b-col>
+      </b-row>
 
-          <!-- 전체 동호회 리스트 제목 -->
-          <b-row class="mt-3">
-            <b-col class="font-style">
-              전체 동호회
-            </b-col>
-          </b-row>
+      <!-- 전체 동호회 리스트 제목 -->
+      <b-row class="mt-3">
+        <b-col class="font-style"> 전체 동호회 </b-col>
+      </b-row>
 
-          <!-- 전체 동호회 리스트 -->
-          <b-row class="padding-style-all">
-            <b-col class="mb-1" v-for="club in totalclublist" v-bind:key="club" cols="6" style="overflow: hidden;">
-              <img :src="'/' + club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
-              <b-col @click="enterClub(club.clubid)" class="club-name-style">{{club.name}}</b-col>
-            </b-col>
-          </b-row>
-          <b-row  class="notexist" v-if="!totalclubexist">
-            <b-col>동호회가 존재하지 않습니다.</b-col>
-          </b-row>
-        </b-container>
-    </div>
+      <!-- 전체 동호회 리스트 -->
+      <b-row class="padding-style-all">
+        <b-col
+          class="mb-1"
+          v-for="club in totalclublist"
+          v-bind:key="club"
+          cols="6"
+          style="overflow: hidden"
+        >
+          <img
+            :src="'/' + club.profile_thumbnail"
+            class="img-style"
+            alt="클럽썸네일"
+            @click="enterClub(club.clubid)"
+          />
+          <b-col @click="enterClub(club.clubid)" class="club-name-style">{{
+            club.name
+          }}</b-col>
+        </b-col>
+      </b-row>
+      <b-row class="notexist" v-if="!totalclubexist">
+        <b-col>동호회가 존재하지 않습니다.</b-col>
+      </b-row>
+    </b-container>
+  </div>
 </template> 
 
 <script>
@@ -69,12 +105,12 @@ export default {
   data() {
     return {
       clublist: null,
-      totalclublist : null,
+      totalclublist: null,
       clubexist: false,
-      totalclubexist : false,
+      totalclubexist: false,
       userinfo: null,
       selecturl: "@/assets/profile.png",
-      word: ""
+      word: "",
     };
   },
   methods: {
@@ -83,12 +119,12 @@ export default {
     },
     goClub(clubid) {
       this.$store.dispatch("selectedClub", clubid);
-      this.$router.push({name : "ClubMain"});
+      this.$router.push({ name: "ClubMain" });
     },
     enterClub(clubid) {
       this.$store.dispatch("selectedClub", clubid);
       console.log(this.$store.state.selectedClub);
-      this.$router.push({name : "EnterClub"});
+      this.$router.push({ name: "EnterClub" });
     },
     // 모든 vue에서 실행될 checklogin 함수 #######
     checkLogin() {
@@ -106,51 +142,52 @@ export default {
     searchClub() {
       http
         .get("api/club/search/", {
-            params: {
-              word: this.word
-            }
+          params: {
+            word: this.word,
+          },
         })
         .then((res) => {
           this.totalclublist = res.data;
-          if(this.totalclublist.length > 0) this.totalclubexist = true;
+          if (this.totalclublist.length > 0) this.totalclubexist = true;
         })
         .catch((error) => {
           console.log(error);
-          this.$router.push("/club/list")
-        })
+          this.$router.push("/club/list");
+        });
     },
     profile() {
-      this.$router.push("/mypage")
-    }
+      this.$router.push("/mypage");
+    },
   },
-  created() { 
+  created() {
     this.checkLogin();
-    http.
-      get("/api/club/", {
-        withCredentials : true
+    http
+      .get("/api/club/", {
+        withCredentials: true,
       })
       .then((res) => {
         console.log(res.data);
         this.totalclublist = res.data;
-        if(this.totalclublist.length > 0) this.totalclubexist = true;
-      }).catch((error) => {
+        if (this.totalclublist.length > 0) this.totalclubexist = true;
+      })
+      .catch((error) => {
         console.log(error);
         alert("가져오기 실패");
       });
 
-    http.
-      get("/api/club/myclub", {
-        withCredentials : true
+    http
+      .get("/api/club/myclub", {
+        withCredentials: true,
       })
       .then((res) => {
         console.log(res.data);
         this.clublist = res.data;
-        if(this.clublist.length > 0) this.clubexist = true;
-      }).catch((error) => {
+        if (this.clublist.length > 0) this.clubexist = true;
+      })
+      .catch((error) => {
         console.log(error);
         alert("가져오기 실패");
-
-      });    
+      });
   },
 };
 </script>
@@ -166,7 +203,7 @@ export default {
 .round {
   width: 100%;
   height: 100%;
-  object-fit:cover;
+  object-fit: cover;
 }
 
 .text-style {
@@ -175,7 +212,7 @@ export default {
 }
 
 .padding-style {
-  padding-left:0;
+  padding-left: 0;
 }
 
 .padding-right-style {
@@ -197,7 +234,7 @@ export default {
   height: 150px;
 }
 
-.club-name-style{
+.club-name-style {
   font-weight: bold;
   font-size: 100%;
   text-align: left;
@@ -214,7 +251,7 @@ export default {
 .club {
   width: 40%;
   height: 20%;
-  float:left;
+  float: left;
   margin-left: 7%;
   margin-bottom: 7px;
 }
