@@ -111,7 +111,7 @@ public class UserServiceImpl implements UserService {
                 }
             }
             user.setUserEmail(user.getUserEmail());
-            if (putinfo.getPassword() != null){
+            if (putinfo.getPassword() != ""){
                 user.setPassword(passwordEncoder.encode(putinfo.getPassword()));
             }
             user.setUsernickname(putinfo.getUsernickname());
