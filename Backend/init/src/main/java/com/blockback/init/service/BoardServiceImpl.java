@@ -50,7 +50,7 @@ public class BoardServiceImpl implements BoardService {
 
             Optional<BoardFile> boardf = fileRepository.findByBoardId(board.getId());
             if(boardf.isPresent()) {
-                br.setPhoto_thumbnail(boardf.get().getSave_folder());
+                br.setPhoto_thumbnail("/resources/" + boardf.get().getSave_folder());
             }
 
             br.setClubid(clubid);
@@ -59,7 +59,14 @@ public class BoardServiceImpl implements BoardService {
             br.setContent(board.getContent());
             br.setSection(board.getSection());
             br.setTitle(board.getTitle());
+
             br.setUsernickname(board.getUser().getUsernickname());
+            br.setUseraccount(board.getUser().getUseraccount());
+            br.setUserEmail(board.getUser().getUserEmail());
+            br.setUserthumbnail("/resources/" + board.getUser().getUserthumbnail());
+            br.setUserid(board.getUser().getId());
+            br.setPassword(board.getUser().getPassword());
+
             br.setView(board.getView());
             res.add(br);
         }
