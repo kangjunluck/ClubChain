@@ -3,10 +3,11 @@
 
     <div class="image_area">
       <!-- <img class="image" :src="'/resources/'+photo.photo_address" alt="상세 이미지"> -->
-      <img class="image" src="@/assets/근데.png" alt="이미지">
+      <img class="image" src="@/assets/cats.jpg" alt="이미지">
     </div>
     <div>
       <div>야근 중</div>
+      <img :src="'/resources/'+photo.userthumbnail" alt="">
       <div>2021-10-06 07:54:09</div>
       <div>{{photo.user_name}}</div>
       <div>{{afterDayFormat}}</div>
@@ -46,11 +47,6 @@ export default {
       this.afterDayFormat = parsingdata3 + "일"
       console.log(this.afterDayFormat)
     },
-  },
-  monunted() {
-    console.log('마운트 시작')
-    this.parsingDay(this.photo)
-    console.log('마운트 끝')
   },
   created() {
     console.log('created 시작')
