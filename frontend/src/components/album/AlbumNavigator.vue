@@ -18,7 +18,7 @@
           <i class="fas fa-arrow-left"></i>
         </b-col>
         <b-col class="nav_album_detail" cols="8">
-          <div>{{index+1}} / {{photoCount}}</div>
+          <div>{{index}} / {{photoCount}}</div>
         </b-col>
         <b-col cols="2"></b-col>
       </b-row>

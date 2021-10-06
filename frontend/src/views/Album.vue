@@ -4,7 +4,7 @@
       v-on:stateChange="doStateChange"
       v-bind:componenetStateEmit="componenetStateEmit"
       v-bind:index="index"
-      v-bind:photoCoun="photoCount"
+      v-bind:photoCount="photoCount"
     />
     <AlbumMain
       v-if="componenetStateEmit === true"
