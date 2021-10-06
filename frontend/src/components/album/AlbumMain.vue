@@ -58,7 +58,7 @@ export default {
           // console.log("리스트", res.data.list);
           console.log(res.data);
           console.log(res.data.total);
-          console.log(res.data.List);
+          console.log(res.data.list);
           // this.photoCount = res.data.total;
           // this.photoList = res.data.List;
         })
