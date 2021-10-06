@@ -130,7 +130,7 @@ export default {
       if (this.password === this.passwordconfirm) {
         var putUrl = "api/users/" + this.userinfo.userId;
         const formData = new FormData();
-        formData.append("file", this.image);
+        formData.append("image", this.image);
         formData.append("password", this.password);
         formData.append("userEmail", this.useremail);
         formData.append("usernickname", this.usernickname);
@@ -157,6 +157,7 @@ export default {
     fileSelect() {
       this.image = this.$refs.image.files[0];
       this.selecturl = URL.createObjectURL(this.image);
+      console.log(this.selecturl);
       this.beforeurl = URL.createObjectURL(this.image);
     },
     goback() {
