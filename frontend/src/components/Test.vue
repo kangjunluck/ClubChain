@@ -98,6 +98,7 @@
       alt=""
     />"
     <div style="background-color: red">1</div>
+    <div>club 테스트</div><img src="resources/image/club/default.png" alt="클럽썸네일" class="img-style">
   </div>
 </template>
 
