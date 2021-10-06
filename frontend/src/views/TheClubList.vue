@@ -2,7 +2,7 @@
   <div class="main">
     <b-container>
       <!-- 상단 로고와 프로필 이미지 -->
-      <b-row class="m-0" style="height:3rem;">
+      <b-row class="mt-3 mb-2">
         <b-col cols="2" align-self="start">
           <img alt="Vue" class="logo" src="@/assets/CC_logo_symbol.svg" />
         </b-col>
@@ -199,13 +199,10 @@ export default {
 }
 
 .round-box {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 70%;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .round {
@@ -216,9 +213,7 @@ export default {
 
 .text-style {
   text-align: right;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  margin-top: 16px;
 }
 
 .padding-style {
