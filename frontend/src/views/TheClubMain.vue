@@ -23,13 +23,15 @@
       <div class="space"></div>
       <div class="post" v-for="post in postlist" v-bind:key="post" @click="detail(post.id)">
         <div class="nickname">
-          <img :src="post.user.userthumbnail" alt="프로필" class="postprofile">
+          <img :src="getThumbnail(post.user.userthumbnail)" alt="프로필" class="postprofile">
           {{post.user.usernickname}}
           {{post.updated}}
         </div>
         <div class="title">
           {{post.title}}
         </div>
+        <!--<div class="postimage" v-if="imageexist(post)">
+        </div>-->
         <div class="content">
           {{post.content}}
         </div>
@@ -104,6 +106,25 @@ export default {
     goback () {
       this.$router.push('/club/list');
     },
+    getThumbnail(url) {
+      return "/resources/" + url;
+    },
+    /*
+    imageexist(post) {
+      var url = "/api/";
+      url += this.$store.state.selectedClub;
+      http.
+        get(url, {
+          withCredentials : true
+        }).then((res) => {
+          
+          
+        }).catch((error) => {
+          console.log(error);
+      })
+      if(post.)
+    }
+    */
   },
   created() {
     this.getClubinfo();
