@@ -9,21 +9,21 @@
         class="photo_list"
       ></div>
     </div>
-      
-      <!-- <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
+
+    <!-- <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
       <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
       <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
      -->
 
     <div class="image_area" @click="photoClick()">
-      <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지">
+      <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
     </div>
     <div class="image_area" @click="photoClick()">
-      <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지">
+      <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
     </div>
-    
+
     <div class="image_area" @click="photoClick()">
-      <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지">
+      <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
     </div>
     <div v-if="photoCount === 0" class="photos_area">
       업로드 된 사진이 없습니다.
@@ -42,12 +42,13 @@ export default {
       photoCount: 0,
       clubId: this.$store.state.selectedClub,
       photoList: null,
-      photo: 1
+      photo: 1,
     };
   },
   methods: {
     getAlbum() {
       console.log("동호회 사진 불러오기");
+      console.log("this.clubId");
       http
         .get("api/" + this.clubId + "board/photo")
         .then((res) => {
@@ -66,11 +67,11 @@ export default {
       this.$emit("stateChange");
     },
     photoClick() {
-      console.log("특정 사진 클릭")
-      console.log('자식', this.photo)
-      this.$emit("stateChange")
-      this.$emit("photoInfo", this.photo)
-    }
+      console.log("특정 사진 클릭");
+      console.log("자식", this.photo);
+      this.$emit("stateChange");
+      this.$emit("photoInfo", this.photo);
+    },
   },
   created() {
     this.getAlbum();
@@ -97,21 +98,20 @@ export default {
 .photo_list {
   background-color: yellow;
 }
-.image_area{
-  background-color:aquamarine;
-  width:30%;
-  height:25%;
-  overflow:hidden;
+.image_area {
+  background-color: aquamarine;
+  width: 30%;
+  height: 25%;
+  overflow: hidden;
   /* margin:0 auto; */
   margin: 0 1% 0 1%;
 }
-.image{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.photo_count{
+.photo_count {
   text-align: left;
   padding: 0 0 0 4.5%;
   font-size: 1.3rem;
