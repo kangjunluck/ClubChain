@@ -52,7 +52,7 @@
           <!-- 전체 동호회 리스트 -->
           <b-row  v-for="club in totalclublist" v-bind:key="club">
             <b-col class="m-2">
-              <img :src="club.profile_thumbnail" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
+              <img src="resources/image/club/default.png" class="img-style" alt="클럽썸네일" @click="enterClub(club.clubid)">
               <b-col @click="enterClub(club.clubid)" class="club-name-style">{{club.name}}</b-col>
             </b-col>
           </b-row>
