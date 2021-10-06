@@ -1,6 +1,7 @@
 <template>
   <div>
     <!-- <div>네비게이터입니다! {{ componenetStateEmit }}</div> -->
+    
     <b-container class="nav_container">
       <b-row class="nav_row" v-if="componenetStateEmit === true">
         <b-col class="nav_album">
@@ -17,7 +18,7 @@
           <i class="fas fa-arrow-left"></i>
         </b-col>
         <b-col class="nav_album_detail" cols="8">
-          1 / 3
+          <div>{{index+1}} / {{photoCount}}</div>
         </b-col>
         <b-col cols="2"></b-col>
       </b-row>
