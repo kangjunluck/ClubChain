@@ -139,7 +139,7 @@ export default {
   
 }
 .photos_area{
-  padding: 1% 0 0 0;
+  padding: 2vw;
 }
 .no_photo {
   /* background-color: red; */
