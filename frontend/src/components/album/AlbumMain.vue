@@ -7,12 +7,11 @@
       <b-col
         v-for="photo in photoList"
         v-bind:key="photo"
-        class="photo_list"
+        class="photo_list EqHeightDiv"
         cols="4"
         style="overflow: hidden"
       >
         <img
-          class="EqHeightDiv"
           :src="'/resources/' + photo.photo_address"
           alt="앨범 이미지"
           @click="photoClick(photo)"
@@ -33,7 +32,7 @@
       <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
      -->
 
-    <div class="image_area EqHeightDiv" @click="photoClick()">
+    <!-- <div class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
     </div>
     <div class="image_area EqHeightDiv" @click="photoClick()">
@@ -42,7 +41,7 @@
 
     <div class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
-    </div>
+    </div> -->
     <div v-if="photoCount === 0" class="photos_area">
       업로드 된 사진이 없습니다.
       <br />
