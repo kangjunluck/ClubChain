@@ -36,7 +36,7 @@
       </div>
       <div v-if="showclub">
         <div v-for="club in myclubinfo" :key="club.pk">
-          <p class="mb-1">{{ club.introduce }}</p>
+          <p class="mb-1">{{ club.name }}</p>
         </div>
       </div>
       <div @click="myWrite" style="height:30px; width:100%; text-align:left;border-bottom:1px solid">
