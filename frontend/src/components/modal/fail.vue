@@ -5,7 +5,7 @@
         <div class="modal-container">
           <div class="modal-header justify-content-center">
             <slot name="header">
-              <img class="w-50" src="@/assets/OurLogo.png" alt="">
+              <img class="w-50" src="@/assets/GrayLogo.png" alt="">
             </slot>
           </div>
           <div class="modal-body">

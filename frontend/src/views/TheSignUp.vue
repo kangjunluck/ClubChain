@@ -83,13 +83,15 @@
         회원가입
       </div>
     </div>
-    <CompleteModal v-if="showModal" :message="message" @close="moveTo"/>
+    <CompleteModal v-if="completeModal" :message="message" @close="moveTo"/>
+    <FailModal v-if="failModal" :message="message" @close="failModal=false"/>
   </div>
 </template>
 
 <script>
 import http from "@/util/http-common";
 import CompleteModal from "../components/modal/complete.vue"
+import FailModal from "../components/modal/fail.vue"
 import Web3 from "web3";
 
 export default {
@@ -104,12 +106,14 @@ export default {
 
       selecturl: require("@/assets/profile.png"),
 
-      showModal : false,
-      message : "회원가입완료",
+      completeModal : false,
+      failModal : false,
+      message : "",
     };
   },
   components :{
     CompleteModal,
+    FailModal,
   },
   methods: {
     // imageclick(){
@@ -150,12 +154,12 @@ export default {
           this.sendEth();
           console.log(res.data);
           this.message = "회원가입 완료";
-          this.showModal = true;
+          this.completeModal = true;
           
         })
         .catch((error) => {
           this.message = error
-          this.showModal = true;
+          this.failModal = true;
         });
     },
     home() {
@@ -220,10 +224,8 @@ export default {
       this.$router.push("/");
     },
     moveTo () {
-      this.showModal = false;
-      if (this.message == "회원가입 완료"){
-        this.$router.push("/");
-      }
+      this.completeModal = false;
+      this.$router.push("/");
     },
   },
 };
