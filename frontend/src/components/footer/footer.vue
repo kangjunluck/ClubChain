@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     moveToHome() {
-      this.$router.push("/club/list")
+      this.$router.push("/club/ClubMain")
     },
     moveToFinance() {
       console.log('계좌로이동')
