@@ -157,7 +157,6 @@ export default {
     fileSelect() {
       this.image = this.$refs.image.files[0];
       this.selecturl = URL.createObjectURL(this.image);
-      console.log(this.selecturl);
       this.beforeurl = URL.createObjectURL(this.image);
     },
     goback() {
