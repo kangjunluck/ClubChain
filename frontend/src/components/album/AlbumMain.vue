@@ -2,35 +2,23 @@
   <div class="container">
     <!-- <div>앨범 메인페이지 {{ componenetStateEmit }}</div> -->
     <div class="photo_count">전체 사진 {{ photoCount }}개</div>
-    <!-- <div>앨범 영역</div> -->
     <b-row v-if="photoCount !== 0" class="photos_area" >
       <b-col
-        v-for="photo in photoList"
-        v-bind:key="photo"
+        v-for="(photo, index) in photoList"
+        v-bind:key="index"
         class="EqHeightDiv photo_list"
         cols="4"
         style="overflow: hidden"
       >
+        <div>{{index}}</div>
         <img
           class="image_resize"
           :src="'/resources/' + photo.photo_address"
           alt="앨범 이미지"
-          @click="photoClick(photo)"
+          @click="photoClick(photo, index)"
         />
       </b-col>
     </b-row>
-    <!-- <div>앨범영역 끝</div> -->
-
-    <!-- <div v-if="photoCount !== 0" class="photos_area">
-      <div v-for="photo in photoList" v-bind:key="photo" class="photo_list">
-        <img :src="'/resources/' + photo.photo_address" alt="앨범 이미지" />
-      </div>
-    </div> -->
-
-    <!-- <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
-      <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
-      <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
-     -->
 
     <div  class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
@@ -47,7 +35,7 @@
       <br />
       첫 사진을 업로드 해주세요.
     </div>
-    <button @click="test()">클릭</button>
+    <!-- <button @click="test()">클릭</button> -->
 
   </div>
   
@@ -102,12 +90,14 @@ export default {
       console.log("사진 업로드 버튼");
       this.$emit("stateChange");
     },
-    photoClick(photo) {
+    photoClick(photo, index) {
       console.log("특정 사진 클릭");
-      console.log("자식", this.photo);
+      // console.log("자식", this.photo);
       console.log("자식2", photo);
+      console.log("자식2=index", index);
       this.$emit("stateChange");
-      this.$emit("photoInfo", photo);
+      this.$emit("photoInfo", photo, index);
+      // ?
     },
     test() {
       $(".EqHeightDiv").each(function(){
@@ -150,6 +140,7 @@ export default {
 }
 .photos_area {
   background-color: red;
+  padding:2vw;
 }
 .photo_list {
   background-color: yellow;
