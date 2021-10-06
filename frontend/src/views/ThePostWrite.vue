@@ -57,6 +57,7 @@ export default {
         console.log('content :' + this.content);
         console.log('clubid : ' + this.$store.state.selectedClub);
         console.log('userid : ' + this.$store.state.credentials.userId);
+        console.log('board_thumbnail : ' + this.image);
 
         var url = "/api/";
         url += this.$store.state.selectedClub;
@@ -67,7 +68,7 @@ export default {
         ).then( (res) => {
             console.log(res.data);
             alert("글 작성 완료");
-            this.$router.push("club/main");
+            this.$router.push("/club/main");
         }).catch((error) => {
             alert("글쓰기 실패");
             console.dir(error);
@@ -76,6 +77,7 @@ export default {
     fileSelect() {
       this.image = this.$refs.image.files[0];
       this.selecturl = URL.createObjectURL(this.image);
+      console.log(this.image);
     },
   },
 };
