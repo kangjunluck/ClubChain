@@ -67,17 +67,18 @@ export default {
 
 <style scoped>
 .select {
-  color: #1ec0ff;
+  color: #0080FF;
 }
 .fas {
   font-size: 2rem;
   margin: 0;
 }
 #footer {
+  border-top: solid;
   position: fixed;
   bottom: 0;
   height: 4rem;
   width: 100%;
-  background-color: rgb(219, 234, 253);
+  background-color: rgb(255, 255, 255);
 }
 </style>
