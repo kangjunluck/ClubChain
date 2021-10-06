@@ -75,14 +75,15 @@ export default {
   color: #0080FF;
 }
 .fas {
-  font-size: 2rem;
+  font-size: 1.7rem;
   margin: 0;
+  /* color: rgba(0, 0, 0, 0.7) */
 }
 #footer {
-  border-top: solid;
+  border-top: 1px solid;
   position: fixed;
   bottom: 0;
-  height: 4rem;
+  height: 3.5rem;
   width: 100%;
   background-color: rgb(255, 255, 255);
 }
