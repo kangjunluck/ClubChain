@@ -20,9 +20,12 @@
         {{schedule.title}}
         </div>
       </div>
-      <div class="post" v-for="post in postlist" v-bind:key="post">
-        <div class="nickname" @click="detail(post.id)">
+      <div class="post" v-for="post in postlist" v-bind:key="post" @click="detail(post.id)">
+        <div class="nickname" >
           {{post.user.usernickname}}
+        </div>
+        <div class="title">
+          {{post.title}}
         </div>
         <div class="content">
           {{post.content}}
