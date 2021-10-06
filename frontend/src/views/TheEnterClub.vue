@@ -4,7 +4,7 @@
 		<div align="left" class="cancel">
 			<i class="far fa-times-circle fa-2x" @click="goback"></i>
 		</div>
-        <!-- 동호회 이미지 align-v="center"-->
+        <!-- 동호회 이미지 -->
         <b-container align-v="center" class="margin-style">
             <b-row class="justify-content-center" >
                 <b-col cols="8">
@@ -116,18 +116,15 @@ export default {
 </script>
 
 <style scoped>
-.cancel {
-	position: relative;
-	left: 15px;
-	top: 15px;
+.main {
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
-.cancel-btn-style {
-    background-color: #999999;
-    color: #ffffff;
-    width: 100%;
-    border: 0;
-    outline: 0;
+.cancel {
+    position: relative;
+	left: 15px;
+	top: 15px;
 }
 
 .enter-btn-style {
@@ -140,7 +137,7 @@ export default {
 }
 
 .margin-style {
-    margin-top: 100px;
+    margin-top: 70px;
 }
 
 .name {
