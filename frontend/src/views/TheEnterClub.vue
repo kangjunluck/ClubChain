@@ -27,7 +27,7 @@
                             type="password"
                             id="password"
                             name="password"
-                            v-model="password"
+                            v-model="inputPassword"
                             ref="password"
                             placeholder="비밀번호"
                             class="form-control mb-2"
@@ -59,6 +59,7 @@ export default {
         name : "",
         image : "",
         password : "",
+        inputPassword: ""
     };
 },
   methods: {
@@ -82,6 +83,7 @@ export default {
         .post(url, {
             clubid : this.$store.state.selectedClub,
         },
+        {password: {password : this.inputPassword}},
         { withCredentials: true }
         ).then( () => {
             console.log("가입 성공");
@@ -90,7 +92,6 @@ export default {
             console.log(error);
             alert("가입 실패");
         });
-
     },
     goBack() {
         this.$router.push({ name : "Main"});
