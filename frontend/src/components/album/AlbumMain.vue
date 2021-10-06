@@ -31,7 +31,7 @@
       <img class="image_test" src="@/assets/cats.jpg" alt="앨범 이미지"  @click="photoClick()">
      -->
 
-    <div  class="image_area EqHeightDiv" @click="photoClick()">
+    <!-- <div  class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
     </div>
     <div class="image_area EqHeightDiv" @click="photoClick()">
@@ -40,7 +40,7 @@
 
     <div class="image_area EqHeightDiv" @click="photoClick()">
       <img class="image" src="@/assets/cats.jpg" alt="앨범 이미지" />
-    </div>
+    </div> -->
     <div v-if="photoCount === 0" class="photos_area">
       업로드 된 사진이 없습니다.
       <br />
@@ -101,19 +101,6 @@ export default {
       this.$emit("stateChange");
       this.$emit("photoInfo", photo);
     },
-    // divSizeChange() {
-    //   $(document).ready(function(){
-    //     console.log('Works!')          
-    //     $(".EqHeightDiv").each(function(){
-    //     var a = $(this).width()
-    //     $(this).height(a)
-    //     console.log('높이', a)
-    //   })
-    //   console.log('end')
-
-    //   })
-      
-    // },
     test() {
       $(".EqHeightDiv").each(function(){
         var b = $(this).width()
@@ -129,13 +116,20 @@ export default {
     console.log(viewportWidth)
     console.log(this.rowHeight)
   },
-  // mounted() {
-  //   this.$nextTick(function(){
-  //     console.log("넥스트");
-  //     this.divSizeChange();
-  //   }
-  //     )
-  // },
+  mounted() {
+      console.log('Works!')          
+      $(".EqHeightDiv").each(function(){
+      var a = $(this).width()
+      $(this).height(a)
+      console.log('높이', a)
+      console.log('end')
+
+    // this.$nextTick(function(){
+    //   console.log("넥스트");
+    //   this.divSizeChange();
+    // }
+      })
+  },
 };
 </script>
 
