@@ -24,16 +24,18 @@
       <div class="post" v-for="post in postlist" v-bind:key="post" @click="detail(post.id)">
         <div class="nickname">
           <div class="round-box">
-            <img :src="getThumbnail(post.user.userthumbnail)" alt="프로필" class="round">
+            <img :src="getThumbnail(post.userthumbnail)" alt="프로필" class="round">
           </div>
-          {{post.user.usernickname}}
-          {{post.updated}}
+          <div class="profile">
+            {{post.usernickname}}
+            {{post.created}}
+          </div>
+          
         </div>
         <div class="title">
           {{post.title}}
         </div>
-        <!--<div class="postimage" v-if="imageexist(post)">
-        </div>-->
+        <img :src="getPhotoThumbnail(post.photo_thumbnail)" alt="이미지" class="postimage">
         <div class="content">
           {{post.content}}
         </div>
@@ -91,6 +93,7 @@ export default {
       var url = "/api/";
       url += this.$store.state.selectedClub;
       url += "/board/";
+      //url = "/api/30/board/";   //배포시 지울것
       http.
         get(url, {
           withCredentials : true
@@ -111,6 +114,9 @@ export default {
     getThumbnail(url) {
       return "/resources/" + url;
     },
+    getPhotoThumbnail(url) {
+      return "/resources/" + url;
+    }
     /*
     imageexist(post) {
       var url = "/api/";
@@ -178,6 +184,11 @@ export default {
 .nickname{
   height: 3rem;
 }
+
+.title {
+  margin-top: 2rem;
+}
+
 .content{
   height: 6rem;
 }
@@ -193,11 +204,22 @@ export default {
   height: 50px;
   border-radius: 70%;
   overflow: hidden;
+  display:inline-block;
 }
 
 .round {
   width: 100%;
   height: 100%;
   object-fit:cover;
+}
+
+.profile {
+  display:inline-block;
+  margin-left: 2rem;
+}
+
+.postimage {
+  width:10rem;
+  height: 10rem;
 }
 </style>
