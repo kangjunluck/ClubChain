@@ -39,7 +39,7 @@ export default {
       console.log('사진첩으로 이동')
     },
     moveToMyPage() {
-      console.log('마이페이지로 이동')
+      this.$router.push("club/mypage")
     },
     makeinit() {
       console.log(this.$props.footernum)

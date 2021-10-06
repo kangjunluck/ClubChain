@@ -136,7 +136,7 @@ export default {
         alert("가져오기 실패");
       });
 
-  http.
+    http.
       get("/api/club/myclub", {
         withCredentials : true
       })

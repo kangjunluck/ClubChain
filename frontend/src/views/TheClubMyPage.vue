@@ -39,6 +39,18 @@
           <p class="mb-1">{{ club.introduce }}</p>
         </div>
       </div>
+      <div @click="createInvitation" style="height:30px; width:100%; text-align:left;border-bottom:1px solid">
+        초대장 생성
+      </div>
+      <div @click="goSetting" style="height:30px; width:100%; text-align:left;border-bottom:1px solid">
+        동호회 설정
+      </div>
+      <div v-if="checkuser" @click="resignClub" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
+        동호회 탈퇴
+      </div>
+      <div v-else @click="clubDismantle" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
+        동호회 해체
+      </div>
       <div @click="logout" style="height:30px; color:red; width:100%; text-align:left; border-bottom:1px black solid">
         로그아웃
       </div>
@@ -91,21 +103,15 @@ export default {
           console.log(error);
         });
     },
-    userDelete() {
+    resignClub() {
       console.log("탈퇴하기");
-      var userId = this.$store.state.credentials.userId;
-      var formdata = new FormData();
-      formdata.append("userId", userId);
-      var url = "api/users/" + userId;
+      var url = "api/" + this.$store.state.selectedClub + "/";
       http
-        .delete(url, formdata, { withCredentials: true })
+        .delete(url, { withCredentials: true })
         .then((res) => {
-          console.log("탈퇴 응답");
-          console.log(res);
-          if (res.status === 204) {
-            alert("회원 탈퇴");
-            this.$router.push("/");
-          }
+            console.log(res)
+            alert("동호회 탈퇴");
+            this.$router.push("/club/list");
         })
         .catch((error) => {
           console.log("에러!");
@@ -124,6 +130,44 @@ export default {
       else
         this.showclub = false;
     },
+    createInvitation()
+    {
+
+    },
+    goSetting()
+    {
+      let url = "/api/club/{clubid}?clubid=" + this.$store.state.selectedClub;
+      http.get(url)
+      .then((res)=>{
+        if(res.data.owner_name == this.userinfo.usernickname)
+        {
+          // console.log('동호회 설정창으로 이동');
+          this.$router.push("/club/update");
+        }
+        else{
+          alert('동호회장만 설정할 수 있습니다.');
+        }
+      })
+
+    },
+    checkUser()
+    {
+      let url = "/api/club/{clubid}?clubid=" + this.$store.state.selectedClub;
+      http.get(url)
+      .then((res)=>{
+        if(res.data.owner_name == this.userinfo.usernickname)
+        {
+          this.checkuser = false;
+        }
+        else{
+          this.checkuser = true;
+        }
+      })
+    },
+    clubDismantle()
+    {
+      console.log('동호회 해체');
+    },
     logout() {
       http
         .delete("api/users/logout", { withCredentials: true })
@@ -137,6 +181,7 @@ export default {
   },
   created() {
     this.checkLogin();
+    this.checkUser();
   },
 }
 </script>
