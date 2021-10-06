@@ -39,7 +39,7 @@ export default {
   margin: 0;
 }
 #footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   height: 4rem;
   width: 100%;
