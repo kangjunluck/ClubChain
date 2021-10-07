@@ -2,7 +2,7 @@
   <div>
     <b-container>
       <b-row>
-        <b-col offset="1" cols="1" style="min-height:3rem, vertical-align:middle" @click="goBack">
+        <b-col offset="1" cols="1" style="min-height:2rem, vertical-align:middle" @click="goBack">
           <i class="fas fa-arrow-left"></i>
         </b-col>
       </b-row>
