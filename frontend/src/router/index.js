@@ -20,6 +20,7 @@ import PostDetail from "../views/ThePostDetail.vue"
 import PostSearch from "../views/ThePostSearch.vue"
 import Album from "../views/Album.vue"
 import ClubMyPage from "../views/TheClubMyPage.vue"
+import PostModify from "../views/ThePostModify.vue"
 
 Vue.use(VueRouter);
 
@@ -123,7 +124,12 @@ const routes = [
     path:"/club/mypage",
     name:"ClubMypage",
     component:ClubMypage,
-  }
+  },
+  {
+    path:"/club/post/modify",
+    name:"PostModify",
+    component:PostModify,
+  },
 ];
 
 const router = new VueRouter({
