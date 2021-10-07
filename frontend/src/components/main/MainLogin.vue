@@ -102,8 +102,6 @@ export default {
           this.$router.push("club/list"); 
         })
         .catch((error) => {
-          this.message = "잘못된 정보입니다."
-          this.failModal = true;
           console.log(error);
         });
     },
@@ -133,7 +131,8 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-          alert("로그인 실패");
+          this.message = "잘못된 정보입니다."
+          this.failModal = true;
         });
     },
   },
