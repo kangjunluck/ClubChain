@@ -3,21 +3,21 @@
     <b-container class="info_container">
       <b-row class="info_row">
         <b-col class="info-nav-box">
-            앨범
+            지갑 관리
         </b-col>
       </b-row>
     <b-container/>
-    <div class="clubname" style="font-size: 1rem" >{{clubname}}</div>
+    <div class="clubname" style="font-size: 1.2rem; font-weight:500; margin:2vw 0 2vw 0;" >{{clubname}}</div>
     <b-container style="" class="infomation">
       <b-row>
         <b-col cols="1" align-self="center"></b-col>
         <b-col cols="10" class="ethCard">
-          <div style="font-size: 0.8rem;">{{ myAccountNumber}} </div>
+          <div style="font-size: 0.8rem; width:100%; overflow:hidden;">{{ myAccountNumber}} </div>
           <div>
-            <div style="font-size: 2rem"><i class="fas fa-coins"></i>&nbsp; 잔고: {{balance}}</div>
+            <div style="font-size: 2rem">잔고: {{balance}} <i class="fas fa-coins"></i>&nbsp;</div>
           </div>
           
-          <div>
+          <div class="d-flex justify-content-between">
             <span class="button1" @click="transactionHistoryButton">거래내역</span>
             <span class="button1" @click="transferButton">이체</span>
             <span class="button2" @click="tokenEnchargeButton">충전</span>
@@ -655,9 +655,9 @@ export default {
   justify-content: center;
 }
 .button1 {
-  margin: 0 2rem 0 0;
+  margin: 0 0 0 0;
 }
 .button2 {
-  margin: 0 0 0 2 rem;
+  margin: 0 0 0 0;
 }
 </style>
