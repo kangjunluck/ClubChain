@@ -13,7 +13,7 @@
         <i class="fas fa-arrow-left" @click="goback"></i>
       </div> -->
     </div>
-    <div class="row" style="padding-left: 33px; padding-right: 33px;">
+    <!-- <div class="row" style=""> -->
       <div class=" d-flex justify-content-between align-items-center mb-3 p-0">
         <img
           :src="selecturl"
@@ -21,7 +21,7 @@
           class="circle px-0"
           style="width: 5rem; height: 5rem"
         />
-        <div class="w-50">
+        <div class="">
           <p class="m-0 h5" style="text-align:left;">{{ this.userinfo.usernickname }}</p>
           <p class="m-0 h6" style="text-align:left;">{{ this.userinfo.userEmail }}</p>
         </div>
@@ -29,7 +29,7 @@
       <!-- <button @click="profileUpdate" class="btn update-button">
         프로필 설정
       </button> -->
-    </div>
+    <!-- </div> -->
     <hr size="1px" width="60%" />
         <div style="width:85%;">
       <div @click="showmyclub" style="line-height: 1.9; height:30px; width:100%; text-align:left; border-top:1px solid; border-bottom:1px solid">
