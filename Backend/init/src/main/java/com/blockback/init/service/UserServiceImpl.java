@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    String BASE_PATH = System.getProperty("user.dir") + "/Backend/init/src/main/resources/image/user/";
+    String BASE_PATH = System.getProperty("user.dir") + "/src/main/resources/image/user/";
 
     @Override
     public User getUserByUserEmail(String userEmail) {
