@@ -5,32 +5,35 @@
           <i class="fas fa-arrow-left" style="color: white;" @click="goback"></i>
         </div>
       </div>
-      <div class="clubname d-flex flex-column justify-content-center" :style="{ backgroundImage : `url(${clubthumbnail})`}">
+      <div class="clubname d-flex flex-column justify-content-between" :style="{ backgroundImage : `url(${clubthumbnail})`}">
         <!-- <img src="@/assets/profile.png" style="width:100%; height:1.5rem;" alt=""> -->
+        <div></div>
         <div>{{club.name}}</div>
-      </div>
-      <div class="clubmember d-flex flex-column justify-content-center">
-        <div style="text-align:right;">공개 그룹 - {{club.join_num}}명</div>
+        <div class="clubmember d-flex flex-column justify-content-center">
+          <div style="text-align:right; font-size: 0.8rem;">공개 그룹 - {{club.join_num}}명</div>
+        </div>
       </div>
       <div class="space"></div>
-      <div class="post" v-for="post in postlist" v-bind:key="post" @click="detail(post.id)">
-        <div class="nickname mt-1">
-          <img :src="getThumbnail(post.userthumbnail)" alt="프로필" class="round">
-          <div class="profile">
-            <div class="d-flex flex-column justify-content-center">
-              <div class="usernickname">{{post.usernickname}}</div>
-              <div class="created">{{post.created}}</div>
+      <div v-for="post in postlist" v-bind:key="post" @click="detail(post.id)">
+        <div class="post">
+          <div class="nickname mt-1">
+            <img :src="getThumbnail(post.userthumbnail)" alt="프로필" class="round">
+            <div class="profile">
+              <div class="d-flex flex-column justify-content-center">
+                <div class="usernickname">{{post.usernickname}}</div>
+                <div class="created">{{post.created}}</div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="title">
-          {{post.title}}
-        </div>
-        <img :src="getPhotoThumbnail(post.photo_thumbnail)" alt="이미지" class="postimage" v-if="post.photo_thumbnail">
-        <!--<img src="@/assets/gold.png" alt="a" class="postimage"> 로컬 테스트용-->
-        <div class="content">
-          {{post.content}}
+          <div class="title">
+            {{post.title}}
+          </div>
+          <img :src="getPhotoThumbnail(post.photo_thumbnail)" alt="이미지" class="postimage" v-if="post.photo_thumbnail">
+          <!--<img src="@/assets/gold.png" alt="a" class="postimage"> 로컬 테스트용-->
+          <div class="content">
+            {{post.content}}
+          </div>
         </div>
         <div class="space2"></div>
       </div>
@@ -148,14 +151,13 @@ export default {
   font-weight: 600;
   font-size: 1.5rem;
   width:100%;
-  height: 5rem;
+  height: 7rem;
   text-align: center;
   background-size: 100%;
 }
 
 .clubmember{
-  margin-left: 2rem;
-  margin-right: 2rem;
+  margin-right: 1rem;
   height: 2rem;
 }
 .post {
@@ -181,13 +183,13 @@ export default {
   height: 3rem;
 }
 .space {
-  border-top : 1px solid #999999;
   height: 1rem;
   background-color: #DDE0E3;
+  margin-bottom: 0.5rem;
 }
 .space2 {
   border-top : 1px solid #999999;
-  height: 1rem;
+  height: 0.5rem;
   background-color: #ffffff;
 }
 .round-box {
