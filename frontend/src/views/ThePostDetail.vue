@@ -29,7 +29,7 @@
         <div class="space2"></div>
 
 
-      <div class="buttonarea">
+      <div class="buttonarea" v-if="postinfo.user.id == this.$store.state.credentials.userId">
         <div class="button" @click="modify">수정</div>
         <div class="button" @click="del">삭제</div>
       </div>
