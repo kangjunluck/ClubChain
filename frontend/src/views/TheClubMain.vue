@@ -32,7 +32,7 @@
         <div class="content">
           {{post.content}}
         </div>
-        <div class="space"></div>
+        <div class="space2"></div>
       </div>
       <div class="exist text-center" v-if="postlist.length == 0">등록된 게시물이 없습니다</div>
       <Footer :footernum="footernum" />
@@ -170,13 +170,12 @@ export default {
 
 
 .title {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   font-weight: 600;
 }
 
 .content{
-  height: 6rem;
-  margin-left: 5%;
+  margin-bottom: 2rem;
 }
 .comment{
   height: 3rem;
@@ -185,6 +184,11 @@ export default {
   border-top : 1px solid #999999;
   height: 1rem;
   background-color: #DDE0E3;
+}
+.space2 {
+  border-top : 1px solid #999999;
+  height: 1rem;
+  background-color: #ffffff;
 }
 .round-box {
   width: 3.5rem;
