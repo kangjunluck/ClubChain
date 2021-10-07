@@ -6,9 +6,9 @@
             지갑 관리
         </b-col>
       </b-row>
-    <b-container/>
+    </b-container>
     <div class="clubname" style="font-size: 1.2rem; font-weight:500; margin:2vw 0 2vw 0;" >{{clubname}}</div>
-    <b-container style="" class="infomation">
+    <b-container style="" class="">
       <b-row>
         <b-col cols="1" align-self="center"></b-col>
         <b-col cols="10" class="ethCard">
@@ -17,7 +17,7 @@
             <div style="font-size: 2rem">잔고: {{balance}} <i class="fas fa-coins"></i>&nbsp;</div>
           </div>
           
-          <div class="d-flex justify-content-between">
+          <div class="d-flex justify-content-between" style="padding:0 10vw 0 10vw">
             <span class="button1" @click="transactionHistoryButton">거래내역</span>
             <span class="button1" @click="transferButton">이체</span>
             <span class="button2" @click="tokenEnchargeButton">충전</span>

@@ -2,31 +2,41 @@
   <div>
     <b-container style="padding-left: 0px; padding-right: 0px;">
       <b-row>
-        <b-col offset="1" cols="10" class="ethCard" style="padding-top:10px; padding-bottom:10px;">
+        <b-col offset="1" cols="10" class="ethCard" style="padding-top:10px; padding-bottom:10px; ">
           <b-row class="mb-1">
-            <b-col class="d-flex flex-column justify-content-center">
-              <div>받는사람</div>
+            <b-col class="d-flex justify-content-between align-items-center">
+              <div style="width:35%; text-align:left;">받는사람</div>
+            <!-- </b-col>
+            <b-col> -->
+              <div style="width:65% " >
+                <b-form-input v-model="toEmail"></b-form-input>
+              </div>
             </b-col>
-            <b-col><b-form-input v-model="toEmail"></b-form-input></b-col>
           </b-row>
           <b-row class="mb-1">
-            <b-col class="d-flex flex-column justify-content-center" style="font-size: 0.8rem">
-              <div>동호회 계좌</div>
-            </b-col>
-            <b-col><input type="checkbox" id="checkbox" v-model="checked"></b-col>
+            <b-col class="d-flex  justify-content-between align-items-center" style="">
+              <div style="width:35%;  text-align:left; font-size:1rem">동호회 계좌</div>
+            <!-- </b-col>
+            <b-col> -->
+              <input type="checkbox" style="width:65%" id="checkbox" v-model="checked"></b-col>
           </b-row>
           
           <b-row class="mb-1">
-            <b-col class="d-flex flex-column justify-content-center"><div>송금액</div></b-col>
-            <b-col><b-form-input type="number" v-model="value"></b-form-input></b-col>
+            <b-col class="d-flex  justify-content-between align-items-center">
+              <div style="width:35%;  text-align:left;" >송금액</div>
+              <!-- </b-col>
+            <b-col> -->
+              <b-form-input type="number" style="width:65%" v-model="value"></b-form-input></b-col>
           </b-row>
           <b-row class="mb-1">
-            <b-col class="d-flex flex-column justify-content-center"><div>송금 메세지</div></b-col>
-            <b-col><b-form-input v-model="message"></b-form-input></b-col>
+            <b-col class="d-flex  justify-content-between align-items-center"><div style="width:35%; text-align:left;">송금 메세지</div>
+            <!-- </b-col>
+            <b-col> -->
+              <b-form-input v-model="message" style="width:65%"></b-form-input></b-col>
           </b-row>
-          <b-row class="d-flex justify-content-center" style="text-align">
+          <b-row class="d-flex justify-content-between" style="text-align">
             <!-- <b-col>PrivateKey 업로드</b-col> -->
-            <b-col class="d-flex flex-column justify-content-center"><div>Private Key</div></b-col>
+            <b-col class="d-flex  justify-content-start"><div>Private Key</div></b-col>
             <!-- <input class="col" id="PK" type="file" accept="text/*" value="개인키 파일" @change="updatePK"> -->
           </b-row>
           <b-row>
