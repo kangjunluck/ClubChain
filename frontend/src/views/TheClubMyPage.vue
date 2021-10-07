@@ -14,7 +14,7 @@
       </div> -->
     </div>
     <!-- <div class="row" style=""> -->
-      <div class=" d-flex justify-content-between align-items-center mb-3 p-0">
+      <div class=" d-flex justify-content-between mb-3 p-0" style="width:85%">
         <img
           :src="selecturl"
           alt=""
