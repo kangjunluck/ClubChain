@@ -1,24 +1,38 @@
 <template>
     <div class="main">
       <div class="toparea">
-        <img src="@/assets/plusbtn.png" alt="돌아가기" class="backbtn" @click="back()">
+        <div class="d-flex justify-content-between h-100 align-items-center">
+          <i class="fas fa-arrow-left" style="color: white;" @click="goback"></i>
+        </div>
       </div>
-      <div class="title">
-        {{postinfo.title}}
+
+        <div class="post">
+          <div class="nickname mt-1">
+            <img :src="getThumbnail(postinfo.user.userthumbnail)" alt="프로필" class="round">
+            <div class="profile">
+              <div class="d-flex flex-column justify-content-center">
+                <div class="usernickname">{{postinfo.user.usernickname}}</div>
+                <div class="created">{{postinfo.created}}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="title">
+            {{postinfo.title}}
+          </div>
+          <!--<img :src="getPhotoThumbnail(post.photo_thumbnail)" alt="이미지" class="postimage" v-if="post.photo_thumbnail">-->
+          <!--<img src="@/assets/gold.png" alt="a" class="postimage"> 로컬 테스트용-->
+          <div class="content">
+            {{postinfo.content}}
+          </div>
+        </div>
+        <div class="space2"></div>
+
+
+      <div class="buttonarea">
+        <div class="button" @click="modify">수정</div>
+        <div class="button" @click="del">삭제</div>
       </div>
-      <div class="writer">
-        <img src="@/assets/profile.png" class="profile">
-        {{postinfo.user.usernickname}}
-      </div>
-      <div class="content">
-        {{postinfo.content}}
-      </div>
-      <div class="comment" v-for="comment in commentlist" v-bind:key="comment">
-        <img src="@/assets/profile.png" class="profile">
-        <div>작성자</div>
-        {{commentlist.content}}
-      </div>
-      <div class="exist" v-if="commentlist.length == 0">등록된 댓글이 없습니다</div>
     </div>
 </template>
 
@@ -33,7 +47,18 @@ export default {
     };
   },
   methods: {
-    
+    goback() {
+      this.$router.push("/club/ClubMain");
+    },
+    modify() {
+
+    },
+    del() {
+
+    },
+    getThumbnail(url) {
+      return "/resource/" + url;
+    },
   },
   created() {
     var url = "/api/";
@@ -53,24 +78,6 @@ export default {
         alert("가져오기 실패");
       });
 
-    url = "/api/";
-    url += this.$store.state.selectedClub;
-    url += "/";
-    url += this.$store.state.postId;
-    url += "/comment/";
-    http.
-      get(url, {
-        withCredentials : true
-      })
-      .then((res) => {
-        console.log(res.data);
-        this.commentlist = res.data;
-      }).catch((error) => {
-        console.log(error);
-        alert("가져오기 실패");
-      });
-
-
   },
 };
 </script>
@@ -82,21 +89,31 @@ export default {
   flex-direction: column;
 }
 .toparea {
+  top: 0;
   height: 3rem;
-  background-color: pink;
+  width: 100%;
+  background-color: #0080FF;
 }
-.backbtn {
-  width: 2rem;
-  height: 2rem;
-  float:left;
+.fas {
+  font-size: 1.5rem;
+  margin: 1rem;
+}
+.plusbtn {
+  width:1rem;
+  height: 1rem;
+  float:right;
 }
 
+
+/*
 .title {
   height: 3rem;
   text-align: left;
   width: 90%;
   margin-left: 5%;
   margin-top : 3rem;
+  border-bottom: 1px solid #999999;
+  margin-bottom: 2rem;
 }
 
 .writer {
@@ -112,20 +129,122 @@ export default {
 
 .content {
   height: 15rem;
-  background-color: plum;
   text-align: left;
   width: 90%;
   margin-left: 5%;
 }
 
-.comment {
-  width: 90%;
-  height: 1.5rem;
-  width: 90%;
-  margin-left: 5%;
+
+
+.usernickname {
+  display:block;
+}
+
+.created {
+  color: #999999;
+  font-size:0.5rem;
+  display:block;
+}
+
+*/
+
+
+.main {
+  width: 100%;
   text-align: left;
+}
+.clubname {
+  font-weight: 600;
+  font-size: 1.5rem;
+  width:100%;
+  height: 5rem;
+  text-align: center;
+  background-size: 100%;
+}
+
+.clubmember{
+  margin-left: 2rem;
+  margin-right: 2rem;
+  height: 2rem;
+}
+.post {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+.notice{
+  height: 3rem;
+  border-bottom : 1px solid #999999;
+}
+.schedule{
+  height: 3rem;
 }
 
 
+.title {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.content{
+  height: 6rem;
+}
+.comment{
+  height: 3rem;
+}
+.space {
+  border-top : 1px solid #999999;
+  height: 1rem;
+  background-color: #DDE0E3;
+}
+.round-box {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 70%;
+  overflow: hidden;
+  display:inline-block;
+}
+
+.round {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 70%;
+  object-fit:cover;
+  display:inline-block;
+}
+
+.profile {
+  display:inline-block;
+  margin-left: 1rem;
+  height: 100%;
+}
+
+.postimage {
+  width: 100%;
+}
+
+.usernickname {
+  display:block;
+}
+
+.created {
+  color: #999999;
+  font-size:0.5rem;
+  display:block;
+}
+
+.buttonarea {
+  text-align: center;
+}
+
+.button {
+  width: 5rem;
+  background-color: #1ec0ff;
+  border-radius: 0.5rem;
+  height: 2rem;
+  line-height: 2rem;
+  color: white;
+  display:inline-block;
+  text-align: center;
+}
 
 </style>
