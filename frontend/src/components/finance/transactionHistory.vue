@@ -87,6 +87,27 @@ export default {
     },
     check2(){
       this.my = false;
+      this.balances= [];
+      let btemp = [];
+      let temp = [];
+      this.cst.forEach(item => {
+        temp.push(item);
+      });
+      console.log(temp);
+
+      btemp.push(temp[0].value);
+
+      for (let i = 1; i < temp.length; i++) {
+        if(temp[i].fromAddr == this.clubAddr)
+        {
+          btemp.push(btemp[i-1]*1 - temp[i].value*1);
+        }
+        else
+        {
+          btemp.push(btemp[i-1]*1 + temp[i].value*1);
+        }
+      }
+      this.balances = btemp.reverse();
     }
   }
 }
