@@ -17,7 +17,7 @@
             <div style="font-size: 2rem">잔고: {{balance}} <i class="fas fa-coins"></i>&nbsp;</div>
           </div>
           
-          <div class="d-flex justify-content-between" style="padding:0 10vw 0 10vw">
+          <div class="d-flex justify-content-between" style="padding:0 10vw 0 10vw; margin:2% 0 0 0;">
             <span class="button1" @click="transactionHistoryButton">거래내역</span>
             <span class="button1" @click="transferButton">이체</span>
             <span class="button2" @click="tokenEnchargeButton">충전</span>
@@ -32,22 +32,30 @@
     v-bind:myAddr="myAccountNumber" />
     <div v-else>
       <b-row>
-        <b-col style="font-size:1.2rem; text-align: left; font-weight: bolder; 
+        <b-col offset="1" style="font-size:1.2rem; text-align: left; font-weight: bolder; 
             margin-left: 12px; ">최근거래</b-col>
       </b-row>
     <div style="height:20px;"></div>
       <div v-for="(item,index) in myhistory.slice(0,5)" v-bind:key="index">
         <b-row>
-          <b-col style="font-size:1rem;">{{item.message}}</b-col>
+          <b-col style="font-size:1rem;" cols="6"><div style="font-size:1rem; overflow: hidden; white-space: nowrap;">{{item.message}}</div></b-col>
           <b-col style="font-size:1rem;" v-if="item.fromAddr == myAccountNumber">- {{item.value}} CC</b-col>
           <b-col style="font-size:1rem;" v-else>+ {{item.value}} CC</b-col>
         </b-row>
+        <!-- <b-row>
+          <b-col style="font-size:1rem;">{{item.message}}</b-col>
+          <b-col style="font-size:1rem;" v-if="item.fromAddr == myAccountNumber">- {{item.value}} CC</b-col>
+          <b-col style="font-size:1rem;" v-else>+ {{item.value}} CC</b-col>
+        </b-row> -->
         <b-row>
           <b-col style="font-size:0.8rem; color:#999999">{{item.date.substring(0,24)}}</b-col>
           <b-col style="font-size:0.8rem; color:#999999">{{balances[index]}} CC</b-col>
         </b-row>
         <hr style=" color:#333333; margin: 0.3em;">
       </div>
+    </div>
+    <div style="height:3.5rem;">
+
     </div>
     </b-container>
   </div>
