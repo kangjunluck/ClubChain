@@ -5,9 +5,10 @@
           <i class="fas fa-arrow-left" style="color: white;" @click="goback"></i>
         </div>
       </div>
-      <div class="clubname d-flex flex-column justify-content-center" :style="{ backgroundImage : `url(${clubthumbnail})`}">
+      <div class="clubname d-flex flex-column justify-content-between" :style="{ backgroundImage : `url(${clubthumbnail})`}">
         <!-- <img src="@/assets/profile.png" style="width:100%; height:1.5rem;" alt=""> -->
-        <div>{{club.name}}하위</div>
+        <div></div>
+        <div>{{club.name}}</div>
         <div class="clubmember d-flex flex-column justify-content-center">
           <div style="text-align:right; font-size: 0.8rem;">공개 그룹 - {{club.join_num}}명</div>
         </div>
