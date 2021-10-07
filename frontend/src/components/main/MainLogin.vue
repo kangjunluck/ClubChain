@@ -87,25 +87,28 @@ export default {
     },
   },
   methods: {
-    checkLogin() {
-      http
-        .get("api/users/islogin", { withCredentials: true })
-        .then((res) => {
-          this.credentials.userEmail = res.data.userEmail;
-          this.credentials.useraccount = res.data.useraccount;
-          this.credentials.usernickname = res.data.usernickname;
-          this.credentials.userthumbnail = res.data.userthumbnail;
-          this.credentials.userId = res.data.userId;
-          this.$store.dispatch("logininfo", this.credentials);
-          this.$store.dispatch("isLogin");
-          console.log("로그인 데이터");
-          this.$router.push("club/list"); 
-        })
-        .catch((error) => {
-          console.log(error);
-          console.log("세션 없음")
-        });
-    },
+    // checkLogin() {
+    //   http
+    //     .get("api/users/islogin", { withCredentials: true })
+    //     .then((res) => {
+    //       if (res.data.statusCode == 200){
+    //         this.credentials.userEmail = res.data.userEmail;
+    //         this.credentials.useraccount = res.data.useraccount;
+    //         this.credentials.usernickname = res.data.usernickname;
+    //         this.credentials.userthumbnail = res.data.userthumbnail;
+    //         this.credentials.userId = res.data.userId;
+    //         this.$store.dispatch("logininfo", this.credentials);
+    //         this.$store.dispatch("isLogin");
+    //         console.log("로그인 데이터");
+    //         this.$router.push("club/list"); 
+    //       } else {
+    //         console.log("세션 없음")
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
     pageLink() {
       // object
       this.$router.push({ path: "signup" });
@@ -138,7 +141,7 @@ export default {
     },
   },
   created () {
-    this.checkLogin();
+    // this.checkLogin();
   },
   // jquery로 화면 높이 계산하려고 했음
   // mounted() {
