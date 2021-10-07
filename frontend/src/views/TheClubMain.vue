@@ -7,7 +7,7 @@
       </div>
       <div class="clubname d-flex flex-column justify-content-center" :style="{ backgroundImage : `url(${club.photo_thumbnail})`}">
         <!-- <img src="@/assets/profile.png" style="width:100%; height:1.5rem;" alt=""> -->
-        <div>{{club.name}}하위</div>
+        <div>{{club.name}}</div>
       </div>
       <div class="clubmember d-flex flex-column justify-content-center">
         <div style="text-align:right;">공개 그룹 - {{club.join_num}}명</div>
@@ -16,9 +16,11 @@
       <div class="post" v-for="post in postlist" v-bind:key="post" @click="detail(post.id)">
         <div class="nickname">
           <img :src="getThumbnail(post.userthumbnail)" alt="프로필" class="round">
-          <div class="profile d-flex flex-column justify-content-center">
-            <div class="usernickname">{{post.usernickname}}</div>
-            <div class="created">{{post.created}}</div>
+          <div class="profile">
+            <div class="d-flex flex-column justify-content-center">
+              <div class="usernickname">{{post.usernickname}}</div>
+              <div class="created">{{post.created}}</div>
+            </div>
           </div>
         </div>
 
