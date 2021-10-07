@@ -205,7 +205,7 @@ export default {
 .profile {
   display:inline-block;
   margin-left: 1rem;
-  height: 100%;
+  height: 3.5rem;
 }
 
 .postimage {
