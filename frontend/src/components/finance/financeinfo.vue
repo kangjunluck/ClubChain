@@ -25,33 +25,32 @@
         </b-col> 
         <b-col cols="1" align-self="center"></b-col>
       </b-row>
-    <div style="height:20px;"></div>
-    <Transaction v-if= "componenetStateValue==='transfer'" v-bind:clubAddr="clubAddr" />
-    <TransactionHistory v-else-if= "componenetStateValue==='transactionHistory'" v-bind:balance="balance" v-bind:clubAddr="clubAddr"  v-bind:hst="myhistory" v-bind:cst="clubhistory" />
-    <Encharge v-else-if="componenetStateValue==='tokenEncharge'" v-bind:nickname="myNickName" v-bind:abi="contractAbi" v-bind:contractAddr="contractAddr" 
-    v-bind:myAddr="myAccountNumber" />
-    <div v-else>
-      <b-row>
-        <b-col style="font-size:1.2rem; text-align: left; font-weight: bolder; 
-            margin-left: 12px; ">최근거래</b-col>
-      </b-row>
-    <div style="height:20px;"></div>
-      <div v-for="(item,index) in myhistory.slice(0,5)" v-bind:key="index">
+      <div style="height:20px;"></div>
+      <Transaction v-if= "componenetStateValue==='transfer'" v-bind:clubAddr="clubAddr" />
+      <TransactionHistory v-else-if= "componenetStateValue==='transactionHistory'" v-bind:balance="balance" v-bind:clubAddr="clubAddr"  v-bind:hst="myhistory" v-bind:cst="clubhistory" />
+      <Encharge v-else-if="componenetStateValue==='tokenEncharge'" v-bind:nickname="myNickName" v-bind:abi="contractAbi" v-bind:contractAddr="contractAddr" 
+      v-bind:myAddr="myAccountNumber" />
+      <div v-else>
         <b-row>
-          <b-col style="font-size:1rem;">{{item.message}}</b-col>
-          <b-col style="font-size:1rem;" v-if="item.fromAddr == myAccountNumber">- {{item.value}} CC</b-col>
-          <b-col style="font-size:1rem;" v-else>+ {{item.value}} CC</b-col>
+          <b-col style="font-size:1.2rem; text-align: left; font-weight: bolder; 
+              margin-left: 12px; ">최근거래</b-col>
         </b-row>
-        <b-row>
-          <b-col style="font-size:0.8rem; color:#999999">{{item.date.substring(0,24)}}</b-col>
-          <b-col style="font-size:0.8rem; color:#999999">{{balances[index]}} CC</b-col>
-        </b-row>
-        <hr style=" color:#333333; margin: 0.3em;">
+        <div style="height:20px;"></div>
+        <div v-for="(item,index) in myhistory.slice(0,5)" v-bind:key="index">
+          <b-row>
+            <b-col style="font-size:1rem;">{{item.message}}</b-col>
+            <b-col style="font-size:1rem;" v-if="item.fromAddr == myAccountNumber">- {{item.value}} CC</b-col>
+            <b-col style="font-size:1rem;" v-else>+ {{item.value}} CC</b-col>
+          </b-row>
+          <b-row>
+            <b-col style="font-size:0.8rem; color:#999999">{{item.date.substring(0,24)}}</b-col>
+            <b-col style="font-size:0.8rem; color:#999999">{{balances[index]}} CC</b-col>
+          </b-row>
+          <hr style=" color:#333333; margin: 0.3em;">
+        </div>
       </div>
-    </div>
     </b-container>
   </div>
-
 <!-- 개인 계좌 불러오기 (api 요청) -->
 <!-- 키 불러오기 -->
 </template>
