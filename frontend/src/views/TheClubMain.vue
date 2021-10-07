@@ -5,7 +5,7 @@
           <i class="fas fa-arrow-left" style="color: white;" @click="goback"></i>
         </div>
       </div>
-      <div class="clubname d-flex flex-column justify-content-center" :style="{ backgroundImage : `url(${club.photo_thumbnail})`}">
+      <div class="clubname d-flex flex-column justify-content-center" :style="{ backgroundImage : `url('resources/'+${club.photo_thumbnail})`}">
         <!-- <img src="@/assets/profile.png" style="width:100%; height:1.5rem;" alt=""> -->
         <div>{{club.name}}</div>
       </div>
@@ -205,7 +205,7 @@ export default {
 .profile {
   display:inline-block;
   margin-left: 1rem;
-  height: 3.5rem;
+  height: 100%;
 }
 
 .postimage {
