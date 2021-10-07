@@ -41,17 +41,13 @@
           </div>
       </b-row>
     </b-container>
-    <CompleteModal v-if="completeModal" :modalmessage="message" @close="moveTo"/>
-    <FailModal v-if="failModal" :modalmessage="message" @close="failModal=false"/>
+    
   </div>
 </template>
 
 <script>
 import Web3 from "web3";
 import http from "@/util/http-common";
-import CompleteModal from "../components/modal/complete.vue"
-import FailModal from "../components/modal/fail.vue"
-
 export default {
   name: "Transaction",
     props: ["clubhis","clubAddr"],
@@ -466,10 +462,6 @@ export default {
       toAddr:"",
       value:"",
       message:"",
-
-      completeModal : false,
-      failModal : false,
-      modalmessage : "",
     };
   },
   computed:{
@@ -488,10 +480,7 @@ export default {
       }
     }
   },
-  components :{
-    CompleteModal,
-    FailModal,
-  },
+
   methods:{
     async sendTx()
     {
@@ -528,8 +517,7 @@ export default {
       console.log("수신: ",this.toAddr)
       console.log(this.privateKey);
       if (this.privateKey == ""){
-        this.modalmessage = "인증키를 입력해주세요"
-        this.failModal = true;
+        alert("인증키를 입력해주세요")
       }
       const Tx = require('ethereumjs-tx').Transaction;
       var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d2f03576222c4c2fbc5eeb6850f9abf3"));
@@ -555,9 +543,9 @@ export default {
         web3.eth.sendSignedTransaction('0x'+transaction.serialize().toString('hex'))
         .on('transactionHash',console.log)
         .then((res)=>{
-          console.log(res)
-          this.modalmessage = "송금이 완료되었습니다.";
-          this.completeModal = true;
+          alert("송금이 완료되었습니다.")
+          console.log(res);
+          location.reload();
         })
       })
     },
@@ -601,11 +589,6 @@ export default {
         web3.eth.sendSignedTransaction('0x'+transaction.serialize().toString('hex'))
         .on('transactionHash',console.log)
       });
-    },
-
-    moveTo () {
-      this.completeModal = false;
-      location.reload();
     },
   }
 }
