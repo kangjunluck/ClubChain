@@ -55,7 +55,7 @@ export default {
     },
     del() {
       var url = "/api/";
-      url += url += this.$store.state.selectedClub;
+      url += this.$store.state.selectedClub;
       url += "/board/";
       url += this.$store.state.postId;
       http.delete(url,
@@ -69,8 +69,7 @@ export default {
       })
     },
     getThumbnail(url) {
-      console.log("url : " + url);
-      return "/resource/" + url;
+      return "/resources/" + url;
     },
   },
   created() {
