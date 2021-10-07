@@ -1,7 +1,7 @@
 <template>
-  <b-container class="container" style="background-color:red;">
+  <b-container class="container" >
     
-    <b-row style="background-color:yellow;" >
+    <b-row  >
       <b-col class="d-flex justify-content-between" offset="1" cols="10">
         <div>
           내 계좌 <input type="checkbox" id="checkbox1" v-model="my" @click="check1">
@@ -11,7 +11,7 @@
         </div>
       </b-col>
     </b-row>
-    <div style="height:3vw; background-color:black;"></div>
+    <div style="height:3vw; "></div>
     <div v-if="my==true">
       <div v-for="(item,index) in hst" v-bind:key="index">
         <b-row>
