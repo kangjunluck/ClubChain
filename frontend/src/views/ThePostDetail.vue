@@ -58,9 +58,9 @@ export default {
       url += this.$store.state.selectedClub;
       url += "/board/";
       url += this.$store.state.postId;
-      http.delete(url,
-
-      ).then((res) => {
+      http.delete(url, {
+        withCredentials : true
+      }).then((res) => {
         console.log(res.data);
         this.$router.push('/club/ClubMain');
       }).catch((error) => {
