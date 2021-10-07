@@ -1,7 +1,12 @@
 <template>
   <div class="finanaceInfo">
-    <div style="background-color: #0080FF; height:40px; color:#ffffff; font-size:1rem; line-height:40px;">지갑관리</div>
-    <div style="height:30px;"></div>
+    <b-container class="info_container">
+      <b-row class="info_row" v-if="componenetStateEmit === true">
+        <b-col class="info-nav-box">
+            앨범
+        </b-col>
+      </b-row>
+    <b-container/>
     <div class="clubname" style="font-size: 1rem" >{{clubname}}</div>
     <b-container style="" class="infomation">
       <b-row>
@@ -20,7 +25,7 @@
         </b-col> 
         <b-col cols="1" align-self="center"></b-col>
       </b-row>
-     <div style="height:20px;"></div>
+    <div style="height:20px;"></div>
     <Transaction v-if= "componenetStateValue==='transfer'" v-bind:clubAddr="clubAddr" />
     <TransactionHistory v-else-if= "componenetStateValue==='transactionHistory'" v-bind:balance="balance" v-bind:clubAddr="clubAddr"  v-bind:hst="myhistory" v-bind:cst="clubhistory" />
     <Encharge v-else-if="componenetStateValue==='tokenEncharge'" v-bind:nickname="myNickName" v-bind:abi="contractAbi" v-bind:contractAddr="contractAddr" 
@@ -613,6 +618,27 @@ export default {
 <style scoped>
 /* 왜 scoped 하면 적용 안되지? */
 /* 로컬스토리지 날리면 적용됨 */
+.info_container{
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  min-width: 100%
+}
+.info_row {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  font-size: 1.7rem;
+}
+.info-nav-box{
+  height: 3rem;
+  background-color: #0080FF;
+  color : #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  margin: 0 0 0 0;
+  padding: 0 0 0 5%;
+}
 .clubname {
   text-align: left;
   padding: 0 0 0 9%;
