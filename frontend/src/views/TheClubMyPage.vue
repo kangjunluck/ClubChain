@@ -171,7 +171,7 @@ export default {
         .then((res)=>{
             console.log(res);
             res.data.forEach(item => {
-                if(item.user.userEmail == this.$store.state.credentials.userEmail)
+                if(item.userEmail == this.$store.state.credentials.userEmail)
                 {
                     this.boards.push(item);
                 }
