@@ -2,32 +2,21 @@
     <div class="main">
       <div class="toparea">
         <div class="d-flex justify-content-between h-100 align-items-center">
-          <i class="fas fa-arrow-left" @click="goback"></i>
-          <i class="fas fa-plus" @click="write()" ></i>
+          <i class="fas fa-arrow-left" style="color: white;" @click="goback"></i>
         </div>
       </div>
-
-      <div class="clubname">
-        {{club.name}}
+      <div class="clubname d-flex flex-column justify-content-center" :style="{ backgroundImage : `url(${club.photo_thumbnail})`}">
+        <!-- <img src="@/assets/profile.png" style="width:100%; height:1.5rem;" alt=""> -->
+        <div>{{club.name}}하위</div>
       </div>
-      <div class="clubmember">
-        공개 그룹 - {{club.join_num}}명
-      </div>
-      <div class="notice">
-        중요 공지
-      </div>
-      <div class="schedule">
-      가까운 일정(7일 이내)
-        <div>
-        {{schedule.title}}
-        </div>
+      <div class="clubmember d-flex flex-column justify-content-center">
+        <div style="text-align:right;">공개 그룹 - {{club.join_num}}명</div>
       </div>
       <div class="space"></div>
       <div class="post" v-for="post in postlist" v-bind:key="post" @click="detail(post.id)">
         <div class="nickname">
-            <img :src="getThumbnail(post.userthumbnail)" alt="프로필" class="round">
-            <!--<img src="@/assets/gold.png" alt="a" class="round"> -->
-          <div class="profile">
+          <img :src="getThumbnail(post.userthumbnail)" alt="프로필" class="round">
+          <div class="profile d-flex flex-column justify-content-center">
             <div class="usernickname">{{post.usernickname}}</div>
             <div class="created">{{post.created}}</div>
           </div>
@@ -43,7 +32,7 @@
         </div>
         <div class="space"></div>
       </div>
-      <div class="exist" v-if="postlist.length == 0">등록된 게시물이 없습니다</div>
+      <div class="exist text-center" v-if="postlist.length == 0">등록된 게시물이 없습니다</div>
       <Footer :footernum="footernum" />
     </div>
 </template>
@@ -103,7 +92,7 @@ export default {
           console.log(res.data);
           console.log("게시글 찍히나 확인");
           console.log(res.data[0]);
-          this.postlist = res.data;
+          this.postlist = res.data.reverse();
         }).catch((error) => {
           console.log(error);
           alert("게시글 가져오기 실패");
@@ -135,6 +124,7 @@ export default {
   top: 0;
   height: 3rem;
   width: 100%;
+  background-color: #0080FF;
 }
 .fas {
   font-size: 1.5rem;
@@ -152,15 +142,21 @@ export default {
 }
 .clubname {
   font-weight: 600;
-  font-size: 2rem;
+  font-size: 1.5rem;
   width:100%;
-  height: 3rem;
+  height: 5rem;
   text-align: center;
+  background-size: 100%;
 }
 
 .clubmember{
-  height: 3rem;
-  border-bottom : 1px solid #999999;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  height: 2rem;
+}
+.post {
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 .notice{
   height: 3rem;
@@ -172,8 +168,7 @@ export default {
 
 
 .title {
-  margin-top: 2rem;
-  margin-left: 5%;
+  margin-top: 1rem;
   font-weight: 600;
 }
 
@@ -185,6 +180,7 @@ export default {
   height: 3rem;
 }
 .space {
+  border-top : 1px solid #999999;
   height: 1rem;
   background-color: #DDE0E3;
 }
@@ -206,7 +202,7 @@ export default {
 
 .profile {
   display:inline-block;
-  margin-left: 2rem;
+  margin-left: 1rem;
   height: 100%;
 }
 
