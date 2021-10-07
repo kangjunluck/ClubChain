@@ -14,7 +14,7 @@
       </div>
       <div class="space"></div>
       <div class="post" v-for="post in postlist" v-bind:key="post" @click="detail(post.id)">
-        <div class="nickname">
+        <div class="nickname mt-1">
           <img :src="getThumbnail(post.userthumbnail)" alt="프로필" class="round">
           <div class="profile">
             <div class="d-flex flex-column justify-content-center">
