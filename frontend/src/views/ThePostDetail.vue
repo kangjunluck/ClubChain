@@ -54,9 +54,22 @@ export default {
 
     },
     del() {
+      var url = "/api/";
+      url += url += this.$store.state.selectedClub;
+      url += "/board/";
+      url += this.$store.state.postId;
+      http.delete(url,
 
+      ).then((res) => {
+        console.log(res.data);
+        this.$router.push('/club/ClubMain');
+      }).catch((error) => {
+        console.log(error);
+          alert("글 삭제 실패");
+      })
     },
     getThumbnail(url) {
+      console.log("url : " + url);
       return "/resource/" + url;
     },
   },
@@ -65,7 +78,7 @@ export default {
     url += this.$store.state.selectedClub;
     url += "/board/"
     url += this.$store.state.postId;
-    url = "/api/6/board/1";
+    //url = "/api/6/board/1";
     http.
       get(url, {
         withCredentials : true
