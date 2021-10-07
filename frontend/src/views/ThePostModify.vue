@@ -11,7 +11,7 @@
             v-model="title"
             ref="title"
             placeholder="제목을 입력해주세요"
-            v-bind="postinfo.title"
+
             class="title b"
             />
             <textarea 
@@ -19,7 +19,6 @@
                 v-model="content"
                 ref="content"
                 placeholder="내용을 입력해주세요"
-                v-bind="postinfo.content"
                 class="content c"
                 />
             <!-- <i v-if="selecturl == false" class="far fa-image d" v-on:click="photoClick()"></i> -->
@@ -119,6 +118,8 @@ export default {
             .then((res) => {
                 console.log(res.data);
                 this.postinfo = res.data;
+                this.title = this.postinfo.title;
+                this.content = this.postinfo.content;
             }).catch((error) => {
                 console.log(error);
                 alert("가져오기 실패");
