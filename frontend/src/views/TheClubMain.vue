@@ -150,7 +150,7 @@ export default {
   font-weight: 600;
   font-size: 1.5rem;
   width:100%;
-  height: 5rem;
+  height: 7rem;
   text-align: center;
   background-size: 100%;
 }
@@ -184,10 +184,11 @@ export default {
 .space {
   height: 1rem;
   background-color: #DDE0E3;
+  margin-bottom: 0.5rem;
 }
 .space2 {
   border-top : 1px solid #999999;
-  height: 1rem;
+  height: 0.5rem;
   background-color: #ffffff;
 }
 .round-box {
