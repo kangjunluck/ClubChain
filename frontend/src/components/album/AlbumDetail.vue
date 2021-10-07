@@ -20,15 +20,7 @@
         </div>
       </div>
     </div>
-    <!-- <div class="row">
-      <div class="detail_info d-flex justify-content-left">
-        <img class=" circle" src="@/assets/cats.jpg" alt="이미지">
-        <div class="image_info_div">
-          <p class="m-0 h5 p-tag" style="text-align:left;">살려줘</p>
-          <p class="m-0 h6 p-tag" style="text-align:left;">2021년 10월 7일</p>
-        </div>
-      </div>
-    </div> -->
+
   </div>
 </template>
 
