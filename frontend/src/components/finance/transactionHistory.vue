@@ -1,14 +1,22 @@
 <template>
-  <div class="container">
-    <b-row>
-        <b-col>내 계좌<input type="checkbox" id="checkbox1" v-model="my" @click="check1"></b-col>
-        <b-col>동호회 계좌<input type="checkbox" id="checkbox2" v-model="club" @click="check2"></b-col>
+  <b-container class="container" style="background-color:red;">
+    
+    <b-row style="background-color:yellow;" >
+      <b-col class="d-flex justify-content-between" offset="1" cols="10">
+        <div>
+          내 계좌 <input type="checkbox" id="checkbox1" v-model="my" @click="check1">
+        </div>
+        <div>
+          동호회 계좌 <input type="checkbox" id="checkbox2" v-model="club" @click="check2">
+        </div>
+      </b-col>
     </b-row>
-    <div style="height:20px;"></div>
+    <div style="height:3vw; background-color:black;"></div>
     <div v-if="my==true">
       <div v-for="(item,index) in hst" v-bind:key="index">
         <b-row>
-          <b-col style="font-size:1rem;">{{item.message}}</b-col>
+          <b-col style="font-size:1rem; overflow: hidden; white-space: nowrap;">{{item.message}}</b-col>
+          <b-col style="font-size:1rem;"><div style="font-size:1rem; overflow: hidden; white-space: nowrap;">{{item.message}}</div></b-col>
           <b-col style="font-size:1rem;" v-if="item.fromAddr == myAddr">- {{item.value}} CC</b-col>
           <b-col style="font-size:1rem;" v-else>+ {{item.value}} CC</b-col>
         </b-row>
@@ -33,7 +41,7 @@
         <hr style=" color:#333333; margin: 0.3em;">
       </div>
     </div>
-  </div>
+  </b-container>
   
 </template>
 
@@ -118,7 +126,7 @@ export default {
   /* background-color: teal; */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
 }
 .historyTitle {
   text-align: left;

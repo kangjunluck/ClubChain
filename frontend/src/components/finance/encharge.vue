@@ -4,10 +4,11 @@
       <b-row>
         <b-col offset="1" cols="10" class="ethCard" style="padding-top:10px; padding-bottom:10px;">
           <b-row>
-            <b-col class="d-flex flex-column justify-content-center" >
-              <div>충전금액</div>
-            </b-col>
-            <b-col><b-form-input v-model="value"></b-form-input></b-col>
+            <b-col class="d-flex justify-content-between align-items-center" >
+              <div style="width:35%;" >충전금액</div>
+            <!-- </b-col>
+            <b-col> -->
+              <b-form-input  style="width:65%" v-model="value"></b-form-input></b-col>
           </b-row>
         </b-col>
         <div>
