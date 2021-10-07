@@ -27,7 +27,7 @@ export default {
       }
     }
   },
-  method : {
+  method: {
     checkLogin() {
       http
         .get("api/users/islogin", { withCredentials: true })
@@ -40,7 +40,7 @@ export default {
           this.$store.dispatch("logininfo", this.credentials);
           this.$store.dispatch("isLogin");
           console.log("로그인 데이터");
-          this.$router.push("club/list");
+          this.$router.push("club/list"); 
         })
         .catch((error) => {
           console.log(error);
