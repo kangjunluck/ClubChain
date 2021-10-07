@@ -160,15 +160,14 @@ export default {
 
 .clubmember{
   height: 3rem;
-  border-bottom : 1px solid black;
+  border-bottom : 1px solid #999999;
 }
 .notice{
   height: 3rem;
-  border-bottom : 1px solid black;
+  border-bottom : 1px solid #999999;
 }
 .schedule{
   height: 3rem;
-  border-bottom : 1px solid black;
 }
 
 
