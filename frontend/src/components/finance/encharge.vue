@@ -18,29 +18,40 @@
           </div>
       </b-row>
     </b-container>
-    
+    <CompleteModal v-if="completeModal" :message="message" @close="moveTo"/>
+    <FailModal v-if="failModal" :message="message" @close="failModal=false"/>
   </div>
 </template>
 
 <script>
 import Web3 from "web3";
+import CompleteModal from "../modal/complete.vue";
+import FailModal from "../modal/fail.vue";
 // import http from "@/util/http-common";
+
 export default {
   name: "enchargeToken",
   props: ["abi","contractAddr","myAddr","nickname"],
 
+  components :{
+    CompleteModal,
+    FailModal,
+  },
   data(){
       return{
-          value:"",
+        value:"",
+
+        completeModal : false,
+        failModal : false,
+        message : "",
       }
   },
+
   methods:{
     async sendTx()
     {
       await this.encharge();
-
       this.saveHistory();
-
     },
     encharge()
     {
@@ -65,9 +76,9 @@ export default {
         web3.eth.sendSignedTransaction('0x'+transaction.serialize().toString('hex'))
         .on('transactionHash',console.log)
         .then((res)=>{
-          alert("충전이 완료되었습니다.")
-          console.log(res);
-          location.reload();
+          console.log(res)
+          this.message = "충전이 완료되었습니다.";
+          this.completeModal = true;
         })
       })
     },
@@ -107,6 +118,10 @@ export default {
         web3.eth.sendSignedTransaction('0x'+transaction.serialize().toString('hex'))
         .on('transactionHash',console.log)
       });
+    },
+    moveTo () {
+      this.completeModal = false;
+      location.reload();
     },
   }
 }
