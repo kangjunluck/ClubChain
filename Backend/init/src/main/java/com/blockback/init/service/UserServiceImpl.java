@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User putUser(UserPutReq putinfo, Long userId, MultipartFile thumbnail) {
         User user = userRepository.findById(userId).get();
-        String pic_place = System.getProperty("user.dir") + "/Backend/init/src/main/resources/" + user.getUserthumbnail();
+        String pic_place = System.getProperty("user.dir") + "/src/main/resources/" + user.getUserthumbnail();
         try {
             if(thumbnail == null) { // 프로필 사진 입력 안함
                 //프로필 이미지 저장 (기본 이미지)

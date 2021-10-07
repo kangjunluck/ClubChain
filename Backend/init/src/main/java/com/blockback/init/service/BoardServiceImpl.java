@@ -34,7 +34,7 @@ public class BoardServiceImpl implements BoardService {
     @Autowired
     FileRepository fileRepository;
 
-    String BASE_PATH = System.getProperty("user.dir") + "/Backend/init/src/main/resources/image/club/";
+    String BASE_PATH = System.getProperty("user.dir") + "/src/main/resources/image/club/";
 
     @Override
     public List<BoardRes> getBoardsByClubId(Long clubid) {
