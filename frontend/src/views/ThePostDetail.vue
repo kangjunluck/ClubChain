@@ -51,7 +51,7 @@ export default {
       this.$router.push("/club/ClubMain");
     },
     modify() {
-
+      this.$router.push("/club/post/modify")
     },
     del() {
       var url = "/api/";
