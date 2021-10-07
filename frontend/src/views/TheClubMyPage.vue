@@ -226,7 +226,7 @@ export default {
   overflow: hidden;
   max-width: 7rem;
   height: 7rem;
-  border: 8px solid #efefef;
+  /* border: 8px solid #efefef; */
   /* position: absolute;
   top: 72px; */
 }

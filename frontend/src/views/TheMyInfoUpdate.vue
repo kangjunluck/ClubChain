@@ -207,13 +207,13 @@ export default {
 }
 
 .signup_header {
-  width: 60%;
+  width: 70%;
   font-size: 1.5rem;
   text-align: left;
 }
 
 .signup_form {
-  width: 60%;
+  width: 70%;
 }
 .photo-button {
   padding: 3px 15px;

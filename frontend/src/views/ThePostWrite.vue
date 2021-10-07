@@ -22,7 +22,7 @@
                 />
             <!-- <i v-if="selecturl == false" class="far fa-image d" v-on:click="photoClick()"></i> -->
             <!-- <div v-if="selecturl !== false" class="photoarea"> -->
-            <div class="photoarea d-flex justify-content-end" style="padding: 0 3vw 3vw 0">
+            <div class="photoarea d-flex justify-content-end" style="padding: 0 4vw 4vw 0">
                 <img :src="selecturl" alt="url" class="photo" style="width:20vw; height:20vw;" v-on:click="photoClick()">
                 <!-- <label class="photo-button" for="photo">사진 업로드</label> -->
             
