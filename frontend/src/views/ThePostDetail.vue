@@ -51,16 +51,16 @@ export default {
       this.$router.push("/club/ClubMain");
     },
     modify() {
-
+      this.$router.push("/club/post/modify")
     },
     del() {
       var url = "/api/";
-      url += url += this.$store.state.selectedClub;
+      url += this.$store.state.selectedClub;
       url += "/board/";
       url += this.$store.state.postId;
-      http.delete(url,
-
-      ).then((res) => {
+      http.delete(url, {
+        withCredentials : true
+      }).then((res) => {
         console.log(res.data);
         this.$router.push('/club/ClubMain');
       }).catch((error) => {
@@ -69,8 +69,7 @@ export default {
       })
     },
     getThumbnail(url) {
-      console.log("url : " + url);
-      return "/resource/" + url;
+      return "/resources/" + url;
     },
   },
   created() {

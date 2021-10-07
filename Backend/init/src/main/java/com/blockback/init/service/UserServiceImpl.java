@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(UserRegisterPostReq userRegisterInfo, MultipartFile thumbnail) {
         String BASE_PATH = System.getProperty("user.dir") + "/Backend/init/src/main/resources/image/user/";
-
+        System.out.println(System.getProperty("user.dir") + "@@@@@@@@@@@@@@@@@@@@@@@");
         User user = new User();
         try {
             /*
