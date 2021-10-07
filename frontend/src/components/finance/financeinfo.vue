@@ -1,7 +1,7 @@
 <template>
   <div class="finanaceInfo">
     <b-container class="info_container">
-      <b-row class="info_row" v-if="componenetStateEmit === true">
+      <b-row class="info_row">
         <b-col class="info-nav-box">
             앨범
         </b-col>
