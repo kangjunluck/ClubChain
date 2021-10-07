@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -52,9 +53,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(UserRegisterPostReq userRegisterInfo, MultipartFile thumbnail) {
-        System.setProperty( "user.dir", "/var/lib/jenkins/workspace/PJT" );
-        String BASE_PATH = System.getProperty("user.dir") + "/Backend/init/src/main/resources/image/user/";
-        System.out.println(System.getProperty("user.dir") + "@@@@@@@@@@@@@@@@@@@@@@@");
+
+        String BASE_PATH = "/var/lib/jenkins/workspace/PJT" + "/Backend/init/src/main/resources/image/user/";
         User user = new User();
         try {
             /*
