@@ -103,6 +103,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+          console.log("세션 없음")
         });
     },
     pageLink() {
