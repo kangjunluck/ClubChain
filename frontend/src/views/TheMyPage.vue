@@ -15,7 +15,7 @@
     </div>
     <div></div>
     <div class="row" style="padding-left: 33px; padding-right: 33px;">
-      <div class="d-flex justify-content-between align-items-center mb-3 p-0">
+      <div class="d-flex justify-content-between align-items-center mb-4 p-0">
         <img
           :src="selecturl"
           alt=""
