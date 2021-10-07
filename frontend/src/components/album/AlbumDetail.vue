@@ -16,7 +16,7 @@
         <img class=" circle" :src="'/resources/'+photo.userthumbnail" alt="이미지">
         <div class="image_info_div">
           <p class="m-0 h5 p-tag" style="text-align:left;">{{photo.user_name}}</p>
-          <p class="m-0 h6 p-tag" style="text-align:left;">{{photo.afterDayFormat}}</p>
+          <p class="m-0 h6 p-tag" style="text-align:left;">{{afterDayFormat}}</p>
         </div>
       </div>
     </div>
