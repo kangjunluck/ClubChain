@@ -5,7 +5,7 @@
           <i class="fas fa-arrow-left" style="color: white;" @click="goback"></i>
         </div>
       </div>
-      <div class="clubname d-flex flex-column justify-content-center" :style="{ backgroundImage : `url('resources/'+${club.photo_thumbnail})`}">
+      <div class="clubname d-flex flex-column justify-content-center" :style="{ backgroundImage : `url(${clubthumbnail})`}">
         <!-- <img src="@/assets/profile.png" style="width:100%; height:1.5rem;" alt=""> -->
         <div>{{club.name}}</div>
       </div>
@@ -47,6 +47,7 @@ export default {
   data() {
     return {
       club : "",
+      clubthumbnail : "",
       schedule : "",
       postlist : "",
       join_num : "",
@@ -76,6 +77,7 @@ export default {
           console.log("동호회 정보");
           console.log(res.data);
           this.club = res.data;
+          this.clubthumbnail = '/resources/' + this.club.profile_thumbnail;
           console.log(this.club);
         }).catch((error) => {
           console.log(error);
@@ -167,15 +169,13 @@ export default {
 .schedule{
   height: 3rem;
 }
-
-
 .title {
   margin-top: 0.5rem;
   font-weight: 600;
 }
 
 .content{
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
 }
 .comment{
   height: 3rem;
