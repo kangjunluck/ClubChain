@@ -80,7 +80,24 @@ export default {
     },
   },
   methods: {
-    // ...mapActions(["login"]),
+    checkLogin() {
+      http
+        .get("api/users/islogin", { withCredentials: true })
+        .then((res) => {
+          this.credentials.userEmail = res.data.userEmail;
+          this.credentials.useraccount = res.data.useraccount;
+          this.credentials.usernickname = res.data.usernickname;
+          this.credentials.userthumbnail = res.data.userthumbnail;
+          this.credentials.userId = res.data.userId;
+          this.$store.dispatch("logininfo", this.credentials);
+          this.$store.dispatch("isLogin");
+          console.log("로그인 데이터");
+          this.$router.push("club/list"); 
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     pageLink() {
       // object
       this.$router.push({ path: "signup" });
@@ -110,6 +127,9 @@ export default {
           alert("로그인 실패");
         });
     },
+  },
+  created () {
+    this.checkLogin();
   },
   // jquery로 화면 높이 계산하려고 했음
   // mounted() {
