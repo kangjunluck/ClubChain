@@ -14,11 +14,6 @@
     <div style="height:3vw; background-color:black;"></div>
     <div v-if="my==true">
       <div v-for="(item,index) in hst" v-bind:key="index">
-        <!-- <b-row>
-          <b-col style="font-size:1rem; overflow: hidden; white-space: nowrap;">{{item.message}}</b-col>
-          <b-col style="font-size:1rem;" v-if="item.fromAddr == myAddr">- {{item.value}} CC</b-col>
-          <b-col style="font-size:1rem;" v-else>+ {{item.value}} CC</b-col>
-        </b-row> -->
         <b-row>
           <b-col style="font-size:1rem;" cols="6"><div style="font-size:1rem; overflow: hidden; white-space: nowrap;">{{item.message}}</div></b-col>
           <b-col style="font-size:1rem;" v-if="item.fromAddr == myAddr">- {{item.value}} CC</b-col>
