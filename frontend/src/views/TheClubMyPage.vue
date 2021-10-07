@@ -9,9 +9,9 @@
     "
   >
     <div class="toparea position-absolute">
-      <div class="d-flex justify-content-between h-100 align-items-center">
+      <!-- <div class="d-flex justify-content-between h-100 align-items-center">
         <i class="fas fa-arrow-left" @click="goback"></i>
-      </div>
+      </div> -->
     </div>
     <div class="row" style="padding-left: 33px; padding-right: 33px;">
       <div class=" d-flex justify-content-between align-items-center mb-3 p-0">
@@ -26,9 +26,9 @@
           <p class="m-0 h6" style="text-align:left;">{{ this.userinfo.userEmail }}</p>
         </div>
       </div>
-      <button @click="profileUpdate" class="btn update-button">
+      <!-- <button @click="profileUpdate" class="btn update-button">
         프로필 설정
-      </button>
+      </button> -->
     </div>
     <hr size="1px" width="60%" />
         <div style="width:85%;">
