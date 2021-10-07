@@ -189,7 +189,7 @@ public class UserController {
         if(user != null) {
             return ResponseEntity.status(200).body(UserResponse.of(200, "Success", user));
         }
-        return ResponseEntity.status(400).body(UserResponse.of(200, "Success", user));
+        return ResponseEntity.status(400).body(UserResponse.of(400, FAIL));
     }
 
     @GetMapping("/board")
