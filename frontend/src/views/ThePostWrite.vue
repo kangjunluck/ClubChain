@@ -118,6 +118,7 @@ export default {
     height: 3rem;
     border: 1px solid white;
     border-bottom: 1px solid #999999;
+    padding-left: 0.5rem;
 }
 .content {
     font-size:1rem;
@@ -126,6 +127,7 @@ export default {
     height: 60%;
     border: 1px solid white;
     padding-top: 0.5rem;
+    padding-left: 0.5rem;
 }
 input:focus{outline:none;}
 textarea:focus{outline: none;}
