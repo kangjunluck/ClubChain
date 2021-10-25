@@ -10,17 +10,6 @@
   - 원하는 동호회에 가입하고 투명한 회비 관리로 건강한 동호회 운영을 할 수 있습니다.
   - 다양한 사람들과 취미를 공유할 수 있는 동호회 커뮤니티입니다.
 
-
-
-# :person_with_pouting_face: 팀원 소개
-
-|                            김기도                            |                            서강준                            |                            송지연                            |                            왕영문                            |                            윤소영                            |
-| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| <img src="README.assets/image-20211007234248579.png" width="250px" height="250px"/> | <img src="README.assets/image-20211007235210199.png" width="250px" height="250px"/> | <img src="README.assets/image-20211008000724138.png" width="250px" height="250px"/> | <img src="README.assets/image-20211007234321092.png" width="250px" height="250px"/> | <img src="README.assets/image-20211007234306141.png" width="250px" height="250px"/> |
-|                 Project Leader & Blockchain                  |                           Backend                            |                           Backend                            |                           Frontend                           |                           Frontend                           |
-
-
-
 # ⚙ 개발 환경
 
 ### Frontend
